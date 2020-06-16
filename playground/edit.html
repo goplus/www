@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+	<head>
+		<title>The Go+ Playground</title>
+		<link rel="stylesheet" href="/static/style.css">
+		{{if .Analytics}}
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11222381-7"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-11222381-7');
+			gtag('config', 'UA-49880327-6');
+		</script>
+		{{end}}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="/static/jquery-linedtextarea.js"></script>
+		<script src="/playground.js"></script>
+		<script src="/static/playground-embed.js"></script>
+		<script>
+		$(document).ready(function() {
+			playground({
+				'codeEl':       '#code',
+				'outputEl':     '#output',
+				'runEl':        '#run, #embedRun',
+				'fmtEl':        '#fmt',
+				'fmtImportEl':  '#imports',
+				{{if $.Share}}
+				'shareEl':      '#share',
+				'shareURLEl':   '#shareURL',
+				{{end}}
+				'enableHistory': true,
+				'enableShortcuts': true,
+				'enableVet': true,
+				'toysEl': '.js-playgroundToysEl'
+			});
+			playgroundEmbed({
+				'codeEl':       '#code',
+				{{if $.Share}}
+				'shareEl':      '#share',
+				{{end}}
+				'embedEl':      '#embed',
+				'embedLabelEl': '#embedLabel',
+				'embedHTMLEl':  '#shareURL'
+			});
+			$('#code').linedtextarea();
+			// Avoid line wrapping.
+			$('#code').attr('wrap', 'off');
+			var about = $('#about');
+			about.click(function(e) {
+				if ($(e.target).is('a')) {
+					return;
+				}
+				about.hide();
+			});
+			$('#aboutButton').click(function() {
+				if (about.is(':visible')) {
+					about.hide();
+					return;
+				}
+				about.show();
+			})
+			// Preserve "Imports" checkbox value between sessions.
+			if (readCookie('playgroundImports') == 'true') {
+				$('#imports').attr('checked','checked');
+			}
+			$('#imports').change(function() {
+				createCookie('playgroundImports', $(this).is(':checked') ? 'true' : '');
+			});
+			{{if .Analytics}}
+			// Fire Google Analytics events for Run/Share button clicks.
+			$('#run').click(function() {
+				gtag('event', 'click', {
+					event_category: 'playground',
+					event_label: 'run-button',
+				});
+			});
+			$('#share').click(function() {
+				gtag('event', 'click', {
+					event_category: 'playground',
+					event_label: 'share-button',
+				});
+			});
+			{{end}}
+		});
+
+		function createCookie(name, value) {
+			document.cookie = name+"="+value+"; path=/";
+		}
+
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+		</script>
+	</head>
+	<body itemscope itemtype="http://schema.org/CreativeWork">
+		<input type="button" value="Run" id="embedRun">
+		<div id="banner">
+			<div id="head" itemprop="name">The Go+ Playground</div>
+			<input type="button" value="Run" id="run">
+<!--			<input type="button" value="Format" id="fmt">-->
+<!--			<div id="importsBox">
+				<label title="Rewrite imports on Format">
+					<input type="checkbox" id="imports">
+					Imports
+				</label>
+			</div>-->
+			{{if $.Share}}
+			<input type="button" value="Share" id="share">
+			<input type="text" id="shareURL">
+			<label id="embedLabel">
+				<input type="checkbox" id="embed">
+				embed
+			</label>
+			{{end}}
+			<select class="js-playgroundToysEl">
+				<option value="hello.txt">Hello, Go+</option>
+				<option value="rational.txt">Rational</option>
+			</select>
+			<input type="button" value="About" id="aboutButton">
+		</div>
+		<div id="wrap">
+			<textarea itemprop="description" id="code" name="code" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">{{printf "%s" .Snippet.Body}}</textarea>
+		</div>
+		<div id="output"></div>
+		<img itemprop="image" src="/static/gopher.png" style="display:none">
+		<div id="about">
+<p><b>About the Playground</b></p>
+
+<p>
+The Go Playground is a web service that runs on
+<a href="https://golang.org/">golang.org</a>'s servers.
+The service receives a Go program, <a href="https://golang.org/cmd/vet/">vets</a>, compiles, links, and
+runs the program inside a sandbox, then returns the output.
+</p>
+
+<p>
+If the program contains <a href="https://golang.org/pkg/testing">tests or examples</a>
+and no main function, the service runs the tests.
+Benchmarks will likely not be supported since the program runs in a sandboxed
+environment with limited resources.
+</p>
+
+<p>
+There are limitations to the programs that can be run in the playground:
+</p>
+
+<ul>
+
+<li>
+The playground can use most of the standard library, with some exceptions.
+The only communication a playground program has to the outside world
+is by writing to standard output and standard error.
+</li>
+
+<li>
+In the playground the time begins at 2009-11-10 23:00:00 UTC
+(determining the significance of this date is an exercise for the reader).
+This makes it easier to cache programs by giving them deterministic output.
+</li>
+
+<li>
+There are also limits on execution time and on CPU and memory usage.
+</li>
+
+</ul>
+
+<p>
+The article "<a href="https://blog.golang.org/playground" target="_blank" rel="noopener">Inside
+the Go Playground</a>" describes how the playground is implemented.
+The source code is available at <a href="https://go.googlesource.com/playground" target="_blank" rel="noopener">
+https://go.googlesource.com/playground</a>.
+</p>
+
+<p>
+The playground uses the latest stable release of Go.<br>
+The current version is <a href="/p/Ztyu2FJaajl">{{.GoVersion}}</a>.
+</p>
+
+<p>
+The playground service is used by more than just the official Go project
+(<a href="https://gobyexample.com/">Go by Example</a> is one other instance)
+and we are happy for you to use it on your own site.
+All we ask is that you
+<a href="mailto:golang-dev@googlegroups.com">contact us first (note this is a public mailing list)</a>,
+use a unique user agent in your requests (so we can identify you),
+and that your service is of benefit to the Go community.
+</p>
+
+<p>
+Any requests for content removal should be directed to
+<a href="mailto:security@golang.org">security@golang.org</a>.
+Please include the URL and the reason for the request.
+</p>
+		</div>
+	</body>
+</html>
