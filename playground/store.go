@@ -5,12 +5,15 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"io/ioutil"
 	"os"
-	"sync"
 
-	"cloud.google.com/go/datastore"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/shurcooL/webdavfs/vfsutil"
 	"golang.org/x/net/webdav"
 )
@@ -18,50 +21,6 @@ import (
 type store interface {
 	PutSnippet(ctx context.Context, id string, snip *snippet) error
 	GetSnippet(ctx context.Context, id string, snip *snippet) error
-}
-
-type cloudDatastore struct {
-	client *datastore.Client
-}
-
-func (s cloudDatastore) PutSnippet(ctx context.Context, id string, snip *snippet) error {
-	key := datastore.NameKey("Snippet", id, nil)
-	_, err := s.client.Put(ctx, key, snip)
-	return err
-}
-
-func (s cloudDatastore) GetSnippet(ctx context.Context, id string, snip *snippet) error {
-	key := datastore.NameKey("Snippet", id, nil)
-	return s.client.Get(ctx, key, snip)
-}
-
-// inMemStore is a store backed by a map that should only be used for testing.
-type inMemStore struct {
-	sync.RWMutex
-	m map[string]*snippet // key -> snippet
-}
-
-func (s *inMemStore) PutSnippet(_ context.Context, id string, snip *snippet) error {
-	s.Lock()
-	if s.m == nil {
-		s.m = map[string]*snippet{}
-	}
-	b := make([]byte, len(snip.Body))
-	copy(b, snip.Body)
-	s.m[id] = &snippet{Body: b}
-	s.Unlock()
-	return nil
-}
-
-func (s *inMemStore) GetSnippet(_ context.Context, id string, snip *snippet) error {
-	s.RLock()
-	defer s.RUnlock()
-	v, ok := s.m[id]
-	if !ok {
-		return datastore.ErrNoSuchEntity
-	}
-	*snip = *v
-	return nil
 }
 
 type localStore struct {
@@ -90,4 +49,77 @@ func NewLocalStore(dir string) store {
 
 func NewMemStore() store {
 	return &localStore{webdav.NewMemFS()}
+}
+
+// s3Storage refers to a common s3 storage
+type s3Storage struct {
+	endpoint  string
+	region    string
+	accessKey string
+	secretKey string
+	bucket    string
+}
+
+// s3Session opens a new s3 session.
+func (s *s3Storage) s3Session() (*session.Session, error) {
+	conf := &aws.Config{
+		Region:      aws.String(s.region),
+		Endpoint:    aws.String(s.endpoint),
+		Credentials: credentials.NewStaticCredentials(s.accessKey, s.secretKey, ""),
+	}
+	return session.NewSessionWithOptions(session.Options{Config: *conf})
+}
+
+// PutSnippet is used as storage snippet.
+// duplicate check should be done before put.
+// we do not run size check neither.
+func (s *s3Storage) PutSnippet(ctx context.Context, id string, snip *snippet) error {
+	sess, err := s.s3Session()
+	if err != nil {
+		return err
+	}
+
+	svc := s3.New(sess)
+	input := &s3.PutObjectInput{
+		Bucket:      &s.bucket,
+		Key:         &id,
+		Body:        aws.ReadSeekCloser(bytes.NewBuffer(snip.Body)),
+		ContentType: aws.String("text/plain"),
+	}
+	_, err = svc.PutObject(input)
+	return err
+}
+
+// GetSnippet returns the actual snippet.
+func (s *s3Storage) GetSnippet(ctx context.Context, id string, snip *snippet) error {
+	sess, err := s.s3Session()
+	if err != nil {
+		return err
+	}
+
+	svc := s3.New(sess)
+	input := &s3.GetObjectInput{
+		Bucket: &s.bucket,
+		Key:    &id,
+	}
+	result, err := svc.GetObject(input)
+	if err != nil {
+		return err
+	}
+	b, _ := ioutil.ReadAll(result.Body)
+	defer result.Body.Close()
+
+	*snip = snippet{Body: b}
+	return nil
+}
+
+// NewS3Store is used as a common code snippet storage.
+func NewS3Store() store {
+	s := &s3Storage{}
+	s.endpoint = os.Getenv("S3_ENDPOINT")
+	s.region = os.Getenv("S3_REGION")
+	s.accessKey = os.Getenv("S3_ACCESS_KEY")
+	s.secretKey = os.Getenv("S3_SECRET_KEY")
+	s.bucket = os.Getenv("S3_BUCKET")
+	return s
 }
