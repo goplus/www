@@ -36,7 +36,6 @@ import (
 
 	"cloud.google.com/go/compute/metadata"
 	"github.com/bradfitz/gomemcache/memcache"
-	"golang.org/x/playground/internal"
 	"golang.org/x/playground/internal/gcpdial"
 	"golang.org/x/playground/sandbox/sandboxtypes"
 )
@@ -340,6 +339,10 @@ var failedTestPattern = "--- FAIL"
 // The output of successfully ran program is returned in *response.Events.
 // If a program cannot be built or has timed out,
 // *response.Errors contains an explanation for a user.
+// compileAndRun tries to build and run a user program.
+// The output of successfully ran program is returned in *response.Events.
+// If a program cannot be built or has timed out,
+// *response.Errors contains an explanation for a user.
 func compileAndRun(ctx context.Context, req *request) (*response, error) {
 	// TODO(andybons): Add semaphore to limit number of running programs at once.
 	tmpDir, err := ioutil.TempDir("", "sandbox")
@@ -348,68 +351,44 @@ func compileAndRun(ctx context.Context, req *request) (*response, error) {
 	}
 	defer os.RemoveAll(tmpDir)
 
-	ioutil.WriteFile(filepath.Join(tmpDir, "main.gop"), []byte(req.Body), 0644)
-
-	// log.Printf("\n", req.Body)
-
-	// br, err := sandboxBuild(ctx, tmpDir, []byte(req.Body), req.WithVet)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// if br.errorMessage != "" {
-	// 	return &response{Errors: br.errorMessage}, nil
-	// }
-	qrun, err := exec.LookPath("qrun")
+	br, err := sandboxBuildGoplus(ctx, tmpDir, []byte(req.Body), req.WithVet)
 	if err != nil {
-		return nil, fmt.Errorf("error find qrun command: %v", err)
+		return nil, err
+	}
+	if br.errorMessage != "" {
+		return &response{Errors: br.errorMessage}, nil
 	}
 
-	// execRes, err := sandboxRun(ctx, qrun, tmpDir)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// if execRes.Error != "" {
-	// 	return &response{Errors: execRes.Error}, nil
-	// }
-	// rec := new(Recorder)
-	// rec.Stdout().Write(execRes.Stdout)
-	// rec.Stderr().Write(execRes.Stderr)
-	// events, err := rec.Events()
+	execRes, err := sandboxRun(ctx, br.exePath, br.testParam)
+	if err != nil {
+		return nil, err
+	}
+	if execRes.Error != "" {
+		return &response{Errors: execRes.Error}, nil
+	}
 
-	cmd := exec.Command(qrun, ".")
-	cmd.Dir = tmpDir
 	rec := new(Recorder)
-	cmd.Stdout = rec.Stdout()
-	cmd.Stderr = rec.Stderr()
-
-	if err := runTimeout(cmd, maxRunTime); err != nil {
-		if err == timeoutErr {
-			return nil, fmt.Errorf("process took too long")
-		}
-		if _, ok := err.(*exec.ExitError); !ok {
-			return nil, fmt.Errorf("error running sandbox: %v", err)
-		}
-	}
+	rec.Stdout().Write(execRes.Stdout)
+	rec.Stderr().Write(execRes.Stderr)
 	events, err := rec.Events()
-
 	if err != nil {
 		log.Printf("error decoding events: %v", err)
 		return nil, fmt.Errorf("error decoding events: %v", err)
 	}
 	var fails int
-	// if br.testParam != "" {
-	// 	// In case of testing the TestsFailed field contains how many tests have failed.
-	// 	for _, e := range events {
-	// 		fails += strings.Count(e.Message, failedTestPattern)
-	// 	}
-	// }
+	if br.testParam != "" {
+		// In case of testing the TestsFailed field contains how many tests have failed.
+		for _, e := range events {
+			fails += strings.Count(e.Message, failedTestPattern)
+		}
+	}
 	return &response{
 		Events:      events,
-		Status:      0,
-		IsTest:      false, //br.testParam != "",
+		Status:      execRes.ExitCode,
+		IsTest:      br.testParam != "",
 		TestsFailed: fails,
-		//		VetErrors:   br.vetOut,
-		//		VetOK: req.WithVet && br.vetOut == "",
+		VetErrors:   br.vetOut,
+		VetOK:       req.WithVet && br.vetOut == "",
 	}, nil
 }
 
@@ -459,118 +438,67 @@ func (b *buildResult) cleanup() error {
 	return nil
 }
 
-// sandboxBuild builds a Go program and returns a build result that includes the build context.
-//
-// An error is returned if a non-user-correctable error has occurred.
-func sandboxBuild(ctx context.Context, tmpDir string, in []byte, vet bool) (*buildResult, error) {
-	files, err := splitFiles(in)
+// sandboxBuildGoplus build the goplus program in a temp directory and not run it;
+func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool) (*buildResult, error) {
+	err := ioutil.WriteFile(filepath.Join(tmpDir, "main.gop"), []byte(in), 0644)
 	if err != nil {
-		return &buildResult{errorMessage: err.Error()}, nil
+		return nil, err
 	}
 
 	br := new(buildResult)
-	defer br.cleanup()
-	var buildPkgArg = "."
-	if files.Num() == 1 && len(files.Data(progName)) > 0 {
-		buildPkgArg = progName
-		src := files.Data(progName)
-		if code := getTestProg(src); code != nil {
-			br.testParam = "-test.v"
-			files.AddFile(progName, code)
-		}
+
+	qgo, err := exec.LookPath("qgo")
+	if err != nil {
+		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
+	cmdGenerate := exec.Command(qgo, ".")
+	cmdGenerate.Dir = tmpDir
 
-	br.useModules = allowModuleDownloads(files)
-	if !files.Contains("go.mod") && br.useModules {
-		files.AddFile("go.mod", []byte("module play\n"))
-	}
-
-	for f, src := range files.m {
-		// Before multi-file support we required that the
-		// program be in package main, so continue to do that
-		// for now. But permit anything in subdirectories to have other
-		// packages.
-		if !strings.Contains(f, "/") {
-			fset := token.NewFileSet()
-			f, err := parser.ParseFile(fset, f, src, parser.PackageClauseOnly)
-			if err == nil && f.Name.Name != "main" {
-				return &buildResult{errorMessage: "package name must be main"}, nil
-			}
-		}
-
-		in := filepath.Join(tmpDir, f)
-		if strings.Contains(f, "/") {
-			if err := os.MkdirAll(filepath.Dir(in), 0755); err != nil {
-				return nil, err
-			}
-		}
-		if err := ioutil.WriteFile(in, src, 0644); err != nil {
-			return nil, fmt.Errorf("error creating temp file %q: %v", in, err)
-		}
-	}
-
-	br.exePath = filepath.Join(tmpDir, "a.out")
-	goCache := filepath.Join(tmpDir, "gocache")
-
-	cmd := exec.Command("/usr/local/go-faketime/bin/go", "build", "-o", br.exePath, "-tags=faketime")
-	cmd.Dir = tmpDir
-	cmd.Env = []string{"GOOS=linux", "GOARCH=amd64", "GOROOT=/usr/local/go-faketime"}
-	cmd.Env = append(cmd.Env, "GOCACHE="+goCache)
-	if br.useModules {
-		// Create a GOPATH just for modules to be downloaded
-		// into GOPATH/pkg/mod.
-		cmd.Args = append(cmd.Args, "-modcacherw")
-		br.goPath, err = ioutil.TempDir("", "gopath")
-		if err != nil {
-			log.Printf("error creating temp directory: %v", err)
-			return nil, fmt.Errorf("error creating temp directory: %v", err)
-		}
-		cmd.Env = append(cmd.Env, "GO111MODULE=on", "GOPROXY="+playgroundGoproxy())
-	} else {
-		br.goPath = os.Getenv("GOPATH")              // contains old code.google.com/p/go-tour, etc
-		cmd.Env = append(cmd.Env, "GO111MODULE=off") // in case it becomes on by default later
-	}
-	cmd.Args = append(cmd.Args, buildPkgArg)
-	cmd.Env = append(cmd.Env, "GOPATH="+br.goPath)
 	out := &bytes.Buffer{}
-	cmd.Stderr, cmd.Stdout = out, out
+	cmdGenerate.Stderr, cmdGenerate.Stdout = out, out
 
-	if err := cmd.Start(); err != nil {
-		return nil, fmt.Errorf("error starting go build: %v", err)
-	}
-	ctx, cancel := context.WithTimeout(ctx, maxCompileTime)
-	defer cancel()
-	if err := internal.WaitOrStop(ctx, cmd, os.Interrupt, 250*time.Millisecond); err != nil {
-		if errors.Is(err, context.DeadlineExceeded) {
-			br.errorMessage = fmt.Sprintln(goBuildTimeoutError)
-		} else if ee := (*exec.ExitError)(nil); !errors.As(err, &ee) {
-			log.Printf("error building program: %v", err)
-			return nil, fmt.Errorf("error building go source: %v", err)
+	if err := runTimeout(cmdGenerate, maxRunTime); err != nil {
+		if err == timeoutErr {
+			return nil, fmt.Errorf("process took too long")
 		}
-		// Return compile errors to the user.
-		// Rewrite compiler errors to strip the tmpDir name.
+		if _, ok := err.(*exec.ExitError); !ok {
+			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
+			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
+			return br, nil
+		}
+	}
+
+	// until now, qgo does not provide process exit code, so we hard code this.
+	if strings.Contains(out.String(), "[ERROR]") {
 		br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
-
-		// "go build", invoked with a file name, puts this odd
-		// message before any compile errors; strip it.
 		br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
-
 		return br, nil
 	}
-	const maxBinarySize = 100 << 20 // copied from sandbox backend; TODO: unify?
+
+	cmdBuild := exec.Command("go", "build", "-o", "a.out", "gop_autogen.go")
+	cmdBuild.Dir = tmpDir
+	br.exePath = filepath.Join(tmpDir, "a.out")
+	cmdBuild.Stderr, cmdBuild.Stdout = out, out
+
+	if err := runTimeout(cmdBuild, maxRunTime); err != nil {
+		if err == timeoutErr {
+			return nil, fmt.Errorf("process took too long")
+		}
+		if _, ok := err.(*exec.ExitError); !ok {
+			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
+			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
+			return br, nil
+		}
+	}
+
+	const maxBinarySize = 100 << 20
 	if fi, err := os.Stat(br.exePath); err != nil || fi.Size() == 0 || fi.Size() > maxBinarySize {
 		if err != nil {
 			return nil, fmt.Errorf("failed to stat binary: %v", err)
 		}
 		return nil, fmt.Errorf("invalid binary size %d", fi.Size())
 	}
-	if vet {
-		// TODO: do this concurrently with the execution to reduce latency.
-		br.vetOut, err = vetCheckInDir(tmpDir, br.goPath, br.useModules)
-		if err != nil {
-			return nil, fmt.Errorf("running vet: %v", err)
-		}
-	}
+
 	return br, nil
 }
 
@@ -646,7 +574,7 @@ func (s *server) healthCheck(ctx context.Context) error {
 		return fmt.Errorf("error creating temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	br, err := sandboxBuild(ctx, tmpDir, []byte(healthProg), false)
+	br, err := sandboxBuildGoplus(ctx, tmpDir, []byte(healthProg), false)
 	if err != nil {
 		return err
 	}
@@ -721,3 +649,4 @@ import "fmt"
 
 func main() { fmt.Print("ok") }
 `
+
