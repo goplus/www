@@ -8,7 +8,9 @@ require (
 	cloud.google.com/go/pubsub v1.3.1 // indirect
 	contrib.go.opencensus.io/exporter/prometheus v0.1.0
 	contrib.go.opencensus.io/exporter/stackdriver v0.13.1
+	github.com/aws/aws-sdk-go v1.32.4
 	github.com/bradfitz/gomemcache v0.0.0-20190329173943-551aad21a668
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/google/go-cmp v0.4.0
 	github.com/qiniu/goplus v0.6.30
 	github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c

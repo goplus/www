@@ -5,14 +5,11 @@
 package main
 
 import (
-	"context"
 	"flag"
-	"fmt"
 	"net/http"
 	"os"
 
 	"cloud.google.com/go/compute/metadata"
-	"cloud.google.com/go/datastore"
 )
 
 var log = newStdLogger()
@@ -26,15 +23,10 @@ func main() {
 	flag.Parse()
 	s, err := newServer(func(s *server) error {
 		pid := projectID()
-		if pid == "" {
-			//s.db = &inMemStore{}
-			s.db = NewLocalStore("./share")
+		if os.Getenv("STORE") == "s3" {
+			s.db = NewS3Store()
 		} else {
-			c, err := datastore.NewClient(context.Background(), pid)
-			if err != nil {
-				return fmt.Errorf("could not create cloud datastore client: %v", err)
-			}
-			s.db = cloudDatastore{client: c}
+			s.db = NewLocalStore("./share")
 		}
 		if caddr := os.Getenv("MEMCACHED_ADDR"); caddr != "" {
 			s.cache = newGobCache(caddr)
