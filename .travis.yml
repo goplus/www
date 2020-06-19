@@ -2,7 +2,6 @@ language: go
 go:
   - "1.14"
 script:
-  - cd playground
   - go install -v ./...
   - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
 after_success:

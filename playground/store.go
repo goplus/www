@@ -42,12 +42,12 @@ func (s localStore) GetSnippet(ctx context.Context, id string, snip *snippet) er
 	return err
 }
 
-func NewLocalStore(dir string) store {
+func newLocalStore(dir string) store {
 	os.Mkdir(dir, 0777)
 	return &localStore{webdav.Dir(dir)}
 }
 
-func NewMemStore() store {
+func newMemStore() store {
 	return &localStore{webdav.NewMemFS()}
 }
 
@@ -113,8 +113,8 @@ func (s *s3Storage) GetSnippet(ctx context.Context, id string, snip *snippet) er
 	return nil
 }
 
-// NewS3Store is used as a common code snippet storage.
-func NewS3Store() store {
+// newS3Store is used as a common code snippet storage.
+func newS3Store() store {
 	s := &s3Storage{}
 	s.endpoint = os.Getenv("S3_ENDPOINT")
 	s.region = os.Getenv("S3_REGION")

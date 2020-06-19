@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"log"
+	"log"
 
 	"github.com/qiniu/goplus/ast"
 	"github.com/qiniu/goplus/cl"
@@ -14,7 +14,7 @@ import (
 	_ "github.com/qiniu/goplus/lib"
 )
 
-func build_goplus(data string) {
+func buildGoplus(data string) {
 	fset := token.NewFileSet()
 	file, err := parser.ParseFile(fset, "", data, 0)
 	pkg := &ast.Package{

@@ -36,8 +36,8 @@ import (
 
 	"cloud.google.com/go/compute/metadata"
 	"github.com/bradfitz/gomemcache/memcache"
-	"golang.org/x/playground/internal/gcpdial"
-	"golang.org/x/playground/sandbox/sandboxtypes"
+	"github.com/qiniu/goplus-www/playground/internal/gcpdial"
+	"github.com/qiniu/goplus-www/playground/sandbox/sandboxtypes"
 )
 
 const (
@@ -392,7 +392,7 @@ func compileAndRun(ctx context.Context, req *request) (*response, error) {
 	}, nil
 }
 
-var timeoutErr = errors.New("process timed out")
+var errTimeout = errors.New("process timed out")
 
 func runTimeout(cmd *exec.Cmd, d time.Duration) error {
 	if err := cmd.Start(); err != nil {
@@ -409,7 +409,7 @@ func runTimeout(cmd *exec.Cmd, d time.Duration) error {
 		return err
 	case <-t.C:
 		cmd.Process.Kill()
-		return timeoutErr
+		return errTimeout
 	}
 }
 
@@ -458,7 +458,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	cmdGenerate.Stderr, cmdGenerate.Stdout = out, out
 
 	if err := runTimeout(cmdGenerate, maxRunTime); err != nil {
-		if err == timeoutErr {
+		if err == errTimeout {
 			return nil, fmt.Errorf("process took too long")
 		}
 		if _, ok := err.(*exec.ExitError); !ok {
@@ -481,7 +481,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	cmdBuild.Stderr, cmdBuild.Stdout = out, out
 
 	if err := runTimeout(cmdBuild, maxRunTime); err != nil {
-		if err == timeoutErr {
+		if err == errTimeout {
 			return nil, fmt.Errorf("process took too long")
 		}
 		if _, ok := err.(*exec.ExitError); !ok {
@@ -649,4 +649,3 @@ import "fmt"
 
 func main() { fmt.Print("ok") }
 `
-

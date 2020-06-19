@@ -24,9 +24,9 @@ func main() {
 	s, err := newServer(func(s *server) error {
 		pid := projectID()
 		if os.Getenv("STORE") == "s3" {
-			s.db = NewS3Store()
+			s.db = newS3Store()
 		} else {
-			s.db = NewLocalStore("./share")
+			s.db = newLocalStore("./share")
 		}
 		if caddr := os.Getenv("MEMCACHED_ADDR"); caddr != "" {
 			s.cache = newGobCache(caddr)

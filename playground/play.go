@@ -38,7 +38,10 @@ type Recorder struct {
 	stdout, stderr recorderWriter
 }
 
+// Stdout of Recorder
 func (r *Recorder) Stdout() io.Writer { return &r.stdout }
+
+// Stderr of Recorder
 func (r *Recorder) Stderr() io.Writer { return &r.stderr }
 
 type recorderWriter struct {
@@ -59,12 +62,14 @@ func (w *recorderWriter) Write(b []byte) (n int, err error) {
 	return len(b), nil
 }
 
+// Event type
 type Event struct {
 	Message string
 	Kind    string        // "stdout" or "stderr"
 	Delay   time.Duration // time to wait before printing Message
 }
 
+// Events recorded
 func (r *Recorder) Events() ([]Event, error) {
 	stdout, stderr := r.stdout.bytes(), r.stderr.bytes()
 

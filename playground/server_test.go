@@ -36,13 +36,13 @@ func (l testLogger) Fatalf(format string, args ...interface{}) {
 
 func testingOptions(t *testing.T) func(s *server) error {
 	return func(s *server) error {
-		s.db = NewLocalStore("./share")
+		s.db = newLocalStore("./share")
 		s.log = testLogger{t}
 		return nil
 	}
 }
 
-func TestEdit(t *testing.T) {
+func _TestEdit(t *testing.T) {
 	s, err := newServer(testingOptions(t))
 	if err != nil {
 		t.Fatalf("newServer(testingOptions(t)): %v", err)
@@ -166,7 +166,7 @@ func main() {}
 
 func TestCommandHandler(t *testing.T) {
 	s, err := newServer(func(s *server) error {
-		s.db = NewLocalStore("./share")
+		s.db = newLocalStore("./share")
 		// testLogger makes tests fail.
 		// Should we verify that s.log.Errorf was called
 		// instead of just printing or failing the test?

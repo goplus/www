@@ -1,4 +1,4 @@
-module golang.org/x/playground
+module github.com/qiniu/goplus-www
 
 go 1.12
 
