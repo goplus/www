@@ -3,25 +3,33 @@ module github.com/qiniu/goplus-www
 go 1.12
 
 require (
-	cloud.google.com/go v0.54.0
-	cloud.google.com/go/datastore v1.1.0
-	cloud.google.com/go/pubsub v1.3.1 // indirect
-	contrib.go.opencensus.io/exporter/prometheus v0.1.0
+	cloud.google.com/go v0.58.0
+	contrib.go.opencensus.io/exporter/prometheus v0.2.0
 	contrib.go.opencensus.io/exporter/stackdriver v0.13.1
-	github.com/aws/aws-sdk-go v1.32.4
-	github.com/bradfitz/gomemcache v0.0.0-20190329173943-551aad21a668
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/google/go-cmp v0.4.0
+	github.com/aws/aws-sdk-go v1.32.5
+	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
+	github.com/google/go-cmp v0.5.0
 	github.com/qiniu/goplus v0.6.30
 	github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c
-	go.opencensus.io v0.22.3
-	golang.org/x/build v0.0.0-20190709001953-30c0e6b89ea0
-	golang.org/x/mod v0.2.0
-	golang.org/x/net v0.0.0-20200301022130-244492dfa37a
-	golang.org/x/tools v0.0.0-20200420001825-978e26b7c37c
-	google.golang.org/api v0.20.0
-	google.golang.org/genproto v0.0.0-20200312145019-da6875a35672
-	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
-	gopkg.in/yaml.v2 v2.2.7 // indirect
+	go.opencensus.io v0.22.4
+	golang.org/x/build v0.0.0-20200618235529-3228d3c70d31
+	golang.org/x/mod v0.3.0
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/tools v0.0.0-20200619180055-7c47624df98f
+	google.golang.org/api v0.28.0
+	google.golang.org/genproto v0.0.0-20200619004808-3e7fca5c55db
 	grpc.go4.org v0.0.0-20170609214715-11d0a25b4919
+)
+
+replace (
+	github.com/golang/protobuf => github.com/golang/protobuf v1.4.2
+	cloud.google.com/go => cloud.google.com/go v0.58.0
+	cloud.google.com/go/bigquery => cloud.google.com/go/bigquery v1.8.0
+	golang.org/x/tools => golang.org/x/tools v0.0.0-20200619180055-7c47624df98f
+	golang.org/x/net => golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/sys => golang.org/x/sys v0.0.0-20200523222454-059865788121
+	golang.org/x/mod => golang.org/x/mod v0.3.0
+	google.golang.org/genproto => google.golang.org/genproto v0.0.0-20200619004808-3e7fca5c55db
+	google.golang.org/grpc => google.golang.org/grpc v1.29.1
+	google.golang.org/api => google.golang.org/api v0.28.0
 )

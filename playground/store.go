@@ -9,6 +9,7 @@ import (
 	"context"
 	"io/ioutil"
 	"os"
+	"syscall"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -16,6 +17,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/shurcooL/webdavfs/vfsutil"
 	"golang.org/x/net/webdav"
+)
+
+var (
+	// ErrNoSuchEntity error
+	ErrNoSuchEntity = syscall.ENOENT
 )
 
 type store interface {
