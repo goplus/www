@@ -21,7 +21,7 @@ import (
 // Deprecated: this is the handler for the legacy /vet endpoint; use
 // the /compile (compileAndRun) handler instead with the WithVet
 // boolean set. This code path doesn't support modules and only exists
-// as a temporary compatiblity bridge to older javascript clients.
+// as a temporary compatibility bridge to older javascript clients.
 func vetCheck(ctx context.Context, req *request) (*response, error) {
 	return &response{}, nil
 	tmpDir, err := ioutil.TempDir("", "vet")

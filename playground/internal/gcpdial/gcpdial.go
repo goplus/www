@@ -21,6 +21,7 @@ import (
 	"google.golang.org/api/compute/v1"
 )
 
+// Dialer type
 type Dialer struct {
 	lister instanceLister
 

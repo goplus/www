@@ -75,6 +75,7 @@ var (
 	runSem         chan struct{}
 )
 
+// Container type
 type Container struct {
 	name string
 
@@ -88,6 +89,7 @@ type Container struct {
 	waitErr chan error // 1-buffered; receives error from WaitOrStop(..., cmd, ...)
 }
 
+// Close implements io.Closer.
 func (c *Container) Close() {
 	setContainerWanted(c.name, false)
 
@@ -97,6 +99,7 @@ func (c *Container) Close() {
 	}
 }
 
+// Wait waits command finished.
 func (c *Container) Wait() error {
 	err := <-c.waitErr
 	c.waitErr <- err
