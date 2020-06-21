@@ -126,8 +126,15 @@
     {{end}}
     <select class="js-playgroundToysEl">
         <option value="hello.txt">Hello, Go+</option>
+        <option value="range.txt">Range</option>
         <option value="rational.txt">Rational</option>
+        <option value="slice.txt">Slice literal</option>
+        <option value="listmap.txt">List/Map comprehension</option>
+        <option value="error.txt">Error wrap</option>
     </select>
+    <iframe id="iframe" src="https://ghbtns.com/github-btn.html?user=qiniu&repo=goplus&type=star&count=true&size=large"
+            frameborder="0" scrolling="0" class="github-stars"></iframe>
+
     <input type="button" value="About" id="aboutButton">
 </div>
 <div id="wrap">
@@ -136,17 +143,30 @@
 </div>
 <div id="output"></div>
 <img itemprop="image" src="/static/gopher.png" style="display:none">
-<div id="about">
-    <p><b>About the Go+ Playground</b></p>
 
-    <p>
-        The Go+ Playground is a web service built on <a href="https://github.com/golang/playground"> golang
-            playground.</a>
-    </p>
-    <p>
-        The service receives a Go+ program, compiles, links, and
-        runs the program inside a sandbox, then returns the output.
-    </p>
+<div id="about">
+    <div class="row open-source">
+        <h1>About Go+ Playground</h1>
+        <p>
+            The Go+ Playground is a web service that runs on
+            <a href="https://goplus.org/">goplus.org</a>'s secrvers.
+            The service receives a Go+ program.
+            runs the program inside a gopherjs,
+            then returns the output.
+        </p>
+    </div>
+
+    <div class="row open-source">
+        <div class="col-md-12">
+            <h1><i class="fa fa-github"></i> Open Source</h1>
+            <p>GoPlus - The Go+ language for data science. All components are available under the <a
+                        href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2 License</a> on <a
+                        href="https://github.com/qiniu/goplus">GitHub</a>.</p>
+            <iframe src="https://ghbtns.com/github-btn.html?user=qiniu&repo=goplus&type=star&count=true&size=large"
+                    frameborder="0" scrolling="0" class="github-stars"></iframe>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
