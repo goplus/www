@@ -1,0 +1,37 @@
+package main
+
+import(
+	"fmt"
+)
+
+func main() {
+	// in Go we do:
+	a := []float64{1, 2, 3.4}
+	println(a)
+
+	// in GoPlus we do:
+	b := [1, 2, 3.4]
+	println(b)
+
+	//slice literal
+	c := [1, 3.4] // []float64
+	fmt.Printf("%#v %T\n", c, c)
+
+	d := [1] // []int
+	fmt.Printf("%#v %T\n", d, d)
+
+	e := [1+2i, "xsw"] // []interface{}
+	fmt.Printf("%#v %T\n", e, e)
+
+	f := [1, 3.4, 3+4i] // []complex128
+	fmt.Printf("%#v %T\n", f, f)
+
+	g := [5+6i] // []complex128
+	fmt.Printf("%#v %T\n", g, g)
+
+	h := ["xsw", 3] // []interface{}
+	fmt.Printf("%#v %T\n", h, h)
+
+	empty := [] // []interface{}
+	fmt.Printf("%#v %T\n", empty, empty)
+}
