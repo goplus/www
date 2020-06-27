@@ -27,6 +27,40 @@ func TestHandleFmt(t *testing.T) {
 			method: http.MethodOptions,
 		},
 		{
+			name:   "goplus hello world",
+			method: http.MethodPost,
+			body:   `println("Hello, Go+")
+
+
+println(1r << 129  )
+println(1/3r + 2/7r * 2)
+
+arr := [1, 3, 5, 7, 11,  13, 17, 19]
+ println(arr)
+println([x*x for x <- arr, x > 3] )
+
+m := {"Hi" : 1, "Go+": 2}
+println(m)
+println({v:  k for k  , v <- m})
+println([k for k, _ <-  m])
+println( [ v for v <- m]  )`,
+			want:   `println("Hello, Go+")
+
+println(1r << 129)
+println(1/3r + 2/7r*2)
+
+arr := [1, 3, 5, 7, 11, 13, 17, 19]
+println(arr)
+println([x*x for x <- arr, x > 3])
+
+m := {"Hi": 1, "Go+": 2}
+println(m)
+println({v: k for k, v <- m})
+println([k for k, _ <- m])
+println([v for v <- m])
+`,
+		},
+		{
 			name:   "classic",
 			method: http.MethodPost,
 			body:   " package main\n    func main( ) {  }\n",
@@ -76,18 +110,6 @@ func TestHandleFmt(t *testing.T) {
 				"-- go.mod --\n   module   foo   \n\n\n" +
 				"-- plain.txt --\n   plain   text   \n\n\n",
 			want: "package main\n-- go.mod --\nmodule foo\n-- plain.txt --\n   plain   text   \n\n\n",
-		},
-		{
-			name:    "error_gofmt",
-			method:  http.MethodPost,
-			body:    "package 123\n",
-			wantErr: "prog.go:1:9: expected 'IDENT', found 123",
-		},
-		{
-			name:    "error_gofmt_with_header",
-			method:  http.MethodPost,
-			body:    "-- dir/one.go --\npackage 123\n",
-			wantErr: "dir/one.go:1:9: expected 'IDENT', found 123",
 		},
 		{
 			name:    "error_goimports",
