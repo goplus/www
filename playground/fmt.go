@@ -7,7 +7,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"go/format"
+	"github.com/qiniu/goplus/format"
 	"net/http"
 	"path"
 
