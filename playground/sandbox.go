@@ -475,7 +475,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		return br, nil
 	}
 
-	cmdBuild := exec.Command("go", "build", "-o", "a.out", "gop_autogen.go")
+	cmdBuild := exec.Command("go", "build", "-o", "a.out", "-tags=faketime", "gop_autogen.go")
 	cmdBuild.Dir = tmpDir
 	br.exePath = filepath.Join(tmpDir, "a.out")
 	cmdBuild.Stderr, cmdBuild.Stdout = out, out
