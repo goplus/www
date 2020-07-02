@@ -52,8 +52,8 @@ func (s *server) handleEdit(w http.ResponseWriter, r *http.Request) {
 		}
 		id := r.URL.Path[3:]
 		serveText := false
-		if strings.HasSuffix(id, ".go") {
-			id = id[:len(id)-3]
+		if strings.HasSuffix(id, ".gop") {
+			id = id[:len(id)-4]
 			serveText = true
 		}
 
@@ -67,7 +67,7 @@ func (s *server) handleEdit(w http.ResponseWriter, r *http.Request) {
 		if serveText {
 			if r.FormValue("download") == "true" {
 				w.Header().Set(
-					"Content-Disposition", fmt.Sprintf(`attachment; filename="%s.go"`, id),
+					"Content-Disposition", fmt.Sprintf(`attachment; filename="%s.gop"`, id),
 				)
 			}
 			w.Header().Set("Content-type", "text/plain; charset=utf-8")
