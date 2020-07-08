@@ -13,7 +13,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/qiniu/goplus-www/playground/internal/gcpdial"
+	"github.com/goplus/www/playground/internal/gcpdial"
 )
 
 var (

@@ -31,8 +31,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/qiniu/goplus-www/playground/internal"
-	"github.com/qiniu/goplus-www/playground/sandbox/sandboxtypes"
+	"github.com/goplus/www/playground/internal"
+	"github.com/goplus/www/playground/sandbox/sandboxtypes"
 	"go.opencensus.io/plugin/ochttp"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"

@@ -36,8 +36,8 @@ import (
 
 	"cloud.google.com/go/compute/metadata"
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/qiniu/goplus-www/playground/internal/gcpdial"
-	"github.com/qiniu/goplus-www/playground/sandbox/sandboxtypes"
+	"github.com/goplus/www/playground/internal/gcpdial"
+	"github.com/goplus/www/playground/sandbox/sandboxtypes"
 )
 
 const (

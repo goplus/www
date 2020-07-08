@@ -8,7 +8,7 @@
       "entrypoint": "bash",
       "args": [
         "-c",
-        "go run github.com/qiniu/goplus-www/playground/cmd/latestgo > /workspace/goversion; echo GO_VERSION=`cat /workspace/goversion`"
+        "go run github.com/goplus/www/playground/cmd/latestgo > /workspace/goversion; echo GO_VERSION=`cat /workspace/goversion`"
       ]
     },
     {

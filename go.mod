@@ -1,4 +1,4 @@
-module github.com/qiniu/goplus-www
+module github.com/goplus/www
 
 go 1.12
 
