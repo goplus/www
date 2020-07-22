@@ -461,7 +461,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		if err == errTimeout {
 			return nil, fmt.Errorf("process took too long")
 		}
-		if _, ok := err.(*exec.ExitError); !ok {
+		if _, ok := err.(*exec.ExitError); ok {
 			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
 			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
 			return br, nil
@@ -484,7 +484,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		if err == errTimeout {
 			return nil, fmt.Errorf("process took too long")
 		}
-		if _, ok := err.(*exec.ExitError); !ok {
+		if _, ok := err.(*exec.ExitError); ok {
 			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
 			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
 			return br, nil
