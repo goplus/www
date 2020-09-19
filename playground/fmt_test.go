@@ -29,7 +29,7 @@ func TestHandleFmt(t *testing.T) {
 		{
 			name:   "goplus hello world",
 			method: http.MethodPost,
-			body:   `println("Hello, Go+")
+			body: `println("Hello, Go+")
 
 
 println(1r << 129  )
@@ -44,7 +44,7 @@ println(m)
 println({v:  k for k  , v <- m})
 println([k for k, _ <-  m])
 println( [ v for v <- m]  )`,
-			want:   `println("Hello, Go+")
+			want: `println("Hello, Go+")
 
 println(1r << 129)
 println(1/3r + 2/7r*2)
@@ -78,6 +78,12 @@ println([v for v <- m])
 			method: http.MethodPost,
 			body:   "-- prog.go --\n  package main",
 			want:   "-- prog.go --\npackage main\n",
+		},
+		{
+			name:    "invalid_file_name",
+			method:  http.MethodPost,
+			body:    "-- ../prog.go --\n  package main",
+			wantErr: "invalid file name \"../prog.go\"",
 		},
 		{
 			name:   "multi_go_with_header",
@@ -119,6 +125,13 @@ println([v for v <- m])
 			wantErr: "prog.go:1:9: expected 'IDENT', found 123",
 		},
 		{
+			name:    "error_expected_statement",
+			method:  http.MethodPost,
+			body:    "package 123\n",
+			imports: false,
+			wantErr: "prog.go:1:27: expected statement, found 'package' (and 1 more errors)",
+		},
+		{
 			name:    "error_goimports_with_header",
 			method:  http.MethodPost,
 			body:    "-- dir/one.go --\npackage 123\n",
@@ -145,12 +158,15 @@ println([v for v <- m])
 			if tt.imports {
 				form.Set("imports", "true")
 			}
-			req := httptest.NewRequest("POST", "/fmt", strings.NewReader(form.Encode()))
+			req := httptest.NewRequest(tt.method, "/fmt", strings.NewReader(form.Encode()))
 			req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 			handleFmt(rec, req)
 			resp := rec.Result()
 			if resp.StatusCode != 200 {
 				t.Fatalf("code = %v", resp.Status)
+			}
+			if tt.want == "" && tt.wantErr == "" {
+				return
 			}
 			corsHeader := "Access-Control-Allow-Origin"
 			if got, want := resp.Header.Get(corsHeader), "*"; got != want {
