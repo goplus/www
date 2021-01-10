@@ -36,7 +36,6 @@ func TestIsTest(t *testing.T) {
 		want   bool
 	}{
 		{"Test", Test, true},
-		{"Test", nameOf, false},
 		{"Test", TestIsTest, true},
 		{"Test", Test1IsATest, true},
 		{"Test", TestÑIsATest, true},
@@ -66,6 +65,10 @@ func TestIsTest(t *testing.T) {
 			if tc.want != isTestFunction[name] {
 				t.Fatalf(".want (%v) is inconsistent with -test.list", tc.want)
 			}
+			if !strings.HasPrefix(name, tc.prefix) {
+				t.Fatalf("%q is not a prefix of %v", tc.prefix, name)
+			}
+
 			got := isTest(name, tc.prefix)
 			if got != tc.want {
 				t.Errorf(`isTest(%q, %q) = %v; want %v`, name, tc.prefix, got, tc.want)
@@ -177,137 +180,4 @@ func Benchmark1IsABenchmark(b *testing.B) {
 // Please ignore any lint or vet warnings for this function.
 func BenchmarkisNotABenchmark(b *testing.B) {
 	panic("This is not a valid benchmark function.")
-}
-
-func TestGetTestProg(t *testing.T) {
-	tcs := []struct {
-		name string
-		src  []byte
-		want []byte
-	}{
-		{
-			name: "import_parse_error",
-		},
-		{
-			name: "not_main_package",
-			src:  []byte("package notmain\n"),
-		},
-		{
-			name: "with_main_method",
-			src: []byte(`package main
-import "testing"
-
-func main(){}
-
-func TestMain(t *testing.T){}
-`),
-		},
-		{
-			name: "no_test",
-			src: []byte(`package main
-import "testing"
-`),
-		},
-		{
-			name: "no_testing_import",
-			src: []byte(`package main
-func TestMain(t *testing.T){}
-`),
-		},
-		{
-			name: "parse_error",
-			src: []byte(`package main
-import "testing"
-func TestMain(t *testing.T){ // no }
-`),
-		},
-		{
-			name: "test_true",
-			src: []byte(`package main
-import "testing"
-
-func TestTrue(t *testing.T){
-}
-`),
-			want: []byte(`package main
-import "testing"
-
-func TestTrue(t *testing.T){
-}
-
-func main() {
-	matchAll := func(t string, pat string) (bool, error) { return true, nil }
-	tests := []testing.InternalTest{
-
-		{"TestTrue", TestTrue},
-
-	}
-	examples := []testing.InternalExample{
-
-	}
-	testing.Main(matchAll, tests, nil, examples)
-}
-`)},
-		{name: "example_hello",
-			src: []byte(`package main
-import "fmt"
-func ExampleHello(){
-    fmt.Println("hello")
-    // Output:
-    // hello
-}
-`),
-			want: []byte(`package main;import "testing";
-import "fmt"
-func ExampleHello(){
-    fmt.Println("hello")
-    // Output:
-    // hello
-}
-
-func main() {
-	matchAll := func(t string, pat string) (bool, error) { return true, nil }
-	tests := []testing.InternalTest{
-
-	}
-	examples := []testing.InternalExample{
-
-		{"ExampleHello", ExampleHello, "hello\n", false},
-
-	}
-	testing.Main(matchAll, tests, nil, examples)
-}
-`),
-		},
-		{
-			name: "example_without_output",
-			src: []byte(`package main
-func ExampleHello(){}
-				`),
-			want:[]byte(`package main;import "testing";
-func ExampleHello(){}
-				
-func main() {
-	matchAll := func(t string, pat string) (bool, error) { return true, nil }
-	tests := []testing.InternalTest{
-
-	}
-	examples := []testing.InternalExample{
-
-	}
-	testing.Main(matchAll, tests, nil, examples)
-}
-`),
-		},
-	}
-	for _, tc := range tcs {
-		t.Run(tc.name, func(t *testing.T) {
-			want := getTestProg(tc.src)
-			if !reflect.DeepEqual(tc.want, want) {
-				t.Log(string(tc.want))
-				t.Log(string(want))
-				t.Fatal()
-			}
-		})
-	}
 }
