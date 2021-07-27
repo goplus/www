@@ -1,0 +1,240 @@
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-info navbar-light border">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+            <img src="/logo.svg" alt="Logo" style="width:70px;">
+        </a>
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light" href="https://github.com/goplus/gop">
+                        Github
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="py-5 bg-light">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Go+: designed for data science</h2>
+                <br/>
+                <ol>
+                    <li>A static typed language.</li>
+                    <li>Fully compatible with the Go language.</li>
+                    <li>Script-like style, and more readable code for data science than Go.</li>
+                </ol>
+
+                <br/>
+                <a href="https://play.goplus.org/">
+                    <button type="btn" class="btn btn-primary ">Playground</button>
+                </a>
+                <a href="https://repl.goplus.org/">
+                    <button type="btn" class="btn btn-primary ">Playground/REPL</button>
+                </a>
+                <a href="https://jsplay.goplus.org/">
+                    <button type="btn" class="btn btn-primary ">Playground/GopherJS</button>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="pt-3">Go compatibility</h3>
+                        <p>Go+ supports bytecode backend and Go code generation.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="pt-3">Go enhancements</h3>
+                        <p>We introduce some features for enhancement.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="pt-3">Better error handling</h3>
+                        <p>We reinvent the error handling specification in Go+.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="pt-3">Unix shebang</h3>
+                        <p>You can use Go+ programs as shell scripts now.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Compatibility with Go</h2>
+                <P>All Go features will be supported (including partially support cgo).</P>
+                <a href="https://play.goplus.org/p/go7P1z-A1ev">
+                    <button type="btn" class="btn btn-info ">Go to Playground</button>
+                </a>
+            </div>
+            <div class="col-md-6">
+
+                <!-- HTML generated using hilite.me -->
+                <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+                            style="margin: 0; line-height: 125%"><span style="color: #0000aa">import</span> (
+    <span style="color: #aa5500">&quot;fmt&quot;</span>
+    <span style="color: #aa5500">&quot;strings&quot;</span>
+)
+
+x := strings.NewReplacer(<span style="color: #aa5500">&quot;?&quot;</span>, <span
+                                style="color: #aa5500">&quot;!&quot;</span>).Replace(<span style="color: #aa5500">&quot;hello, world???&quot;</span>)
+fmt.Println(<span style="color: #aa5500">&quot;x:&quot;</span>, x)
+</pre>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Rational number: bigint, bigrat, bigfloat</h2>
+                <P>We introduce the rational number as native Go+ types. We use suffix r to denote rational literals.
+                    For example, (1r << 200) means a big int whose value is equal to 2<sup>200</sup>. And 4/5r means the
+                    rational
+                    constant 4/5.</P>
+                <a href="https://play.goplus.org/p/bRwN15drYVP">
+                    <button type="btn" class="btn btn-info ">Go to Playground</button>
+                </a>
+
+            </div>
+            <div class="col-md-6">
+
+                <!-- HTML generated using hilite.me -->
+                <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+                            style="margin: 0; line-height: 125%">a := <span
+                                style="color: #009999">1</span>r &lt;&lt; <span style="color: #009999">65</span>   <span
+                                style="color: #aaaaaa; font-style: italic">// bigint, large than int64</span>
+b := <span style="color: #009999">4</span>/<span style="color: #009999">5</span>r       <span
+                                style="color: #aaaaaa; font-style: italic">// bigrat</span>
+c := b - <span style="color: #009999">1</span>/<span style="color: #009999">3</span>r + <span
+                                style="color: #009999">3</span> * <span style="color: #009999">1</span>/<span
+                                style="color: #009999">2</span>r
+<span style="color: #00aaaa">println</span>(a, b, c)
+</pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Range enhancements</h2>
+                <P>We support list comprehension, which makes data processing easier.</P>
+                <a href="https://play.goplus.org/p/qkrIC56qH0T">
+                    <button type="btn" class="btn btn-info ">Go to Playground</button>
+                </a>
+
+            </div>
+            <div class="col-md-6">
+
+                <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">sum := <span style="color: #009999">0</span>
+<span style="color: #0000aa">for</span> x &lt;- [<span style="color: #009999">1</span>, <span style="color: #009999">3</span>, <span style="color: #009999">5</span>, <span style="color: #009999">7</span>, <span style="color: #009999">11</span>, <span style="color: #009999">13</span>, <span style="color: #009999">17</span>], x &gt; <span style="color: #009999">3</span> {
+    sum += x
+}
+<span style="color: #00aaaa">println</span>(sum)
+
+resultMap := [k+<span style="color: #aa5500">&quot;,&quot;</span>+s <span style="color: #0000aa">for</span> k, s &lt;- {<span style="color: #aa5500">&quot;Hello&quot;</span>: <span style="color: #aa5500">&quot;xsw&quot;</span>, <span style="color: #aa5500">&quot;Hi&quot;</span>: <span style="color: #aa5500">&quot;Go+&quot;</span>}]
+<span style="color: #00aaaa">println</span>(resultMap)
+
+array := [<span style="color: #009999">1</span>, <span style="color: #009999">2</span>, <span style="color: #009999">3</span>, <span style="color: #009999">4</span>, <span style="color: #009999">5</span>, <span style="color: #009999">6</span>]
+resultArray := [[a, b] <span style="color: #0000aa">for</span> a &lt;- array, a &lt; b <span style="color: #0000aa">for</span> b &lt;- array, b &gt; <span style="color: #009999">2</span>]
+<span style="color: #00aaaa">println</span>(resultArray)
+</pre></div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Error handling</h2>
+                <P>We reinvent the error handling specification in Go+, as is ErrWrap expressions.</P>
+                <a href="https://play.goplus.org/p/bAVnOom-JSb">
+                    <button type="btn" class="btn btn-info ">Go to Playground</button>
+                </a>
+
+            </div>
+            <div class="col-md-6">
+
+                <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">expr! <span style="color: #aaaaaa; font-style: italic">// panic if err</span>
+expr? <span style="color: #aaaaaa; font-style: italic">// return if err</span>
+expr?:defval <span style="color: #aaaaaa; font-style: italic">// use defval if err</span>
+</pre></div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="pb-3">Unix shebang</h2>
+                <P>You can use Go+ programs as shell scripts now.</P>
+
+            </div>
+            <div class="col-md-6">
+
+                <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #aaaaaa; font-style: italic">#!/usr/bin/env gop run</span>
+
+println(<span style="color: #aa5500">&quot;Hello, Go+&quot;</span>)
+</pre></div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="copyright bg-light border pt-2">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <p> Github:https://github.com/goplus/gop. Powered By Qiniu.com. </p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
