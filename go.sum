@@ -72,6 +72,9 @@ github.com/google/pprof v0.0.0-20200507031123-427632fa3b1c/go.mod h1:ZgVRPoUq/hf
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+Tv3SM=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
+github.com/goplus/gop v0.9.6 h1:ny5L1VZ3Y2rahB/bUw+C0ahXNnlU+33ChZUuzXX3q78=
+github.com/goplus/gop v0.9.6/go.mod h1:wbUYHG7OCPa7TvI8DsgzJviR1CWKlPHNSKeVPdVSRMc=
+github.com/goplus/gox v0.9.23/go.mod h1:jRTG/pYm6zzVme7kWEEZQ8Ah2W4gyFID+YZHqVTCdxc=
 github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7/go.mod h1:FecbI9+v66THATjSRHfNgh1IVFe/9kFxbXtjV0ctIMA=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
@@ -118,6 +121,8 @@ github.com/qiniu/goplus v0.6.41-0.20200627014401-a031ebddfa3f h1:60UriceFM7qBZv6
 github.com/qiniu/goplus v0.6.41-0.20200627014401-a031ebddfa3f/go.mod h1:p/bMvJU8jV85hla2KKlDBy9dMqSMGdm88MTqz25HMm0=
 github.com/qiniu/x v1.10.5 h1:7V/CYWEmo9axJULvrJN6sMYh2FdY+esN5h8jwDkA4b0=
 github.com/qiniu/x v1.10.5/go.mod h1:03Ni9tj+N2h2aKnAz+6N0Xfl8FwMEDRC2PAlxekASDs=
+github.com/qiniu/x v1.11.5 h1:TYr5cl4g2yoHAZeDK4MTjKF6CMoG+IHlCDvvM5qym6U=
+github.com/qiniu/x v1.11.5/go.mod h1:03Ni9tj+N2h2aKnAz+6N0Xfl8FwMEDRC2PAlxekASDs=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c h1:hrFjpFFCbJL/sC7LNMzIKtgwZCTETOxQPko1UeoPa4c=
 github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c/go.mod h1:hKmq5kWdCj2z2KEozexVbfEZIWiTjhE0+UjmZgPqehw=
