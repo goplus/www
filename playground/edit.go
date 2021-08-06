@@ -90,6 +90,9 @@ func (s *server) handleEdit(w http.ResponseWriter, r *http.Request) {
 
 const hello = `println("Hello, Go+")
 
+println(1r << 129)
+println(1/3r + 2/7r*2)
+
 arr := [1, 3, 5, 7, 11, 13, 17, 19]
 println(arr)
 println([x*x for x <- arr, x > 3])
