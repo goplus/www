@@ -5,13 +5,11 @@ package main
 import (
 	"log"
 
-	"github.com/qiniu/goplus/ast"
-	"github.com/qiniu/goplus/cl"
-	exec "github.com/qiniu/goplus/exec/bytecode"
-	"github.com/qiniu/goplus/parser"
-	"github.com/qiniu/goplus/token"
-
-	_ "github.com/qiniu/goplus/lib"
+	"github.com/goplus/gop/ast"
+	"github.com/goplus/gop/cl"
+	exec "github.com/goplus/gop/exec/bytecode"
+	"github.com/goplus/gop/parser"
+	"github.com/goplus/gop/token"
 )
 
 func buildGoplus(data string) {
