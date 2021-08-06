@@ -468,7 +468,9 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	}
 
 	// until now, qgo does not provide process exit code, so we hard code this.
-	if strings.Contains(out.String(), "errors") || strings.Contains(out.String(), "TODO") {
+	if strings.Contains(out.String(), "errors") ||
+		strings.Contains(out.String(), "TODO") ||
+		strings.Contains(out.String(), "runtime error") {
 		br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
 		br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
 		return br, nil

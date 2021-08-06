@@ -10,7 +10,6 @@ import (
 	exec "github.com/goplus/gop/exec/bytecode"
 	"github.com/goplus/gop/parser"
 	"github.com/goplus/gop/token"
-
 )
 
 func buildGoplus(data string) {
