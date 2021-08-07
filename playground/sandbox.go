@@ -447,11 +447,11 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 
 	br := new(buildResult)
 
-	qgo, err := exec.LookPath("qgo")
+	qgo, err := exec.LookPath("gop")
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	cmdGenerate := exec.Command(qgo, ".")
+	cmdGenerate := exec.Command(qgo, "go", ".")
 	cmdGenerate.Dir = tmpDir
 
 	out := &bytes.Buffer{}
@@ -463,13 +463,14 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		}
 		if _, ok := err.(*exec.ExitError); ok {
 			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
-			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
 			return br, nil
 		}
 	}
 
 	// until now, qgo does not provide process exit code, so we hard code this.
-	if strings.Contains(out.String(), "[ERROR]") {
+	if strings.Contains(out.String(), "errors") ||
+		strings.Contains(out.String(), "TODO") ||
+		strings.Contains(out.String(), "runtime error") {
 		br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
 		br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
 		return br, nil

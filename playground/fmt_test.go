@@ -29,8 +29,7 @@ func TestHandleFmt(t *testing.T) {
 		{
 			name:   "goplus hello world",
 			method: http.MethodPost,
-			body:   `println("Hello, Go+")
-
+			body: `println("Hello, Go+")
 
 println(1r << 129  )
 println(1/3r + 2/7r * 2)
@@ -44,7 +43,7 @@ println(m)
 println({v:  k for k  , v <- m})
 println([k for k, _ <-  m])
 println( [ v for v <- m]  )`,
-			want:   `println("Hello, Go+")
+			want: `println("Hello, Go+")
 
 println(1r << 129)
 println(1/3r + 2/7r*2)
