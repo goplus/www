@@ -1,0 +1,6 @@
+.section {
+  width: 1024px;
+  display: flex;
+  margin: auto;
+  padding-top: 72px;
+}

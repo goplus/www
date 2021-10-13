@@ -1,0 +1,57 @@
+.footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 1024px;
+  height: 92px;
+  margin: auto;
+  padding: 0 35px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.qiniuDoll {
+  position: absolute !important;
+  left: 35px !important;
+  bottom: 0 !important;
+  /* width: 100px;
+  height: 82px; */
+}
+
+.links {
+  margin-left: 170px;
+  flex-grow: 1;
+}
+
+.links a {
+  position: relative;
+  margin-right: 81px;
+}
+
+.links a:hover {
+  color: #000;
+}
+
+.links a::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  right: -40px;
+  width: 1px;
+  height: 20px;
+  transform: translateY(-50%);
+  background: #e5e5e5;
+}
+
+.links a:last-child::after {
+  content: none;
+}
+
+.powerBy {
+  display: flex;
+  align-items: center;
+}
+
+.powerBy span {
+  margin-right: 12px;
+}

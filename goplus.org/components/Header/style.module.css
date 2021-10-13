@@ -1,0 +1,41 @@
+.header {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: white;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1024px;
+  height: 72px;
+  padding: 0 35px;
+  margin: auto;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links .linkItem {
+  font-size: 16px;
+  margin: 0 48px;
+}
+
+.links .linkItem:hover {
+  color: #000;
+}
+
+
+.links a:last-child {
+  margin-right: 0;
+}
+
+.links .selected {
+  color: #2c84ff;
+  line-height: 24px;
+}
