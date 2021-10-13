@@ -8,7 +8,7 @@ export default function Features({ children }: React.PropsWithChildren<{}>) {
   return (
     <div className={styles.section}>
       <Aside />
-      <div>{children}</div>
+      <div className={styles.features}>{children}</div>
     </div>
   )
 }

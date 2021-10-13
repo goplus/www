@@ -4,3 +4,9 @@
   margin: auto;
   padding-top: 72px;
 }
+
+.features {
+  width: 0;
+  flex: 1;
+  word-wrap: break-word;
+}

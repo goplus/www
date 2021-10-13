@@ -1,0 +1,22 @@
+.codeBlock {
+  position: relative;
+}
+
+.codeBlock code {
+  border-radius: initial;
+  background-color: initial;
+}
+
+.copyBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.codeBlock:hover .copyBtn{
+  display: inline-block;
+}
+
+

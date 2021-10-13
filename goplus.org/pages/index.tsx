@@ -5,7 +5,8 @@ import Home from '../components/Home'
 import Heading from '../components/Home/Heading'
 import { getDoc } from '../lib/docs'
 import Code from '../components/Code'
-const components = { Code, h3: Heading }
+
+const components = { code: Code, h3: Heading }
 
 export default function TestPage({ source }: any) {
   return (

@@ -8,7 +8,7 @@ import Layout from '../Layout'
 export default function Home({ children }: React.PropsWithChildren<{}>) {
   return (
     <Layout>
-      <main>
+      <main style={{ marginBottom: 60 }}>
         <Intro />
         <Summary />
         <Features>{children}</Features>

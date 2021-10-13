@@ -1,13 +1,8 @@
-import Home from '../components/Home'
-import Code from '../components/Code'
-
 ### Rational number: bigint, bigrat, bigfloat
 
 We introduce the rational number as native Go+ types. We use suffix `r` to denote rational literals. For example, (1r << 200) means a big int whose value is equal to 2<sup>200</sup>. And 4/5r means the rational constant 4/5.
 
-<Code language="go">
-
-```
+```go
 var a bigint = 1r << 65  // bigint, large than int64
 var b bigrat = 4/5r      // bigrat
 c := b - 1/3r + 3 * 1/2r // bigrat
@@ -18,26 +13,18 @@ var y *big.Rat = 4/5r
 println(x, y)
 ```
 
-</Code>
-
 ### Map literal
 
-<Code language="go">
-
-```
+```go
 x := {"Hello": 1, "xsw": 3.4} // map[string]float64
 y := {"Hello": 1, "xsw": "Go+"} // map[string]interface{}
 z := {"Hello": 1, "xsw": 3} // map[string]int
 empty := {} // map[string]interface{}
 ```
 
-</Code>
-
 ### Slice literal
 
-<Code language="go">
-
-```
+```go
 x := [1, 3.4] // []float64
 y := [1] // []int
 z := [1+2i, "xsw"] // []interface{}
@@ -47,13 +34,9 @@ c := ["xsw", 3] // []interface{}
 empty := [] // []interface{}
 ```
 
-</Code>
-
 ### Deduce struct type
 
-<Code language="go">
-
-```
+```go
 type Config struct {
     Dir   string
     Level int
@@ -66,15 +49,11 @@ func foo(conf *Config) {
 foo({Dir: "/foo/bar", Level: 1})
 ```
 
-</Code>
-
 Here `foo({Dir: "/foo/bar", Level: 1})` is equivalent to `foo(&Config{Dir: "/foo/bar", Level: 1})`. However, you can't replace `foo(&Config{"/foo/bar", 1})` with `foo({"/foo/bar", 1})`, because it is confusing to consider `{"/foo/bar", 1}` as a struct literal.
 
 You also can omit struct types in a return statement. For example:
 
-<Code language="go">
-
-```
+```go
 type Result struct {
     Text string
 }
@@ -84,14 +63,10 @@ func foo() *Result {
 }
 ```
 
-</Code>
-
 
 ### List comprehension
 
-<Code language="go">
-
-```
+```go
 a := [x*x for x <- [1, 3, 5, 7, 11]]
 b := [x*x for x <- [1, 3, 5, 7, 11], x > 3]
 c := [i+v for i, v <- [1, 3, 5, 7, 11], i%2 == 1]
@@ -105,13 +80,9 @@ y := {x: i for i, x <- [1, 3, 5, 7, 11], i%2 == 1}
 z := {v: k for k, v <- {1: "Hello", 3: "Hi", 5: "xsw", 7: "Go+"}, k > 3}
 ```
 
-</Code>
-
 ### Select data from a collection
 
-<Code language="go">
-
-```
+```go
 type student struct {
     name  string
     score int
@@ -126,13 +97,9 @@ println(unknownScore, ok) // output: 0 false
 println(jasonScore) // output: 80
 ```
 
-</Code>
-
 ### Check if data exists in a collection
 
-<Code language="go">
-
-```
+```go
 type student struct {
     name  string
     score int
@@ -144,27 +111,19 @@ hasJason := {for x <- students, x.name == "Jason"} // is any student named Jason
 hasFailed := {for x <- students, x.score < 60}     // is any student failed?
 ```
 
-</Code>
-
 ### For loop
 
-<Code language="go">
-
-```
+```go
 sum := 0
 for x <- [1, 3, 5, 7, 11, 13, 17], x > 3 {
     sum += x
 }
 ```
 
-</Code>
-
 
 ### For range of UDT
 
-<Code language="go">
-
-```
+```go
 type Foo struct {
 }
 
@@ -186,16 +145,12 @@ for k, v <- foo {
 println({v: k for k, v <- foo})
 ```
 
-</Code>
-
 **Note: you can't use break/continue or return statements in for range of udt.Gop_Enum(callback).**
 
 
 ### For range of UDT2
 
-<Code language="go">
-
-```
+```go
 type FooIter struct {
 }
 
@@ -225,13 +180,9 @@ for k, v <- foo {
 println({v: k for k, v <- foo})
 ```
 
-</Code>
-
 ### Lambda expression
 
-<Code language="go">
-
-```
+```go
 func plot(fn func(x float64) float64) {
     // ...
 }
@@ -244,13 +195,9 @@ plot(x => x * x)           // plot(func(x float64) float64 { return x * x })
 plot2(x => (x * x, x + x)) // plot2(func(x float64) (float64, float64) { return x * x, x + x })
 ```
 
-</Code>
-
 ### Overload operators
 
-<Code language="go">
-
-```
+```go
 import "math/big"
 
 type MyBigInt struct {
@@ -279,28 +226,20 @@ println(a + Int(3r))
 println(-a)
 ```
 
-</Code>
-
 
 ### Error handling
 
 We reinvent the error handling specification in Go+. We call them `ErrWrap expressions`:
 
-<Code language="go">
-
-```
+```go
 expr! // panic if err
 expr? // return if err
 expr?:defval // use defval if err
 ```
 
-</Code>
-
 How to use them? Here is an example:
 
-<Code language="go">
-
-```
+```go
 import (
     "strconv"
 )
@@ -321,11 +260,7 @@ println(`add("10", "abc"):`, sum, err)
 println(`addSafe("10", "abc"):`, addSafe("10", "abc"))
 ```
 
-</Code>
-
 The output of this example is:
-
-<Code language="text">
 
 ```
 add("100", "23"): 123
@@ -338,8 +273,6 @@ main.add("10", "abc")
 addSafe("10", "abc"): 10
 ```
 
-</Code>
-
 Compared to corresponding Go code, It is clear and more readable.
 
 And the most interesting thing is, the return error contains the full error stack. When we got an error, it is very easy to position what the root cause is.
@@ -351,9 +284,7 @@ How these `ErrWrap expressions` work? See [Error Handling](https://github.com/go
 
 Let's see an example written in Go+:
 
-<Code language="go">
-
-```
+```go
 import "github.com/goplus/gop/ast/goptest"
 
 doc := goptest.New(`... Go+ code ...`)!
@@ -361,23 +292,17 @@ doc := goptest.New(`... Go+ code ...`)!
 println(doc.Any().FuncDecl().Name())
 ```
 
-</Code>
-
 In many languages, there is a concept named `property` who has `get` and `set` methods.
 
 Suppose we have `get property`, the above example will be:
 
-<Code language="go">
-
-```
+```go
 import "github.com/goplus/gop/ast/goptest"
 
 doc := goptest.New(`... Go+ code ...`)!
 
 println(doc.any.funcDecl.name)
 ```
-
-</Code>
 
 In Go+, we introduce a concept named `auto property`. It is a `get property`, but is implemented automatically. If we have a method named `Bar()`, then we will have a `get property` named `bar` at the same time.
 
@@ -386,9 +311,7 @@ In Go+, we introduce a concept named `auto property`. It is a `get property`, bu
 
 You can use Go+ programs as shell scripts now. For example:
 
-<Code language="go">
-
-```
+```go
 #!/usr/bin/env -S gop run
 
 println("Hello, Go+")
@@ -407,9 +330,4 @@ println([k for k, _ <- m])
 println([v for v <- m])
 ```
 
-</Code>
-
 Go [tutorial/20-Unix-Shebang/shebang](https://github.com/goplus/gop/blob/main/tutorial/20-Unix-Shebang/shebang) to get the source code.
-
-
-export default ({ children }) => <Home>{children}</Home>

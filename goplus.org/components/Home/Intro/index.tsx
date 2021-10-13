@@ -16,7 +16,7 @@ export default function Intro() {
           </a>
           <a href="" className={styles.btn}>
             <Image width={24} height={16} src="/download.svg" alt="Download Logo" />
-            <span>Download Go+</span>
+            <span className={styles.downloadTxt}>Download Go+</span>
           </a>
         </div>
         <Image width={172} height={133} src="/qiniu_doll.png" alt="Qiniu Doll Logo" />

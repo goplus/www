@@ -35,12 +35,19 @@
 
 .btn {
   composes: btnBase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #2c84ff;
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
   color: #4f98ff;
+}
+
+.downloadTxt {
+  margin-left: 20px;
 }
 
 .primaryBtn {

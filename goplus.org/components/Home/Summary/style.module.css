@@ -7,7 +7,9 @@
   padding-top: 72px;
 }
 
-.summary .title {
+.title {
+  font-size: 28px;
+  color: #000;
   margin-top: 72px;
 }
 

@@ -30,7 +30,6 @@
   color: #000;
 }
 
-
 .links a:last-child {
   margin-right: 0;
 }
@@ -38,4 +37,8 @@
 .links .selected {
   color: #2c84ff;
   line-height: 24px;
+}
+
+.links .selected:hover {
+  color: #2c84ff;
 }
