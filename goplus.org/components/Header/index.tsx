@@ -32,7 +32,7 @@ export default function Nav() {
     <header className={styles.header}>
       <div className={styles.nav}>
         <Link href="/">
-          <a>
+          <a style={{ lineHeight: 1 }}>
             <Image width={60} height={17} src="/go_plus.svg" alt="Go Plus Logo" />
           </a>
         </Link>
@@ -40,7 +40,7 @@ export default function Nav() {
           {navItems.current.map((item, index) => (
             <NaviItem className={0 === index ? styles.selected : ''} key={index} {...item} />
           ))}
-          <a href="https://github.com/goplus/gop">
+          <a href="https://github.com/goplus/gop" rel="noreferrer">
             <Image width={20} height={20} src="/github.svg" alt="Github Logo"></Image>
           </a>
         </div>
@@ -56,7 +56,7 @@ interface NaviItemProps {
 
 function NaviItem({ className, href, children }: React.PropsWithChildren<NaviItemProps>) {
   return (
-    <a className={`${styles.linkItem} ${className}`} href={href}>
+    <a className={`${styles.linkItem} ${className}`} href={href} rel="noreferrer">
       {children}
     </a>
   )

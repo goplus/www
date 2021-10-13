@@ -11,10 +11,10 @@ export default function Intro() {
         </div>
         <div className={styles.title}>The Go+ language for engineering, STEM education, and data science</div>
         <div className={styles.btnsWrap}>
-          <a href="" className={styles.primaryBtn}>
+          <a href="https://play.goplus.org" className={styles.primaryBtn} rel="noopener">
             Try Go+
           </a>
-          <a href="" className={styles.btn}>
+          <a href="https://github.com/goplus/gop/releases" className={styles.btn} rel="noopener">
             <Image width={24} height={16} src="/download.svg" alt="Download Logo" />
             <span className={styles.downloadTxt}>Download Go+</span>
           </a>

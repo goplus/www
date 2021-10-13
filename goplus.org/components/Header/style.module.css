@@ -32,6 +32,7 @@
 
 .links a:last-child {
   margin-right: 0;
+  line-height: 1;
 }
 
 .links .selected {

@@ -3,8 +3,8 @@ import { MDXRemote } from 'next-mdx-remote'
 
 import Home from '../components/Home'
 import Heading from '../components/Home/Heading'
-import { getDoc } from '../lib/docs'
 import Code from '../components/Code'
+import { getDoc } from '../lib/doc'
 
 const components = { code: Code, h3: Heading }
 

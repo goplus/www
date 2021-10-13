@@ -1,7 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { CodeBlock, github } from 'react-code-blocks'
 import Image from 'next/image'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+
+import { useTimer } from '../../hooks'
 
 import styles from './style.module.css'
 
@@ -21,10 +23,14 @@ github.backgroundColor = '#FAFAFA'
 export default function Code({ children, className }: React.PropsWithChildren<Props>) {
   const [isCopied, setIsCopied] = useState(false)
   const sourceCode = useMemo(() => getSourceCode(children) || '', [children])
-  const onCopy = useCallback((_, result) => {
-    setIsCopied(result)
-    setTimeout(() => setIsCopied(false), 2500)
-  }, [])
+  const timer = useTimer()
+  const onCopy = useCallback(
+    (_, result) => {
+      setIsCopied(result)
+      timer.current = setTimeout(() => setIsCopied(false), 2500)
+    },
+    [timer]
+  )
 
   return (
     <div className={styles.codeBlock}>
