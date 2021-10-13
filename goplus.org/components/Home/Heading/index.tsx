@@ -15,7 +15,7 @@ export default function Heading({ children }: React.PropsWithChildren<{}>) {
     return null
   }
   return (
-    <a id={computedAnchor(children)} className={styles.title}>
+    <a data-id={computedAnchor(children)} className={styles.title}>
       {children}
     </a>
   )
