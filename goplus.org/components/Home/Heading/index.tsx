@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 
+import { getText } from '../../../utils'
+import featuresCtx from '../Features/ctx'
 import styles from './style.module.css'
 
 function computedAnchor(title: string) {
@@ -11,12 +13,22 @@ function computedAnchor(title: string) {
 }
 
 export default function Heading({ children }: React.PropsWithChildren<{}>) {
-  if (typeof children !== 'string') {
-    return null
-  }
+  const { registerFeature } = useContext(featuresCtx)
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  const id = computedAnchor(getText(children))
+
+  useEffect(() => {
+    registerFeature({
+      id,
+      title: children,
+      heading: headingRef.current!
+    })
+  }, [id, children, registerFeature])
+
   return (
-    <a data-id={computedAnchor(children)} className={styles.title}>
+    <h3 ref={headingRef} data-id={id} className={styles.title}>
       {children}
-    </a>
+    </h3>
   )
 }

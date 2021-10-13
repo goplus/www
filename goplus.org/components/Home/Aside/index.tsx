@@ -1,77 +1,19 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MoveTo } from 'moveto'
 
-import styles from './style.module.css'
 import { useHash } from '../../../hooks/url'
+import featureCtx from '../Features/ctx'
 
-const defaultScrollDuration = 400 // 默认滚动动画时间 ms
+import styles from './style.module.css'
+
+const defaultScrollDuration = 400 // 默认滚动动画时间，单位 ms
+const defaultScrollDebounceWait = 50 // 对 scroll 事件监听的延迟，单位 ms
 const headerHeight = 72 // Header 的高度，单位 px
 
 export default function Aside() {
   const [hash] = useHash()
-
-  const anchors = React.useRef<Array<{ href: string; text: string; className?: string }>>([
-    {
-      href: '#rational-number',
-      text: 'Rational number: bigint, bigrat, bigfloat'
-    },
-    {
-      href: '#map-literal',
-      text: 'Map literal'
-    },
-    {
-      href: '#slice-literal',
-      text: 'Slice literal'
-    },
-    {
-      href: '#deduce-struct-type',
-      text: 'Deduce struct type'
-    },
-    {
-      href: '#list-comprehension',
-      text: 'List comprehension'
-    },
-    {
-      href: '#select-data-from-a-collection',
-      text: 'Select data from a collection'
-    },
-    {
-      href: '#check-if-data-exists-in-a-collection',
-      text: 'Check if data exists in a collection'
-    },
-    {
-      href: '#for-loop',
-      text: 'For loop'
-    },
-    {
-      href: '#for-range-of-udt',
-      text: 'For range of UDT'
-    },
-    {
-      href: '#for-range-of-udt2',
-      text: 'For range of UDT2'
-    },
-    {
-      href: '#lambda-expression',
-      text: 'Lambda expression'
-    },
-    {
-      href: '#overload-operators',
-      text: 'Overload operators'
-    },
-    {
-      href: '#error-handling',
-      text: 'Error handling'
-    },
-    {
-      href: '#auto-property',
-      text: 'Auto property'
-    },
-    {
-      href: '#unix-shebang',
-      text: 'Unix shebang'
-    }
-  ])
+  const { features } = useContext(featureCtx)
+  const [activeFeature, setActiveFeature] = useState<string | null>(null)
 
   // 第三方库 moveto 在 module init 的时候就会尝试读 window，故它延后加载，这里存放其导出
   const MoveToRef = useRef<typeof MoveTo | undefined>()
@@ -97,18 +39,36 @@ export default function Aside() {
 
   useEffect(() => {
     if (hash == null) return
-    const activeAnchor = anchors.current.find(({ href }) => href === ('#' + hash))
-    if (activeAnchor == null) return
-    const target = document.querySelector(`[data-id="${hash}"]`)
-    if (target == null || !(target instanceof HTMLElement)) return
-    scrollTo(target.offsetTop - headerHeight)
-  }, [hash])
+    const targetFeature = features.find(feature => feature.id === hash)
+    if (targetFeature == null) return
+    scrollTo(targetFeature.heading.offsetTop - headerHeight)
+  }, [features, hash])
+
+  const featuresRef = useRef(features)
+  featuresRef.current = features
+
+  useEffect(() => {
+    // 如有性能问题，这里加个 debounce
+    function handleScroll() {
+      const scrollTop = getGlobalScrollTop()
+      const features = featuresRef.current
+      let activeFeature = null
+      for (let i = 0; i < features.length; i++) {
+        if (scrollTop >= (features[i].heading.offsetTop - headerHeight)) {
+          activeFeature = features[i].id
+        }
+      }
+      setActiveFeature(activeFeature)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <div className={styles.aside}>
-      {anchors.current.map(anchor => (
-        <div key={anchor.href} className={`${styles.anchorWrap} ${anchor.href === ('#' + hash) ? styles.selected : ''}`}>
-          <a href={anchor.href}>{anchor.text}</a>
+      {features.map(feature => (
+        <div key={feature.id} className={`${styles.anchorWrap} ${feature.id === activeFeature ? styles.selected : ''}`}>
+          <a href={`#${feature.id}`}>{feature.title}</a>
         </div>
       ))}
     </div>
