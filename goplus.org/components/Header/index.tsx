@@ -9,7 +9,7 @@ export default function Nav() {
   const navItems = React.useRef([
     {
       children: 'Overview',
-      href: 'https://github.com/goplus/gop#summary-about-go'
+      href: ''
     },
     {
       children: 'Tutorials',
