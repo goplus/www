@@ -21,7 +21,7 @@ export default function Layout({ meta: pageMeta, children }: React.PropsWithChil
     <div>
       <Head>
         <title>{meta.title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/go_plus.svg" />
       </Head>
       <Header />
       <main>{children}</main>
