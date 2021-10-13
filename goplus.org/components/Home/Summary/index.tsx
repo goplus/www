@@ -75,11 +75,15 @@ export default function Summary() {
       <div className={styles.title}>Why Go+</div>
       <div className={styles.tabs}>
         {items.current.map((item, index) => (
-          <div className={styles.tab} key={item.title} onClick={() => setSelected(index)}>
+          <div
+            className={`${styles.tab} ${selected === index ? styles.selectedTab : ''}`}
+            key={item.title}
+            onClick={() => setSelected(index)}
+          >
             {item.title}
           </div>
         ))}
-        <div className={`${styles.tab} ${styles.selectedBar}`} style={{ transform }}></div>
+        <div className={`${styles.tab} ${styles.backgroundBar}`} style={{ transform }}></div>
       </div>
       <div className={styles.tabContent}>{items.current[selected].content}</div>
     </div>

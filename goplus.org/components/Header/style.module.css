@@ -27,7 +27,7 @@
 }
 
 .links .linkItem:hover {
-  color: #000;
+  color: #2c84ff;
 }
 
 .links a:last-child {
@@ -36,10 +36,24 @@
 }
 
 .links .selected {
+  position: relative;
   color: #2c84ff;
   line-height: 24px;
 }
 
 .links .selected:hover {
   color: #2c84ff;
+}
+
+.links .selected::after {
+  content: ' ';
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 2px;
+  background: #2c84ff;
+  
+  
 }

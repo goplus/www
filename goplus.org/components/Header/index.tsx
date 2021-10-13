@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from './style.module.css'
+import { useHoverState } from '../../hooks'
 
 export default function Nav() {
   const navItems = React.useRef([
@@ -28,6 +29,8 @@ export default function Nav() {
     }
   ])
 
+  const { isHovered, onMouseEnter, onMouseLeave } = useHoverState()
+
   return (
     <header className={styles.header}>
       <div className={styles.nav}>
@@ -40,8 +43,18 @@ export default function Nav() {
           {navItems.current.map((item, index) => (
             <NaviItem className={0 === index ? styles.selected : ''} key={index} {...item} />
           ))}
-          <a href="https://github.com/goplus/gop" rel="noreferrer">
-            <Image width={20} height={20} src="/github.svg" alt="Github Logo"></Image>
+          <a
+            href="https://github.com/goplus/gop"
+            rel="noreferrer"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            <Image
+              width={20}
+              height={20}
+              src={isHovered ? '/github_hover.svg' : '/github.svg'}
+              alt="Github Logo"
+            ></Image>
           </a>
         </div>
       </div>

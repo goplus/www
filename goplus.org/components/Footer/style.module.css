@@ -5,17 +5,14 @@
   width: 1024px;
   height: 92px;
   margin: auto;
-  padding: 0 35px;
+  padding: 0;
   font-size: 16px;
   line-height: 1.5;
 }
 
 .qiniuDoll {
   position: absolute !important;
-  left: 35px !important;
   bottom: 0 !important;
-  /* width: 100px;
-  height: 82px; */
 }
 
 .links {

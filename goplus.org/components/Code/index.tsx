@@ -3,7 +3,7 @@ import { CodeBlock, github } from 'react-code-blocks'
 import Image from 'next/image'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { useTimer } from '../../hooks'
+import { useHoverState, useTimer } from '../../hooks'
 
 import styles from './style.module.css'
 
@@ -22,7 +22,7 @@ github.backgroundColor = '#FAFAFA'
 
 export default function Code({ children, className }: React.PropsWithChildren<Props>) {
   const [isCopied, setIsCopied] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const { isHovered, onMouseEnter, onMouseLeave } = useHoverState()
   const sourceCode = useMemo(() => getSourceCode(children) || '', [children])
   const timer = useTimer()
   const onCopy = useCallback(
@@ -32,10 +32,6 @@ export default function Code({ children, className }: React.PropsWithChildren<Pr
     },
     [timer]
   )
-
-  const onMouseEnter = useCallback(() => setIsHovered(true), [])
-
-  const onMouseLeave = useCallback(() => setIsHovered(false), [])
 
   const copyIconSrc = isCopied ? '/copy_done.svg' : isHovered ? '/copy_hover.svg' : '/copy_enable.svg'
 

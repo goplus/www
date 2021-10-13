@@ -9,6 +9,7 @@
 
 .title {
   font-size: 28px;
+  font-weight: bold;
   color: #000;
 }
 
@@ -27,15 +28,16 @@
   width: 296px;
   height: 40px;
   line-height: 40px;
+  color: #666;
   text-align: center;
   cursor: pointer;
 }
 
-.tab:hover {
-  color: #000;
+.selectedTab, .tab:hover {
+  color: #333;
 }
 
-.selectedBar {
+.backgroundBar {
   z-index: 9;
   top: 4px;
   left: 4px;
