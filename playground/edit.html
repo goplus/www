@@ -107,7 +107,7 @@
 <body itemscope itemtype="http://schema.org/CreativeWork">
 <input type="button" value="Run" id="embedRun">
 <div id="banner">
-    <div id="head" itemprop="name">The Go+ Playground</div>
+    <div id="head" itemprop="name">Go+</div>
     <input type="button" value="Run" id="run">
     <input type="button" value="Format" id="fmt">
     <!--			<div id="importsBox">
@@ -117,7 +117,7 @@
                     </label>
                 </div>-->
     {{if $.Share}}
-        <input type="button" value="Share" id="share">
+        <input type="button" value="Share" id="share" class="mobilehide">
         <input type="text" id="shareURL">
         <label id="embedLabel">
             <input type="checkbox" id="embed">
@@ -133,9 +133,9 @@
         <option value="error.txt">Error wrap</option>
     </select>
     <iframe id="iframe" src="https://ghbtns.com/github-btn.html?user=goplus&repo=gop&type=star&count=true&size=large"
-            frameborder="0" scrolling="0" class="github-stars"></iframe>
+            frameborder="0" scrolling="0" class="github-stars mobilehide"></iframe>
 
-    <input type="button" value="About" id="aboutButton">
+    <input type="button" value="About" id="aboutButton" class="mobilehide">
 </div>
 <div id="wrap">
     <textarea itemprop="description" id="code" name="code" autocorrect="off" autocomplete="off" autocapitalize="off"
@@ -170,3 +170,4 @@
 
 </body>
 </html>
+
