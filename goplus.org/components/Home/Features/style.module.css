@@ -1,8 +1,18 @@
 .section {
   width: 1024px;
-  display: flex;
   margin: auto;
   padding-top: 72px;
+}
+
+.title {
+  font-size: 28px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.content {
+  display: flex;
 }
 
 .features {

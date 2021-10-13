@@ -15,16 +15,16 @@ export default function Features({ children }: React.PropsWithChildren<{}>) {
     })
   }, [])
 
-  const ctxValue = useMemo(
-    () => ({ features, registerFeature }),
-    [features, registerFeature]
-  )
+  const ctxValue = useMemo(() => ({ features, registerFeature }), [features, registerFeature])
 
   return (
     <featuresCtx.Provider value={ctxValue}>
       <div className={styles.section}>
-        <Aside />
-        <div className={styles.features}>{children}</div>
+        <div className={styles.title}>Go+ features</div>
+        <div className={styles.content}>
+          <Aside />
+          <div className={styles.features}>{children}</div>
+        </div>
       </div>
     </featuresCtx.Provider>
   )

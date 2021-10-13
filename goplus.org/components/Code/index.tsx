@@ -22,6 +22,7 @@ github.backgroundColor = '#FAFAFA'
 
 export default function Code({ children, className }: React.PropsWithChildren<Props>) {
   const [isCopied, setIsCopied] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const sourceCode = useMemo(() => getSourceCode(children) || '', [children])
   const timer = useTimer()
   const onCopy = useCallback(
@@ -31,6 +32,12 @@ export default function Code({ children, className }: React.PropsWithChildren<Pr
     },
     [timer]
   )
+
+  const onMouseEnter = useCallback(() => setIsHovered(true), [])
+
+  const onMouseLeave = useCallback(() => setIsHovered(false), [])
+
+  const copyIconSrc = isCopied ? '/copy_done.svg' : isHovered ? '/copy_hover.svg' : '/copy_enable.svg'
 
   return (
     <div className={styles.codeBlock}>
@@ -42,8 +49,12 @@ export default function Code({ children, className }: React.PropsWithChildren<Pr
         showLineNumbers={false}
       />
       <CopyToClipboard text={sourceCode} onCopy={onCopy}>
-        <div className={`${styles.copyBtn} ${isCopied ? styles.copyed : ''}`}>
-          <Image width={28} height={28} src={isCopied ? '/copy_done.svg' : '/copy_enable.svg'} alt="Copy Icon" />
+        <div
+          className={`${styles.copyBtn} ${isCopied ? styles.copyed : ''}`}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <Image width={28} height={28} src={copyIconSrc} alt="Copy Icon" />
         </div>
       </CopyToClipboard>
     </div>

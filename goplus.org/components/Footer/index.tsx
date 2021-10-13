@@ -14,7 +14,7 @@ export default function Footer() {
         <a href="https://github.com/goplus/gop/blob/main/LICENSE" rel="noreferrer">License</a>
       </div>
       <div className={styles.powerBy}>
-        <span>Power by</span>
+        <span>Powered by</span>
         <a style={{ height: 20 }} href="https://www.qiniu.com" rel="noreferrer">
           <Image width={31} height={20} src="/qiniu_logo.svg" alt="Qiniu Logo" />
         </a>

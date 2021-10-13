@@ -9,11 +9,13 @@
 
 .aside .anchorWrap {
   position: relative;
+  font-size: 12px;
   height: 32px;
   width: 326px;
   padding-left: 20px;
   display: flex;
   align-items: center;
+  color: #333;
 }
 
 .aside .anchorWrap::before {

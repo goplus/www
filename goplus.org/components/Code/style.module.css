@@ -1,11 +1,15 @@
 .codeBlock {
   position: relative;
+}
+
+.codeBlock > span {
   padding: 20px;
 }
 
 .codeBlock code {
   border-radius: initial;
   background-color: initial;
+  padding: 0 !important;
 }
 
 .copyBtn {
