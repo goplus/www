@@ -38,12 +38,44 @@
   color: #000;
 }
 
-.advantages {
+.tabContent {
   width: 900px;
-  margin-bottom: 72px;
+  font-size: 14px;
 }
 
-.advantage {
+.tabContent > *:first-child {
+  margin-top: 0;
+}
+
+.tabContent h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  line-height: 28px;
+  margin: 32px 0 24px;
+}
+
+.tabContent p {
   font-size: 14px;
+  color: #333333;
+  line-height: 20px;
   margin: 16px 0;
+}
+
+.tabContent ul {
+  margin: 24px 0 28px;
+}
+
+.tabContent li {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 16px 0;
+}
+
+.tabContent li:first-child {
+  margin-top: 0;
+}
+
+.tabContent a {
+  text-decoration: underline;
 }
