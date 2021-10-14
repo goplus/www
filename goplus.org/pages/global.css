@@ -7,6 +7,8 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+  background-color: white;
+  min-width: 1024px;
 }
 
 a {
