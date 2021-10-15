@@ -1,0 +1,97 @@
+.section {
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding-top: 72px;
+}
+
+.introWrap {
+  background-color: #fafafa;
+}
+
+.goPlus {
+  margin-bottom: 31px;
+}
+
+.title {
+  font-size: 28px;
+  color: #000;
+}
+
+.btnsWrap {
+  display: flex;
+  margin: 72px 0 64px 0;
+}
+
+.btnBase {
+  width: 240px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.btn {
+  composes: btnBase;
+  color: #2c84ff;
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  color: #4f98ff;
+}
+
+.primaryBtn {
+  composes: btnBase;
+  margin-right: 28px;
+  color: white;
+  background-color: #2c84ff;
+  box-shadow: 0px 16px 32px 0px rgba(44, 132, 255, 0.2);
+}
+
+.primaryBtn:hover {
+  background-color: #4f98ff;
+}
+
+.summary .title {
+  margin-top: 72px;
+}
+
+.tabs {
+  display: flex;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px;
+  margin: 36px 0 32px 0;
+}
+
+.tab {
+  font-size: 16px;
+  width: 296px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: #000;
+}
+
+.selected {
+  background-color: white;
+  border-radius: 6px;
+  color: #000;
+}
+
+.advantages {
+  width: 900px;
+  margin-bottom: 72px;
+}
+
+.advantage {
+  font-size: 14px;
+  margin: 16px 0;
+}

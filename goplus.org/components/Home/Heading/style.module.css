@@ -1,0 +1,13 @@
+.title {
+  display: block;
+  color: #000;
+  font-size: 20px;
+  line-height: 28px;
+  font-family: PingFangSC, PingFangSC-Medium;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.title:first-child {
+  margin-top: 0;
+}

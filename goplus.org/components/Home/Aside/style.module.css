@@ -1,0 +1,42 @@
+.aside {
+  position: sticky;
+  top: 72px;
+  max-height: 100vh;
+  margin-right: 26px;
+  overflow-y: auto;
+  flex: 0 0 auto;
+}
+
+.aside .anchorWrap {
+  position: relative;
+  font-size: 12px;
+  height: 32px;
+  width: 326px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.aside .anchorWrap::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 1px;
+  background-color: #e5e5e5;
+}
+
+.aside a:hover {
+  color: #2c84ff;
+}
+
+.aside .selected {
+  color: #2c84ff;
+}
+
+.aside .selected::before {
+  width: 2px;
+  background-color: #2c84ff;
+}

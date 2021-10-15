@@ -1,0 +1,27 @@
+{
+  "name": "goplus.org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "moveto": "^1.8.2",
+    "next": "11.1.2",
+    "next-mdx-remote": "^3.0.6",
+    "react": "17.0.2",
+    "react-code-blocks": "0.0.9-0",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.27",
+    "@types/react-copy-to-clipboard": "^5.0.1",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "typescript": "4.4.3"
+  }
+}
