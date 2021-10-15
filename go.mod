@@ -9,12 +9,12 @@ require (
 	github.com/aws/aws-sdk-go v1.37.0
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
 	github.com/google/go-cmp v0.5.5
-	github.com/goplus/gop v1.0.0-beta1
+	github.com/goplus/gop v1.0.15
 	github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c
 	go.opencensus.io v0.23.0
-	golang.org/x/mod v0.4.2
+	golang.org/x/mod v0.5.1
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
-	golang.org/x/tools v0.1.5
+	golang.org/x/tools v0.1.7
 	google.golang.org/api v0.37.0
 	google.golang.org/genproto v0.0.0-20210126160654-44e461bb6506
 	google.golang.org/grpc v1.39.0 // indirect
