@@ -13,7 +13,7 @@ export interface Props {
 
 export default function Layout({ meta: pageMeta, children }: React.PropsWithChildren<Props>) {
   const meta = {
-    title: 'Go Plus Language',
+    title: 'GoPlus - The Go+ language for engineering, STEM education, and data science',
     ...pageMeta
   }
 
