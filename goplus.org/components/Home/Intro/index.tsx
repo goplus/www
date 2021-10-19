@@ -14,12 +14,12 @@ export default function Intro() {
           <a href="https://play.goplus.org" className={styles.primaryBtn} rel="noopener">
             Try Go+
           </a>
-          <a href="https://github.com/goplus/gop/releases" className={styles.btn} rel="noopener">
-            <Image width={24} height={16} src="/download.svg" alt="Download Logo" />
-            <span className={styles.downloadTxt}>Download Go+</span>
+          <a href="https://github.com/goplus/gop#how-to-install" className={styles.btn} rel="noopener">
+            <Image width={24} height={16} src="/download.svg" alt="Download Icon" />
+            <span className={styles.installTxt}>Install Go+</span>
           </a>
         </div>
-        <Image width={172} height={133} src="/qiniu_doll.png" alt="Qiniu Doll Logo" />
+        <Image width={172} height={133} src="/qiniu_doll.png" alt="Qiniu Doll" />
       </div>
     </div>
   )
