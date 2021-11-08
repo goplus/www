@@ -1,7 +1,8 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { matchMediaMobile } from '../utils'
 
 export function useTimer() {
-  const timer: React.MutableRefObject<NodeJS.Timeout | undefined> = useRef()
+  const timer = useRef<NodeJS.Timeout>()
 
   React.useEffect(() => {
     return () => timer.current && clearTimeout(timer.current)
@@ -20,4 +21,19 @@ export function useHoverState() {
     onMouseEnter,
     onMouseLeave
   }
+}
+
+/** Use is-mobile info based on media-query match */
+export function useMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const matched = matchMediaMobile()
+    setIsMobile(matched.matches)
+    function handleMatchedChange(e: MediaQueryListEvent) {
+      setIsMobile(e.matches)
+    }
+    matched.addEventListener('change', handleMatchedChange)
+    return () => matched.removeEventListener('change', handleMatchedChange)
+  }, [])
+  return isMobile
 }

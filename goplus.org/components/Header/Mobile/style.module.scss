@@ -1,0 +1,70 @@
+@import '../../../utils/index.scss';
+
+.header {
+  top: 0;
+  position: sticky;
+  z-index: 11;
+  background-color: white;
+}
+
+.main {
+  height: 72px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoLink {
+  padding: 10px 0;
+}
+
+.operations {
+  display: flex;
+  align-items: center;
+}
+
+.operations > * {
+  flex: 0 0 auto;
+  display: block;
+  padding: 10px 0;
+  margin-left: 19px;
+  display: flex;
+
+  svg {
+    fill: #666;
+    &:active {
+      fill: #333;
+    }
+  }
+}
+
+.githubLink {
+
+}
+
+.expandBtn {
+  border: none;
+  background: none;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+}
+
+.navItem {
+  padding: 0 12px;
+  line-height: 48px;
+  border-radius: 4px;
+  list-style: none;
+  font-size: 16px;
+  color: #000;
+
+  &:active {
+    color: #2C84FF;
+    background-color: rgba(#2C84FF, 0.1);
+  }
+}

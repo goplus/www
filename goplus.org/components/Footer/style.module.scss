@@ -1,8 +1,11 @@
+@import '../../utils/index.scss';
+
 .footer {
+  @include centered;
+
   position: relative;
   display: flex;
   align-items: center;
-  width: 1024px;
   height: 92px;
   margin: auto;
   padding: 0;

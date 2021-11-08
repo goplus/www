@@ -1,3 +1,5 @@
+@import '../../../utils/index.scss';
+
 .header {
   position: sticky;
   top: 0px;
@@ -6,14 +8,14 @@
 }
 
 .nav {
+  @include centered;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1024px;
   height: 72px;
   padding: 0;
   margin: auto;
-  background-color: white;
 }
 
 .links {
@@ -55,6 +57,14 @@
   width: 32px;
   height: 2px;
   background: #2c84ff;
-  
-  
+}
+
+.githubLink {
+  svg {
+    transition: all 0.3s;
+    fill: #666;
+    &:hover {
+      fill: #333;
+    }
+  }
 }
