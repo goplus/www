@@ -3,6 +3,6 @@ import { join } from 'path'
 
 const docsDirectory = join(process.cwd(), 'docs')
 
-export function getDoc(filename: string) {
+export function readDoc(filename: string) {
   return fs.readFileSync(join(docsDirectory, filename)).toString()
 }

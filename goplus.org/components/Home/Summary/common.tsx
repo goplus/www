@@ -23,7 +23,7 @@ export const summaryItems: SummaryItem[] = [
     title: 'For STEM Education',
     content: (
       <>
-        <h4>Compared with Scratch:</h4>
+        <h5>Compared with Scratch:</h5>
         <ul>
           <li>
             Scratch is designed only for the purpose of programming teaching. It is based on a block-like interface,
@@ -57,7 +57,7 @@ export const summaryItems: SummaryItem[] = [
           programming.
         </p>
         <p>Go+ supports bytecode backend and Go code generation.</p>
-        <h4>Compared with Python, Go+ provides:</h4>
+        <h5>Compared with Python, Go+ provides:</h5>
         <ul>
           <li>Better performance</li>
           <li>More natural-language-like grammar</li>

@@ -1,7 +1,7 @@
 import React from 'react'
 
+import TextWrapper from '../../../TextWrapper'
 import { summaryItems } from '../common'
-import commonStyles from '../style.module.scss'
 import styles from './style.module.scss'
 
 export default function SummaryTabs() {
@@ -23,8 +23,10 @@ export default function SummaryTabs() {
         ))}
         <div className={`${styles.tab} ${styles.backgroundBar}`} style={{ transform }}></div>
       </div>
-      <div className={`${styles.tabContent} ${commonStyles.textWrapper}`}>
-        {summaryItems[selected].content}
+      <div className={styles.tabContent}>
+        <TextWrapper>
+          {summaryItems[selected].content}
+        </TextWrapper>
       </div>
     </>
   )

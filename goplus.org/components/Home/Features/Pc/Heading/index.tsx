@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react'
 
-import { getText } from '../../../utils'
-import featuresCtx from '../Features/ctx'
-import styles from './style.module.css'
+import { getText } from '../../../../../utils'
+import featuresCtx from '../ctx'
 
 function computedAnchor(title: string) {
   return title
@@ -27,7 +26,7 @@ export default function Heading({ children }: React.PropsWithChildren<{}>) {
   }, [id, children, registerFeature])
 
   return (
-    <h3 ref={headingRef} data-id={id} className={styles.title}>
+    <h3 ref={headingRef} data-id={id}>
       {children}
     </h3>
   )

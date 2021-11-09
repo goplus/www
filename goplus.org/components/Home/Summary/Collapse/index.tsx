@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
+import TextWrapper from '../../../TextWrapper'
 import { summaryItems } from '../common'
-import commonStyles from '../style.module.scss'
 import styles from './style.module.scss'
 
 export default function SummaryCollapse() {
@@ -23,7 +23,11 @@ export default function SummaryCollapse() {
           {item.title}
           <ArrowIcon className={styles.arrow} />
         </h3>
-        <div className={`${styles.content} ${commonStyles.textWrapper}`}>{item.content}</div>
+        <div className={styles.content}>
+          <TextWrapper>
+            {item.content}
+          </TextWrapper>
+        </div>
       </section>
     )
   })

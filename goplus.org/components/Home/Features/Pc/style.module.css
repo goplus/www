@@ -7,9 +7,8 @@
 .title {
   font-size: 28px;
   color: #000;
-  font-weight: 500;
   text-align: center;
-  margin-bottom: 44px;
+  margin: 0 0 44px;
 }
 
 .content {

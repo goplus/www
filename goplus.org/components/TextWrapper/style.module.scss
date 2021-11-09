@@ -1,0 +1,71 @@
+@import '../../utils/index.scss';
+
+.wrapper {
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.4;
+    margin: 24px 0 16px;
+  }
+
+  h4 {
+    font-size: 20px;
+    line-height: 1.4;
+    margin: 32px 0 24px;
+
+    @include mobile {
+      margin: 24px 0 16px;
+    }
+  }
+
+  h5 {
+    font-size: 20px;
+    line-height: 1.4;
+    margin: 16px 0 12px;
+
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    color: #333333;
+    line-height: 24px;
+    margin: 16px 0;
+  }
+
+  ul {
+    margin: 24px 0 28px;
+
+    @include mobile {
+      padding-left: 16px;
+      margin: 16px 0 16px;
+    }
+  }
+
+  li {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 16px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
