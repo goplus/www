@@ -13,8 +13,8 @@ export default function Header() {
     setExpanded(v => !v)
   }
 
-  const overlay = expanded && ( // TODO: animation
-    <div className={styles.overlay}>
+  const overlay = (
+    <div className={[styles.overlay, expanded && styles.visible].filter(Boolean).join(' ')}>
       {navItems.map((item, i) => <NavItem key={i} {...item} />)}
     </div>
   )
