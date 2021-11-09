@@ -13,7 +13,7 @@ export default function Header() {
     setExpanded(v => !v)
   }
 
-  const overlay = expanded && (
+  const overlay = expanded && ( // TODO: animation
     <div className={styles.overlay}>
       {navItems.map((item, i) => <NavItem key={i} {...item} />)}
     </div>
@@ -32,7 +32,8 @@ export default function Header() {
             <GithubIcon />
           </a>
           <button className={styles.expandBtn} onClick={handleExpandBtnClick}>
-            {expanded ? <CloseIcon /> : <MenuIcon />}
+            <CloseIcon visible={expanded} />
+            <MenuIcon visible={!expanded} />
           </button>
         </div>
       </div>
@@ -49,22 +50,22 @@ function NavItem({ children, href }: NavItemInfo) {
   )
 }
 
-function MenuIcon() {
+interface OperationIconProps {
+  visible: boolean
+}
+
+function MenuIcon({ visible }: OperationIconProps) {
   return (
-    <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="none" strokeWidth="1" fillRule="evenodd">
-        <g transform="translate(-339.000000, -26.000000)">
-          <g id="编组" transform="translate(339.000000, 26.000000)">
-            <path d="M18,15 L18,17 L2,17 L2,15 L18,15 Z M18,9 L18,11 L2,11 L2,9 L18,9 Z M18,3 L18,5 L2,5 L2,3 L18,3 Z" id="形状结合"></path>
-          </g>
-        </g>
-      </g>
+    <svg className={visible ? undefined : styles.invisible} width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18,15 L18,17 L2,17 L2,15 L18,15 Z M18,9 L18,11 L2,11 L2,9 L18,9 Z M18,3 L18,5 L2,5 L2,3 L18,3 Z" fillRule="evenodd"/>
     </svg>
   )
 }
 
-function CloseIcon() {
+function CloseIcon({ visible }: OperationIconProps) {
   return (
-    <MenuIcon /> // TODO
+    <svg className={visible ? undefined : styles.invisible} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.3137085,3.3137085 L12.3137085,10.3137085 L19.3137085,10.3137085 L19.3137085,12.3137085 L12.3137085,12.3137085 L12.3137085,19.3137085 L10.3137085,19.3137085 L10.3137085,12.3137085 L3.3137085,12.3137085 L3.3137085,10.3137085 L10.3137085,10.3137085 L10.3137085,3.3137085 L12.3137085,3.3137085 Z" transform="rotate(45 10.828 12.485)" fillRule="evenodd"/>
+    </svg>
   )
 }
