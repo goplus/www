@@ -12,11 +12,9 @@ export interface Props {
 export default function Home({ featuresSource }: Props) {
   return (
     <Layout>
-      <main style={{ marginBottom: 60 }}>
-        <Intro />
-        <Summary />
-        <Features source={featuresSource} />
-      </main>
+      <Intro />
+      <Summary />
+      <Features source={featuresSource} />
     </Layout>
   )
 }

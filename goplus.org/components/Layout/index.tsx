@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 
 import Header from '../Header'
-import styles from './style.module.css'
 import Footer from '../Footer'
 
 export interface Props {
