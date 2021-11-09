@@ -7,7 +7,7 @@ import GithubIcon from '../GithubIcon'
 import styles from './style.module.scss'
 
 export default function Header() {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(false)
 
   function handleExpandBtnClick() {
     setExpanded(v => !v)

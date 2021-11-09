@@ -1,8 +1,18 @@
 import Image from 'next/image'
 
-import styles from './style.module.css'
+import { useMobile } from '../../../hooks'
+import styles from './style.module.scss'
 
 export default function Intro() {
+
+  const isMobile = useMobile()
+
+  const qiniuDollSize = (
+    isMobile
+    ? { width: 120, height: 97 }
+    : { width: 172, height: 133 }
+  )
+
   return (
     <div className={styles.introWrap}>
       <div className={styles.section}>
@@ -19,7 +29,7 @@ export default function Intro() {
             <span className={styles.installTxt}>Install Go+</span>
           </a>
         </div>
-        <Image width={172} height={133} src="/qiniu_doll.png" alt="Qiniu Doll" />
+        <Image {...qiniuDollSize} src="/qiniu_doll.png" alt="Qiniu Doll" />
       </div>
     </div>
   )
