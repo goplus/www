@@ -85,10 +85,14 @@ $operation-area-size: 40px;
 }
 
 .navItem {
+  list-style: none;
+}
+
+.navLink {
+  display: block;
   padding: 0 12px;
   line-height: 48px;
   border-radius: 4px;
-  list-style: none;
   font-size: 16px;
   color: #000;
 
