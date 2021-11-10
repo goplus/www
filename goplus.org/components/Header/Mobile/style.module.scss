@@ -1,0 +1,103 @@
+@import '../../../utils/index.scss';
+
+$operation-area-size: 40px;
+
+.header {
+  top: 0;
+  position: sticky;
+  z-index: 11;
+  background-color: white;
+}
+
+.main {
+  height: $mobile-header-height;
+  padding: 0 6px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoLink {
+  display: flex;
+  height: $operation-area-size;
+  align-items: center;
+}
+
+.operations {
+  display: flex;
+  align-items: center;
+}
+
+.operations > * {
+  flex: 0 0 auto;
+  display: flex;
+  width: $operation-area-size;
+  height: $operation-area-size;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    fill: #666;
+    &:active {
+      fill: #333;
+    }
+  }
+}
+
+.githubLink {
+  text-decoration: none;
+}
+
+.expandBtn {
+  position: relative;
+  border: none;
+  background: none;
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    transition: opacity .2s .1s;
+
+    &.invisible {
+      transition: opacity .3s;
+      opacity: 0;
+      fill: #666;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility 0s .3s;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s, visibility 0s;
+  }
+}
+
+.navItem {
+  list-style: none;
+}
+
+.navLink {
+  display: block;
+  padding: 0 12px;
+  line-height: 48px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #000;
+
+  &:active {
+    color: #2C84FF;
+    background-color: rgba(#2C84FF, 0.1);
+  }
+}

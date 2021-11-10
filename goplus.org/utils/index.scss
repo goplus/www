@@ -1,0 +1,23 @@
+@import './variables.module.scss';
+
+@mixin mobile {
+  @media screen and (max-width: $mobile-max-width) {
+    @content
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: $mobile-max-width + 1px) {
+    @content
+  }
+}
+
+@mixin centered {
+  width: 100%;
+  @include pc {
+    width: 1024px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

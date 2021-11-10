@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MoveTo } from 'moveto'
 
-import { useHash } from '../../../hooks/url'
-import featureCtx from '../Features/ctx'
+import { useHash } from '../../../../../hooks/url'
+import featureCtx from '../ctx'
 
 import styles from './style.module.css'
 

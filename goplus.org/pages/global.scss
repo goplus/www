@@ -1,3 +1,5 @@
+@import '../utils/index.scss';
+
 html,
 body {
   padding: 0;
@@ -8,7 +10,6 @@ body {
   line-height: 1.5;
   color: #333;
   background-color: white;
-  min-width: 1024px;
 }
 
 a {
@@ -27,4 +28,18 @@ code {
   border-radius: 6px;
   background-color: rgba(175, 184, 193, 0.2);
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+  font-weight: 500;
+  font-family: PingFangSC, PingFangSC-Medium, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+}
+
+@include mobile {
+  // offset for element matches anchor
+  // https://stackoverflow.com/questions/4086107/fixed-page-header-overlaps-in-page-anchors#answer-56467997
+  html {
+    scroll-padding-top: $mobile-header-height;
+  }
 }
