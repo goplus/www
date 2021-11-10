@@ -1,3 +1,9 @@
+/**
+ * @file component TextWrapper
+ * @desc Wrapper for text content (usually HTML content converted from Markdown),
+ *       it provides some built-in style for main HTML tags
+ */
+
 import React, { ReactNode } from 'react'
 
 import styles from './style.module.scss'
