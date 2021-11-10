@@ -3,11 +3,13 @@ import { MDXRemote } from 'next-mdx-remote'
 
 import TextWrapper from '../../../../components/TextWrapper'
 import Code from '../../../../components/Code'
-import { Props } from '../common'
+import { getAnchorId, Props } from '../common'
 import styles from './style.module.scss'
+import { getText } from '../../../../utils'
 
 const components = {
   code: Code,
+  h3: Heading // TODO: maybe all heading elements (h1, h2, h3, ...)?
 }
 
 export default function MobileFeatures({ source }: Props) {
@@ -19,4 +21,9 @@ export default function MobileFeatures({ source }: Props) {
       </TextWrapper>
     </section>
   )
+}
+
+function Heading({ children }: React.PropsWithChildren<{}>) {
+  const id = getAnchorId(getText(children))
+  return <h3 id={id}>{children}</h3>
 }

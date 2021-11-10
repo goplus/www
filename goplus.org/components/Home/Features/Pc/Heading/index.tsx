@@ -1,21 +1,14 @@
 import React, { useContext, useEffect, useRef } from 'react'
 
 import { getText } from '../../../../../utils'
+import { getAnchorId } from '../../common'
 import featuresCtx from '../ctx'
-
-function computedAnchor(title: string) {
-  return title
-    .split(/[^\w\d\s]/, 1)[0]
-    .split(/\s+/)
-    .map(word => word.toLocaleLowerCase())
-    .join('-')
-}
 
 export default function Heading({ children }: React.PropsWithChildren<{}>) {
   const { registerFeature } = useContext(featuresCtx)
   const headingRef = useRef<HTMLHeadingElement>(null)
 
-  const id = computedAnchor(getText(children))
+  const id = getAnchorId(getText(children))
 
   useEffect(() => {
     registerFeature({

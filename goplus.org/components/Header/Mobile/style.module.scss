@@ -10,7 +10,7 @@ $operation-area-size: 40px;
 }
 
 .main {
-  height: 72px;
+  height: $mobile-header-height;
   padding: 0 6px 0 16px;
   display: flex;
   justify-content: space-between;
