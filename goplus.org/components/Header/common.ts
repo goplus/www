@@ -8,11 +8,11 @@ export interface NavItemInfo {
 export const navItems: NavItemInfo[] = [
   {
     children: 'Overview',
-    href: '/'
+    href: 'https://goplus.org'
   },
   {
     children: 'Tutorials',
-    href: 'https://github.com/goplus/gop#tutorials'
+    href: 'https://tutorial.goplus.org'
   },
   {
     children: 'Playground',

@@ -59,3 +59,11 @@ function getHash(): HashValue {
   return hash || null
 }
 
+export function useUrl() {
+  const [url, setUrl] = useState<string | null>(null)
+  useEffect(() => {
+    setUrl(window.location.href)
+    // TODO: subscribe location change by state push / pop
+  }, [])
+  return url
+}

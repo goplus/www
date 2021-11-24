@@ -1,9 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-html-link-for-pages */
+
 import React, { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
 
 import { NavItemInfo, navItems } from '../common'
 import GithubIcon from '../GithubIcon'
+import Logo from '../../Logo'
 import styles from './style.module.scss'
 
 export default function Header() {
@@ -22,11 +24,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.main}>
-        <Link href="/">
-          <a className={styles.logoLink}>
-            <Image width={60} height={17} src="/go_plus.svg" alt="Go Plus Logo" />
-          </a>
-        </Link>
+        <a href="/" className={styles.logoLink}>
+          <Logo />
+        </a>
         <div className={styles.operations}>
           <a href="https://github.com/goplus/gop" className={styles.githubLink}>
             <GithubIcon />

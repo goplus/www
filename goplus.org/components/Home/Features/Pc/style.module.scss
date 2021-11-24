@@ -1,5 +1,7 @@
+@import '../../../../utils/index.scss';
+
 .section {
-  width: 1024px;
+  width: $pc-content-width;
   margin: auto;
   padding-top: 72px;
 }

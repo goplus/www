@@ -1,0 +1,6 @@
+@import '../utils/index.scss';
+
+goplus-www-header, goplus-www-footer {
+  @include reset;
+  display: block;
+}
