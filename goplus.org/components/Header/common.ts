@@ -12,7 +12,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Tutorials',
-    href: 'https://github.com/goplus/gop#tutorials'
+    href: 'https://tutorial.goplus.org'
   },
   {
     children: 'Playground',
