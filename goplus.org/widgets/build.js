@@ -52,7 +52,7 @@ async function main() {
 
   loadEnvConfig(dir, false)
 
-  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null/** TODO */)
+  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null)
 
   // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
   // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables

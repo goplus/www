@@ -1,13 +1,17 @@
 /**
  * @file Loader for goplus widgets
- * @description When modifying content of this file, keep browsers-support in mind, cuz this file will not be babel-ed
- * @todo Use babel (maybe and tsc) to process this file before publish
+ * @description It loads widgets.
  */
 
 // Usage：
 // <script data-widgets="header,footer" src="https://xxx/loader.js"></script>
-// <goplus-header></goplus-header>
-// <goplus-footer></goplus-footer>
+
+// Notice:
+// When modifying content of this file, keep browsers-support in mind,
+// cuz this file will not be babel-ed.
+
+// TODO: 
+// Use babel (maybe and tsc) to process this file before publish.
 
 (function() {
 
