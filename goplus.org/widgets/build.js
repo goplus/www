@@ -54,10 +54,13 @@ async function main() {
 
   const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null)
 
+  // The Environment that the app is deployed an running on. The value can be either `production`, `preview`, or `development`.
+  const NEXT_PUBLIC_VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV
   // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
-  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
   const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
-  nextConfig.assetPrefix = NEXT_PUBLIC_VERCEL_URL ? ('https://' + NEXT_PUBLIC_VERCEL_URL) : ''
+  // For production build, use `goplus.org` instead of url like `www-*-goplus.vercel.app`
+  const vercelHost = NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'goplus.org' : NEXT_PUBLIC_VERCEL_URL
+  nextConfig.assetPrefix = vercelHost ? ('https://' + vercelHost) : ''
   console.log('assetPrefix:', nextConfig.assetPrefix)
 
   const runWebpackSpan = trace('run-webpack')
