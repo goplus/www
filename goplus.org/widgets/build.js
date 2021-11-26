@@ -13,13 +13,13 @@ const dir = resolve('.')
 const widgetsSrcPath = resolve('widgets')
 const widgetEntriesPath = join(widgetsSrcPath, 'entries')
 const outputPath = resolve('.next')
-const publicPath = resolve('public')
+const publicDirPath = resolve('public')
 
 /** Webpack plugin to generate manifest (as `loader.js`) for widgets */
 class WidgetsManifestPlugin {
 
-  constructor(publicUrl) {
-    this.publicUrl = publicUrl.endsWith('/') ? publicUrl : (publicUrl + '/')
+  constructor(publicPath) {
+    this.publicPath = publicPath.endsWith('/') ? publicPath : (publicPath + '/')
   }
 
   apply(compiler) {
@@ -28,14 +28,14 @@ class WidgetsManifestPlugin {
       const loaderJs = readFileSync(join(widgetsSrcPath, 'loader.js'), { encoding: 'utf8' })
       const simplifiedManifest = Object.keys(assetsByChunkName).reduce((o, name) => {
         o[name] = assetsByChunkName[name].map(
-          path => this.publicUrl + '_next/' + path
+          path => this.publicPath + path
         )
         return o
       }, {})
       const loaderJsWithManifest = loaderJs.replace(/\bMANIFEST\b/g, JSON.stringify(simplifiedManifest))
       // TODO: may not be executed cuz async minify (we call `process.exit()` in the end of `function main`)
       const loaderJsCompressed = (await minify(loaderJsWithManifest, { toplevel: true })).code
-      outputFileSync(join(publicPath, 'widgets/loader.js'), loaderJsCompressed)
+      outputFileSync(join(publicDirPath, 'widgets/loader.js'), loaderJsCompressed)
     })
   }
 }
@@ -54,8 +54,11 @@ async function main() {
 
   const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null/** TODO */)
 
-  setGlobal('phase', PHASE_PRODUCTION_BUILD)
-  setGlobal('distDir', resolve(nextConfig.distDir))
+  // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
+  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
+  const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+  nextConfig.assetPrefix = NEXT_PUBLIC_VERCEL_URL ? ('https://' + NEXT_PUBLIC_VERCEL_URL) : ''
+  console.log('assetPrefix:', nextConfig.assetPrefix)
 
   const runWebpackSpan = trace('run-webpack')
 
@@ -100,16 +103,12 @@ async function main() {
     return { ...rule, oneOf }
   })
 
-  // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
-  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
-  const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
-  const publicUrl = NEXT_PUBLIC_VERCEL_URL ? ('https://' + NEXT_PUBLIC_VERCEL_URL) : '/'
-  console.log('publicUrl:', publicUrl)
+  const publicPath = `${nextConfig.assetPrefix || ''}/_next/`
 
   webpackConfig.output = {
     path: outputPath,
     filename: 'static/widgets/[name].[contenthash].js',
-    publicPath: publicUrl
+    publicPath
   }
 
   webpackConfig.plugins = webpackConfig.plugins.filter(
@@ -118,7 +117,7 @@ async function main() {
     new NextMiniCssExtractPlugin({
       filename: 'static/widgets/[name].[contenthash].css'
     }),
-    new WidgetsManifestPlugin(publicUrl)
+    new WidgetsManifestPlugin(publicPath)
   )
 
   webpackConfig.optimization.splitChunks = false
