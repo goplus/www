@@ -5,7 +5,6 @@
   .footer {
     @include centered;
 
-    margin-top: 60px;
     position: relative;
     display: flex;
     align-items: center;
@@ -66,10 +65,6 @@
 }
 
 @include mobile {
-  .footer {
-    margin-top: 72px;
-  }
-
   .qiniuDoll {
     display: none;
   }

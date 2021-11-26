@@ -8,9 +8,10 @@ import imgDoll from 'public/qiniu_doll.png'
 
 import styles from './style.module.scss'
 
-export default function Footer() {
+export default function Footer(props: { className?: string }) {
+  const className = [styles.footer, props.className].filter(Boolean).join(' ')
   return (
-    <div className={styles.footer}>
+    <div className={className}>
       <div className={styles.qiniuDoll}>
         <img width={100} height={82} src={imgDoll.src} alt="Qiniu Doll Logo" />
       </div>

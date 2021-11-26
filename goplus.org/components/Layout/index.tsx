@@ -4,6 +4,8 @@ import Head from 'next/head'
 import Header from '../Header'
 import Footer from '../Footer'
 
+import styles from './style.module.scss'
+
 export interface Props {
   meta?: {
     title?: string
@@ -25,7 +27,7 @@ export default function Layout({ meta: pageMeta, children }: React.PropsWithChil
       </Head>
       <Header />
       <main>{children}</main>
-      <Footer></Footer>
+      <Footer className={styles.footer} />
     </>
   )
 }
