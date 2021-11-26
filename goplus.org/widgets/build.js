@@ -34,7 +34,7 @@ class WidgetsManifestPlugin {
       }, {})
       const loaderJsWithManifest = loaderJs.replace(/\bMANIFEST\b/g, JSON.stringify(simplifiedManifest))
       // TODO: may not be executed cuz async minify (we call `process.exit()` in the end of `function main`)
-      const loaderJsCompressed = (await minify(loaderJsWithManifest, { toplevel: true })).code
+      const loaderJsCompressed = (await minify(loaderJsWithManifest, { toplevel: false })).code
       outputFileSync(join(publicDirPath, 'widgets/loader.js'), loaderJsCompressed)
     })
   }
