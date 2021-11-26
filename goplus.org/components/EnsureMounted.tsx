@@ -8,10 +8,10 @@
 
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 
-export default function EnsureMounted({ children }: PropsWithChildren<{}>) {
+export default function EnsureMounted(props: PropsWithChildren<{ className?: string }>) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
   }, [])
-  return <div style={{ opacity: mounted ? 1 : 0 }}>{children}</div>
+  return <div {...props} style={{ opacity: mounted ? 1 : 0 }} />
 }

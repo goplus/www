@@ -1,13 +1,13 @@
 /**
- * @file 用于加载 widget 内容的加载器
- * @description 注意该文件会被几乎不经处理地直接被插入页面运行，维护时需考虑代码的浏览器兼容性
- * @todo 简单地处理一下这个文件，比如 tsc & babel
+ * @file Loader for goplus widgets
+ * @description When modifying content of this file, keep browsers-support in mind, cuz this file will not be babel-ed
+ * @todo Use babel (maybe and tsc) to process this file before publish
  */
 
-// 预期的使用姿势：
+// Usage：
 // <script data-widgets="header,footer" src="https://xxx/loader.js"></script>
-// <goplus-www-header></goplus-www-header>
-// <goplus-www-footer></goplus-www-footer>
+// <goplus-header></goplus-header>
+// <goplus-footer></goplus-footer>
 
 (function() {
 
@@ -32,7 +32,7 @@
     })
   }
 
-  // 在构建时会被替换为 widgets 组件构建信息映射表
+  // Value of this variable will be replaced with widgets' manifest info when building
   var manifest = MANIFEST
 
   function load(widget) {

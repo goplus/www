@@ -14,15 +14,12 @@ const widgetsSrcPath = resolve('widgets')
 const widgetEntriesPath = join(widgetsSrcPath, 'entries')
 const outputPath = resolve('.next')
 const publicPath = resolve('public')
-// const finalOutputPath = resolve('out')
 
-// 所有需要对外的 widget 组件，对应 /widgets/ 下的内容
-const widgets = readdirSync(widgetEntriesPath).map(removeSuffix)
-
+/** Webpack plugin to generate manifest (as `loader.js`) for widgets */
 class WidgetsManifestPlugin {
 
-  constructor(assetPrefix) {
-    this.assetPrefix = assetPrefix.endsWith('/') ? assetPrefix : (assetPrefix + '/')
+  constructor(publicUrl) {
+    this.publicUrl = publicUrl.endsWith('/') ? publicUrl : (publicUrl + '/')
   }
 
   apply(compiler) {
@@ -31,7 +28,7 @@ class WidgetsManifestPlugin {
       const loaderJs = readFileSync(join(widgetsSrcPath, 'loader.js'), { encoding: 'utf8' })
       const simplifiedManifest = Object.keys(assetsByChunkName).reduce((o, name) => {
         o[name] = assetsByChunkName[name].map(
-          path => this.assetPrefix + '_next/' + path
+          path => this.publicUrl + '_next/' + path
         )
         return o
       }, {})
@@ -48,16 +45,10 @@ function removeSuffix(filePath) {
   return filePath.replace(/\.\w+$/, '')
 }
 
-// // 导出 widgets 内容的构建结果（从 .next/ 到 out/）
-// function exportFiles() {
-//   copySync(
-//     join(outputPath, 'static'),
-//     join(finalOutputPath, '_next', 'static'),
-//     { errorOnExist: true }
-//   )
-// }
-
 async function main() {
+
+  const widgets = readdirSync(widgetEntriesPath).map(removeSuffix)
+  console.log('widgets:', widgets)
 
   loadEnvConfig(dir, false)
 
@@ -95,8 +86,6 @@ async function main() {
     {}
   )
 
-  console.log('entries:', webpackConfig.entry)
-
   webpackConfig.module.rules = webpackConfig.module.rules.map(rule => {
     if (!rule.oneOf) return rule
     const oneOf = rule.oneOf.filter(r => {
@@ -111,12 +100,16 @@ async function main() {
     return { ...rule, oneOf }
   })
 
-  console.log('NEXT_PUBLIC_VERCEL_URL:', process.env.NEXT_PUBLIC_VERCEL_URL)
+  // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
+  // https://vercel.com/docs/concepts/projects/environment-variables#system-environment-variables
+  const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+  const publicUrl = NEXT_PUBLIC_VERCEL_URL ? ('https://' + NEXT_PUBLIC_VERCEL_URL) : '/'
+  console.log('publicUrl:', publicUrl)
 
   webpackConfig.output = {
     path: outputPath,
     filename: 'static/widgets/[name].[contenthash].js',
-    publicPath: process.env.NEXT_PUBLIC_VERCEL_URL || '/'
+    publicPath: publicUrl
   }
 
   webpackConfig.plugins = webpackConfig.plugins.filter(
@@ -125,7 +118,7 @@ async function main() {
     new NextMiniCssExtractPlugin({
       filename: 'static/widgets/[name].[contenthash].css'
     }),
-    new WidgetsManifestPlugin(nextConfig.assetPrefix)
+    new WidgetsManifestPlugin(publicUrl)
   )
 
   webpackConfig.optimization.splitChunks = false
@@ -153,7 +146,6 @@ async function main() {
     })
   }
   await flushAllTraces()
-  // exportFiles()
   console.log('done')
   process.exit(0)
 }

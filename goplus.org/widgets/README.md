@@ -1,15 +1,15 @@
-# 官网对外提供的可嵌入组件方案
+# Web Widgets provided by goplus.org
 
-### 外部站点嵌入使用
+### How to use
 
-#### 组件渲染
+#### 
 
 外部站点的使用姿势可以参考 `test/widget/index.html` 内容，引入代码如下：
 
 ```html
-<script src="https://xxx/loader.js"></script>
-<div id="header"></div>
-<script>window.__qiniu_www_widgets__.load('header', document.getElementById('header'))</script>
+<script data-widgets="header,footer" src="https://xxx/loader.js"></script>
+<goplus-header></goplus-header>
+<goplus-footer></goplus-footer>
 ```
 
 `/widgets/loader.js` 会提供加载组件用的 `load` 方法，使用方使用该 `load` 方法将指定组件加载到对应的 HTML 容器中即可：

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf .next && next build && node widgets/build.js",
+    "dev:widgets": "node widgets/build.js && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
     "start": "next start",
     "lint": "next lint"
   },
