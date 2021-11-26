@@ -111,9 +111,12 @@ async function main() {
     return { ...rule, oneOf }
   })
 
+  console.log('NEXT_PUBLIC_VERCEL_URL:', process.env.NEXT_PUBLIC_VERCEL_URL)
+
   webpackConfig.output = {
     path: outputPath,
-    filename: 'static/widgets/[name].[contenthash].js'
+    filename: 'static/widgets/[name].[contenthash].js',
+    publicPath: process.env.NEXT_PUBLIC_VERCEL_URL || '/'
   }
 
   webpackConfig.plugins = webpackConfig.plugins.filter(
