@@ -15,7 +15,8 @@
 @mixin centered {
   width: 100%;
   @include pc {
-    width: $pc-content-width;
+    min-width: $min-pc-content-width;
+    max-width: $max-pc-content-width;
     position: relative;
     margin-left: auto;
     margin-right: auto;
