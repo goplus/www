@@ -1,11 +1,11 @@
 const { resolve, join } = require('path')
-const { copySync, readFileSync, outputFileSync, readdirSync } = require('fs-extra')
+const { readFileSync, outputFileSync, readdirSync } = require('fs-extra')
 const { loadEnvConfig } = require('@next/env')
 const { runCompiler } = require('next/dist/build/compiler')
 const getBaseWebpackConfig = require('next/dist/build/webpack-config')
 const { PHASE_PRODUCTION_BUILD } = require('next/dist/shared/lib/constants')
 const loadConfig = require('next/dist/server/config')
-const { trace, flushAllTraces, setGlobal } = require('next/dist/trace')
+const { trace, flushAllTraces } = require('next/dist/trace')
 const { default: NextMiniCssExtractPlugin } = require('next/dist/build/webpack/plugins/mini-css-extract-plugin')
 const { minify } = require('next/dist/compiled/terser')
 
@@ -126,7 +126,7 @@ async function main() {
   webpackConfig.optimization.splitChunks = false
   webpackConfig.optimization.runtimeChunk = false
 
-  // Uncomment thes lines to improve build speed when do local development
+  // Uncomment these lines to improve build speed when do local development
   // webpackConfig.optimization.minimize = false
   // webpackConfig.devtool = false
 
