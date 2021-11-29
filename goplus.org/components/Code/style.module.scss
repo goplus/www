@@ -1,0 +1,73 @@
+@import '~utils/index.scss';
+
+.codeBlock {
+  position: relative;
+}
+
+.codeBlock > span {
+  padding: 20px;
+}
+
+.codeBlock code {
+  border-radius: initial;
+  background-color: initial;
+  padding: 0 !important;
+}
+
+.ops {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+}
+
+@include pc {
+  .ops {
+    visibility: hidden;
+  }
+  .codeBlock:hover .ops {
+    visibility: visible;
+  }
+}
+
+.opBtn {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #666;
+  background-color: #FAFAFA;
+  border: 1px solid #BFBFBF;
+  border-radius: 4px;
+  transition: all .2s;
+
+  &:hover {
+    background-color: #F5F5F5;
+  }
+
+  &.active {
+    color: #2C84FF;
+    border-color: #2C84FF;
+  }
+
+  + .opBtn {
+    margin-left: 16px;
+  }
+}
+
+.runResult {
+  position: relative;
+  margin-top: 0;
+  padding: 20px;
+  overflow-x: auto;
+  background-color: #F0F0F0;
+
+  .tip {
+    margin: 0;
+    color: #666;
+  }
+}

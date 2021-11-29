@@ -8,15 +8,16 @@ export default function Heading({ children }: React.PropsWithChildren<{}>) {
   const { registerFeature } = useContext(featuresCtx)
   const headingRef = useRef<HTMLHeadingElement>(null)
 
-  const id = getAnchorId(getText(children))
+  const title = getText(children)
+  const id = getAnchorId(title)
 
   useEffect(() => {
     registerFeature({
       id,
-      title: children,
+      title,
       heading: headingRef.current!
     })
-  }, [id, children, registerFeature])
+  }, [id, title, registerFeature])
 
   return (
     <h3 ref={headingRef} data-id={id}>

@@ -1,24 +1,37 @@
-import React, { ReactNode, isValidElement } from 'react'
+import React, { ReactNode, isValidElement, Children } from 'react'
 
 import Code from 'components/Code'
 
-function getSourceCode(element: ReactNode) {
-  while (isValidElement(element)) {
-    element = element.props.children
-  }
-  while (Array.isArray(element)) {
-    element = element[0]
-  }
-  return typeof element === 'string' ? element : ''
-}
-
 export interface Props {
+  inline?: boolean
   className?: string
   children?: ReactNode
 }
 
-export default function CodeForMD({ children, className }: Props) {
-  const language = className?.slice(9)
+export default function CodeForMD({ inline = false, children, className }: Props) {
+  if (inline) {
+    return <code>{children}</code>
+  }
+  const language = getLang(className)
   const code = getSourceCode(children)
   return <Code language={language} code={code} />
+}
+
+const classNamePattern = /^language-(.*)$/
+
+function getLang(className: string | undefined) {
+  if (className == null) return undefined
+  const matched = classNamePattern.exec(className)
+  if (matched == null) return undefined
+  return matched[1]
+}
+
+function getSourceCode(children: ReactNode) {
+  const sources = Children.map(children, element => {
+    while (isValidElement(element)) {
+      element = element.props.children
+    }
+    return typeof element === 'string' ? element : ''
+  })
+  return (sources || []).join('')
 }

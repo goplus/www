@@ -2,7 +2,7 @@
 
 We introduce the rational number as native Go+ types. We use suffix `r` to denote rational literals. For example, (1r << 200) means a big int whose value is equal to 2<sup>200</sup>. And 4/5r means the rational constant 4/5.
 
-```go
+```gop
 var a bigint = 1r << 65  // bigint, large than int64
 var b bigrat = 4/5r      // bigrat
 c := b - 1/3r + 3 * 1/2r // bigrat
@@ -15,7 +15,7 @@ println(x, y)
 
 ### Map literal
 
-```go
+```gop
 x := {"Hello": 1, "xsw": 3.4} // map[string]float64
 y := {"Hello": 1, "xsw": "Go+"} // map[string]interface{}
 z := {"Hello": 1, "xsw": 3} // map[string]int
@@ -24,7 +24,7 @@ empty := {} // map[string]interface{}
 
 ### Slice literal
 
-```go
+```gop
 x := [1, 3.4] // []float64
 y := [1] // []int
 z := [1+2i, "xsw"] // []interface{}
@@ -36,7 +36,7 @@ empty := [] // []interface{}
 
 ### Deduce struct type
 
-```go
+```gop
 type Config struct {
     Dir   string
     Level int
@@ -53,7 +53,7 @@ Here `foo({Dir: "/foo/bar", Level: 1})` is equivalent to `foo(&Config{Dir: "/foo
 
 You also can omit struct types in a return statement. For example:
 
-```go
+```gop
 type Result struct {
     Text string
 }
@@ -66,7 +66,7 @@ func foo() *Result {
 
 ### List comprehension
 
-```go
+```gop
 a := [x*x for x <- [1, 3, 5, 7, 11]]
 b := [x*x for x <- [1, 3, 5, 7, 11], x > 3]
 c := [i+v for i, v <- [1, 3, 5, 7, 11], i%2 == 1]
@@ -82,7 +82,7 @@ z := {v: k for k, v <- {1: "Hello", 3: "Hi", 5: "xsw", 7: "Go+"}, k > 3}
 
 ### Select data from a collection
 
-```go
+```gop
 type student struct {
     name  string
     score int
@@ -99,7 +99,7 @@ println(jasonScore) // output: 80
 
 ### Check if data exists in a collection
 
-```go
+```gop
 type student struct {
     name  string
     score int
@@ -113,7 +113,7 @@ hasFailed := {for x <- students, x.score < 60}     // is any student failed?
 
 ### For loop
 
-```go
+```gop
 sum := 0
 for x <- [1, 3, 5, 7, 11, 13, 17], x > 3 {
     sum += x
@@ -123,7 +123,7 @@ for x <- [1, 3, 5, 7, 11, 13, 17], x > 3 {
 
 ### For range of UDT
 
-```go
+```gop
 type Foo struct {
 }
 
@@ -150,7 +150,7 @@ println({v: k for k, v <- foo})
 
 ### For range of UDT2
 
-```go
+```gop
 type FooIter struct {
 }
 
@@ -182,7 +182,7 @@ println({v: k for k, v <- foo})
 
 ### Lambda expression
 
-```go
+```gop
 func plot(fn func(x float64) float64) {
     // ...
 }
@@ -197,7 +197,7 @@ plot2(x => (x * x, x + x)) // plot2(func(x float64) (float64, float64) { return 
 
 ### Overload operators
 
-```go
+```gop
 import "math/big"
 
 type MyBigInt struct {
@@ -231,7 +231,7 @@ println(-a)
 
 We reinvent the error handling specification in Go+. We call them `ErrWrap expressions`:
 
-```go
+```gop
 expr! // panic if err
 expr? // return if err
 expr?:defval // use defval if err
@@ -239,7 +239,7 @@ expr?:defval // use defval if err
 
 How to use them? Here is an example:
 
-```go
+```gop
 import (
     "strconv"
 )
@@ -284,7 +284,7 @@ How these `ErrWrap expressions` work? See [Error Handling](https://github.com/go
 
 Let's see an example written in Go+:
 
-```go
+```gop
 import "github.com/goplus/gop/ast/goptest"
 
 doc := goptest.New(`... Go+ code ...`)!
@@ -296,7 +296,7 @@ In many languages, there is a concept named `property` who has `get` and `set` m
 
 Suppose we have `get property`, the above example will be:
 
-```go
+```gop
 import "github.com/goplus/gop/ast/goptest"
 
 doc := goptest.New(`... Go+ code ...`)!
@@ -311,7 +311,7 @@ In Go+, we introduce a concept named `auto property`. It is a `get property`, bu
 
 You can use Go+ programs as shell scripts now. For example:
 
-```go
+```gop
 #!/usr/bin/env -S gop run
 
 println("Hello, Go+")
