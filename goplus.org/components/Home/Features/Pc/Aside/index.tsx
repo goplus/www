@@ -41,7 +41,7 @@ export default function Aside() {
     if (hash == null) return
     const targetFeature = features.find(feature => feature.id === hash)
     if (targetFeature == null) return
-    scrollTo(targetFeature.heading.offsetTop - headerHeight)
+    scrollTo(getOffsetTop(targetFeature.heading) - headerHeight)
   }, [features, hash])
 
   const featuresRef = useRef(features)
@@ -54,7 +54,7 @@ export default function Aside() {
       const features = featuresRef.current
       let activeFeature = null
       for (let i = 0; i < features.length; i++) {
-        if (scrollTop >= (features[i].heading.offsetTop - headerHeight)) {
+        if (scrollTop >= (getOffsetTop(features[i].heading) - headerHeight)) {
           activeFeature = features[i].id
         }
       }
@@ -80,4 +80,15 @@ function getGlobalScrollTop() {
   if (window.pageXOffset !== undefined) return window.pageYOffset
   if (document.compatMode === 'CSS1Compat') return document.documentElement.scrollTop
   return document.body.scrollTop
+}
+
+/** Get absolute offset top */
+function getOffsetTop(element: HTMLElement) {
+  let top = 0
+  let el: HTMLElement | null = element
+  do {
+    top += el.offsetTop
+    el = el.offsetParent as HTMLElement | null
+  } while (el)
+  return top
 }
