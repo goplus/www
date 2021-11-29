@@ -4,6 +4,8 @@ import Head from 'next/head'
 import Header from '../Header'
 import Footer from '../Footer'
 
+import styles from './style.module.scss'
+
 export interface Props {
   meta?: {
     title?: string
@@ -17,7 +19,7 @@ export default function Layout({ meta: pageMeta, children }: React.PropsWithChil
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>{meta.title}</title>
         <link rel="icon" href="/go_plus.svg" />
@@ -25,7 +27,7 @@ export default function Layout({ meta: pageMeta, children }: React.PropsWithChil
       </Head>
       <Header />
       <main>{children}</main>
-      <Footer></Footer>
-    </div>
+      <Footer className={styles.footer} />
+    </>
   )
 }

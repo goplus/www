@@ -8,7 +8,7 @@ import Aside from './Aside'
 import Heading from './Heading'
 import featuresCtx, { Feature } from './ctx'
 
-import styles from './style.module.css'
+import styles from './style.module.scss'
 
 const components = {
   code: Code,

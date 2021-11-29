@@ -1,0 +1,10 @@
+@import '../../utils/index.scss';
+
+.footer {
+  @include pc {
+    margin-top: 60px;
+  }
+  @include mobile {
+    margin-top: 72px;
+  }
+}

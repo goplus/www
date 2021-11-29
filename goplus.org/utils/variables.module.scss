@@ -1,5 +1,7 @@
 $mobile-max-width: 640px;
 $mobile-header-height: 72px;
+$min-pc-content-width: 1024px;
+$max-pc-content-width: 1176px;
 
 :export {
   mobileMaxWidth: $mobile-max-width

@@ -1,6 +1,7 @@
+@import '../../../../utils/index.scss';
+
 .section {
-  width: 1024px;
-  margin: auto;
+  @include centered;
   padding-top: 72px;
 }
 

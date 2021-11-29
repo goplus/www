@@ -1,13 +1,19 @@
+/* eslint-disable @next/next/no-img-element */
+
 import React from 'react'
 import Image from 'next/image'
 
+import QiniuLogo from 'components/QiniuLogo'
+import imgDoll from 'public/qiniu_doll.png'
+
 import styles from './style.module.scss'
 
-export default function Footer() {
+export default function Footer(props: { className?: string }) {
+  const className = [styles.footer, props.className].filter(Boolean).join(' ')
   return (
-    <div className={styles.footer}>
+    <div className={className}>
       <div className={styles.qiniuDoll}>
-        <Image width={100} height={82} src="/qiniu_doll.png" alt="Qiniu Doll Logo" />
+        <img width={100} height={82} src={imgDoll.src} alt="Qiniu Doll Logo" />
       </div>
       <div className={styles.links}>
         <a href="https://github.com/goplus/gop" rel="noreferrer">
@@ -20,7 +26,7 @@ export default function Footer() {
       <div className={styles.powerBy}>
         <span>Powered by</span>
         <a style={{ height: 20 }} href="https://www.qiniu.com" rel="noreferrer">
-          <Image width={31} height={20} src="/qiniu_logo.svg" alt="Qiniu Logo" />
+          <QiniuLogo />
         </a>
       </div>
     </div>

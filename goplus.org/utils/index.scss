@@ -7,7 +7,7 @@
 }
 
 @mixin pc {
-  @media screen and (min-width: $mobile-max-width + 1px) {
+  @media screen and (min-width: ($mobile-max-width + 1px)) {
     @content
   }
 }
@@ -15,9 +15,46 @@
 @mixin centered {
   width: 100%;
   @include pc {
-    width: 1024px;
+    min-width: $min-pc-content-width;
+    max-width: $max-pc-content-width;
     position: relative;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+// style reset for page (& widgets)
+@mixin reset {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: white;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 6px;
+    background-color: rgba(175, 184, 193, 0.2);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    font-weight: 500;
+    font-family: PingFangSC, PingFangSC-Medium, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   }
 }

@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:widgets": "node widgets/build.js",
+    "dev:widgets": "npm run build:widgets && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run build:widgets",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,8 +23,10 @@
   "devDependencies": {
     "@types/react": "17.0.27",
     "@types/react-copy-to-clipboard": "^5.0.1",
+    "@types/react-dom": "17.0.11",
     "eslint": "7.32.0",
     "eslint-config-next": "^12.0.0",
+    "fs-extra": "^10.0.0",
     "sass": "^1.43.4",
     "typescript": "4.4.3"
   },
