@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 import TextWrapper from 'components/TextWrapper'
 import CodeForMD from 'components/CodeForMD'
@@ -18,7 +19,10 @@ export default function MobileFeatures() {
     <section className={styles.wrapper}>
       <h2 className={styles.title}>Go+ features</h2>
       <TextWrapper>
-        <ReactMarkdown components={components}>{content}</ReactMarkdown>
+        <ReactMarkdown
+          components={components}
+          rehypePlugins={[rehypeRaw]}
+        >{content}</ReactMarkdown>
       </TextWrapper>
     </section>
   )

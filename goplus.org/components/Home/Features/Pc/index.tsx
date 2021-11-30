@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 import TextWrapper from 'components/TextWrapper'
 import CodeForMD from 'components/CodeForMD'
@@ -36,7 +37,10 @@ export default function PcFeatures() {
           <Aside />
           <div className={styles.features}>
             <TextWrapper>
-              <ReactMarkdown components={components}>{content}</ReactMarkdown>
+              <ReactMarkdown
+                components={components}
+                rehypePlugins={[rehypeRaw]}
+              >{content}</ReactMarkdown>
             </TextWrapper>
           </div>
         </div>
