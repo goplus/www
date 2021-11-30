@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useMobile } from '../../../hooks'
+import { useMobile } from 'hooks'
 import SummaryCollapse from './Collapse'
 import SummaryTabs from './Tabs'
 import styles from './style.module.scss'

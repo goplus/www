@@ -1,5 +1,6 @@
-import React, { useCallback, useState, HTMLAttributes, ReactNode, useRef, useEffect, PropsWithChildren, ButtonHTMLAttributes } from 'react'
-import { CodeBlock, github } from 'react-code-blocks'
+import React, { useCallback, useState, ReactNode, useRef, useEffect, PropsWithChildren, ButtonHTMLAttributes } from 'react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import syntaxHighlightStyle from './syntax-highlight-style'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { useTimer } from 'hooks'
@@ -9,9 +10,16 @@ import styles from './style.module.scss'
 
 const langGop = 'gop'
 
-export interface Props {
+type CodeSegmentInfo = {
   /** Code content */
-  code: string
+  content: string
+  /** Corresponding document for the code content */
+  doc?: ReactNode
+}
+
+export interface Props {
+  /** Code */
+  code: string | CodeSegmentInfo[]
   /** Language of given code */
   language?: string
   /** If code copyable (with a copy button) */
@@ -22,8 +30,6 @@ export interface Props {
   editable?: boolean
 }
 
-github.backgroundColor = '#FAFAFA'
-
 export default function Code({
   code,
   language = langGop,
@@ -31,6 +37,10 @@ export default function Code({
   runnable = true,
   editable = true
 }: Props) {
+
+  const codeSegments = Array.isArray(code) ? code : [{ content: code }]
+  const codeText = codeSegments.map(({ content }) => content).join('\n')
+  const hasDoc = codeSegments.some(seg => seg.doc != null)
 
   const runResultRef = useRef<HTMLPreElement>(null)
   const [runResult, setRunResult] = useState<ReactNode>(null)
@@ -51,22 +61,47 @@ export default function Code({
     </pre>
   )
 
+  const className = [
+    styles.wrapper,
+    hasDoc && styles.hasDoc
+  ].filter(Boolean).join(' ')
+
   return (
-    <div className={styles.codeBlock}>
-      <CodeBlock
-        text={code}
-        language={language === langGop ? 'go' : language} // `gop` not supported yet
-        codeBlock
-        theme={github}
-        showLineNumbers={false}
-      />
+    <div className={className}>
+      <div className={styles.codeSegments}>
+        {codeSegments.map((seg, i) => (
+          <CodeSegment key={i} language={language} hasDoc={hasDoc} {...seg} />
+        ))}
+      </div>
       <div className={styles.ops}>
-        {copyable && <CopyButton code={code} />}
-        {runnable && <RunButton code={code} onResult={setRunResult} />}
-        {editable && <EditButton code={code} />}
+        {copyable && <CopyButton code={codeText} />}
+        {runnable && <RunButton code={codeText} onResult={setRunResult} />}
+        {editable && <EditButton code={codeText} />}
       </div>
       {runResultView}
     </div>
+  )
+}
+
+type CodeSegmentProps = CodeSegmentInfo & {
+  language: string
+  /** If doc exists in the whole `CodeBlock` (not just this segment) */
+  hasDoc: boolean
+}
+
+function CodeSegment({ content, doc, language, hasDoc }: CodeSegmentProps) {
+  return (
+    <article className={styles.codeSegment}>
+      {hasDoc && <aside className={styles.doc}>{doc}</aside>}
+      <SyntaxHighlighter
+        className={styles.code}
+        language={language === langGop ? 'go' : language} // `gop` not supported yet
+        showLineNumbers={false}
+        useInlineStyles
+        style={syntaxHighlightStyle}
+        PreTag="p"
+      >{content.trim()}</SyntaxHighlighter>
+    </article>
   )
 }
 
@@ -76,7 +111,7 @@ function CopyButton({ code }: { code: string }) {
   const onCopy = useCallback(
     (_, result) => {
       setIsCopied(result)
-      timer.current = setTimeout(() => setIsCopied(false), 500)
+      timer.current = setTimeout(() => setIsCopied(false), 2500)
     },
     [timer]
   )

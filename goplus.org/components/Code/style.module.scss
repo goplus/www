@@ -1,17 +1,78 @@
 @import '~utils/index.scss';
 
-.codeBlock {
+.wrapper {
   position: relative;
+  line-height: 1.7143;
+
+  p {
+    margin: 0;
+  }
 }
 
-.codeBlock > span {
-  padding: 20px;
+.codeSegment {
+  .code {
+    font-family: monospace;
+    white-space: pre;
+    background-color: #FAFAFA !important;
+    overflow-x: auto;
+  }
 }
 
-.codeBlock code {
-  border-radius: initial;
-  background-color: initial;
-  padding: 0 !important;
+@include pc {
+  .codeSegment {
+    display: flex;
+    flex-direction: row;
+
+    .doc, .code {
+      flex: 1 1;
+    }
+
+    .doc {
+      padding: 0 40px 6px 0;
+    }
+
+    .code {
+      padding: 0 20px 6px;
+    }
+
+    &:first-child {
+      .doc, .code {
+        padding-top: 20px;
+      }
+    }
+
+    &:last-child {
+      .doc, .code {
+        padding-bottom: 20px;
+      }
+    }
+  }
+
+  .hasDoc .codeSegment {
+    .doc, .code {
+      flex: 0 0 50%;
+    }
+  }
+}
+
+@include mobile {
+  .hasDoc {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #F0F0F0;
+
+    .code, .doc {
+      margin-bottom: 1em;
+    }
+
+    .codeSegment:last-child .code {
+      margin-bottom: 0;
+    }
+  }
+
+  .code {
+    padding: 20px;
+  }
 }
 
 .ops {
@@ -25,7 +86,7 @@
   .ops {
     visibility: hidden;
   }
-  .codeBlock:hover .ops {
+  .wrapper:hover .ops {
     visibility: visible;
   }
 }
@@ -76,7 +137,7 @@
 
 .runResult {
   position: relative;
-  margin-top: 0;
+  margin: 0;
   padding: 20px;
   overflow-x: auto;
   background-color: #F0F0F0;
@@ -84,5 +145,17 @@
   .tip {
     margin: 0;
     color: #666;
+  }
+}
+
+@include pc {
+  .hasDoc .runResult {
+    margin-left: 50%;
+  }
+}
+
+@include mobile {
+  .hasDoc .runResult {
+    margin-top: 1em;
   }
 }
