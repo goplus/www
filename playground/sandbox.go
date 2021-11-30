@@ -445,13 +445,17 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		return nil, err
 	}
 
+	err = ioutil.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte("module gop_autogen\n\ngo 1.16\n"), 0644)
+	if err != nil {
+		return nil, err
+	}
 	br := new(buildResult)
 
 	qgo, err := exec.LookPath("gop")
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	cmdGenerate := exec.Command(qgo, "go", ".")
+	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", "-tags=faketime", ".")
 	cmdGenerate.Dir = tmpDir
 
 	out := &bytes.Buffer{}
@@ -467,31 +471,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		}
 	}
 
-	// until now, qgo does not provide process exit code, so we hard code this.
-	if strings.Contains(out.String(), "errors") ||
-		strings.Contains(out.String(), "TODO") ||
-		strings.Contains(out.String(), "runtime error") {
-		br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
-		br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
-		return br, nil
-	}
-
-	cmdBuild := exec.Command("go", "build", "-o", "a.out", "-tags=faketime", "gop_autogen.go")
-	cmdBuild.Dir = tmpDir
 	br.exePath = filepath.Join(tmpDir, "a.out")
-	cmdBuild.Stderr, cmdBuild.Stdout = out, out
-
-	if err := runTimeout(cmdBuild, maxRunTime); err != nil {
-		if err == errTimeout {
-			return nil, fmt.Errorf("process took too long")
-		}
-		if _, ok := err.(*exec.ExitError); ok {
-			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
-			br.errorMessage = strings.Replace(br.errorMessage, "# command-line-arguments\n", "", 1)
-			return br, nil
-		}
-	}
-
 	const maxBinarySize = 100 << 20
 	if fi, err := os.Stat(br.exePath); err != nil || fi.Size() == 0 || fi.Size() > maxBinarySize {
 		if err != nil {
