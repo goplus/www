@@ -66,6 +66,12 @@ export default function Code({
     hasDoc && styles.hasDoc
   ].filter(Boolean).join(' ')
 
+  const opBtns = [
+    copyable && <CopyButton key="copy" code={codeText} />,
+    runnable && <RunButton key="run" code={codeText} onResult={setRunResult} />,
+    editable && <EditButton key="edit" code={codeText} />,
+  ].filter(Boolean)
+
   return (
     <div className={className}>
       <div className={styles.codeSegments}>
@@ -73,11 +79,9 @@ export default function Code({
           <CodeSegment key={i} language={language} hasDoc={hasDoc} {...seg} />
         ))}
       </div>
-      <div className={styles.ops}>
-        {copyable && <CopyButton code={codeText} />}
-        {runnable && <RunButton code={codeText} onResult={setRunResult} />}
-        {editable && <EditButton code={codeText} />}
-      </div>
+      {opBtns.length > 0 && (
+        <div className={styles.ops}>{opBtns}</div>
+      )}
       {runResultView}
     </div>
   )
