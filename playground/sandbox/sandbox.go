@@ -199,7 +199,7 @@ func listDockerContainers(ctx context.Context) ([]dockerContainer, error) {
 	if err := cmd.Start(); err != nil {
 		return nil, fmt.Errorf("listDockerContainers: cmd.Start() failed: %w", err)
 	}
-	ctx, cancel := context.WithTimeout(ctx, time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
 	defer cancel()
 	if err := internal.WaitOrStop(ctx, cmd, os.Interrupt, 250*time.Millisecond); err != nil {
 		return nil, fmt.Errorf("listDockerContainers: internal.WaitOrStop() failed: %w", err)
