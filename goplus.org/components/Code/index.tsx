@@ -1,9 +1,9 @@
-import React, { useCallback, useState, HTMLAttributes, ReactNode, useRef, useEffect, PropsWithChildren } from 'react'
+import React, { useCallback, useState, HTMLAttributes, ReactNode, useRef, useEffect, PropsWithChildren, ButtonHTMLAttributes } from 'react'
 import { CodeBlock, github } from 'react-code-blocks'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { useTimer } from 'hooks'
-import { compile, CompileResult } from 'apis/play'
+import { compile, CompileResult, share } from 'apis/play'
 
 import styles from './style.module.scss'
 
@@ -18,6 +18,8 @@ export interface Props {
   copyable?: boolean
   /** If code runnable (with a run button) */
   runnable?: boolean
+  /** If code editable (with a edit button navigating to playground) */
+  editable?: boolean
 }
 
 github.backgroundColor = '#FAFAFA'
@@ -26,7 +28,8 @@ export default function Code({
   code,
   language = langGop,
   copyable = true,
-  runnable = true
+  runnable = true,
+  editable = true
 }: Props) {
 
   const runResultRef = useRef<HTMLPreElement>(null)
@@ -40,6 +43,7 @@ export default function Code({
   }, [runResult])
 
   runnable = language === langGop && runnable
+  editable = language === langGop && editable
 
   const runResultView = runnable && runResult != null && (
     <pre className={styles.runResult} ref={runResultRef}>
@@ -59,6 +63,7 @@ export default function Code({
       <div className={styles.ops}>
         {copyable && <CopyButton code={code} />}
         {runnable && <RunButton code={code} onResult={setRunResult} />}
+        {editable && <EditButton code={code} />}
       </div>
       {runResultView}
     </div>
@@ -71,14 +76,14 @@ function CopyButton({ code }: { code: string }) {
   const onCopy = useCallback(
     (_, result) => {
       setIsCopied(result)
-      timer.current = setTimeout(() => setIsCopied(false), 2500)
+      timer.current = setTimeout(() => setIsCopied(false), 500)
     },
     [timer]
   )
 
   return (
     <CopyToClipboard text={code} onCopy={onCopy}>
-      <Button className={isCopied ? styles.active : undefined} title="Copy Code">
+      <Button highlight={isCopied} title="Copy Code">
         {isCopied ? <IconOK /> : <IconCopy />}
       </Button>
     </CopyToClipboard>
@@ -99,40 +104,105 @@ function ExitStatus({ status }: { status: CompileResult['Status'] }) {
   return <Tip>Program exited with {status}.</Tip>
 }
 
+function EventsWithStatus({ result }: { result: CompileResult }) {
+  return <>
+    <Events events={result.Events} />
+    <ExitStatus status={result.Status} />
+  </>
+}
+
 function Tip(props: PropsWithChildren<{}>) {
   return <p className={styles.tip} {...props} />
 }
 
+function Error({ message }: { message: string }) {
+  return <>
+    <Tip>Error encountered:</Tip>
+    {message}
+  </>
+}
+
 function RunButton({ code, onResult }: RunButtonProps) {
 
-  async function handleClick() {
+  const [loading, setLoading] = useState(false)
+
+  function startWaiting() {
+    setLoading(true)
     onResult(<Tip>Waiting for remote server...</Tip>)
-    const result = await compile({ body: code })
-    const content = (() => {
-      if (result.Errors) {
-        return <>
-          <Tip>Error encountered:</Tip>
-          {result.Errors}
-        </>
-      }
-      return <>
-        <Events events={result.Events} />
-        <ExitStatus status={result.Status} />
-      </>
-    })()
-    onResult(content)
+  }
+
+  function endWaiting(result: ReactNode) {
+    setLoading(false)
+    onResult(result)
+  }
+
+  async function handleClick() {
+    startWaiting()
+
+    let result: CompileResult
+    try {
+      result = await compile({ body: code })
+    } catch (e: unknown) {
+      const message = `Request failed: ${e && (e as any).message || 'Unkown'}`
+      endWaiting(<Error message={message} />)
+      return
+    }
+    endWaiting(
+      result.Errors
+      ? <Error message={result.Errors} />
+      : <EventsWithStatus result={result} />
+    )
   }
 
   return (
-    <Button title="Run Code" onClick={handleClick}>
+    <Button title="Run Code" onClick={handleClick} loading={loading}>
       <IconPlay />
     </Button>
   )
 }
 
-function Button({ className, ...restProps }: HTMLAttributes<HTMLButtonElement>) {
-  className = [styles.opBtn, className].filter(Boolean).join(' ')
-  return <button type="button" className={className} {...restProps} />
+function EditButton({ code }: { code: string }) {
+  const [loading, setLoading] = useState(false)
+
+  async function handleClick() {
+    let url: string
+    setLoading(true)
+    try {
+      url = await share(code)
+    } catch (e: unknown) {
+      // TODO: deal with error
+      return
+    } finally {
+      setLoading(false)
+    }
+    window.open(url, 'goplus-playground')
+  }
+
+  return (
+    <Button
+      title="Edit Code In Playground"
+      onClick={handleClick}
+      loading={loading}
+    >
+      <IconEdit />
+    </Button>
+  )
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean
+  highlight?: boolean
+}
+
+function Button({ className, loading, highlight, disabled, ...restProps }: ButtonProps) {
+  className = [
+    styles.opBtn,
+    highlight && styles.highlight,
+    loading && styles.loading,
+    className
+  ].filter(Boolean).join(' ')
+  disabled = disabled || loading
+  return <button type="button" className={className} disabled={disabled} {...restProps} />
 }
 
 function IconCopy() {
@@ -158,6 +228,14 @@ function IconPlay() {
   return (
     <svg width="11" height="14" viewBox="0 0 11 14" fill="none">
       <path d="M1 1.80385L10 7L1 12.1962V1.80385Z" stroke="currentColor"/>
+    </svg>
+  )
+}
+
+function IconEdit() {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16">
+      <path fill="currentColor" d="M7.875,1.75 C7.94375,1.75 8,1.80625 8,1.875 L8,1.875 L8,2.75 C8,2.81875 7.94375,2.875 7.875,2.875 L7.875,2.875 L2.875,2.875 L2.875,13.125 L13.125,13.125 L13.125,8.125 C13.125,8.05625 13.18125,8 13.25,8 L13.25,8 L14.125,8 C14.19375,8 14.25,8.05625 14.25,8.125 L14.25,8.125 L14.25,13.75 C14.25,14.0265625 14.0265625,14.25 13.75,14.25 L13.75,14.25 L2.25,14.25 C1.9734375,14.25 1.75,14.0265625 1.75,13.75 L1.75,13.75 L1.75,2.25 C1.75,1.9734375 1.9734375,1.75 2.25,1.75 L2.25,1.75 Z M12.1828125,1.75 C12.215625,1.75 12.246875,1.7609375 12.271875,1.7859375 L12.271875,1.7859375 L14.2140625,3.7265625 C14.2625,3.775 14.2625,3.8546875 14.2140625,3.903125 L14.2140625,3.903125 L7.715625,10.3875 C7.69375,10.409375 7.6625,10.421875 7.63125,10.4234375 L7.63125,10.4234375 L5.7875,10.46875 C5.6421875,10.46875 5.5296875,10.3546875 5.53123392,10.215625 L5.53123392,10.215625 L5.5609375,8.3578125 C5.5609375,8.325 5.575,8.29375 5.596875,8.2703125 L5.596875,8.2703125 L12.09375,1.7859375 C12.11875,1.7625 12.15,1.75 12.1828125,1.75 Z M12.1828125,3.109375 L6.553125,8.7265625 L6.5421875,9.4515625 L7.25625,9.434375 L12.8890625,3.8140625 L12.1828125,3.109375 Z"></path>
     </svg>
   )
 }

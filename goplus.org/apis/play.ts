@@ -1,4 +1,4 @@
-const playHost = 'https://play.goplus.org'
+const host = 'https://play.goplus.org'
 
 export type CompileOptions = {
   body: string
@@ -35,12 +35,29 @@ export type CompileResult = {
 }
 
 export async function compile({ body, withVet = false }: CompileOptions): Promise<CompileResult> {
-  const resp = await fetch(`${playHost}/compile`, {
+  const resp = await fetch(`${host}/compile`, {
     method: 'POST',
+    mode: 'cors',
     body: new URLSearchParams({
       body,
       withVet: withVet + ''
-    })
+    }),
   })
+  if (!resp.ok) {
+    throw new Error(`Status ${resp.status}`)
+  }
   return resp.json()
+}
+
+export async function share(code: string) {
+  const resp = await fetch(`${host}/share`, {
+    method: 'POST',
+    mode: 'cors',
+    body: code
+  })
+  if (!resp.ok) {
+    throw new Error(`Status ${resp.status}`)
+  }
+  const hash = await resp.text()
+  return `${host}/p/${hash}`
 }

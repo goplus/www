@@ -49,9 +49,24 @@
     background-color: #F5F5F5;
   }
 
-  &.active {
+  &:active {
+    background-color: #F0F0F0;
+  }
+
+  &:disabled {
+    background-color: #F0F0F0;
+    svg {
+      opacity: .5;
+    }
+  }
+
+  &.highlight {
     color: #2C84FF;
     border-color: #2C84FF;
+  }
+
+  &.loading {
+    // TODO: detail style for status loading
   }
 
   + .opBtn {
