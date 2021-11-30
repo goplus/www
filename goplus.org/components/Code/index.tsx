@@ -10,7 +10,7 @@ import styles from './style.module.scss'
 
 const langGop = 'gop'
 
-type CodeSegmentInfo = {
+export type CodeSegmentInfo = {
   /** Code content */
   content: string
   /** Corresponding document for the code content */

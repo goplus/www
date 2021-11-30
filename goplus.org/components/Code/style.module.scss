@@ -2,6 +2,7 @@
 
 .wrapper {
   position: relative;
+  min-height: 28px + (20px * 2); // opBtn height + padding top + padding bottom
   line-height: 1.7143;
 
   p {
@@ -76,18 +77,26 @@
 }
 
 .ops {
-  position: absolute;
-  right: 20px;
-  top: 20px;
   display: flex;
 }
 
 @include pc {
   .ops {
+    position: absolute;
+    right: 20px;
+    top: 20px;
     visibility: hidden;
   }
+
   .wrapper:hover .ops {
     visibility: visible;
+  }
+}
+
+@include mobile {
+  .ops {
+    justify-content: end;
+    margin: 1em 0;
   }
 }
 
