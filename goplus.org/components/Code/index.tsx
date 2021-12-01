@@ -10,6 +10,9 @@ import styles from './style.module.scss'
 
 const langGop = 'gop'
 
+// `gop|raw` means language: `gop`, while not interactive (runnable / editable)
+const tagRaw = 'raw'
+
 export type CodeSegmentInfo = {
   /** Code content */
   content: string
@@ -20,7 +23,7 @@ export type CodeSegmentInfo = {
 export interface Props {
   /** Code */
   code: string | CodeSegmentInfo[]
-  /** Language of given code */
+  /** Language of given code, language with tag (`gop|raw`) is also supported */
   language?: string
   /** If code copyable (with a copy button) */
   copyable?: boolean
@@ -52,8 +55,11 @@ export default function Code({
     })
   }, [runResult])
 
-  runnable = language === langGop && runnable
-  editable = language === langGop && editable
+  const [lang, tag] = language.split('|')
+  const interactive = lang === langGop && tag !== tagRaw
+
+  runnable = interactive && runnable
+  editable = interactive && editable
 
   const runResultView = runnable && runResult != null && (
     <pre className={styles.runResult} ref={runResultRef}>
@@ -76,7 +82,7 @@ export default function Code({
     <div className={className}>
       <div className={styles.codeSegments}>
         {codeSegments.map((seg, i) => (
-          <CodeSegment key={i} language={language} hasDoc={hasDoc} {...seg} />
+          <CodeSegment key={i} language={lang} hasDoc={hasDoc} {...seg} />
         ))}
       </div>
       {opBtns.length > 0 && (
@@ -157,7 +163,7 @@ function Tip(props: PropsWithChildren<{}>) {
 function Error({ message }: { message: string }) {
   return <>
     <Tip>Error encountered:</Tip>
-    {message}
+    <p className={styles.error}>{message}</p>
   </>
 }
 
