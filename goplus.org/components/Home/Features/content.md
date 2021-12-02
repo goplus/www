@@ -3,6 +3,8 @@
 We introduce the rational number as native Go+ types. We use suffix `r` to denote rational literals. For example, (1r << 200) means a big int whose value is equal to 2<sup>200</sup>. And 4/5r means the rational constant 4/5.
 
 ```gop
+import "math/big"
+
 var a bigint = 1r << 65  // bigint, large than int64
 var b bigrat = 4/5r      // bigrat
 c := b - 1/3r + 3 * 1/2r // bigrat
@@ -20,6 +22,8 @@ x := {"Hello": 1, "xsw": 3.4} // map[string]float64
 y := {"Hello": 1, "xsw": "Go+"} // map[string]interface{}
 z := {"Hello": 1, "xsw": 3} // map[string]int
 empty := {} // map[string]interface{}
+
+println x, y, z, empty
 ```
 
 ### Slice literal
@@ -32,6 +36,8 @@ a := [1, 3.4, 3+4i] // []complex128
 b := [5+6i] // []complex128
 c := ["xsw", 3] // []interface{}
 empty := [] // []interface{}
+
+println x, y, z, a, b, c, empty
 ```
 
 ### Lambda expression
@@ -76,6 +82,8 @@ type Result struct {
 func foo() *Result {
     return {Text: "Hi, Go+"} // return &Result{Text: "Hi, Go+"}
 }
+
+println foo()
 ```
 
 
@@ -93,6 +101,8 @@ e := [[a, b] for a <- arr, a < b for b <- arr, b > 2]
 x := {x: i for i, x <- [1, 3, 5, 7, 11]}
 y := {x: i for i, x <- [1, 3, 5, 7, 11], i%2 == 1}
 z := {v: k for k, v <- {1: "Hello", 3: "Hi", 5: "xsw", 7: "Go+"}, k > 3}
+
+println a, b, c, d, arr, e, x, y, z
 ```
 
 ### Select data from a collection
@@ -124,6 +134,8 @@ students := [student{"Ken", 90}, student{"Jason", 80}, student{"Lily", 85}]
 
 hasJason := {for x <- students, x.name == "Jason"} // is any student named Jason?
 hasFailed := {for x <- students, x.score < 60}     // is any student failed?
+
+println hasJason, hasFailed
 ```
 
 ### For loop
@@ -133,6 +145,8 @@ sum := 0
 for x <- [1, 3, 5, 7, 11, 13, 17], x > 3 {
     sum += x
 }
+
+println sum
 ```
 
 
