@@ -6,12 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>html, body { margin: 0; }</style>
-  <script data-widgets="header,footer" src="/widgets/loader.js"></script>
+  <script data-widgets="header,footer,code" src="/widgets/loader.js"></script>
 </head>
 <body>
   <goplus-header>
     <div style="height: 72px;"></div>
   </goplus-header>
+  <div style="padding: 20px;">
+    <goplus-code>
+println "The start."
+      <goplus-code-doc>
+        Strings, which can be added together with <code>+</code>.
+        <p>This is test content.</p>
+      </goplus-code-doc>
+println "Go"+"Plus"
+      <goplus-code-doc>
+        Integers and floats.
+      </goplus-code-doc>
+      <goplus-code-doc>
+        Integers and floats.
+      </goplus-code-doc>
+println "1+1 =", 1+1
+println "7.0/3.0 =", 7.0/3.0
+
+  println "with indent"
+
+println "7.0/3.0 =", 7.0/3.0
+
+        <goplus-code-doc>
+          The end.
+        </goplus-code-doc>
+    </goplus-code>
+  </div>
   This is a page for goplus widgets development or testing.
   <goplus-footer></goplus-footer>
 </body>

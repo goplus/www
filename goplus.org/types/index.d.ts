@@ -1,3 +1,8 @@
+declare module '*.md' {
+  const content: string
+  export default content
+}
+
 declare module 'moveto' {
   export type Options = {
     duration?: number

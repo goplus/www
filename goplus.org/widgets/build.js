@@ -60,7 +60,9 @@ async function main() {
   const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
   // For production build, use `goplus.org` instead of url like `www-*-goplus.vercel.app`
   const vercelHost = NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'goplus.org' : NEXT_PUBLIC_VERCEL_URL
-  nextConfig.assetPrefix = vercelHost ? ('https://' + vercelHost) : ''
+  // Asset prefix for local development
+  const LOCAL_ASSET_PREFIX = process.env.LOCAL_ASSET_PREFIX
+  nextConfig.assetPrefix = LOCAL_ASSET_PREFIX || (vercelHost ? ('https://' + vercelHost) : '')
   console.log('assetPrefix:', nextConfig.assetPrefix)
 
   const runWebpackSpan = trace('run-webpack')

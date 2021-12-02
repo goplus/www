@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { MDXRemote } from 'next-mdx-remote'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
-import TextWrapper from '../../../../components/TextWrapper'
-import Code from '../../../../components/Code'
-import { Props } from '../common'
+import TextWrapper from 'components/TextWrapper'
+import CodeForMD from 'components/CodeForMD'
+import content from '../content.md'
 import Aside from './Aside'
 import Heading from './Heading'
 import featuresCtx, { Feature } from './ctx'
@@ -11,11 +12,12 @@ import featuresCtx, { Feature } from './ctx'
 import styles from './style.module.scss'
 
 const components = {
-  code: Code,
+  // TODO: performance issue here
+  code: CodeForMD,
   h3: Heading
 }
 
-export default function PcFeatures({ source }: Props) {
+export default function PcFeatures() {
   const [features, setFeatures] = useState<Feature[]>([])
 
   const registerFeature = useCallback((feature: Feature) => {
@@ -35,7 +37,10 @@ export default function PcFeatures({ source }: Props) {
           <Aside />
           <div className={styles.features}>
             <TextWrapper>
-              <MDXRemote {...source} components={components} />
+              <ReactMarkdown
+                components={components}
+                rehypePlugins={[rehypeRaw]}
+              >{content}</ReactMarkdown>
             </TextWrapper>
           </div>
         </div>
