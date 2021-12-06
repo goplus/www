@@ -119,9 +119,9 @@ github.com/google/uuid v1.0.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+Tv3SM=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
-github.com/goplus/gop v1.0.15 h1:ylVDIPyYa9Fzvp8LeHzR8zz0iWuGBLGuK3/HRBUS+LM=
-github.com/goplus/gop v1.0.15/go.mod h1:oo5V2tps5zZxzPXqnO1ENeXOVBIjQnMRI8ZIRCQ72rk=
-github.com/goplus/gox v1.7.10/go.mod h1:orZ6Mr9qqB4BVaVCMp/cypMtkn0Fp5XUE7e5uqjZATA=
+github.com/goplus/gop v1.0.33-0.20211204062201-15116b6ffecc h1:GnNOSwWAEcj/VCPyh/aH9OIKrA9Z6VSbUMRdm8nr/Y0=
+github.com/goplus/gop v1.0.33-0.20211204062201-15116b6ffecc/go.mod h1:zbsPaUDiA9eo7C72X+Oj1kq6S7YiMHwMr/wPvyxrGQ4=
+github.com/goplus/gox v1.8.0/go.mod h1:fUMG5YrEvPjSfGqPnP1gfrZvWlVuA1/9lZy3s/5+Aes=
 github.com/gorilla/context v1.1.1/go.mod h1:kBGZzfjB9CEq2AlWe17Uuf7NDRt0dE0s8S51q0aT7Yg=
 github.com/gorilla/mux v1.6.2/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/gorilla/mux v1.7.3/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=

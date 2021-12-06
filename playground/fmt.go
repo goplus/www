@@ -7,10 +7,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/goplus/gop/format"
 	"net/http"
 	"path"
 
+	xformat "github.com/goplus/gop/x/format"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/tools/imports"
 )
@@ -46,7 +46,7 @@ func handleFmt(w http.ResponseWriter, r *http.Request) {
 				// can find symbols in sibling files.
 				out, err = imports.Process(f, in, nil)
 			} else {
-				out, err = format.Source(in)
+				out, err = xformat.GopstyleSource(in)
 			}
 			if err != nil {
 				errMsg := err.Error()
