@@ -3,7 +3,7 @@
 .wrapper {
   position: relative;
   min-height: 28px + (20px * 2); // opBtn height + padding top + padding bottom
-  line-height: 1.7143;
+  line-height: 1.5;
 
   p {
     margin: 0;
@@ -16,6 +16,11 @@
   overflow-x: auto;
   background-color: #FAFAFA !important;
   border: 1px solid #E5E5E5;
+}
+
+.hasRunResult .codeSegment:last-child .code {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 @include pc {
@@ -32,10 +37,6 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     border-bottom-width: 1px;
-  }
-  .hasRunResult .codeSegment:last-child .code {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 }
 
@@ -88,7 +89,7 @@
     border-radius: 4px;
     border: 1px solid #F0F0F0;
 
-    .code, .doc {
+    .code, .doc:not(:empty) {
       margin-bottom: 1em;
     }
 
@@ -189,12 +190,6 @@
 @include pc {
   .hasDoc .runResult {
     margin-left: 50%;
-  }
-}
-
-@include mobile {
-  .hasDoc .runResult {
-    margin-top: 1em;
   }
 }
 
