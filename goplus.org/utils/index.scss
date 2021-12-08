@@ -24,12 +24,12 @@
 }
 
 // style reset for page (& widgets)
-@mixin reset {
+@mixin reset($fontSize: 14px) {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji';
-  font-size: 14px;
+  font-size: $fontSize;
   line-height: 1.5;
   color: #333;
   background-color: white;

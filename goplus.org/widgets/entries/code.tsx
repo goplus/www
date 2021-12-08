@@ -27,7 +27,6 @@ defineWidget('code', el => {
 
   function sealSegment() {
     if (segment == null) return
-    segment.content = segment.content.trim()
     if (!segment.content) return
     segments.push(segment)
   }
@@ -54,6 +53,7 @@ defineWidget('code', el => {
       copyable={getBoolAttr(el, 'copyable')}
       runnable={getBoolAttr(el, 'runnable')}
       editable={getBoolAttr(el, 'editable')}
+      halfCode={getBoolAttr(el, 'half-code')}
     />
   )
 })

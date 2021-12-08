@@ -12,31 +12,64 @@
   <goplus-header>
     <div style="height: 72px;"></div>
   </goplus-header>
-  <div style="padding: 20px;">
-    <goplus-code>
-println "The start."
-      <goplus-code-doc>
-        Strings, which can be added together with <code>+</code>.
-        <p>This is test content.</p>
-      </goplus-code-doc>
-println "Go"+"Plus"
-      <goplus-code-doc>
-        Integers and floats.
-      </goplus-code-doc>
-      <goplus-code-doc>
-        Integers and floats.
-      </goplus-code-doc>
-println "1+1 =", 1+1
+  <div style="padding: 100px; font-size: 16px;">
+    <goplus-code>println "The start."
+<goplus-code-doc>
+  Strings, which can be added together with <code>+</code>.
+  <p>This is test content.</p>
+</goplus-code-doc>println "Go"+"Plus"
+<goplus-code-doc>
+  Integers and floats.
+</goplus-code-doc>println "1+1 =", 1+1
 println "7.0/3.0 =", 7.0/3.0
 
   println "with indent"
 
 println "7.0/3.0 =", 7.0/3.0
+<goplus-code-doc>
+  The end.
+</goplus-code-doc></goplus-code>
+    <h2>Switch:</h2>
+    <goplus-code>import (
+    "time"
+)
 
-        <goplus-code-doc>
-          The end.
-        </goplus-code-doc>
-    </goplus-code>
+<goplus-code-doc><p>Here&rsquo;s a basic <code>switch</code>.</p>
+</goplus-code-doc>i := 2
+print "Write ", i, " as "
+switch i {
+case 1:
+    println "one"
+case 2:
+    println "two"
+case 3:
+    println "three"
+}
+
+<goplus-code-doc><p>You can use commas to separate multiple expressions
+in the same <code>case</code> statement. We use the optional
+<code>default</code> case in this example as well.</p>
+</goplus-code-doc>switch time.now().weekday() {
+case time.Saturday, time.Sunday:
+    println "It's the weekend"
+default:
+    println "It's a weekday"
+}
+
+<goplus-code-doc><p><code>switch</code> without an expression is an alternate way
+to express if/else logic. Here we also show how the
+<code>case</code> expressions can be non-constants.</p>
+</goplus-code-doc>t := time.now()
+switch {
+case t.hour() < 12:
+    println "It's before noon"
+default:
+    println "It's after noon"
+}
+</goplus-code>
+<goplus-code editable="false">println "not editable"</goplus-code>
+<goplus-code language="js">class Foo {}</goplus-code>
+<goplus-code half-code>println "half code"</goplus-code>
   </div>
   This is a page for goplus widgets development or testing.
   <goplus-footer></goplus-footer>
