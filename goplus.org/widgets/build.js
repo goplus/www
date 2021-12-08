@@ -129,8 +129,8 @@ async function main() {
   webpackConfig.optimization.runtimeChunk = false
 
   // Uncomment these lines to improve build speed when do local development
-  webpackConfig.optimization.minimize = false
-  webpackConfig.devtool = false
+  // webpackConfig.optimization.minimize = false
+  // webpackConfig.devtool = false
 
   const result = await runCompiler(webpackConfig, { runWebpackSpan })
   if (result.errors && result.errors.length > 0) {
