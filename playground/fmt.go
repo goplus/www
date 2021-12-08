@@ -6,11 +6,16 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"os/exec"
 	"path"
+	"path/filepath"
+	"strings"
 
-	xformat "github.com/goplus/gop/x/format"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/tools/imports"
 )
@@ -46,7 +51,32 @@ func handleFmt(w http.ResponseWriter, r *http.Request) {
 				// can find symbols in sibling files.
 				out, err = imports.Process(f, in, nil)
 			} else {
-				out, err = xformat.GopstyleSource(in)
+				var tmpDir string
+				tmpDir, err = os.MkdirTemp("", "gopformat")
+				if err != nil {
+					json.NewEncoder(w).Encode(fmtResponse{Error: err.Error()})
+					return
+				}
+				defer os.RemoveAll(tmpDir)
+				tmpGoFile := filepath.Join(tmpDir, "prog.go")
+				tmpGopFile := filepath.Join(tmpDir, "prog.gop")
+				if err = os.WriteFile(tmpGoFile, in, 0644); err != nil {
+					json.NewEncoder(w).Encode(fmtResponse{Error: err.Error()})
+					return
+				}
+				cmd := exec.Command("gop", "fmt", "-smart", "-mvgo", tmpGoFile)
+				//gop fmt returns error result in stdout, so we do not need to handle stderr
+				//err is to check gop fmt return code
+				var fmtErr []byte
+				fmtErr, err = cmd.Output()
+				if err != nil {
+					json.NewEncoder(w).Encode(fmtResponse{Error: strings.Replace(string(fmtErr), tmpGoFile, "prog.go", -1)})
+					return
+				}
+				out, err = ioutil.ReadFile(tmpGopFile)
+				if err != nil {
+					err = errors.New("interval error when formatting gop code")
+				}
 			}
 			if err != nil {
 				errMsg := err.Error()
