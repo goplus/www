@@ -38,6 +38,9 @@
     border-bottom-right-radius: 8px;
     border-bottom-width: 1px;
   }
+  .halfCode:not(.hasDoc) {
+    width: 50%;
+  }
 }
 
 @include mobile {

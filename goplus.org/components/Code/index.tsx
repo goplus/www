@@ -31,6 +31,8 @@ export interface Props {
   runnable?: boolean
   /** If code editable (with a edit button navigating to playground) */
   editable?: boolean
+  /** If always render code as a half (by width, no matter whether docs exists) */
+  halfCode?: boolean
 }
 
 export default function Code({
@@ -38,7 +40,8 @@ export default function Code({
   language = langGop,
   copyable = true,
   runnable = true,
-  editable = true
+  editable = true,
+  halfCode = false
 }: Props) {
 
   const codeSegments = Array.isArray(code) ? code : [{ content: code }]
@@ -71,7 +74,8 @@ export default function Code({
   const className = [
     styles.wrapper,
     hasDoc && styles.hasDoc,
-    hasRunResult && styles.hasRunResult
+    hasRunResult && styles.hasRunResult,
+    halfCode && styles.halfCode
   ].filter(Boolean).join(' ')
 
   const opBtns = [

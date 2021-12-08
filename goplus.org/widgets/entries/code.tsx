@@ -53,6 +53,7 @@ defineWidget('code', el => {
       copyable={getBoolAttr(el, 'copyable')}
       runnable={getBoolAttr(el, 'runnable')}
       editable={getBoolAttr(el, 'editable')}
+      halfCode={getBoolAttr(el, 'half-code')}
     />
   )
 })
