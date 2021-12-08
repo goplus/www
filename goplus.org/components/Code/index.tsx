@@ -42,7 +42,7 @@ export default function Code({
 }: Props) {
 
   const codeSegments = Array.isArray(code) ? code : [{ content: code }]
-  const codeText = codeSegments.map(({ content }) => content).join('\n')
+  const codeText = codeSegments.map(({ content }) => content).join('')
   const hasDoc = codeSegments.some(seg => seg.doc != null)
 
   const runResultRef = useRef<HTMLPreElement>(null)
@@ -112,7 +112,7 @@ function CodeSegment({ content, doc, language, hasDoc }: CodeSegmentProps) {
         useInlineStyles
         style={syntaxHighlightStyle}
         PreTag="p"
-      >{content.trim()}</SyntaxHighlighter>
+      >{content.replace(/\n$/, '')}</SyntaxHighlighter>
     </article>
   )
 }

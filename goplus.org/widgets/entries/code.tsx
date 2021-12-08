@@ -27,7 +27,6 @@ defineWidget('code', el => {
 
   function sealSegment() {
     if (segment == null) return
-    segment.content = segment.content.trim()
     if (!segment.content) return
     segments.push(segment)
   }
