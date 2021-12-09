@@ -1,37 +1,30 @@
-package main
+// in Go we do:
+a := []float64{1, 2, 3.4}
+println a
 
-import (
-	"fmt"
-)
+// in GoPlus we do:
+b := [1, 2, 3.4]
+println b
 
-func main() {
-	// in Go we do:
-	a := []float64{1, 2, 3.4}
-	println(a)
+//slice literal
+c := [1, 3.4] // []float64
+printf "%#v %T\n", c, c
 
-	// in GoPlus we do:
-	b := [1, 2, 3.4]
-	println(b)
+d := [1] // []int
+printf "%#v %T\n", d, d
 
-	//slice literal
-	c := [1, 3.4] // []float64
-	fmt.Printf("%#v %T\n", c, c)
+e := [1+2i, "xsw"] // []interface{}
+printf "%#v %T\n", e, e
 
-	d := [1] // []int
-	fmt.Printf("%#v %T\n", d, d)
+f := [1, 3.4, 3+4i] // []complex128
+printf "%#v %T\n", f, f
 
-	e := [1+2i, "xsw"] // []interface{}
-	fmt.Printf("%#v %T\n", e, e)
+g := [5+6i] // []complex128
+printf "%#v %T\n", g, g
 
-	f := [1, 3.4, 3+4i] // []complex128
-	fmt.Printf("%#v %T\n", f, f)
+h := ["xsw", 3] // []interface{}
+printf "%#v %T\n", h, h
 
-	g := [5+6i] // []complex128
-	fmt.Printf("%#v %T\n", g, g)
+empty := [] // []interface{}
+printf "%#v %T\n", empty, empty
 
-	h := ["xsw", 3] // []interface{}
-	fmt.Printf("%#v %T\n", h, h)
-
-	empty := [] // []interface{}
-	fmt.Printf("%#v %T\n", empty, empty)
-}
