@@ -58,19 +58,18 @@ func handleFmt(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				defer os.RemoveAll(tmpDir)
-				tmpGoFile := filepath.Join(tmpDir, "prog.go")
 				tmpGopFile := filepath.Join(tmpDir, "prog.gop")
-				if err = os.WriteFile(tmpGoFile, in, 0644); err != nil {
+				if err = os.WriteFile(tmpGopFile, in, 0644); err != nil {
 					json.NewEncoder(w).Encode(fmtResponse{Error: err.Error()})
 					return
 				}
-				cmd := exec.Command("gop", "fmt", "-smart", "-mvgo", tmpGoFile)
+				cmd := exec.Command("gop", "fmt", "-smart", tmpGopFile)
 				//gop fmt returns error result in stdout, so we do not need to handle stderr
 				//err is to check gop fmt return code
 				var fmtErr []byte
 				fmtErr, err = cmd.Output()
 				if err != nil {
-					json.NewEncoder(w).Encode(fmtResponse{Error: strings.Replace(string(fmtErr), tmpGoFile, "prog.go", -1)})
+					json.NewEncoder(w).Encode(fmtResponse{Error: strings.Replace(string(fmtErr), tmpGopFile, "prog.gop", -1)})
 					return
 				}
 				out, err = ioutil.ReadFile(tmpGopFile)
