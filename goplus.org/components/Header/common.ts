@@ -16,7 +16,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Playground',
-    href: 'https://github.com/goplus/gop#playground'
+    href: 'https://play.goplus.org/'
   },
   {
     children: 'Contributing',
