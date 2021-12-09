@@ -440,7 +440,7 @@ func (b *buildResult) cleanup() error {
 
 // sandboxBuildGoplus build the goplus program in a temp directory and not run it;
 func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool) (*buildResult, error) {
-	err := ioutil.WriteFile(filepath.Join(tmpDir, "main.gop"), []byte(in), 0644)
+	err := ioutil.WriteFile(filepath.Join(tmpDir, "prog.gop"), []byte(in), 0644)
 	if err != nil {
 		return nil, err
 	}
@@ -449,6 +449,17 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	if err != nil {
 		return nil, err
 	}
+
+	//use go get directly to
+	//1. avoid fixed version in go.mod
+	//2. and avoid some build warning
+	cmd := exec.Command("go", "get", "github.com/goplus/gop/builtin")
+	cmd.Dir = tmpDir
+	_, err = cmd.CombinedOutput()
+	if err != nil {
+		return nil, fmt.Errorf("error get github.com/goplus/gop/builtin: %v", err)
+	}
+
 	br := new(buildResult)
 
 	qgo, err := exec.LookPath("gop")
@@ -466,7 +477,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 			return nil, fmt.Errorf("process took too long")
 		}
 		if _, ok := err.(*exec.ExitError); ok {
-			br.errorMessage = br.errorMessage + strings.Replace(string(out.Bytes()), tmpDir+"/", "", -1)
+			br.errorMessage = br.errorMessage + trimGopBuild(string(out.Bytes()))
 			return br, nil
 		}
 	}
@@ -481,6 +492,19 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	}
 
 	return br, nil
+}
+
+//try to handle gop build output
+func trimGopBuild(output string) string {
+	var res []string
+	for _, v := range strings.Split(output, "\n") {
+		if strings.Contains(v, "prog.gop") {
+			//here we hard code the "./prog.gop" to prog.go, the frontend need this variable
+			//TODO: move frontend variable prog.go to prog.gop
+			res = append(res, strings.Replace(v, "./prog.gop", "prog.go", -1))
+		}
+	}
+	return strings.Join(res, "\n")
 }
 
 // sandboxRun runs a Go binary in a sandbox environment.
