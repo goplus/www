@@ -9,7 +9,6 @@ require (
 	github.com/aws/aws-sdk-go v1.37.0
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
 	github.com/google/go-cmp v0.5.5
-	github.com/goplus/gop v1.0.33-0.20211204062201-15116b6ffecc
 	github.com/shurcooL/webdavfs v0.0.0-20190527155401-0680c3c63e3c
 	go.opencensus.io v0.23.0
 	golang.org/x/mod v0.5.1

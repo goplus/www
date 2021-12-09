@@ -1,29 +1,26 @@
-package main
-
 import (
 	"strconv"
 )
 
 func add(x, y string) (int, error) {
-	return strconv.Atoi(x)? + strconv.Atoi(y)?, nil
+	return strconv.atoi(x)? + strconv.atoi(y)?, nil
 }
 
 func addSafe(x, y string) int {
-	return strconv.Atoi(x)?:0 + strconv.Atoi(y)?:0
+	return strconv.atoi(x)?:0 + strconv.atoi(y)?:0
 }
 
-func main() {
-	// Error handling
-	// We reinvent the error handling specification in Go+. We call them ErrWrap expressions:
+// Error handling
+// We reinvent the error handling specification in Go+. We call them ErrWrap expressions:
 
-	// expr! // panic if err
-	// expr? // return if err
-	// expr?:defval // use defval if err
+// expr! // panic if err
+// expr? // return if err
+// expr?:defval // use defval if err
 
-	println(`add("100", "23"):`, add("100", "23")!)
+println `add("100", "23"):`, add("100", "23")!
 
-	sum, err := add("10", "abc")
-	println(`add("10", "abc"):`, sum, err)
+sum, err := add("10", "abc")
+println `add("10", "abc"):`, sum, err
 
-	println(`addSafe("10", "abc"):`, addSafe("10", "abc"))
-}
+println `addSafe("10", "abc"):`, addSafe("10", "abc")
+
