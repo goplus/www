@@ -221,28 +221,29 @@ function RunButton({ code, onResult }: RunButtonProps) {
 }
 
 function EditButton({ code }: { code: string }) {
-  const [loading, setLoading] = useState(false)
+  const [url, setUrl] = useState<string | null>(null)
+
+  // Request playground url aftered rendered,
+  // instead of after clicked (which may causes Pop-up window blocked)
+  useEffect(() => {
+    share(code).then(setUrl)
+    // TODO: deal with error
+  }, [code])
 
   async function handleClick() {
-    let url: string
-    setLoading(true)
-    try {
-      url = await share(code)
-    } catch (e: unknown) {
-      // TODO: deal with error
-      return
-    } finally {
-      setLoading(false)
-    }
+    if (url == null) return
     window.open(url, 'goplus-playground')
   }
 
+  const urlReady = url != null
+  const title = (
+    urlReady
+    ? 'Edit Code In Playground'
+    : 'Fetching Playground URL...'
+  )
+
   return (
-    <Button
-      title="Edit Code In Playground"
-      onClick={handleClick}
-      loading={loading}
-    >
+    <Button title={title} onClick={handleClick} disabled={!urlReady}>
       <IconEdit />
     </Button>
   )
