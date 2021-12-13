@@ -136,11 +136,15 @@
   border-radius: 4px;
   transition: all .2s;
 
-  &:hover {
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
     background-color: #F5F5F5;
   }
 
-  &:active {
+  &:active:not(:disabled) {
     background-color: #F0F0F0;
   }
 
