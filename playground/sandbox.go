@@ -498,7 +498,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 func trimGopBuild(output string) string {
 	var res []string
 	for _, v := range strings.Split(output, "\n") {
-		if strings.Contains(v, "prog.gop") {
+		if !strings.Contains(v, "GenGo") && strings.TrimSpace(v) != "" {
 			//here we hard code the "./prog.gop" to prog.go, the frontend need this variable
 			//TODO: move frontend variable prog.go to prog.gop
 			res = append(res, strings.Replace(v, "./prog.gop", "prog.go", -1))
