@@ -1,7 +1,8 @@
 import Image from 'next/image'
 
-import { useMobile } from '../../../hooks'
-import Logo from '../../Icon/Logo'
+import { useMobile } from 'hooks'
+import Logo from 'components/Icon/Logo'
+import CodeEditor from 'components/Code/Editor'
 import styles from './style.module.scss'
 
 export default function Intro() {
@@ -27,7 +28,7 @@ export default function Intro() {
             <span className={styles.installTxt}>Download Go+</span>
           </a>
         </div>
-        <Image {...qiniuDollSize} src="/qiniu_doll.png" alt="Qiniu Doll" />
+        <CodeEditor />
       </div>
     </div>
   )

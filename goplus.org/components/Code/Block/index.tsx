@@ -1,3 +1,8 @@
+/**
+ * @file Code Block for GoPlus
+ * @desc Display & run a gop code snippet
+ */
+
 import React, { useCallback, useState, ReactNode, useRef, useEffect, PropsWithChildren, ButtonHTMLAttributes } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import syntaxHighlightStyle from './syntax-highlight-style'
@@ -35,7 +40,7 @@ export interface Props {
   halfCode?: boolean
 }
 
-export default function Code({
+export default function CodeBlock({
   code,
   language = langGop,
   copyable = true,
