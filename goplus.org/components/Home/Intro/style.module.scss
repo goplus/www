@@ -1,4 +1,4 @@
-@import '../../../utils/index.scss';
+@import '~utils/index.scss';
 
 .section {
   @include centered;
@@ -37,7 +37,7 @@
 
 .btnsWrap {
   display: flex;
-  margin: 72px 0 64px 0;
+  margin: 28px 0 50px 0;
 
   @include mobile {
     flex-direction: column;
@@ -55,9 +55,11 @@
 }
 
 @mixin btnBase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 240px;
   height: 48px;
-  line-height: 48px;
   font-size: 16px;
   border-radius: 4px;
   text-align: center;
@@ -65,9 +67,6 @@
 
 .btn {
   @include btnBase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #2c84ff;
   background-color: white;
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.1);
