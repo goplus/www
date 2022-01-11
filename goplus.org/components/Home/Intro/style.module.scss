@@ -8,6 +8,7 @@
   align-items: center;
   margin: auto;
   padding-top: 72px;
+  padding-bottom: 48px;
 
   @include mobile {
     padding-top: 40px;
@@ -90,4 +91,9 @@
 
 .primaryBtn:hover {
   background-color: #4f98ff;
+}
+
+.codeEditor {
+  width: 900px;
+  font-size: 16px;
 }

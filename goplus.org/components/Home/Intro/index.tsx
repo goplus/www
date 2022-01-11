@@ -5,15 +5,11 @@ import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
 import styles from './style.module.scss'
 
+const helloWorldCode = `println "Hello world"`
+
 export default function Intro() {
 
   const isMobile = useMobile()
-
-  const qiniuDollSize = (
-    isMobile
-    ? { width: 120, height: 97 }
-    : { width: 172, height: 133 }
-  )
 
   return (
     <div className={styles.introWrap}>
@@ -28,7 +24,7 @@ export default function Intro() {
             <span className={styles.installTxt}>Download Go+</span>
           </a>
         </div>
-        <CodeEditor />
+        <CodeEditor className={styles.codeEditor} code={helloWorldCode} />
       </div>
     </div>
   )
