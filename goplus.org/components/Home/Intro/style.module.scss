@@ -11,12 +11,16 @@
   padding-bottom: 48px;
 
   @include mobile {
-    padding-top: 40px;
+    padding: 40px 16px 0;
   }
 }
 
 .introWrap {
   background-color: #fafafa;
+
+  @include mobile {
+    background: none;
+  }
 }
 
 .goPlus {
@@ -93,7 +97,15 @@
   background-color: #4f98ff;
 }
 
-.codeEditor {
+.codeEditorWrapper {
   width: 900px;
   font-size: 16px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.codeEditor {
+  height: 220px;
 }

@@ -4,7 +4,7 @@
 
 .editorLoading, .editor {
   width: 100%;
-  height: 220px;
+  height: 300px;
   padding: 20px;
   overflow: hidden;
   border-radius: 8px;
@@ -22,12 +22,6 @@
 
 .editor {
   display: none;
-  height: 220px;
-  padding: 20px;
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid #E5E5E5;
-  background-color: var(--editor-background);
 }
 
 .editorReady {

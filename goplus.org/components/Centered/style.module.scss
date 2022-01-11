@@ -2,4 +2,8 @@
 
 .centered {
   @include centered;
+
+  @include mobile {
+    padding: 16px;
+  }
 }

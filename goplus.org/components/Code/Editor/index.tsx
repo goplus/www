@@ -1,5 +1,5 @@
 /**
- * @file Code Editor for GoPlus
+ * @file Code Editor for GoPlus (with "Run" button)
  * @desc Edit & run gop code
  */
 
@@ -11,15 +11,24 @@ import { cns } from 'utils'
 import Button from 'components/UI/Button'
 import { useCodeRun, RunResult } from '../Run'
 import styles from './style.module.scss'
+import { useMobile } from 'hooks'
 
-const monacoOptions: EditorProps['options'] = {
-  lineNumbers: 'off',
-  fontSize: 16,
-  minimap: { enabled: false },
-  folding: false,
-  lineDecorationsWidth: 0,
-  scrollbar: { vertical: 'hidden' },
-  overviewRulerLanes: 0
+function getMonacoOptions(isMobile: boolean) {
+  const scrollbarSize = isMobile ? 4 : 8
+  const monacoOptions: EditorProps['options'] = {
+    lineNumbers: 'off',
+    fontSize: 16,
+    minimap: { enabled: false },
+    folding: false,
+    lineDecorationsWidth: 0,
+    scrollbar: {
+      vertical: 'auto',
+      horizontalScrollbarSize: scrollbarSize,
+      verticalScrollbarSize: scrollbarSize
+    },
+    overviewRulerLanes: 0
+  }
+  return monacoOptions
 }
 
 const theme: editor.IStandaloneThemeData = {
@@ -28,16 +37,18 @@ const theme: editor.IStandaloneThemeData = {
   rules: [],
   colors: {
     'editor.background': '#FFFFE0',
-    'editor.lineHighlightBackground': '#FFFFE0'
+    'editor.lineHighlightBackground': '#b8b5ae18'
   }
 }
 
 export interface Props {
   code: string
   className?: string
+  editorClassName?: string
 }
 
-export default function CodeEditor({ code: codeFromProps, className }: Props) {
+export default function CodeEditor({ code: codeFromProps, className, editorClassName }: Props) {
+  const isMobile = useMobile()
   const [code, setCode] = useState(codeFromProps)
   useEffect(() => setCode(codeFromProps), [codeFromProps])
 
@@ -62,15 +73,15 @@ export default function CodeEditor({ code: codeFromProps, className }: Props) {
   return (
     <div className={className} style={{ '--editor-background': '#FFFFE0' } as any}>
       <Editor
-        className={styles.editor}
+        className={cns(styles.editor, editorClassName)}
         language="go" // TODO
         value={code}
         onChange={v => setCode(v ?? '')}
-        options={monacoOptions}
+        options={getMonacoOptions(isMobile)}
         onMount={handleEditorMount}
         loading=""
       />
-      <div className={styles.editorLoading}>Loading Editor...</div>
+      <div className={cns(styles.editorLoading, editorClassName)}>Loading Editor...</div>
       <RunResult result={result} />
       <div className={styles.footer}>
         <Button onClick={run}>Run</Button>

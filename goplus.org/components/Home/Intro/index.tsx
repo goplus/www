@@ -24,7 +24,11 @@ export default function Intro() {
             <span className={styles.installTxt}>Download Go+</span>
           </a>
         </div>
-        <CodeEditor className={styles.codeEditor} code={helloWorldCode} />
+        <CodeEditor
+          className={styles.codeEditorWrapper}
+          editorClassName={styles.codeEditor}
+          code={helloWorldCode}
+        />
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PropsWithChildren } from 'react'
+import React, { HTMLAttributes } from 'react'
 
 import Layout from 'components/Layout'
 import Centered from 'components/Centered'
@@ -48,7 +48,7 @@ export default function Dev() {
         <Block>
           <CodeEditor code={helloWorldCode} />
         </Block>
-        <Block style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+        <Block>
           <CodeBlock halfCode code={helloWorldCode} />
         </Block>
         <Block>
