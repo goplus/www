@@ -2,7 +2,10 @@ import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
 import styles from './style.module.scss'
 
-const helloWorldCode = `println "Hello world"`
+const helloWorldCode = `// You can edit code here!
+// Click "Run" button and see the result
+
+println "Hello world"`
 
 export default function Intro() {
 
