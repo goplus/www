@@ -1,0 +1,14 @@
+.iconLoading {
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    from {
+      transform-origin: 50% 50%;
+      transform: rotate(0);
+    }
+    to {
+      transform-origin: 50% 50%;
+      transform: rotate(360deg);
+    }
+  }
+}

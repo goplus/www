@@ -3,15 +3,16 @@
  * @desc Edit & run gop code
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Editor, { EditorProps, Monaco } from '@monaco-editor/react'
 import { editor } from 'monaco-editor/esm/vs/editor/editor.api'
 
 import { cns } from 'utils'
+import { useMobile } from 'hooks'
 import Button from 'components/UI/Button'
 import { useCodeRun, RunResult } from '../Run'
+import IconLoading from '../IconLoading'
 import styles from './style.module.scss'
-import { useMobile } from 'hooks'
 
 function getMonacoOptions(isMobile: boolean) {
   const scrollbarSize = isMobile ? 4 : 8
@@ -43,11 +44,17 @@ const theme: editor.IStandaloneThemeData = {
 
 export interface Props {
   code: string
+  runImmediately?: boolean
   className?: string
   editorClassName?: string
 }
 
-export default function CodeEditor({ code: codeFromProps, className, editorClassName }: Props) {
+export default function CodeEditor({
+  code: codeFromProps,
+  runImmediately = false,
+  className,
+  editorClassName
+}: Props) {
   const isMobile = useMobile()
   const [code, setCode] = useState(codeFromProps)
   useEffect(() => setCode(codeFromProps), [codeFromProps])
@@ -55,6 +62,14 @@ export default function CodeEditor({ code: codeFromProps, className, editorClass
   const { result, run } = useCodeRun(code)
   const [editorReady, setEditorReady] = useState(false)
   const hasRunResult = result != null
+
+  const runImmediatelyRef = useRef(runImmediately)
+  runImmediatelyRef.current = runImmediately
+  const runRef = useRef(run)
+  runRef.current = run
+  useEffect(() => {
+    if (runImmediatelyRef.current) runRef.current()
+  }, [code])
 
   className = cns(
     styles.wrapper,
@@ -81,8 +96,11 @@ export default function CodeEditor({ code: codeFromProps, className, editorClass
         onMount={handleEditorMount}
         loading=""
       />
-      <div className={cns(styles.editorLoading, editorClassName)}>Loading Editor...</div>
-      <RunResult result={result} />
+      <div className={cns(styles.editorLoading, editorClassName)}>
+        <IconLoading className={styles.iconLoading} />
+        Loading Editor...
+      </div>
+      <RunResult result={result} autoScroll={false} />
       <div className={styles.footer}>
         <Button onClick={run}>Run</Button>
       </div>

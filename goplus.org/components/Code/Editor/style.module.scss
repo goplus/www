@@ -18,6 +18,10 @@
   justify-content: center;
   color: #666;
   font-size: 14px;
+
+  .iconLoading {
+    margin-right: 12px;
+  }
 }
 
 .editor {
@@ -33,7 +37,7 @@
   }
 }
 
-.hasRunResult .editor {
+.hasRunResult .editor, .hasRunResult .editorLoading {
   border-radius: 8px 8px 0 0;
 }
 

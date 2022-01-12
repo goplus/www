@@ -28,6 +28,7 @@ export default function Intro() {
           className={styles.codeEditorWrapper}
           editorClassName={styles.codeEditor}
           code={helloWorldCode}
+          runImmediately
         />
       </div>
     </div>
