@@ -10,8 +10,8 @@ import { editor } from 'monaco-editor/esm/vs/editor/editor.api'
 import { cns } from 'utils'
 import { useMobile } from 'hooks'
 import Button from 'components/UI/Button'
+import IconLoading from 'components/UI/IconLoading'
 import { useCodeRun, RunResult } from '../Run'
-import IconLoading from '../IconLoading'
 import styles from './style.module.scss'
 
 function getMonacoOptions(isMobile: boolean) {
@@ -32,12 +32,14 @@ function getMonacoOptions(isMobile: boolean) {
   return monacoOptions
 }
 
+const editorBackground = '#3F4450'
+
 const theme: editor.IStandaloneThemeData = {
-  base: 'vs',
+  base: 'vs-dark',
   inherit: true,
   rules: [],
   colors: {
-    'editor.background': '#FFFFE0',
+    'editor.background': editorBackground,
     'editor.lineHighlightBackground': '#b8b5ae18'
   }
 }
@@ -57,9 +59,8 @@ export default function CodeEditor({
 }: Props) {
   const isMobile = useMobile()
   const [code, setCode] = useState(codeFromProps)
-  useEffect(() => setCode(codeFromProps), [codeFromProps])
 
-  const { result, run } = useCodeRun(code)
+  const { result, loading: loadingResult, run } = useCodeRun(code)
   const [editorReady, setEditorReady] = useState(false)
   const hasRunResult = result != null
 
@@ -67,9 +68,11 @@ export default function CodeEditor({
   runImmediatelyRef.current = runImmediately
   const runRef = useRef(run)
   runRef.current = run
+
   useEffect(() => {
+    setCode(codeFromProps)
     if (runImmediatelyRef.current) runRef.current()
-  }, [code])
+  }, [codeFromProps])
 
   className = cns(
     styles.wrapper,
@@ -86,7 +89,7 @@ export default function CodeEditor({
   }
 
   return (
-    <div className={className} style={{ '--editor-background': '#FFFFE0' } as any}>
+    <div className={className} style={{ '--editor-background': editorBackground } as any}>
       <Editor
         className={cns(styles.editor, editorClassName)}
         language="go" // TODO
@@ -102,7 +105,7 @@ export default function CodeEditor({
       </div>
       <RunResult result={result} autoScroll={false} />
       <div className={styles.footer}>
-        <Button onClick={run}>Run</Button>
+        <Button loading={loadingResult} onClick={run}>Run</Button>
       </div>
     </div>
   )

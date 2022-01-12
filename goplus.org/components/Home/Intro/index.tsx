@@ -1,6 +1,3 @@
-import Image from 'next/image'
-
-import { useMobile } from 'hooks'
 import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
 import styles from './style.module.scss'
@@ -9,28 +6,25 @@ const helloWorldCode = `println "Hello world"`
 
 export default function Intro() {
 
-  const isMobile = useMobile()
-
   return (
-    <div className={styles.introWrap}>
-      <div className={styles.section}>
-        <div className={styles.goPlus}>
-          <Logo width="120" height="auto" />
-        </div>
-        <div className={styles.title}>The Go+ language for engineering, STEM education, and data science</div>
-        <div className={styles.btnsWrap}>
-          <a href="https://github.com/goplus/gop#how-to-install" className={styles.primaryBtn} rel="noopener">
-            <IconDownload />
-            <span className={styles.installTxt}>Download Go+</span>
-          </a>
-        </div>
-        <CodeEditor
-          className={styles.codeEditorWrapper}
-          editorClassName={styles.codeEditor}
-          code={helloWorldCode}
-          runImmediately
-        />
+    <div className={styles.section}>
+      <div className={styles.goPlus}>
+        <Logo width="120" height="auto" />
       </div>
+      <div className={styles.slogan}>The Go+ language for engineering, STEM education, and data science</div>
+      <div className={styles.btnsWrap}>
+        <a href="https://github.com/goplus/gop#how-to-install" className={styles.primaryBtn} rel="noopener">
+          <IconDownload />
+          <span className={styles.installTxt}>Download Go+</span>
+        </a>
+      </div>
+      <h2 className={styles.title}>Try Go+</h2>
+      <CodeEditor
+        className={styles.codeEditorWrapper}
+        editorClassName={styles.codeEditor}
+        code={helloWorldCode}
+        runImmediately
+      />
     </div>
   )
 }

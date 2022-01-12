@@ -15,14 +15,6 @@
   }
 }
 
-.introWrap {
-  background-color: #fafafa;
-
-  @include mobile {
-    background: none;
-  }
-}
-
 .goPlus {
   margin-bottom: 31px;
   @include mobile {
@@ -30,23 +22,21 @@
   }
 }
 
-.title {
-  font-size: 28px;
-  color: #000;
+.slogan {
+  @include section-title;
 
   @include mobile {
     margin: 0 50px;
-    text-align: center;
   }
 }
 
 .btnsWrap {
   display: flex;
-  margin: 28px 0 50px 0;
+  margin: 28px 0 48px 0;
 
   @include mobile {
     flex-direction: column;
-    margin: 36px 0 42px 0;
+    margin: 36px 0 40px 0;
   }
 
   & > :not(:first-child) {
@@ -95,6 +85,15 @@
 
 .primaryBtn:hover {
   background-color: #4f98ff;
+}
+
+.title {
+  @include section-title;
+  margin: 24px 0 36px;
+
+  @include mobile {
+    margin: 24px 0 24px;
+  }
 }
 
 .codeEditorWrapper {

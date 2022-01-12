@@ -6,9 +6,7 @@
 }
 
 .title {
-  font-size: 28px;
-  color: #000;
-  text-align: center;
+  @include section-title;
   margin: 0 0 44px;
 }
 

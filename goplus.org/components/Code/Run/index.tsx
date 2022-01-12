@@ -7,7 +7,7 @@ import React, { PropsWithChildren, ReactNode, useCallback, useEffect, useRef, us
 
 import { compile, CompileResult } from 'apis/play'
 import { cns } from 'utils'
-import IconLoading from '../IconLoading'
+import IconLoading from 'components/UI/IconLoading'
 
 import styles from './style.module.scss'
 
