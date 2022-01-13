@@ -1,0 +1,25 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 16px;
+  height: 32px;
+
+  font-size: 14px;
+  border: none;
+  border-radius: 2px;
+  color: #FFF;
+  background: #2C84FF;
+
+  transition: all .3s;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: #999;
+  background-color: #EEE;
+}
+
+.iconLoading {
+  margin-right: .5em;
+}

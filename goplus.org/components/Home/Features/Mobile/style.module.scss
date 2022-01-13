@@ -1,9 +1,10 @@
+@import '~utils/index.scss';
+
 .wrapper {
   padding: 0 16px;
 }
 
 .title {
+  @include section-title;
   margin: 44px 0 24px;
-  text-align: center;
-  font-size: 24px;
 }

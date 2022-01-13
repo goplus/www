@@ -1,5 +1,5 @@
 import React from 'react'
-import Code, { CodeSegmentInfo as Segment } from 'components/Code'
+import CodeBlock, { CodeSegmentInfo as Segment } from 'components/Code/Block'
 import { defineWidget, getAttr, getBoolAttr, isElementNode, isTextNode } from '../widget'
 
 /**
@@ -47,7 +47,7 @@ defineWidget('code', el => {
   sealSegment()
 
   return (
-    <Code
+    <CodeBlock
       code={segments}
       language={getAttr(el, 'language')}
       copyable={getBoolAttr(el, 'copyable')}

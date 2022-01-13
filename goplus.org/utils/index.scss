@@ -23,6 +23,16 @@
   }
 }
 
+@mixin section-title {
+  text-align: center;
+  font-size: 28px;
+  color: #000;
+
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
 // style reset for page (& widgets)
 @mixin reset($fontSize: 14px) {
   padding: 0;

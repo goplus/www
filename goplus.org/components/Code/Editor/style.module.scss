@@ -1,0 +1,48 @@
+@import '~utils/index.scss';
+
+.wrapper {}
+
+.editorLoading, .editor {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #E5E5E5;
+  background-color: var(--editor-background);
+}
+
+.editorLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D4D4D4;
+  font-size: 14px;
+
+  .iconLoading {
+    margin-right: 12px;
+  }
+}
+
+.editor {
+  display: none;
+}
+
+.editorReady {
+  .editorLoading {
+    display: none;
+  }
+  .editor {
+    display: block;
+  }
+}
+
+.hasRunResult .editor, .hasRunResult .editorLoading {
+  border-radius: 8px 8px 0 0;
+}
+
+.footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}

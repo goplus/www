@@ -26,3 +26,8 @@ export function getText(node: ReactNode): string {
 export function matchMediaMobile() {
   return window.matchMedia(`(max-width: ${variables.mobileMaxWidth})`)
 }
+
+/** Join class names */
+export function cns(...classNames: Array<string | null | undefined | false>) {
+  return classNames.filter(Boolean).join(' ')
+}

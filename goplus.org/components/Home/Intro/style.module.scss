@@ -1,4 +1,4 @@
-@import '../../../utils/index.scss';
+@import '~utils/index.scss';
 
 .section {
   @include centered;
@@ -8,14 +8,11 @@
   align-items: center;
   margin: auto;
   padding-top: 72px;
+  padding-bottom: 48px;
 
   @include mobile {
-    padding-top: 40px;
+    padding: 40px 16px 0;
   }
-}
-
-.introWrap {
-  background-color: #fafafa;
 }
 
 .goPlus {
@@ -25,23 +22,21 @@
   }
 }
 
-.title {
-  font-size: 28px;
-  color: #000;
+.slogan {
+  @include section-title;
 
   @include mobile {
     margin: 0 50px;
-    text-align: center;
   }
 }
 
 .btnsWrap {
   display: flex;
-  margin: 72px 0 64px 0;
+  margin: 28px 0 48px 0;
 
   @include mobile {
     flex-direction: column;
-    margin: 36px 0 42px 0;
+    margin: 36px 0 40px 0;
   }
 
   & > :not(:first-child) {
@@ -55,9 +50,11 @@
 }
 
 @mixin btnBase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 240px;
   height: 48px;
-  line-height: 48px;
   font-size: 16px;
   border-radius: 4px;
   text-align: center;
@@ -65,9 +62,6 @@
 
 .btn {
   @include btnBase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #2c84ff;
   background-color: white;
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.1);
@@ -91,4 +85,26 @@
 
 .primaryBtn:hover {
   background-color: #4f98ff;
+}
+
+.title {
+  @include section-title;
+  margin: 24px 0 36px;
+
+  @include mobile {
+    margin: 24px 0 24px;
+  }
+}
+
+.codeEditorWrapper {
+  width: 900px;
+  font-size: 16px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.codeEditor {
+  height: 220px;
 }

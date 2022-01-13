@@ -1,6 +1,6 @@
 import React, { ReactNode, isValidElement, Children } from 'react'
 
-import Code from 'components/Code'
+import CodeBlock from 'components/Code/Block'
 
 export interface Props {
   inline?: boolean
@@ -14,7 +14,7 @@ export default function CodeForMD({ inline = false, children, className }: Props
   }
   const language = getLang(className)
   const code = getSourceCode(children)
-  return <Code language={language} code={code} />
+  return <CodeBlock language={language} code={code} />
 }
 
 const classNamePattern = /^language-(.*)$/

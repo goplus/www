@@ -1,10 +1,16 @@
+/**
+ * @file Code Block for GoPlus
+ * @desc Display & run a gop code snippet
+ */
+
 import React, { useCallback, useState, ReactNode, useRef, useEffect, PropsWithChildren, ButtonHTMLAttributes } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import syntaxHighlightStyle from './syntax-highlight-style'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { useTimer } from 'hooks'
-import { compile, CompileResult, share } from 'apis/play'
+import { share } from 'apis/play'
+import syntaxHighlightStyle from './syntax-highlight-style'
+import { useCodeRun, RunResult } from '../Run'
 
 import styles from './style.module.scss'
 
@@ -35,7 +41,7 @@ export interface Props {
   halfCode?: boolean
 }
 
-export default function Code({
+export default function CodeBlock({
   code,
   language = langGop,
   copyable = true,
@@ -47,16 +53,7 @@ export default function Code({
   const codeSegments = Array.isArray(code) ? code : [{ content: code }]
   const codeText = codeSegments.map(({ content }) => content).join('')
   const hasDoc = codeSegments.some(seg => seg.doc != null)
-
-  const runResultRef = useRef<HTMLPreElement>(null)
   const [runResult, setRunResult] = useState<ReactNode>(null)
-
-  useEffect(() => {
-    runResultRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
-    })
-  }, [runResult])
 
   const [lang, tag] = language.split('|')
   const interactive = lang === langGop && tag !== tagRaw
@@ -65,11 +62,7 @@ export default function Code({
   editable = interactive && editable
 
   const hasRunResult = runnable && runResult != null
-  const runResultView = hasRunResult && (
-    <pre className={styles.runResult} ref={runResultRef}>
-      {runResult}
-    </pre>
-  )
+  const runResultView = hasRunResult && <RunResult className={styles.runResult} result={runResult} />
 
   const className = [
     styles.wrapper,
@@ -146,75 +139,16 @@ type RunButtonProps = {
   onResult: (result: ReactNode) => void
 }
 
-function Events({ events }: { events: CompileResult['Events'] }) {
-  if (events == null) return <Warning>No output.</Warning>
-  return <p>{events.map(e => e.Message).join('\n')}</p>
-}
-
-function ExitStatus({ status }: { status: CompileResult['Status'] }) {
-  return <Tip>Program exited with {status}.</Tip>
-}
-
-function EventsWithStatus({ result }: { result: CompileResult }) {
-  return <>
-    <Events events={result.Events} />
-    <ExitStatus status={result.Status} />
-  </>
-}
-
-function Tip(props: PropsWithChildren<{}>) {
-  return <p className={styles.tip} {...props} />
-}
-
-function Warning(props: PropsWithChildren<{}>) {
-  return <p className={styles.warning} {...props} />
-}
-
-function Error(props: PropsWithChildren<{}>) {
-  return <p className={styles.error} {...props}></p>
-}
-
-function Loading({ children, ...restProps }: PropsWithChildren<{}>) {
-  return <p className={styles.loading} {...restProps}><IconLoading />{children}</p>
-}
-
 function RunButton({ code, onResult }: RunButtonProps) {
 
-  const [loading, setLoading] = useState(false)
+  const { loading, result, run } = useCodeRun(code)
 
-  function startWaiting() {
-    setLoading(true)
-    onResult(<Loading>Waiting for remote server...</Loading>)
-  }
-
-  function endWaiting(result: ReactNode) {
-    setLoading(false)
-    onResult(result)
-  }
-
-  async function handleClick() {
-    startWaiting()
-
-    let result: CompileResult
-    try {
-      result = await compile({ body: code })
-    } catch (e: unknown) {
-      const message = `Request failed: ${e && (e as any).message || 'Unkown'}`
-      endWaiting(<Error>{message}</Error>)
-      return
-    }
-    endWaiting(
-      result.Errors
-      ? <>
-        <Error>Error encountered:</Error>
-        <p>{result.Errors}</p>
-      </>
-      : <EventsWithStatus result={result} />
-    )
-  }
+  const onResultRef = useRef(onResult)
+  onResultRef.current = onResult
+  useEffect(() => onResultRef.current(result), [result])
 
   return (
-    <Button title="Run Code" onClick={handleClick} loading={loading}>
+    <Button title="Run Code" onClick={run} loading={loading}>
       <IconPlay />
     </Button>
   )

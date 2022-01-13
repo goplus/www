@@ -158,60 +158,8 @@
   }
 }
 
-.runResult {
-  position: relative;
-  margin: 0;
-  padding: 20px;
-  overflow-x: auto;
-  background-color: #F5F5F5;
-  border: 1px solid #E5E5E5;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-
-  > p + p {
-    margin-top: 12px;
-  }
-
-  .tip {
-    color: #666;
-  }
-
-  .warning {
-    color: #FA8C16;
-  }
-
-  .error {
-    color: #EF4149;
-  }
-
-  .loading {
-    display: flex;
-    align-items: center;
-
-    .iconLoading {
-      flex: 0 0 auto;
-      margin-right: 12px;
-    }
-  }
-}
-
 @include pc {
   .hasDoc .runResult {
     margin-left: 50%;
-  }
-}
-
-.iconLoading {
-  animation: spin 1s linear infinite;
-
-  @keyframes spin {
-    from {
-      transform-origin: 50% 50%;
-      transform: rotate(0);
-    }
-    to {
-      transform-origin: 50% 50%;
-      transform: rotate(360deg);
-    }
   }
 }

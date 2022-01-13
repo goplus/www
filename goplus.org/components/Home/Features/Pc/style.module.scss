@@ -1,4 +1,4 @@
-@import '../../../../utils/index.scss';
+@import '~utils/index.scss';
 
 .section {
   @include centered;
@@ -6,9 +6,7 @@
 }
 
 .title {
-  font-size: 28px;
-  color: #000;
-  text-align: center;
+  @include section-title;
   margin: 0 0 44px;
 }
 

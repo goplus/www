@@ -5,7 +5,7 @@ import React from 'react'
 import { useUrl } from 'hooks/url'
 import { NavItemInfo, navItems } from '../common'
 import GithubIcon from '../GithubIcon'
-import Logo from '../../Logo'
+import Logo from '../../Icon/Logo'
 import styles from './style.module.scss'
 
 export default function Nav() {

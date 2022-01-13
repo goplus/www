@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import React from 'react'
-import Image from 'next/image'
 
-import QiniuLogo from 'components/QiniuLogo'
+import QiniuLogo from 'components/Icon/QiniuLogo'
 import imgDoll from 'public/qiniu_doll.png'
 
 import styles from './style.module.scss'
