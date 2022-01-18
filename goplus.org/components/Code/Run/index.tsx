@@ -60,12 +60,12 @@ export function useCodeRun(code: string) {
     setResult(result)
   }
 
-  const run = useCallback(async () => {
+  const run = useCallback(async (currentCode: string = code) => {
     startWaiting()
 
     let result: CompileResult
     try {
-      result = await compile({ body: code })
+      result = await compile({ body: currentCode })
     } catch (e: unknown) {
       const message = `Request failed: ${e && (e as any).message || 'Unkown'}`
       endWaiting(<Error>{message}</Error>)

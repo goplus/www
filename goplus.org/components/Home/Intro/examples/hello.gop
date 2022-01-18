@@ -1,0 +1,7 @@
+fields := [
+	"engineering",
+	"STEM education", 
+	"and data science",
+]
+
+println "The Go+ language for", fields.join(", ")
