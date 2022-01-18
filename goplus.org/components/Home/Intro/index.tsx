@@ -1,13 +1,13 @@
+import React, { useState } from 'react'
+
 import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
+import Select, { Option } from 'components/UI/Select'
 
 import examples from './examples'
 import styles from './style.module.scss'
-import { useState } from 'react'
-import Select, { Option } from 'components/UI/Select'
 
 export default function Intro() {
-
   return (
     <div className={styles.section}>
       <div className={styles.goPlus}>

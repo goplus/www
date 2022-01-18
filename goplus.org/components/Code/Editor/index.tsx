@@ -57,7 +57,7 @@ export default function CodeEditor({
   runImmediately = false,
   footerExtra,
   className,
-  editorClassName,
+  editorClassName
 }: Props) {
   const isMobile = useMobile()
   const [code, setCode] = useState(codeFromProps)

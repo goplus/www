@@ -148,7 +148,7 @@ function RunButton({ code, onResult }: RunButtonProps) {
   useEffect(() => onResultRef.current(result), [result])
 
   return (
-    <Button title="Run Code" onClick={run} loading={loading}>
+    <Button title="Run Code" onClick={() => run()} loading={loading}>
       <IconPlay />
     </Button>
   )
