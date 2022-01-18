@@ -108,7 +108,7 @@ export default function CodeEditor({
       <RunResult result={result} autoScroll={false} />
       <div className={styles.footer}>
         <div className={styles.extra}>{footerExtra}</div>
-        <Button loading={loadingResult} onClick={run}>Run</Button>
+        <Button loading={loadingResult} onClick={() => run()}>Run</Button>
       </div>
     </div>
   )
