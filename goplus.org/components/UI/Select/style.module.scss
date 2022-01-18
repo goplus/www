@@ -1,3 +1,5 @@
+@import '~utils/index.scss';
+
 .selectWrapper {
   position: relative;
   &::after {
@@ -26,5 +28,10 @@
   border: 1px solid #BFBFBF;
   border-radius: 2px;
   color: #333;
+  background: none;
   outline: none;
+
+  @include mobile {
+    width: 100%;
+  }
 }
