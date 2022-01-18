@@ -45,4 +45,15 @@
   margin-top: 24px;
   display: flex;
   justify-content: space-between;
+
+  @include mobile {
+    margin-top: 16px;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .extra {
+      margin-bottom: 16px;
+      width: 100%;
+    }
+  }
 }
