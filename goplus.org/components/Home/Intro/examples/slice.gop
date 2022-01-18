@@ -1,0 +1,30 @@
+// in Go we do:
+a := []float64{1, 2, 3.4}
+println a
+
+// in GoPlus we do:
+b := [1, 2, 3.4]
+println b
+
+//slice literal
+c := [1, 3.4] // []float64
+printf "%#v %T\n", c, c
+
+d := [1] // []int
+printf "%#v %T\n", d, d
+
+e := [1+2i, "xsw"] // []interface{}
+printf "%#v %T\n", e, e
+
+f := [1, 3.4, 3+4i] // []complex128
+printf "%#v %T\n", f, f
+
+g := [5+6i] // []complex128
+printf "%#v %T\n", g, g
+
+h := ["xsw", 3] // []interface{}
+printf "%#v %T\n", h, h
+
+empty := [] // []interface{}
+printf "%#v %T\n", empty, empty
+

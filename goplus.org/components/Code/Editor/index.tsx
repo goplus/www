@@ -3,7 +3,7 @@
  * @desc Edit & run gop code
  */
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import Editor, { EditorProps, Monaco } from '@monaco-editor/react'
 import { editor } from 'monaco-editor/esm/vs/editor/editor.api'
 
@@ -47,6 +47,7 @@ const theme: editor.IStandaloneThemeData = {
 export interface Props {
   code: string
   runImmediately?: boolean
+  footerExtra?: ReactNode
   className?: string
   editorClassName?: string
 }
@@ -54,8 +55,9 @@ export interface Props {
 export default function CodeEditor({
   code: codeFromProps,
   runImmediately = false,
+  footerExtra,
   className,
-  editorClassName
+  editorClassName,
 }: Props) {
   const isMobile = useMobile()
   const [code, setCode] = useState(codeFromProps)
@@ -71,7 +73,7 @@ export default function CodeEditor({
 
   useEffect(() => {
     setCode(codeFromProps)
-    if (runImmediatelyRef.current) runRef.current()
+    if (runImmediatelyRef.current) runRef.current(codeFromProps)
   }, [codeFromProps])
 
   className = cns(
@@ -105,6 +107,7 @@ export default function CodeEditor({
       </div>
       <RunResult result={result} autoScroll={false} />
       <div className={styles.footer}>
+        <div className={styles.extra}>{footerExtra}</div>
         <Button loading={loadingResult} onClick={run}>Run</Button>
       </div>
     </div>

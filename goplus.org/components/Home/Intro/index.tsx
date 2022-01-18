@@ -1,11 +1,10 @@
 import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
+
+import examples from './examples'
 import styles from './style.module.scss'
-
-const helloWorldCode = `// You can edit code here!
-// Click "Run" button and see the result
-
-println "Hello world"`
+import { useState } from 'react'
+import Select, { Option } from 'components/UI/Select'
 
 export default function Intro() {
 
@@ -22,13 +21,31 @@ export default function Intro() {
         </a>
       </div>
       <h2 className={styles.title}>Try Go+</h2>
-      <CodeEditor
-        className={styles.codeEditorWrapper}
-        editorClassName={styles.codeEditor}
-        code={helloWorldCode}
-        runImmediately
-      />
+      <CodeExamples />
     </div>
+  )
+}
+
+function CodeExamples() {
+  const [codeName, setCodeName] = useState(examples[0].name)
+  const code = examples.find(e => e.name === codeName)?.code ?? ''
+
+  const codeSelect = (
+    <Select value={codeName} onChange={setCodeName}>
+      {examples.map(({ name }) => (
+        <Option key={name} value={name}>{name}</Option>
+      ))}
+    </Select>
+  )
+
+  return (
+    <CodeEditor
+      className={styles.codeEditorWrapper}
+      editorClassName={styles.codeEditor}
+      code={code}
+      runImmediately
+      footerExtra={codeSelect}
+    />
   )
 }
 

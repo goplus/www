@@ -1,0 +1,30 @@
+.selectWrapper {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 7px;
+    justify-self: end;
+    width: 14px;
+    height: 16px;
+    background-image: url(./arrow.svg);
+  }
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  padding: 0 37px 0 11px;
+  width: 260px;
+  height: 32px;
+  position: relative;
+
+  appearance: none;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid #BFBFBF;
+  border-radius: 2px;
+  color: #333;
+  outline: none;
+}
