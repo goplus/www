@@ -14,15 +14,15 @@ export interface Props {
 }
 
 export default function EnsureReady({ children, extra = [] }: Props) {
-  const [mounted, setMounted] = useState(false)
+  const [ready, setReady] = useState(false)
   useEffect(() => {
     if (extra.length === 0) {
-      setMounted(true)
+      setReady(true)
       return
     }
     Promise.all(extra).then(() => {
-      setMounted(true)
+      setReady(true)
     })
   }, [extra])
-  return <div style={{ opacity: mounted ? 1 : 0 }}>{children}</div>
+  return <div style={{ opacity: ready ? 1 : 0 }}>{children}</div>
 }

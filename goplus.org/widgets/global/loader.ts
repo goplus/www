@@ -6,14 +6,13 @@
 // Usage：
 // <script data-widgets="header,footer" src="https://xxx/loader.js"></script>
 
-// Injected by `widgets/build.js`
 declare let MANIFEST: {
   [widgetName: string]: string[]
 }
 
 (function() {
 
-  // Value of this variable will be replaced with widgets' manifest info when building
+  // Injected by `widgets/build.js` when building loader
   const manifest = MANIFEST
 
   function loadWidget(widgetName: string) {
@@ -27,6 +26,8 @@ declare let MANIFEST: {
       const script = document.createElement('script')
       script.src = scriptUrl
       if (styleUrl != null) {
+        // The widget script will read and load it, so the element `<link>`
+        // will be inserted into the shadow root of widget properly
         script.setAttribute('data-style-url', styleUrl)
       }
       document.body.appendChild(script)

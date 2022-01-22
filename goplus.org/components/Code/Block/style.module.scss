@@ -134,7 +134,7 @@
   background-color: #FAFAFA;
   border: 1px solid #BFBFBF;
   border-radius: 4px;
-  transition: all .2s;
+  transition: background-color .2s, color .2s, border-color .2s;
 
   &:disabled {
     cursor: not-allowed;

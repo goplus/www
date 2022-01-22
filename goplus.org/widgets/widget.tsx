@@ -6,6 +6,7 @@ import './host.scss'
 
 export type Renderer = (el: HTMLElement) => ReactNode
 
+// The loader script will provide style url (by attribite `data-style-url`) for us
 const styleUrl = document.currentScript?.getAttribute('data-style-url')
 
 export function defineWidget(name: string, render: Renderer) {
@@ -17,18 +18,18 @@ export function defineWidget(name: string, render: Renderer) {
   const Clz = class extends HTMLElement {
     connectedCallback() {
       const rendered = render(this)
-      const shadow = this.attachShadow({mode: 'open'})
-      const loads: Array<Promise<void>> = []
+      const shadow = this.attachShadow({ mode: 'open' })
+      const waitings: Array<Promise<unknown>> = []
 
       if (styleUrl != null) {
-        loads.push(loadCss(styleUrl, shadow))
+        waitings.push(loadStyle(styleUrl, shadow))
       }
 
       const container = document.createElement('div')
       shadow.appendChild(container)
 
       ReactDOM.render(
-        <EnsureReady extra={loads}>
+        <EnsureReady extra={waitings}>
           {rendered}
         </EnsureReady>,
         container
@@ -56,12 +57,12 @@ export function isTextNode(node: Node): node is Text {
   return node.nodeType === Node.TEXT_NODE
 }
 
-function loadCss(cssUrl: string, attachTo: Node) {
+function loadStyle(url: string, attachTo: Node) {
   const link = document.createElement('link')
   link.rel = 'stylesheet'
-  link.href = cssUrl
-  const promise = new Promise<void>((resolve, reject) => {
-    link.addEventListener('load', () => resolve())
+  link.href = url
+  const promise = new Promise((resolve, reject) => {
+    link.addEventListener('load', resolve)
     link.addEventListener('error', reject)
   })
   attachTo.appendChild(link)
