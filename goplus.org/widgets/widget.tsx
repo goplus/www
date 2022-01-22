@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import EnsureReady from 'components/EnsureReady'
 
@@ -16,7 +16,8 @@ export function defineWidget(name: string, render: Renderer) {
   const tagName = `goplus-${name}`
 
   const Clz = class extends HTMLElement {
-    connectedCallback() {
+    async connectedCallback() {
+      const { width, height } = this.getBoundingClientRect()
       const rendered = render(this)
       const shadow = this.attachShadow({ mode: 'open' })
       const waitings: Array<Promise<unknown>> = []
@@ -26,14 +27,22 @@ export function defineWidget(name: string, render: Renderer) {
       }
 
       const container = document.createElement('div')
+      // As a placeholder to keep widget size stable
+      container.setAttribute('style', `width: ${width}px; height: ${height}px;`)
       shadow.appendChild(container)
 
-      ReactDOM.render(
-        <EnsureReady extra={waitings}>
-          {rendered}
-        </EnsureReady>,
-        container
-      )
+      const rendering = new Promise<void>(resolve => {
+        ReactDOM.render(
+          <EnsureReady extra={waitings}>
+            {rendered}
+          </EnsureReady>,
+          container,
+          resolve
+        )
+      })
+
+      await Promise.all([...waitings, rendering])
+      container.removeAttribute('style')
     }
   }
   window.customElements.define(tagName, Clz)
