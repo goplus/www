@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:widgets": "node widgets/build.js",
-    "dev:widgets": "npm run build:widgets && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
+    "build:widgets": "tsc widgets/global/loader.ts && node widgets/build.js && rm widgets/global/loader.js",
+    "dev:widgets": "NODE_ENV=development npm run build:widgets && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
     "dev": "next dev",
     "build": "next build && npm run build:widgets",
     "start": "next start",

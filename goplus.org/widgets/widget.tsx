@@ -1,10 +1,12 @@
 import { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import EnsureMounted from 'components/EnsureMounted'
+import EnsureReady from 'components/EnsureReady'
 
-import styles from './style.module.scss'
+import './host.scss'
 
 export type Renderer = (el: HTMLElement) => ReactNode
+
+const styleUrl = document.currentScript?.getAttribute('data-style-url')
 
 export function defineWidget(name: string, render: Renderer) {
   // do nothing if executed at server
@@ -15,18 +17,21 @@ export function defineWidget(name: string, render: Renderer) {
   const Clz = class extends HTMLElement {
     connectedCallback() {
       const rendered = render(this)
-      // TODO: use shadowDOM (we should deal with style properly)
-      this.innerHTML = ''
-      // `display` value of custom element defaults to `inline`
-      const style = document.createElement('style')
-      style.innerHTML = `${tagName} { display: block; }`
-      document.head.appendChild(style)
+      const shadow = this.attachShadow({mode: 'open'})
+      const loads: Array<Promise<void>> = []
+
+      if (styleUrl != null) {
+        loads.push(loadCss(styleUrl, shadow))
+      }
+
+      const container = document.createElement('div')
+      shadow.appendChild(container)
 
       ReactDOM.render(
-        <EnsureMounted className={styles.wrapper}>
+        <EnsureReady extra={loads}>
           {rendered}
-        </EnsureMounted>,
-        this
+        </EnsureReady>,
+        container
       )
     }
   }
@@ -49,4 +54,16 @@ export function isElementNode(node: Node): node is Element {
 
 export function isTextNode(node: Node): node is Text {
   return node.nodeType === Node.TEXT_NODE
+}
+
+function loadCss(cssUrl: string, attachTo: Node) {
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = cssUrl
+  const promise = new Promise<void>((resolve, reject) => {
+    link.addEventListener('load', () => resolve())
+    link.addEventListener('error', reject)
+  })
+  attachTo.appendChild(link)
+  return promise
 }

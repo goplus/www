@@ -1,8 +1,8 @@
 import './global.scss'
 import type { AppProps } from 'next/app'
-import EnsureMounted from 'components/EnsureMounted'
+import EnsureReady from 'components/EnsureReady'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <EnsureMounted><Component {...pageProps} /></EnsureMounted>
+  return <EnsureReady><Component {...pageProps} /></EnsureReady>
 }
 export default MyApp
