@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:widgets": "node widgets/build.js",
-    "dev:widgets": "npm run build:widgets && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
+    "build:widgets": "tsc widgets/global/loader.ts && node widgets/build.js && rm widgets/global/loader.js",
+    "dev:widgets": "NODE_ENV=development npm run build:widgets && rm -rf out && mkdir out && mkdir out/_next && cp -r .next/static out/_next && cp -r public/widgets out && cp widgets/dev.html out/index.html",
     "dev": "next dev",
     "build": "next build && npm run build:widgets",
     "start": "next start",
@@ -14,24 +14,24 @@
     "@monaco-editor/react": "^4.3.1",
     "moveto": "^1.8.2",
     "next": "^12.0.5",
-    "react": "17.0.2",
+    "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
-    "react-dom": "17.0.2",
+    "react-dom": "^17.0.2",
     "react-markdown": "^7.1.0",
     "react-syntax-highlighter": "^15.4.5",
     "rehype-raw": "^6.1.0",
     "trim": ">=0.0.3"
   },
   "devDependencies": {
-    "@types/react": "17.0.27",
+    "@types/react": "^17.0.27",
     "@types/react-copy-to-clipboard": "^5.0.1",
-    "@types/react-dom": "17.0.11",
+    "@types/react-dom": "^17.0.11",
     "@types/react-syntax-highlighter": "^13.5.2",
-    "eslint": "7.32.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.0",
     "fs-extra": "^10.0.0",
     "sass": "^1.43.4",
-    "typescript": "4.4.3"
+    "typescript": "^4.4.3"
   },
   "engines": {
     "node": "^12.22.0"

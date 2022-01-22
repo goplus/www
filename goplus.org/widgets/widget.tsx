@@ -1,10 +1,13 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import EnsureMounted from 'components/EnsureMounted'
+import EnsureReady from 'components/EnsureReady'
 
-import styles from './style.module.scss'
+import './host.scss'
 
 export type Renderer = (el: HTMLElement) => ReactNode
+
+// The loader script will provide style url (by attribite `data-style-url`) for us
+const styleUrl = document.currentScript?.getAttribute('data-style-url')
 
 export function defineWidget(name: string, render: Renderer) {
   // do nothing if executed at server
@@ -13,21 +16,33 @@ export function defineWidget(name: string, render: Renderer) {
   const tagName = `goplus-${name}`
 
   const Clz = class extends HTMLElement {
-    connectedCallback() {
+    async connectedCallback() {
+      const { width, height } = this.getBoundingClientRect()
       const rendered = render(this)
-      // TODO: use shadowDOM (we should deal with style properly)
-      this.innerHTML = ''
-      // `display` value of custom element defaults to `inline`
-      const style = document.createElement('style')
-      style.innerHTML = `${tagName} { display: block; }`
-      document.head.appendChild(style)
+      const shadow = this.attachShadow({ mode: 'open' })
+      const waitings: Array<Promise<unknown>> = []
 
-      ReactDOM.render(
-        <EnsureMounted className={styles.wrapper}>
-          {rendered}
-        </EnsureMounted>,
-        this
-      )
+      if (styleUrl != null) {
+        waitings.push(loadStyle(styleUrl, shadow))
+      }
+
+      const container = document.createElement('div')
+      // As a placeholder to keep widget size stable
+      container.setAttribute('style', `width: ${width}px; height: ${height}px;`)
+      shadow.appendChild(container)
+
+      const rendering = new Promise<void>(resolve => {
+        ReactDOM.render(
+          <EnsureReady extra={waitings}>
+            {rendered}
+          </EnsureReady>,
+          container,
+          resolve
+        )
+      })
+
+      await Promise.all([...waitings, rendering])
+      container.removeAttribute('style')
     }
   }
   window.customElements.define(tagName, Clz)
@@ -49,4 +64,16 @@ export function isElementNode(node: Node): node is Element {
 
 export function isTextNode(node: Node): node is Text {
   return node.nodeType === Node.TEXT_NODE
+}
+
+function loadStyle(url: string, attachTo: Node) {
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = url
+  const promise = new Promise((resolve, reject) => {
+    link.addEventListener('load', resolve)
+    link.addEventListener('error', reject)
+  })
+  attachTo.appendChild(link)
+  return promise
 }

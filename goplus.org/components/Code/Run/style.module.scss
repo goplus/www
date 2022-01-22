@@ -1,6 +1,10 @@
 .runResult {
   position: relative;
   margin: 0;
+
+  // 125px = two lines for output & one line for program exit code
+  max-height: 125px;
+
   padding: 20px;
   overflow-x: auto;
   background-color: #F5F5F5;

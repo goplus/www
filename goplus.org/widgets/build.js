@@ -11,31 +11,36 @@ const { minify } = require('next/dist/compiled/terser')
 
 const dir = resolve('.')
 const widgetsSrcPath = resolve('widgets')
+const widgetsGlobalScriptsPath = join(widgetsSrcPath, 'global')
 const widgetEntriesPath = join(widgetsSrcPath, 'entries')
 const outputPath = resolve('.next')
 const publicDirPath = resolve('public')
+const widgetsPublicDirPath = join(publicDirPath, 'widgets')
 
 /** Webpack plugin to generate manifest (as `loader.js`) for widgets */
 class WidgetsManifestPlugin {
 
-  constructor(publicPath) {
+  constructor(publicPath, isDev) {
     this.publicPath = publicPath.endsWith('/') ? publicPath : (publicPath + '/')
+    this.isDev = isDev
   }
 
   apply(compiler) {
     compiler.hooks.afterEmit.tap('WidgetsManifest', async compilation => {
       const assetsByChunkName = compilation.getStats().toJson().assetsByChunkName
-      const loaderJs = readFileSync(join(widgetsSrcPath, 'loader.js'), { encoding: 'utf8' })
+      const loaderJs = readFileSync(join(widgetsGlobalScriptsPath, 'loader.js'), { encoding: 'utf8' })
       const simplifiedManifest = Object.keys(assetsByChunkName).reduce((o, name) => {
         o[name] = assetsByChunkName[name].map(
           path => this.publicPath + path
         )
         return o
       }, {})
-      const loaderJsWithManifest = loaderJs.replace(/\bMANIFEST\b/g, JSON.stringify(simplifiedManifest))
-      // TODO: may not be executed cuz async minify (we call `process.exit()` in the end of `function main`)
-      const loaderJsCompressed = (await minify(loaderJsWithManifest, { toplevel: false })).code
-      outputFileSync(join(publicDirPath, 'widgets/loader.js'), loaderJsCompressed)
+      let processedLoaderJs = loaderJs.replace(/\bMANIFEST\b/g, JSON.stringify(simplifiedManifest))
+      if (!this.isDev) {
+        // TODO: may not be executed cuz async minify (we call `process.exit()` in the end of `function main`)
+        processedLoaderJs = (await minify(processedLoaderJs, { toplevel: false })).code
+      }
+      outputFileSync(join(widgetsPublicDirPath, 'loader.js'), processedLoaderJs)
     })
   }
 }
@@ -45,7 +50,7 @@ function removeSuffix(filePath) {
   return filePath.replace(/\.\w+$/, '')
 }
 
-async function main() {
+async function main(isDev = false) {
 
   const widgets = readdirSync(widgetEntriesPath).map(removeSuffix)
   console.log('widgets:', widgets)
@@ -87,7 +92,7 @@ async function main() {
     (entries, name) => ({
       ...entries,
       [name]: [
-        join(widgetsSrcPath, 'polyfill'),
+        join(widgetsGlobalScriptsPath, 'polyfill'),
         join(widgetEntriesPath, name)
       ]
     }),
@@ -122,15 +127,16 @@ async function main() {
     new NextMiniCssExtractPlugin({
       filename: 'static/widgets/[name].[contenthash].css'
     }),
-    new WidgetsManifestPlugin(publicPath)
+    new WidgetsManifestPlugin(publicPath, isDev)
   )
 
   webpackConfig.optimization.splitChunks = false
   webpackConfig.optimization.runtimeChunk = false
 
-  // Uncomment these lines to improve build speed when do local development
-  // webpackConfig.optimization.minimize = false
-  // webpackConfig.devtool = false
+  if (isDev) {
+    webpackConfig.optimization.minimize = false
+    webpackConfig.devtool = false
+  }
 
   const result = await runCompiler(webpackConfig, { runWebpackSpan })
   if (result.errors && result.errors.length > 0) {
@@ -154,4 +160,5 @@ async function main() {
   process.exit(0)
 }
 
-main()
+// NODE_ENV=<env> node build.js
+main(process.env.NODE_ENV === 'development')

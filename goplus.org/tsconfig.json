@@ -29,6 +29,7 @@
     "pages/index.mdx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "widgets/global/**/*.ts"
   ]
 }
