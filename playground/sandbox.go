@@ -445,28 +445,13 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		return nil, err
 	}
 
-	err = ioutil.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte("module gop_autogen\n\ngo 1.16\n"), 0644)
-	if err != nil {
-		return nil, err
-	}
-
-	//use go get directly to
-	//1. avoid fixed version in go.mod
-	//2. and avoid some build warning
-	cmd := exec.Command("go", "get", "github.com/goplus/gop/builtin")
-	cmd.Dir = tmpDir
-	_, err = cmd.CombinedOutput()
-	if err != nil {
-		return nil, fmt.Errorf("error get github.com/goplus/gop/builtin: %v", err)
-	}
-
 	br := new(buildResult)
 
 	qgo, err := exec.LookPath("gop")
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", "-tags=faketime", ".")
+	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", "prog.gop")
 	cmdGenerate.Dir = tmpDir
 
 	out := &bytes.Buffer{}
