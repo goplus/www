@@ -451,7 +451,31 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", "prog.gop")
+	ioutil.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
+module playground-demo
+
+go 1.16
+
+require github.com/goplus/gop main
+
+`), 0644)
+
+	dumyCmd := exec.Command("mkdir", filepath.Join(tmpDir, "dummy"))
+	dumyCmd.Run()
+	ioutil.WriteFile(filepath.Join(tmpDir, "dummy", "dummy.go"), []byte(`
+package dummy
+
+import (
+	_ "github.com/goplus/gop"
+	_ "github.com/goplus/spx"
+)
+`), 0644)
+
+	tidyCmd := exec.Command("go", "mod", "tidy")
+	tidyCmd.Dir = tmpDir
+	tidyCmd.Run()
+
+	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", ".")
 	cmdGenerate.Dir = tmpDir
 
 	out := &bytes.Buffer{}
