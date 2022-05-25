@@ -28,7 +28,7 @@ export default function Header() {
           <Logo />
         </a>
         <div className={styles.operations}>
-          <a href="https://github.com/goplus/gop" className={styles.githubLink}>
+          <a href="https://github.com/goplus/gop" className={styles.githubLink} target="_blank" rel="noreferrer">
             <GithubIcon />
           </a>
           <button className={styles.expandBtn} onClick={handleExpandBtnClick}>
@@ -42,10 +42,10 @@ export default function Header() {
   )
 }
 
-function NavItem({ children, href }: NavItemInfo) {
+function NavItem({ children, href, isBlank }: NavItemInfo) {
   return (
     <li className={styles.navItem}>
-      <a className={styles.navLink} href={href} rel="noreferrer">{children}</a>
+      <a className={styles.navLink} href={href} {...( isBlank && { target:"_blank" } )} rel="noreferrer">{children}</a>
     </li>
   )
 }

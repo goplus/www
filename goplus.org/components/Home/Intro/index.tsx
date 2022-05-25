@@ -11,7 +11,7 @@ export default function Intro() {
   return (
     <div className={styles.section}>
       <div className={styles.goPlus}>
-        <Logo width="120" height="auto" />
+        <Logo width="120" height="100%" />
       </div>
       <div className={styles.slogan}>The Go+ language for engineering, STEM education, and data science</div>
       <div className={styles.btnsWrap}>

@@ -19,7 +19,7 @@ export default function Nav() {
           {navItems.map((item, index) => (
             <NavItem key={index} {...item} />
           ))}
-          <a className={styles.githubLink} href="https://github.com/goplus/gop" rel="noreferrer">
+          <a className={styles.githubLink} href="https://github.com/goplus/gop" target="_blank" rel="noreferrer">
             <GithubIcon />
           </a>
         </div>
@@ -28,11 +28,11 @@ export default function Nav() {
   )
 }
 
-function NavItem({ href, children }: NavItemInfo) {
+function NavItem({ href, isBlank, children }: NavItemInfo) {
   const url = useUrl()
   const selected = url != null && url.startsWith(href)
   return (
-    <a className={`${styles.linkItem} ${selected ? styles.selected : ''}`} href={href} rel="noreferrer">
+    <a className={`${styles.linkItem} ${selected ? styles.selected : ''}`} href={href} {...( isBlank && { target:"_blank" } )} rel="noreferrer">
       {children}
     </a>
   )
