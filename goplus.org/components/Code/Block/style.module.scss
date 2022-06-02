@@ -59,6 +59,7 @@
     }
 
     .doc {
+      margin-bottom: 1em;
       padding: 0 40px 6px 0;
     }
 
@@ -73,6 +74,9 @@
     }
 
     &:last-child {
+      .doc {
+        margin-bottom: 0;
+      }
       .doc, .code {
         padding-bottom: 20px;
       }

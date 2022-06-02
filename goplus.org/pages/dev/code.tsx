@@ -38,6 +38,25 @@ const valuesCode: CodeSegmentInfo[] = [
   }
 ]
 
+const tutorialCode: CodeSegmentInfo[] = [
+  {
+    content: `var a [5]int
+println "empty:", a`,
+    doc: <p>Here we create an array <code>a</code> that will hold exactly 5 <code>int</code>s. The type of elements and length are both part of the array&rsquo;s type. By default an array is zero-valued, which for <code>int</code>s means <code>0</code>s.</p>
+  },
+  {
+    content: `a[4] = 100
+println "set:", a
+println "get:", a[4]`,
+    doc: <p>We can set a value at an index using the <code>array[index] = value</code> syntax, and get a value with <code>array[index]</code>.</p>
+  },
+  {
+    content: `c := [...]int{1, 2, 3}
+println c`,
+    doc: <p>If you don’t want to write the length of the array, you can use this method and let the compiler calculate the length of the array itself.</p>
+  },
+]
+
 export default function Dev() {
 
   if (process.env.NODE_ENV !== 'development') return null
@@ -53,6 +72,9 @@ export default function Dev() {
         </Block>
         <Block>
           <CodeBlock code={valuesCode} />
+        </Block>
+        <Block style={{ fontSize: '16px' }}>
+          <CodeBlock code={tutorialCode} />
         </Block>
       </Centered>
     </Layout>
