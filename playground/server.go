@@ -51,6 +51,7 @@ func (s *server) init() {
 	s.mux.HandleFunc("/compile", s.commandHandler("prog", compileAndRun))
 	s.mux.HandleFunc("/share", s.handleShare)
 	s.mux.HandleFunc("/favicon.ico", handleFavicon)
+	s.mux.HandleFunc("/favicon.svg", handleFaviconSvg)
 	s.mux.HandleFunc("/_ah/health", s.handleHealthCheck)
 
 	staticHandler := http.StripPrefix("/static/", http.FileServer(http.Dir("./static")))
@@ -62,6 +63,10 @@ func (s *server) init() {
 
 func handleFavicon(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./static/favicon.ico")
+}
+
+func handleFaviconSvg(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./static/favicon.svg")
 }
 
 func (s *server) handleHealthCheck(w http.ResponseWriter, r *http.Request) {
