@@ -4,6 +4,7 @@
   @include centered;
 
   height: 354px;
+  margin-top: 48px;
   padding: 90px 96px;
   display: flex;
   flex-direction: row;
@@ -15,8 +16,14 @@
 
   @include mobile {
     height: auto;
+    margin-top: 40px;
     padding: 80px 25px;
+    border-radius: 0;
   }
+}
+
+.content {
+  width: 100%;
 }
 
 .title {
