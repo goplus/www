@@ -2,15 +2,17 @@ import React from 'react'
 
 import Layout from 'components/Layout'
 import Intro from 'components/Home/Intro'
-import Summary from 'components/Home/Summary'
-import Features from 'components/Home/Features'
+import KeyFeatures from 'components/Home/KeyFeatures'
+import Applications from 'components/Home/Applications'
+import Guide from 'components/Home/Guide'
 
 export default function Home() {
   return (
     <Layout>
       <Intro />
-      <Summary />
-      <Features />
+      <KeyFeatures />
+      <Applications />
+      <Guide />
     </Layout>
   )
 }

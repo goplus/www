@@ -13,7 +13,7 @@ export const navItems: NavItemInfo[] = [
     isBlank: false
   },
   {
-    children: 'Tutorials',
+    children: 'Tutorial',
     href: 'https://tutorial.goplus.org',
     isBlank: false
   },

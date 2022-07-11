@@ -1,0 +1,81 @@
+@import '~utils/index.scss';
+
+.section {
+  @include centered;
+
+  padding: 48px 0 72px;
+  @include mobile {
+    padding: 40px 16px 56px;
+  }
+}
+
+.title {
+  @include section-title;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #E5EAF4;
+  border-radius: 16px;
+  overflow: hidden;
+
+  transition: box-shadow .3s;
+  &:hover {
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.08);
+  }
+
+  .pic {
+    padding-bottom: 66.7%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .footer {
+    height: 72px;
+    padding: 0 16px 0 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top: 1px solid #E5EAF4;
+
+    @include mobile {
+      height: 66px;
+      padding: 0 16px 0 22px;
+    }
+
+    .cardTitle {
+      font-size: 24px;
+      line-height: 32px;
+
+      @include mobile {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+
+    .iconArrow {
+      color: #2C84FF;
+      width: 24px;
+      height: 24px;
+
+      @include mobile {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}

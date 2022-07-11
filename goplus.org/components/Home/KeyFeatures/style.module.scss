@@ -1,0 +1,18 @@
+@import '~utils/index.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0 72px;
+  background-color: #F9FAFB;
+
+  @include mobile {
+    padding: 40px 16px 16px;
+    background: none;
+  }
+}
+
+.title {
+  @include section-title;
+}
