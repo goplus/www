@@ -71,6 +71,9 @@
   }
 
   a {
-    text-decoration: underline;
+    color: #2C84FF;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

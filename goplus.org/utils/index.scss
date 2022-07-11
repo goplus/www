@@ -24,12 +24,16 @@
 }
 
 @mixin section-title {
+  margin: 0 0 48px;
   text-align: center;
-  font-size: 28px;
+  font-size: 36px;
+  line-height: 44px;
   color: #000;
 
   @include mobile {
-    font-size: 24px;
+    margin-bottom: 24px;
+    font-size: 28px;
+    line-height: 36px;
   }
 }
 
@@ -37,7 +41,7 @@
 @mixin reset($fontSize: 14px) {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  font-family: -apple-system, Inter, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji';
   font-size: $fontSize;
   line-height: 1.5;
@@ -64,7 +68,7 @@
   
   h1, h2, h3, h4, h5, h6 {
     color: #000;
-    font-weight: 500;
-    font-family: PingFangSC, PingFangSC-Medium, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    font-weight: 600;
+    font-family: Inter, PingFangSC, PingFangSC-Medium, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   }
 }

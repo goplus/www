@@ -1,0 +1,78 @@
+@import '~utils/index.scss';
+
+.wrapper {
+  @include centered;
+
+  height: 354px;
+  margin-top: 48px;
+  padding: 90px 96px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @include pc {
+    border-radius: 16px;
+    background-image: url('./bg.jpg');
+    background-size: cover;
+  }
+
+  @include mobile {
+    height: auto;
+    margin-top: 40px;
+    padding: 80px 25px;
+
+    background-color: #F8FAFA;
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 40px;
+  line-height: 48px;
+
+  @include mobile {
+    text-align: center;
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+.slogan {
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 26px;
+  color: #666;
+
+  @include mobile {
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.btnsWrap {
+  display: flex;
+  margin-top: 36px;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & > :not(:first-child) {
+    @include pc {
+      margin-left: 20px;
+    }
+    @include mobile {
+      margin-top: 16px;
+    }
+  }
+}
+
+.btn {
+  width: 178px;
+}

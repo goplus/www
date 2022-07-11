@@ -1,24 +1,18 @@
 @import '~utils/index.scss';
 
 .section {
-  @include centered;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  padding-top: 48px;
+  padding: 48px 0 72px;
+  background-color: #F9FAFB;
 
   @include mobile {
-    padding-top: 44px;
+    padding: 40px 16px 16px;
+    background: none;
   }
 }
 
 .title {
   @include section-title;
-  margin: 0;
-
-  @include mobile {
-    margin-bottom: 24px;
-  }
 }

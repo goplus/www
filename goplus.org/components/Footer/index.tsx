@@ -21,6 +21,12 @@ export default function Footer(props: { className?: string }) {
         <a href="https://github.com/goplus/gop/blob/main/LICENSE" rel="noreferrer">
           License <ArrowIcon />
         </a>
+        <a href="https://tutorial.goplus.org" rel="noreferrer">
+          Tutorial <ArrowIcon />
+        </a>
+        <a href="https://play.goplus.org" rel="noreferrer">
+          Playground <ArrowIcon />
+        </a>
       </div>
       <div className={styles.powerBy}>
         <span>Powered by</span>

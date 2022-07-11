@@ -15,96 +15,83 @@
   }
 }
 
-.goPlus {
-  margin-bottom: 31px;
+.logo {
+  margin-bottom: 24px;
+
+  svg {
+    width: 120px;
+    height: 100%;
+  }
+
   @include mobile {
-    margin-bottom: 21px;
+    margin-bottom: 20px;
+    svg {
+      width: 100px;
+    }
   }
 }
 
 .slogan {
-  @include section-title;
+  text-align: center;
+  font-size: 28px;
+  line-height: 38px;
 
   @include mobile {
-    margin: 0 50px;
+    font-size: 22px;
+    line-height: 34px;
+    margin: 0 9px;
   }
 }
 
 .btnsWrap {
   display: flex;
-  margin: 28px 0 48px 0;
+  margin: 48px 0;
 
   @include mobile {
     flex-direction: column;
-    margin: 36px 0 40px 0;
+    margin: 40px 0;
   }
 
   & > :not(:first-child) {
     @include pc {
-      margin-left: 28px;
+      margin-left: 24px;
     }
     @include mobile {
-      margin-top: 28px;
+      margin-top: 16px;
     }
   }
 }
 
-@mixin btnBase {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 240px;
-  height: 48px;
-  font-size: 16px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.btn {
-  @include btnBase;
-  color: #2c84ff;
-  background-color: white;
-  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.1);
-}
-
-.btn:hover {
-  color: #4f98ff;
-  background-color: #FAFAFA;
-}
-
-.installTxt {
+.iconArrowRight {
   margin-left: 20px;
-}
-
-.primaryBtn {
-  @include btnBase;
-  color: white;
-  background-color: #2c84ff;
-  box-shadow: 0px 16px 32px 0px rgba(44, 132, 255, 0.2);
-}
-
-.primaryBtn:hover {
-  background-color: #4f98ff;
 }
 
 .title {
   @include section-title;
-  margin: 24px 0 36px;
+  margin: 32px 0 48px;
 
   @include mobile {
-    margin: 24px 0 24px;
+    margin: 16px 0 24px;
   }
 }
 
 .codeEditorWrapper {
-  width: 900px;
+  width: 1024px;
   font-size: 16px;
 
   @include mobile {
     width: 100%;
+    margin-bottom: 16px;
   }
 }
 
 .codeEditor {
-  height: 220px;
+  height: 268px;
+
+  @include pc {
+    resize: vertical;
+  }
+  @include mobile {
+    height: 220px;
+  }
 }
