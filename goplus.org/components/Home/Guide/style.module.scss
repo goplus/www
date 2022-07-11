@@ -10,15 +10,18 @@
   flex-direction: row;
   align-items: center;
 
-  border-radius: 16px;
-  background-image: url('./bg.jpg');
-  background-size: cover;
+  @include pc {
+    border-radius: 16px;
+    background-image: url('./bg.jpg');
+    background-size: cover;
+  }
 
   @include mobile {
     height: auto;
     margin-top: 40px;
     padding: 80px 25px;
-    border-radius: 0;
+
+    background-color: #F8FAFA;
   }
 }
 
