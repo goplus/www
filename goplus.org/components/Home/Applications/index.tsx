@@ -19,12 +19,12 @@ export default function Applications() {
         <Card
           title="DevOps tools"
           pic={devOpsToolsPic.src}
-          link="https://github.com/goplus/gop#2d-games-powered-by-go"
+          link="https://github.com/goplus/gop#devops-tools"
         />
         <Card
           title="Data processing"
           pic={dataProcessingPic.src}
-          link="https://github.com/goplus/gop#2d-games-powered-by-go"
+          link="https://github.com/goplus/gop#data-processing"
         />
       </div>
     </div>
