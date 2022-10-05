@@ -452,7 +452,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
 	ioutil.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
-module playground-demo
+module playgrounddemo
 
 go 1.16
 
@@ -468,6 +468,7 @@ package dummy
 import (
 	_ "github.com/goplus/gop"
 	_ "github.com/goplus/spx"
+	_ "github.com/qiniu/x/errors"
 )
 `), 0644)
 
