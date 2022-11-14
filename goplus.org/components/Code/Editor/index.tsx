@@ -4,7 +4,7 @@
  */
 
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import Editor, { EditorProps, Monaco } from '@monaco-editor/react'
+import Editor, { EditorProps, Monaco, loader } from '@monaco-editor/react'
 import { editor } from 'monaco-editor/esm/vs/editor/editor.api'
 
 import { cns } from 'utils'
@@ -51,6 +51,12 @@ export interface Props {
   className?: string
   editorClassName?: string
 }
+
+loader.config({
+  paths: {
+    vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.28.1/min/vs'
+  }
+})
 
 export default function CodeEditor({
   code: codeFromProps,
