@@ -1,0 +1,72 @@
+@import '~utils/index.scss';
+
+
+.container{
+    margin-left: 20rem;
+    margin-right: 20rem;
+    font-size: 1.2rem;
+}
+
+.link {
+    color: rgb(71, 174, 209);
+    text-decoration: none;
+  }
+  
+  /* 鼠标悬停时显示下划线的样式 */
+.link:hover {
+    text-decoration: underline;
+}
+
+
+.download_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.download_box {
+    display: flex;
+    flex-direction: column;
+    color: rgba(0,0,0,0.5);
+    background: rgba(209, 209, 209, 0.5);
+    width: 12.875rem;
+    height: 8.375rem;
+    float: left;
+    padding: 1rem;
+  }
+
+.download_box_title{
+    font-size: large;
+    margin-top: 0.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+.download_box_p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-bottom: 1.25rem;
+    color: #6e7072;
+}
+.download_box_link{
+    color: rgb(71, 174, 209);
+    text-decoration: none;
+
+    font-style: normal;
+    font-weight: 200;
+    font-size: 0.85rem;
+
+}
+.download_box_link:hover {
+    text-decoration: underline;
+}
+
+.grid{
+    color: #202224;
+    margin: 0 auto 1.875rem;
+    max-width: 75.75rem;
+    padding: 0 1.5rem;
+}
+
