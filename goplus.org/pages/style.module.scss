@@ -1,24 +1,34 @@
 @import '~utils/index.scss';
 
 
-.container{
-    margin-left: 20rem;
-    margin-right: 20rem;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // height: 100vh;
+    // margin: 0;
+    width: 170rem;
+    box-sizing: border-box; /* 计算边框和内边距在宽度内 */
+    max-width: 100%;
+    // margin:auto;
+    // margin-left: 20rem;
+    // margin-right: 15rem;
     font-size: 1.2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 .link {
-    color: rgb(71, 174, 209);
+    color: #007d9c;
     text-decoration: none;
-  }
-  
-  /* 鼠标悬停时显示下划线的样式 */
+}
+
+/* 鼠标悬停时显示下划线的样式 */
 .link:hover {
     text-decoration: underline;
 }
 
 
-.download_wrapper{
+.download_wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -28,45 +38,97 @@
 .download_box {
     display: flex;
     flex-direction: column;
-    color: rgba(0,0,0,0.5);
-    background: rgba(209, 209, 209, 0.5);
-    width: 12.875rem;
-    height: 8.375rem;
+    color: rgba(0, 0, 0, 0.5);
+    background: #f8f8f8;
+    width: 14rem;
+    height: 9rem;
     float: left;
     padding: 1rem;
-  }
+}
 
-.download_box_title{
+.download_box_title {
     font-size: large;
     margin-top: 0.15rem;
-    margin-bottom: 0.35rem;
-  }
+    margin-bottom: 0.1rem;
+}
 
-.download_box_p{
-    font-style: normal;
+.download_box_p {
+    // font-style: large;
     font-weight: 400;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     line-height: 1rem;
-    margin-bottom: 1.25rem;
+    margin-top: 0.7rem;
+    margin-bottom: auto;
     color: #6e7072;
 }
-.download_box_link{
-    color: rgb(71, 174, 209);
-    text-decoration: none;
 
-    font-style: normal;
-    font-weight: 200;
+.download_box_link {
+    color: #007d9c;
+    text-decoration: none;
+    // font-style: normal;
+    font-weight: 400;
     font-size: 0.85rem;
+    margin-top: auto;
 
 }
+
 .download_box_link:hover {
     text-decoration: underline;
 }
 
-.grid{
+.grid {
     color: #202224;
     margin: 0 auto 1.875rem;
     max-width: 75.75rem;
     padding: 0 1.5rem;
 }
 
+.release_list {
+    list-style-type: none;
+    margin-left: -2.5rem;
+    
+    // gap: 0.5rem;
+
+}
+
+.release_item_name {
+    font-weight: 400;
+    background: #f8f8f8;
+    margin-bottom: 10px;
+    padding: 0.4rem;
+    padding-left: 0.5rem;
+    padding-top: auto;
+    padding-bottom: auto;
+    height: 2.5rem;
+    cursor: pointer;
+
+}
+
+.downloadTable {
+    width: 100%;
+    border-collapse: collapse;
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: gray;
+}
+
+.downloadTable_header {
+    // display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table_highlight{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.filename{
+    display: table-cell;
+    vertical-align: inherit;
+}
