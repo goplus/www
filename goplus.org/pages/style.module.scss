@@ -8,7 +8,8 @@
     // height: 100vh;
     // margin: 0;
     width: 170rem;
-    box-sizing: border-box; /* 计算边框和内边距在宽度内 */
+    box-sizing: border-box;
+    /* 计算边框和内边距在宽度内 */
     max-width: 100%;
     // margin:auto;
     // margin-left: 20rem;
@@ -86,7 +87,7 @@
 .release_list {
     list-style-type: none;
     margin-left: -2.5rem;
-    
+
     // gap: 0.5rem;
 
 }
@@ -123,12 +124,26 @@
     vertical-align: inherit;
     border-color: inherit;
 }
-.table_highlight{
+
+.table_highlight {
     display: table-row;
     vertical-align: inherit;
     border-color: inherit;
 }
-.filename{
+
+.filename {
     display: table-cell;
     vertical-align: inherit;
+}
+
+
+.buttonlink {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin-left: 1.1rem;
+    color: #007d9c;
+    text-decoration: none;
+
 }

@@ -83,6 +83,11 @@ function DownloadTable({ browser_download_url, name, Size }) {
 export default function Home({ releases }) {
 
   const [selectedRelease, setSelectedRelease] = useState(null);
+  const [isContentVisible, setContentVisible] = useState(true);
+
+  const toggleContentVisibility = () => {
+    setContentVisible(!isContentVisible);
+  };
 
   const toggleReleaseAssets = (release) => {
     if (selectedRelease === release) {
@@ -153,69 +158,48 @@ export default function Home({ releases }) {
 
           {/* <h2>Stable versions</h2>
             <GithubStableReleases /> */}
-          <h2>Archived versions</h2>
-
-          <div>
-            <h5>GitHub Releases</h5>
-            <ul className={styles.release_list}>
-              {releases.map((release) => (
-                <li key={release.id}>
-                  <div onClick={() => toggleReleaseAssets(release)} className={styles.release_item_name}>
-                    <span>GoPlus_{release.tag_name}</span>
-                    {selectedRelease != release && (<ButtonLogo />)}
-                    {selectedRelease === release && (<ButtonUpLogo />)}
-                  </div>
-                  {selectedRelease === release && (
-                    <ul className={styles.release_list}>
-                      <table className={styles.downloadTable}>
-                        <thead className={styles.downloadTable_header}>
-                          <th>File name</th>
-                          <th>Kind</th>
-                          <th>OS</th>
-                          <th>Arch</th>
-                          <th>Size</th>
-                          <th>SHA256 Checksum</th>
-                        </thead>
-                        <tbody>
-
-
-                          {release.assets.map((asset) => (
-                            // <li key={asset.id}>
-                            //   <a href={asset.browser_download_url} target="_blank" rel="noopener noreferrer">
-                            //     {asset.name}
-                            //   </a>
-                            // </li>
-
-
-                            <DownloadTable
-                              // id={asset.id} 
-                              browser_download_url={asset.browser_download_url}
-                              name={asset.name}
-                              Size={asset.size}
-                            />
-                            // <tr className={styles.table_hightlight}>
-                            //     <td className={styles.filename}>
-                            //         <a class={styles.link} href={asset.browser_download_url}>
-                            //         {asset.name}
-                            //         </a>
-                            //     </td>
-                            //     <td>
-                            //       123123
-                            //     </td>
-
-                            // </tr>
-
-
-
-                          ))}
-                        </tbody>
-                      </table>
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h2 onClick={toggleContentVisibility} style={{ cursor: 'pointer' }}>Archived versions  
+          {isContentVisible && (<span className={styles.buttonlink}>Show</span>)}
+          {!isContentVisible && (<span className={styles.buttonlink}>Hide</span>)}
+          </h2>
+          {isContentVisible && (
+            <div>
+              <h5>GitHub Releases</h5>
+              <ul className={styles.release_list}>
+                {releases.map((release) => (
+                  <li key={release.id}>
+                    <div onClick={() => toggleReleaseAssets(release)} className={styles.release_item_name}>
+                      <span>GoPlus_{release.tag_name}</span>
+                      {selectedRelease != release && (<ButtonLogo />)}
+                      {selectedRelease === release && (<ButtonUpLogo />)}
+                    </div>
+                    {selectedRelease === release && (
+                      <ul className={styles.release_list}>
+                        <table className={styles.downloadTable}>
+                          <thead className={styles.downloadTable_header}>
+                            <th>File name</th>
+                            <th>Kind</th>
+                            <th>OS</th>
+                            <th>Arch</th>
+                            <th>Size</th>
+                            <th>SHA256 Checksum</th>
+                          </thead>
+                          <tbody>
+                            {release.assets.map((asset) => (
+                              <DownloadTable
+                                browser_download_url={asset.browser_download_url}
+                                name={asset.name}
+                                Size={asset.size}
+                              />
+                            ))}
+                          </tbody>
+                        </table>
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>)}
 
         </main>
       </div>
