@@ -223,7 +223,12 @@ export default function Home({ releases }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
   const response = await fetch('https://api.github.com/repos/goplus/gop/releases');
 
   console.log("ok")
