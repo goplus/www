@@ -1,9 +1,10 @@
-import React, { useState, useEffect, HTMLAttributes, SVGProps  } from 'react';
+import React, { useState, useEffect, HTMLAttributes, SVGProps } from 'react';
 import Head from 'next/head';
 import styles from 'pages/style.module.scss';
 import Layout from 'components/Layout';
-import {ButtonLogo as Logo} from 'components/Icon/ButtonLogo'
+import { ButtonLogo as Logo } from 'components/Icon/ButtonLogo'
 import ButtonLogo from 'components/Icon/ButtonLogo'
+import ButtonUpLogo from 'components/Icon/ButtonUpLogo'
 // import { downloadTable as DownloadTableComponent } from 'components/DownloadTable';
 // import GithubReleases, { GithubStableReleases } from './download/GithubReleases';
 
@@ -161,8 +162,8 @@ export default function Home({ releases }) {
                 <li key={release.id}>
                   <div onClick={() => toggleReleaseAssets(release)} className={styles.release_item_name}>
                     <span>GoPlus_{release.tag_name}</span>
-                    <ButtonLogo />
-
+                    {selectedRelease != release && (<ButtonLogo />)}
+                    {selectedRelease === release && (<ButtonUpLogo />)}
                   </div>
                   {selectedRelease === release && (
                     <ul className={styles.release_list}>
