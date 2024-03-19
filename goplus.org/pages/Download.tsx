@@ -2,7 +2,6 @@ import React, { useState, useEffect, HTMLAttributes, SVGProps } from 'react';
 import Head from 'next/head';
 import styles from 'pages/style.module.scss';
 import Layout from 'components/Layout';
-import { ButtonLogo as Logo } from 'components/Icon/ButtonLogo'
 import ButtonLogo from 'components/Icon/ButtonLogo'
 import ButtonUpLogo from 'components/Icon/ButtonUpLogo'
 // import { downloadTable as DownloadTableComponent } from 'components/DownloadTable';
@@ -35,11 +34,11 @@ function DownloadTable({ browser_download_url, name, Size }) {
     fillContent = ' ';
   }
 
-  if (name.includes("Linux")) {
+  if (name.includes("Linux") || name.includes("linux")) {
     os = 'Linux';
-  } else if (name.includes("Windows")) {
+  } else if (name.includes("Windows") || name.includes("windows")) {
     os = 'Windows';
-  } else if (name.includes("Darwin")) {
+  } else if (name.includes("Darwin") || name.includes("darwin")) {
     os = 'macOS';
   }
 
@@ -80,7 +79,9 @@ function DownloadTable({ browser_download_url, name, Size }) {
 }
 
 
-export default function Home({ releases }) {
+
+
+export default function Home({ StableRelease, ArchivedReleases }) {
 
   const [selectedRelease, setSelectedRelease] = useState(null);
   const [isContentVisible, setContentVisible] = useState(true);
@@ -96,6 +97,12 @@ export default function Home({ releases }) {
       setSelectedRelease(release);
     }
   };
+
+  const latestWinAsset = StableRelease.assets.filter(asset => ((asset.name).includes("win") || (asset.name).includes("Win")) && (asset.name).includes("x86_64") && (asset.name).includes(".zip"))[0]
+  const latestIOSx86Asset = StableRelease.assets.filter(asset => ((asset.name).includes("darwin") || (asset.name).includes("Darwin")) && (asset.name).includes("x86_64") && (asset.name).includes(".tar.gz"))[0]
+  const latestIOSarmAsset = StableRelease.assets.filter(asset => ((asset.name).includes("darwin") || (asset.name).includes("Darwin")) && (asset.name).includes("arm") && (asset.name).includes(".tar.gz"))[0]
+  const latestLinuxarmAsset = StableRelease.assets.filter(asset =>( (asset.name).includes("linux") || (asset.name).includes("Linux")) && (asset.name).includes("arm") && (asset.name).includes(".tar.gz"))[0]
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -114,41 +121,30 @@ export default function Home({ releases }) {
           <h2>Featured downloads </h2>
 
           <div className={styles.download_wrapper}>
-            <a href="https://github.com/goplus/gop/releases/download/v1.2.5/gop_v1.2.5_Windows_x86_64.zip" className={styles.download_box} >
-              <h4 className={styles.download_box_title}>Windows</h4>
+            <a href={latestWinAsset.browser_download_url} className={styles.download_box} >
+              <h4 className={styles.download_box_title}>Microsoft Windows</h4>
               <p className={styles.download_box_p}>Windows 10 or later, Intel 64-bit processor</p>
-              <span className={styles.download_box_link}>gop_v1.2.5_Windows_x86_64.zip</span>
+              <span className={styles.download_box_link}>{latestWinAsset.name}</span>
             </a>
 
-            {/* <a href="Source下载地址" className={styles.download_box}>
-                <h4 className={styles.download_box_title}>iOS (arm64)</h4>
-                <p className={styles.download_box_p}>适用机型: iPhone</p>
-                <span  className={styles.download_box_link}>下载链接</span>
+            <a href={latestIOSx86Asset.browser_download_url} className={styles.download_box}>
+                <h4 className={styles.download_box_title}>Apple MacOS (X86_64)</h4>
+                <p className={styles.download_box_p}>macOS 10.15 or later, Intel 64-bit processor</p>
+                <span  className={styles.download_box_link}>{latestIOSx86Asset.name}</span>
               </a>
 
-              <a href="Source下载地址" className={styles.download_box}>
-                <h4 className={styles.download_box_title}>iOS (x86)</h4>
-                <p className={styles.download_box_p}>适用机型: iPhone Simulator</p>
-                <span className={styles.download_box_link}>下载链接</span>
-              </a> */}
+              <a href={latestIOSarmAsset.browser_download_url} className={styles.download_box}>
+                <h4 className={styles.download_box_title}>Apple MacOS (ARM64)</h4>
+                <p className={styles.download_box_p}>macOS 11 or later, Apple 64-bit processor</p>
+                <span className={styles.download_box_link}>{latestIOSarmAsset.name}</span>
+              </a>
 
-            <a href="https://github.com/goplus/gop/releases/download/v1.2.5/gop_v1.2.5_Linux_arm64.tar.gz" className={styles.download_box}>
-              <h4 className={styles.download_box_title}>Linux-arm64</h4>
+            <a href={latestLinuxarmAsset.browser_download_url} className={styles.download_box}>
+              <h4 className={styles.download_box_title}>Linux (ARM64)</h4>
               <p className={styles.download_box_p}>Linux 2.6.32 or later, Intel 64-bit processor</p>
-              <span className={styles.download_box_link}>gop_v1.2.5_Linux_arm64.tar.gz</span>
+              <span className={styles.download_box_link}>{latestLinuxarmAsset.name}</span>
             </a>
 
-            <a href="https://github.com/goplus/gop/releases/download/v1.2.5/gop_v1.2.5_Linux_x86_64.tar.gz" className={styles.download_box}>
-              <h4 className={styles.download_box_title}>Linux-x86</h4>
-              <p className={styles.download_box_p}>Linux 2.6.32 or later, Intel 64-bit processor</p>
-              <span className={styles.download_box_link}>gop_v1.2.5_Linux_x86_64.tar.gz</span>
-            </a>
-
-            <a href="https://github.com/goplus/gop/archive/refs/tags/v1.2.5.tar.gz" className={styles.download_box}>
-              <h4 className={styles.download_box_title}>Source</h4>
-              <p className={styles.download_box_p}>All</p>
-              <span className={styles.download_box_link}>v1.2.5.tar.gz</span>
-            </a>
           </div>
 
           <p>Get the latest version of <a href="https://github.com/goplus/gop" className={styles.link} target="_blank" rel="noopener noreferrer" >
@@ -156,17 +152,49 @@ export default function Home({ releases }) {
           </a> language from GitHub.</p>
 
 
-          {/* <h2>Stable versions</h2>
-            <GithubStableReleases /> */}
-          <h2 onClick={toggleContentVisibility} style={{ cursor: 'pointer' }}>Archived versions  
-          {isContentVisible && (<span className={styles.buttonlink}>Show</span>)}
-          {!isContentVisible && (<span className={styles.buttonlink}>Hide</span>)}
+          <h2>Stable versions</h2>
+          <ul className={styles.release_list}>
+            <li key={StableRelease.id}>
+              <div onClick={() => toggleReleaseAssets(StableRelease)} className={styles.release_item_name}>
+                <span>GoPlus_{StableRelease.tag_name}</span>
+                {selectedRelease != StableRelease && (<ButtonLogo />)}
+                {selectedRelease === StableRelease && (<ButtonUpLogo />)}
+              </div>
+              {selectedRelease === StableRelease && (
+                <ul className={styles.release_list}>
+                  <table className={styles.downloadTable}>
+                    <thead className={styles.downloadTable_header}>
+                      <th>File name</th>
+                      <th>Kind</th>
+                      <th>OS</th>
+                      <th>Arch</th>
+                      <th>Size</th>
+                      <th>SHA256 Checksum</th>
+                    </thead>
+                    <tbody>
+                      {StableRelease.assets.map((asset) => (
+                        <DownloadTable
+                          browser_download_url={asset.browser_download_url}
+                          name={asset.name}
+                          Size={asset.size}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                </ul>
+              )}
+            </li>
+          </ul>
+          <h2 onClick={toggleContentVisibility} style={{ cursor: 'pointer' }}>Archived versions
+            {isContentVisible && (<span className={styles.buttonlink}>Hide</span>)}
+            {!isContentVisible && (<span className={styles.buttonlink}>Show</span>)}
           </h2>
           {isContentVisible && (
             <div>
               <h5>GitHub Releases</h5>
               <ul className={styles.release_list}>
-                {releases.map((release) => (
+                {ArchivedReleases.map((release) => (
+
                   <li key={release.id}>
                     <div onClick={() => toggleReleaseAssets(release)} className={styles.release_item_name}>
                       <span>GoPlus_{release.tag_name}</span>
@@ -175,14 +203,15 @@ export default function Home({ releases }) {
                     </div>
                     {selectedRelease === release && (
                       <ul className={styles.release_list}>
-                        <table className={styles.downloadTable}>
+                        {release.assets.length === 0 && <span className={styles.release_span}>No content available now !</span>}
+                        {release.assets.length != 0 && <table className={styles.downloadTable}>
                           <thead className={styles.downloadTable_header}>
                             <th>File name</th>
                             <th>Kind</th>
                             <th>OS</th>
                             <th>Arch</th>
                             <th>Size</th>
-                            <th>SHA256 Checksum</th>
+                            {/* <th>SHA256 Checksum</th> */}
                           </thead>
                           <tbody>
                             {release.assets.map((asset) => (
@@ -193,7 +222,8 @@ export default function Home({ releases }) {
                               />
                             ))}
                           </tbody>
-                        </table>
+                        </table>}
+
                       </ul>
                     )}
                   </li>
@@ -216,8 +246,8 @@ export async function getServerSideProps({ req, res }) {
   const response = await fetch('https://api.github.com/repos/goplus/gop/releases');
 
   console.log("ok")
-  const data = await response.json();
-
+  let data = await response.json();
+  const releases = data.filter(Release => !(Release.tag_name).includes("pre") && !(Release.tag_name).includes("beta") && !(Release.tag_name).includes("alpha") && !(Release.tag_name).includes("rc"))
   // Releases = data;
 
 
@@ -225,7 +255,8 @@ export async function getServerSideProps({ req, res }) {
 
   return {
     props: {
-      releases: data
+      StableRelease: releases[0],
+      ArchivedReleases: releases.slice(1)
     }
     // revalidate: 600, // Regenerate page after 10 minutes
   }
