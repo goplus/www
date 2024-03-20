@@ -27,7 +27,7 @@
     "pages/index.ts",
     "pages/index.js",
     "pages/index.mdx"
-, "components/DownloadTable/index.tsx", "pages/Download.tsx"  ],
+ ],
   "exclude": [
     "node_modules",
     "widgets/global/**/*.ts"
