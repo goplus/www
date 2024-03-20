@@ -73,11 +73,11 @@ export function useCodeRun(code: string) {
     }
     endWaiting(
       result.Errors
-      ? <>
-        <Error>Error encountered:</Error>
-        <p>{result.Errors}</p>
-      </>
-      : <EventsWithStatus result={result} />
+        ? <>
+          <Error>Error encountered:</Error>
+          <p>{result.Errors}</p>
+        </>
+        : <EventsWithStatus result={result} />
     )
   }, [code])
 

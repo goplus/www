@@ -173,8 +173,8 @@ function EditButton({ code }: { code: string }) {
   const urlReady = url != null
   const title = (
     urlReady
-    ? 'Edit Code In Playground'
-    : 'Fetching Playground URL...'
+      ? 'Edit Code In Playground'
+      : 'Fetching Playground URL...'
   )
 
   return (
