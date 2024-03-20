@@ -19,7 +19,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Download',
-    href: 'http://localhost:3000/Download',
+    href: 'http://localhost:3000/download',
     isBlank: false
   },
   {
