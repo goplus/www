@@ -1,160 +1,161 @@
-@import '~utils/index.scss';
-
+@import "~utils/index.scss";
 
 .container {
-    @include centered;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    // height: 100vh;
-    // margin: 0;
-    width: 170rem;
-    box-sizing: border-box;
-    /* 计算边框和内边距在宽度内 */
-    max-width: 100%;
-    // margin:auto;
-    // margin-left: 20rem;
-    // margin-right: 15rem;
-    font-size: 1.2rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    }
+  @include centered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  font-size: 1.2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+.title{
+    font-size: 2.25rem;
+    font-weight: bold;
+}
+
+.titleH2{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.description {
+    color: #202224;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 75.75rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: normal;
+
+}
 
 .link {
-    color: #007d9c;
-    text-decoration: none;
+  color: #007d9c;
+  text-decoration: none;
 }
 
-/* 鼠标悬停时显示下划线的样式 */
 .link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-
-.download_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+.downloadWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.download_box {
-    display: flex;
-    flex-direction: column;
-    color: rgba(0, 0, 0, 0.5);
-    background: #f8f8f8;
-    width: 14rem;
-    height: 9rem;
-    float: left;
-    padding: 1rem;
+.downloadBox {
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.5);
+  background: #f8f8f8;
+  width: 14rem;
+  height: 9rem;
+  float: left;
+  padding: 1rem;
 }
 
-.download_box_title {
-    font-size: large;
-    margin-top: 0.15rem;
-    margin-bottom: 0.1rem;
+.downloadBoxTitle {
+  font-size: large;
+  margin-top: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
-.download_box_p {
-    // font-style: large;
-    font-weight: 400;
-    font-size: 0.95rem;
-    line-height: 1rem;
-    margin-top: 0.7rem;
-    margin-bottom: auto;
-    color: #6e7072;
+.downloadBoxP {
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1rem;
+  margin-top: 0.7rem;
+  margin-bottom: auto;
+  color: #6e7072;
 }
 
-.download_box_link {
-    color: #007d9c;
-    text-decoration: none;
-    // font-style: normal;
-    font-weight: 400;
-    font-size: 0.85rem;
-    margin-top: auto;
-
+.downloadBoxLink {
+  color: #007d9c;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-top: auto;
 }
 
-.download_box_link:hover {
-    text-decoration: underline;
+.downloadBoxLink:hover {
+  text-decoration: underline;
 }
 
 .grid {
-    color: #202224;
-    margin: 0 auto 1.875rem;
-    max-width: 75.75rem;
-    padding: 0 1.5rem;
+  color: #202224;
+  margin: 0 auto 1.875rem;
+  max-width: 75.75rem;
+  padding: 0 1.5rem;
 }
 
-.release_list {
-    list-style-type: none;
-    margin-left: -2.5rem;
-
-    // gap: 0.5rem;
-
+.releaseList {
+  list-style-type: none;
+  margin-left: -2.5rem;
 }
 
-.release_item_name {
-    font-weight: 400;
-    background: #f8f8f8;
-    margin-bottom: 10px;
-    padding: 0.4rem;
-    padding-left: 0.5rem;
-    padding-top: auto;
-    padding-bottom: auto;
-    height: 2.5rem;
-    cursor: pointer;
-
+.releaseItemName {
+  font-weight: 500;
+  font-size: 1.1rem;
+  background: #f8f8f8;
+  margin-bottom: 10px;
+  padding: 0.4rem;
+  padding-left: 0.8rem;
+  padding-top: auto;
+  padding-bottom: auto;
+  height: 2.6rem;
+  cursor: pointer;
 }
 
 .downloadTable {
-    width: 100%;
-    border-collapse: collapse;
-    display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: gray;
+  width: 100%;
+  border-collapse: collapse;
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: 2px;
+  border-color: gray;
 }
 
-.downloadTable_header {
-    // display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
+.downloadTableHeader {
+  vertical-align: middle;
+  border-color: inherit;
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
 }
 
-.table_highlight {
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
+.tableHighlight {
+  vertical-align: inherit;
+  border-color: inherit;
 }
 
 .filename {
-    display: table-cell;
-    vertical-align: inherit;
+  vertical-align: inherit;
 }
 
-
-.buttonlink {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-    margin-left: 1.1rem;
-    color: #007d9c;
-    text-decoration: none;
-
+.buttonLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  margin-left: 1.1rem;
+  color: #007d9c;
+  text-decoration: none;
 }
 
-
-.release_span {
-    // padding: 1rem;
-    padding-left: 1.5rem;
-    margin-left: 1.1rem;
-    font-weight: 500;
-    font-size: 1.2rem;
-    font-style: italic;
+.releaseSpan {
+  padding-left: 1.5rem;
+  margin-left: 1.1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+  font-style: italic;
 }
