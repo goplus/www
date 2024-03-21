@@ -301,7 +301,7 @@ export default function Home({
           </p>
           <p className={styles.description}>
           See the 
-          {" "}<a
+            {" "}<a
               href="https://github.com/goplus/gop/releases"
               className={styles.link}
               target="_blank"
