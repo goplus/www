@@ -19,7 +19,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Download',
-    href: 'https://goplus.org/download',
+    href: 'www-git-fork-jaamiezheng-master-goplus.vercel.app/download',
     isBlank: false
   },
   {
