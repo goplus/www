@@ -4,7 +4,7 @@
 import React, { useState } from 'react'
 
 import { NavItemInfo, navItems } from '../common'
-import GithubIcon from '../GithubIcon'
+import GitHubIcon from '../GitHubIcon'
 import Logo from '../../Icon/Logo'
 import styles from './style.module.scss'
 
@@ -29,7 +29,7 @@ export default function Header() {
         </a>
         <div className={styles.operations}>
           <a href="https://github.com/goplus/gop" className={styles.githubLink} target="_blank" rel="noreferrer">
-            <GithubIcon />
+            <GitHubIcon />
           </a>
           <button className={styles.expandBtn} onClick={handleExpandBtnClick}>
             <CloseIcon visible={expanded} />
