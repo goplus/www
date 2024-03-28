@@ -289,7 +289,7 @@ export default function Home({
             </a>. 
           </p>
           <p className={styles.description}>
-          If you are building from source, you can also find instruction in the <a
+          If you are building from source, you can also find instructions in the <a
               href="https://github.com/goplus/gop?tab=readme-ov-file#from-source-code"
               className={styles.link}
               target="_blank"
@@ -299,15 +299,14 @@ export default function Home({
             </a>.
           </p>
           <p className={styles.description}>
-          See the 
-          &nbsp;<a
+          See the&nbsp;<a
               href="https://github.com/goplus/gop/releases"
               className={styles.link}
               target="_blank"
               rel="noopener noreferrer"
             >
               release history
-            </a>&nbsp; for more information about Go+ releases.
+            </a>&nbsp;for more information about Go+ releases.
           </p>
           <h2 className={styles.titleH2}>Featured downloads </h2>
 
@@ -316,7 +315,7 @@ export default function Home({
               href={latestWinAsset.browser_download_url}
               className={styles.downloadBox}
             >
-              <h4 className={styles.downloadBoxTitle}>Microsoft Windows</h4>
+              <h4 className={styles.downloadBoxTitle}>Microsoft Windows </h4>
               <p className={styles.downloadBoxP}>
                 Windows 10 or later, Intel 64-bit processor
               </p>
@@ -367,29 +366,15 @@ export default function Home({
             <a
               href={StableRelease.zipball_url}
               className={styles.downloadBox}
-              download={StableRelease.name + "_source_code.zip"}
             >
               <h4 className={styles.downloadBoxTitle}>Source Code</h4>
               <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
               <span className={styles.downloadBoxLink}>
                 &nbsp;
-                &quot;.zip&quot; file of source_code
+                {"gop_"+StableRelease.tag_name+".src.zip"}
               </span>
             </a>
           </div>
-
-          <p className={styles.description}>
-            Get the latest version of&nbsp;
-            <a
-              href="https://github.com/goplus/gop"
-              className={styles.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Go+
-            </a>&nbsp;
-            language from GitHub.
-          </p>
           <h2 className={styles.titleH2}>Stable versions</h2>
           <ul className={styles.releaseList}>
             <li key={StableRelease.id}>
@@ -433,10 +418,10 @@ export default function Home({
                             href={StableRelease.zipball_url}
                             download={StableRelease.name + "_source_code.zip"}
                           >
-                            &quot;.zip&quot; file of source_code
+                            {"gop_"+StableRelease.tag_name+".src.zip"}
                           </a>
                         </td>
-                        <td>Archive</td>
+                        <td>Source</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -493,10 +478,10 @@ export default function Home({
                                     href={release.zipball_url}
                                     download="source_code.zip"
                                   >
-                                    &quot;.zip&quot; file of source_code
+                                    {"gop_"+release.tag_name+".src.zip"}
                                   </a>
                                 </td>
-                                <td>Archive</td>
+                                <td>Source</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -539,10 +524,10 @@ export default function Home({
                                     className={styles.link}
                                     href={release.zipball_url}
                                   >
-                                    &quot;.zip&quot; file of source_code
+                                    {"gop_"+release.tag_name+".src.zip"}
                                   </a>
                                 </td>
-                                <td>Archive</td>
+                                <td>Source</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
