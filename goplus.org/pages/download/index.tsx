@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NextApiRequest, NextApiResponse } from "next"
-import styles from "pages/download/style.module.scss"
+import styles from "./style.module.scss"
 import Layout from "components/Layout"
 import ArrowDown from "components/Icon/DownArrow"
 import ArrowUp from "components/Icon/UpArrow"
@@ -106,7 +106,7 @@ function createaUploader(): Uploader {
   }
 }
 
-function createaAsset(): Asset {
+function createEmptyAsset(): Asset {
   return {
     url: "",
     id: 0,
@@ -262,7 +262,7 @@ export default function Home({
       )
     }
     if (latestAsset === undefined) {
-      latestAsset = createaAsset()
+      latestAsset = createEmptyAsset()
     }
     return latestAsset
   }
@@ -270,7 +270,7 @@ export default function Home({
   const latestWinAsset = getTarGz(StableRelease.assets, "win", "x86_64") //Win's asset is .zip file.
   const latestMacOSx86Asset = getTarGz(StableRelease.assets, "macOS", "x86_64")
   const latestMacOSarmAsset = getTarGz(StableRelease.assets, "macOS", "arm")
-  const latestLinuxarmAsset = getTarGz(StableRelease.assets, "linux", "x86_64")
+  const latestLinuxX86Asset = getTarGz(StableRelease.assets, "linux", "x86_64")
 
   return (
     <Layout>
@@ -278,37 +278,36 @@ export default function Home({
         <main className={styles.main}>
           <h1 className={styles.title}>All releases</h1>
           <p className={styles.description}>
-            After downloading a binary release suitable for your system, please follow the {" "}
+            After downloading a binary release suitable for your system, please follow the &nbsp;
             <a
               href="https://github.com/goplus/gop?tab=readme-ov-file#how-to-install"
               className={styles.link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              installation instruction
-            </a>{" "}
-            . 
+              installation instructions
+            </a>. 
           </p>
           <p className={styles.description}>
-          If you download source code, you can also find instruction in the <a
+          If you are building from source, you can also find instruction in the <a
               href="https://github.com/goplus/gop?tab=readme-ov-file#from-source-code"
               className={styles.link}
               target="_blank"
               rel="noopener noreferrer"
             >
               document
-            </a>{" "}.
+            </a>.
           </p>
           <p className={styles.description}>
           See the 
-            {" "}<a
+          &nbsp;<a
               href="https://github.com/goplus/gop/releases"
               className={styles.link}
               target="_blank"
               rel="noopener noreferrer"
             >
               release history
-            </a>{" "} for more information about Go+ releases.
+            </a>&nbsp; for more information about Go+ releases.
           </p>
           <h2 className={styles.titleH2}>Featured downloads </h2>
 
@@ -353,7 +352,7 @@ export default function Home({
             </a>
 
             <a
-              href={latestLinuxarmAsset.browser_download_url}
+              href={latestLinuxX86Asset.browser_download_url}
               className={styles.downloadBox}
             >
               <h4 className={styles.downloadBoxTitle}>Linux (x86_64)</h4>
@@ -361,7 +360,7 @@ export default function Home({
                 Linux 2.6.32 or later, Intel 64-bit processor
               </p>
               <span className={styles.downloadBoxLink}>
-                {latestLinuxarmAsset.name}
+                {latestLinuxX86Asset.name}
               </span>
             </a>
             {/* source code zipball_url */}
@@ -373,14 +372,14 @@ export default function Home({
               <h4 className={styles.downloadBoxTitle}>Source Code</h4>
               <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
               <span className={styles.downloadBoxLink}>
-                {" "}
+                &nbsp;
                 &quot;.zip&quot; file of source_code
               </span>
             </a>
           </div>
 
           <p className={styles.description}>
-            Get the latest version of{" "}
+            Get the latest version of&nbsp;
             <a
               href="https://github.com/goplus/gop"
               className={styles.link}
@@ -388,7 +387,7 @@ export default function Home({
               rel="noopener noreferrer"
             >
               Go+
-            </a>{" "}
+            </a>&nbsp;
             language from GitHub.
           </p>
           <h2 className={styles.titleH2}>Stable versions</h2>
