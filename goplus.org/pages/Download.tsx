@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { NextApiRequest, NextApiResponse } from "next"
 import styles from "pages/style.module.scss"
 import Layout from "components/Layout"
@@ -579,6 +579,7 @@ export async function getServerSideProps({
   const response = await fetch(
     "https://api.github.com/repos/goplus/gop/releases"
   )
+  
   let data: GitHubRelease[] = await response.json()
   const releases = data.filter((Release) => {
     const splitTagName = Release.tag_name.split("-")
