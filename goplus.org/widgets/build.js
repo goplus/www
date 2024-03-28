@@ -1,5 +1,5 @@
 const { resolve, join } = require('path')
-const { readFileSync, outputFileSync, readdirSync } = require('fs-extra')
+const { readFileSync, outputFileSync, readdirSync, copyFileSync, ensureDirSync } = require('fs-extra')
 const { loadEnvConfig } = require('@next/env')
 const { runCompiler } = require('next/dist/build/compiler')
 const getBaseWebpackConfig = require('next/dist/build/webpack-config')
@@ -13,7 +13,8 @@ const dir = resolve('.')
 const widgetsSrcPath = resolve('widgets')
 const widgetsGlobalScriptsPath = join(widgetsSrcPath, 'global')
 const widgetEntriesPath = join(widgetsSrcPath, 'entries')
-const outputPath = resolve('.next')
+const outputPath = resolve('.widget')
+const nextOutputPath = resolve('.next')
 const publicDirPath = resolve('public')
 const widgetsPublicDirPath = join(publicDirPath, 'widgets')
 
@@ -156,6 +157,19 @@ async function main(isDev = false) {
     })
   }
   await flushAllTraces()
+
+  ;['chunks', 'media', 'widgets'].forEach(folder => {
+    const folderPath = join(outputPath, 'static', folder)
+    const nextFolderPath = join(nextOutputPath, 'static', folder)
+    ensureDirSync(nextFolderPath)
+    const files = readdirSync(folderPath)
+    files.forEach(fileName => {
+      const filePath = join(folderPath, fileName)
+      copyFileSync(filePath, join(nextOutputPath, 'static', folder, fileName))
+      console.log('copied', filePath, join(nextFolderPath, fileName))
+    })
+  })
+
   console.log('done')
   process.exit(0)
 }
