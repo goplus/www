@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NextApiRequest, NextApiResponse } from "next"
-import styles from "pages/style.module.scss"
+import styles from "pages/download/style.module.scss"
 import Layout from "components/Layout"
 import ArrowDown from "components/Icon/DownArrow"
 import ArrowUp from "components/Icon/UpArrow"
