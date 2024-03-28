@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useUrl } from 'hooks/url'
 import { NavItemInfo, navItems } from '../common'
-import GithubIcon from '../GithubIcon'
+import GitHubIcon from '../GitHubIcon'
 import Logo from '../../Icon/Logo'
 import styles from './style.module.scss'
 
@@ -20,7 +20,7 @@ export default function Nav() {
             <NavItem key={index} {...item} />
           ))}
           <a className={styles.githubLink} href="https://github.com/goplus/gop" target="_blank" rel="noreferrer">
-            <GithubIcon />
+            <GitHubIcon />
           </a>
         </div>
       </div>

@@ -16,7 +16,7 @@ export default function Footer(props: { className?: string }) {
       </div>
       <div className={styles.links}>
         <a href="https://github.com/goplus/gop" rel="noreferrer">
-          Github <ArrowIcon />
+          GitHub <ArrowIcon />
         </a>
         <a href="https://github.com/goplus/gop/blob/main/LICENSE" rel="noreferrer">
           License <ArrowIcon />
