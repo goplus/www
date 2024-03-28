@@ -27,7 +27,7 @@
     "pages/index.ts",
     "pages/index.js",
     "pages/index.mdx"
- ],
+  ],
   "exclude": [
     "node_modules",
     "widgets/global/**/*.ts"
