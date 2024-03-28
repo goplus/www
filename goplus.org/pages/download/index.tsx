@@ -574,11 +574,9 @@ export async function getServerSideProps({
     "Cache-Control",
     "public, s-maxage=600, stale-while-revalidate=60max"
   )
-
   const response = await fetch(
     "https://api.github.com/repos/goplus/gop/releases"
   )
-  
   let data: GitHubRelease[] = await response.json()
   const releases = data.filter((Release) => {
     const splitTagName = Release.tag_name.split("-")
