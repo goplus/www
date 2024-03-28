@@ -27,6 +27,7 @@ function getMonacoOptions(isMobile: boolean) {
       horizontalScrollbarSize: scrollbarSize,
       verticalScrollbarSize: scrollbarSize
     },
+    scrollBeyondLastLine: false,
     overviewRulerLanes: 0
   }
   return monacoOptions
