@@ -387,49 +387,50 @@ export default function Home({
                 {selectedRelease === StableRelease.id && <ArrowUp />}
               </div>
               {selectedRelease === StableRelease.id && (
-                <ul className={styles.releaseList}>
-                  <table className={styles.downloadTable}>
-                    <thead className={styles.downloadTableHeader}>
-                      <th>File name</th>
-                      <th>Kind</th>
-                      <th>OS</th>
-                      <th>Arch</th>
-                      <th>Size</th>
-                      {/* ToDo */}
-                      {/* <th>SHA256 Checksum</th> */}
-                    </thead>
-                    <tbody>
-                      {StableRelease.assets.map((asset) => (
-                        <tr className={styles.tableHighlight} key={asset.id}>
-                          <DownloadTable
-                            browser_download_url={asset.browser_download_url}
-                            name={asset.name}
-                            Size={asset.size}
-                          />
+                <div className={styles.releaseAssetListDiv}>
+                  <ul className={styles.releaseAssetList}>
+                    <table className={styles.downloadTable}>
+                      <thead className={styles.downloadTableHeader}>
+                        <th>File name</th>
+                        <th>Kind</th>
+                        <th>OS</th>
+                        <th>Arch</th>
+                        <th>Size</th>
+                        {/* ToDo */}
+                        {/* <th>SHA256 Checksum</th> */}
+                      </thead>
+                      <tbody>
+                        {StableRelease.assets.map((asset) => (
+                          <tr className={styles.tableHighlight} key={asset.id}>
+                            <DownloadTable
+                              browser_download_url={asset.browser_download_url}
+                              name={asset.name}
+                              Size={asset.size}
+                            />
+                          </tr>
+                        ))}
+                        <tr
+                          className={styles.tableHighlight}
+                          key={StableRelease.id}
+                        >
+                          <td className={styles.filename}>
+                            <a
+                              className={styles.link}
+                              href={StableRelease.zipball_url}
+                              download={StableRelease.name + "_source_code.zip"}
+                            >
+                              {"gop_"+StableRelease.tag_name+".src.zip"}
+                            </a>
+                          </td>
+                          <td>Source</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
-                      ))}
-                      <tr
-                        className={styles.tableHighlight}
-                        key={StableRelease.id}
-                      >
-                        <td className={styles.filename}>
-                          <a
-                            className={styles.link}
-                            href={StableRelease.zipball_url}
-                            download={StableRelease.name + "_source_code.zip"}
-                          >
-                            {"gop_"+StableRelease.tag_name+".src.zip"}
-                          </a>
-                        </td>
-                        <td>Source</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </ul>
-              )}
+                      </tbody>
+                    </table>
+                  </ul>
+                </div>)}
             </li>
           </ul>
           <h2 onClick={toggleContentVisibility} className={styles.titleH2} style={{ cursor: "pointer" }}>
@@ -455,87 +456,90 @@ export default function Home({
                       {selectedRelease === release.id && <ArrowUp />}
                     </div>
                     {selectedRelease === release.id && (
-                      <ul className={styles.releaseList}>
-                        {release.assets.length === 0 && (
-                          <table className={styles.downloadTable}>
-                            <thead className={styles.downloadTableHeader}>
-                              <th>File name</th>
-                              <th>Kind</th>
-                              <th>OS</th>
-                              <th>Arch</th>
-                              <th>Size</th>
-                              {/* ToDo */}
-                              {/* <th>SHA256 Checksum</th> */}
-                            </thead>
-                            <tbody>
-                              <tr
-                                className={styles.tableHighlight}
-                                key={release.id}
-                              >
-                                <td className={styles.filename}>
-                                  <a
-                                    className={styles.link}
-                                    href={release.zipball_url}
-                                    download="source_code.zip"
-                                  >
-                                    {"gop_"+release.tag_name+".src.zip"}
-                                  </a>
-                                </td>
-                                <td>Source</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        )}
-                        {release.assets.length != 0 && (
-                          <table className={styles.downloadTable}>
-                            <thead className={styles.downloadTableHeader}>
-                              <th>File name</th>
-                              <th>Kind</th>
-                              <th>OS</th>
-                              <th>Arch</th>
-                              <th>Size</th>
-                              {/* ToDo */}
-                              {/* <th>SHA256 Checksum</th> */}
-                            </thead>
-                            <tbody>
-                              {release.assets.map((asset) => (
+                      <div className={styles.releaseAssetListDiv}>
+                        <ul className={styles.releaseAssetList}>
+                          {release.assets.length === 0 && (
+                              <table className={styles.downloadTable}>
+                                <thead className={styles.downloadTableHeader}>
+                                  <th>File name</th>
+                                  <th>Kind</th>
+                                  <th>OS</th>
+                                  <th>Arch</th>
+                                  <th>Size</th>
+                                  {/* ToDo */}
+                                  {/* <th>SHA256 Checksum</th> */}
+                                </thead>
+                                <tbody>
                                 <tr
                                   className={styles.tableHighlight}
-                                  key={asset.id}
+                                  key={release.id}
                                 >
-                                  <DownloadTable
-                                    browser_download_url={
-                                      asset.browser_download_url
-                                    }
-                                    name={asset.name}
-                                    Size={asset.size}
-                                  />
+                                  <td className={styles.filename}>
+                                    <a
+                                      className={styles.link}
+                                      href={release.zipball_url}
+                                      download="source_code.zip"
+                                    >
+                                      {"gop_"+release.tag_name+".src.zip"}
+                                    </a>
+                                  </td>
+                                  <td>Source</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
                                 </tr>
-                              ))}
-                              <tr
-                                className={styles.tableHighlight}
-                                key={release.id}
-                              >
-                                <td className={styles.filename}>
-                                  <a
-                                    className={styles.link}
-                                    href={release.zipball_url}
-                                  >
-                                    {"gop_"+release.tag_name+".src.zip"}
-                                  </a>
-                                </td>
-                                <td>Source</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                </tbody>
+                              </table>
+                            
                         )}
-                      </ul>
+                        {release.assets.length != 0 && (
+                              <table className={styles.downloadTable}>
+                                <thead className={styles.downloadTableHeader}>
+                                  <th>File name</th>
+                                  <th>Kind</th>
+                                  <th>OS</th>
+                                  <th>Arch</th>
+                                  <th>Size</th>
+                                  {/* ToDo */}
+                                  {/* <th>SHA256 Checksum</th> */}
+                                </thead>
+                                <tbody>
+                                  {release.assets.map((asset) => (
+                                    <tr
+                                      className={styles.tableHighlight}
+                                      key={asset.id}
+                                    >
+                                      <DownloadTable
+                                        browser_download_url={
+                                          asset.browser_download_url
+                                        }
+                                        name={asset.name}
+                                        Size={asset.size}
+                                      />
+                                    </tr>
+                                  ))}
+                                  <tr
+                                    className={styles.tableHighlight}
+                                    key={release.id}
+                                  >
+                                    <td className={styles.filename}>
+                                      <a
+                                        className={styles.link}
+                                        href={release.zipball_url}
+                                      >
+                                        {"gop_"+release.tag_name+".src.zip"}
+                                      </a>
+                                    </td>
+                                    <td>Source</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                            </table>  
+                        )}
+                        </ul>
+                      </div>
                     )}
                   </li>
                 ))}
