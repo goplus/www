@@ -1,39 +1,19 @@
 @import "~utils/index.scss";
 
-
-
-@include pc {
-  .container {
-    @include centered;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    font-size: 1.2rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-      sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  }
-  .main{
-      display: block;
-  }
+.container {
+  @include centered;
+  font-size: 1.2rem;
+}
+.main{
+    display: block;
 }
 
 @include mobile {
+  
   .main{
-      display: block;
-      max-width: 75.75rem;
-      margin-top: -1rem;
-      margin-right: auto;
-      margin-bottom: 1.875rem;
-      margin-left: auto;
-      padding-top: 0px;
-      padding-right: 1.5rem;
-      padding-bottom: 0px;
-      padding-left: 1.5rem;
+    padding: 0px 16px;
   }
 }
-
-
 
 .title{
   font-size: 2.25rem;
@@ -167,8 +147,7 @@ padding: 0 1.5rem;
     padding-left: 0px;
     }
   .downloadTable {
-    width: 100%;
-    border-collapse: collapse;
+    width: 50rem;
     display: table;
     border-collapse: separate;
     box-sizing: border-box;
@@ -196,20 +175,12 @@ padding: 0 1.5rem;
   .releaseAssetListDiv{
     padding-right: 1rem;
     overflow-x: auto;
-    width: 100%;
+    // width: 100%;
     -webkit-overflow-scrolling: touch;
   }
   .releasAssetList {
     padding-left: 0px;
   }
-}
-
-.downloadTableHeader {
-vertical-align: middle;
-border-color: inherit;
-display: table-row;
-vertical-align: inherit;
-border-color: inherit;
 }
 
 .tableHighlight {

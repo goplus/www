@@ -176,8 +176,6 @@ function DownloadTable({
     fillContent = "Source"
   } else if (name.endsWith(".zip") || name.endsWith(".tar.gz")) {
     fillContent = "Archive"
-  } else if (name.endsWith(".pkg") || name.endsWith(".msi")) {
-    fillContent = "Installer"
   } else {
     fillContent = " "
   }
@@ -317,7 +315,7 @@ export default function Home({
             >
               <h4 className={styles.downloadBoxTitle}>Microsoft Windows </h4>
               <p className={styles.downloadBoxP}>
-                Windows 10 or later, Intel 64-bit processor
+                Windows, Intel 64-bit processor
               </p>
               <span className={styles.downloadBoxLink}>
                 {latestWinAsset.name}
@@ -330,7 +328,7 @@ export default function Home({
             >
               <h4 className={styles.downloadBoxTitle}>Apple MacOS (X86_64)</h4>
               <p className={styles.downloadBoxP}>
-                macOS 10.15 or later, Intel 64-bit processor
+                MacOS, Intel 64-bit processor
               </p>
               <span className={styles.downloadBoxLink}>
                 {latestMacOSx86Asset.name}
@@ -343,7 +341,7 @@ export default function Home({
             >
               <h4 className={styles.downloadBoxTitle}>Apple MacOS (ARM64)</h4>
               <p className={styles.downloadBoxP}>
-                macOS 11 or later, Apple 64-bit processor
+                MacOS, Apple 64-bit processor
               </p>
               <span className={styles.downloadBoxLink}>
                 {latestMacOSarmAsset.name}
@@ -356,7 +354,7 @@ export default function Home({
             >
               <h4 className={styles.downloadBoxTitle}>Linux (x86_64)</h4>
               <p className={styles.downloadBoxP}>
-                Linux 2.6.32 or later, Intel 64-bit processor
+                Linux, Intel 64-bit processor
               </p>
               <span className={styles.downloadBoxLink}>
                 {latestLinuxX86Asset.name}
@@ -391,11 +389,11 @@ export default function Home({
                   <ul className={styles.releaseAssetList}>
                     <table className={styles.downloadTable}>
                       <thead className={styles.downloadTableHeader}>
-                        <th>File name</th>
-                        <th>Kind</th>
-                        <th>OS</th>
-                        <th>Arch</th>
-                        <th>Size</th>
+                        <th style={{width: "24rem"}}>File name</th>
+                        <th style={{width: "12rem"}}>Kind</th>
+                        <th style={{width: "10rem"}}>OS</th>
+                        <th style={{width: "10rem"}}>Arch</th>
+                        <th style={{width: "10rem"}}>Size</th>
                         {/* ToDo */}
                         {/* <th>SHA256 Checksum</th> */}
                       </thead>
@@ -461,11 +459,11 @@ export default function Home({
                           {release.assets.length === 0 && (
                             <table className={styles.downloadTable}>
                               <thead className={styles.downloadTableHeader}>
-                                <th>File name</th>
-                                <th>Kind</th>
-                                <th>OS</th>
-                                <th>Arch</th>
-                                <th>Size</th>
+                                <th style={{width: "24rem"}}>File name</th>
+                                <th style={{width: "12rem"}}>Kind</th>
+                                <th style={{width: "10rem"}}>OS</th>
+                                <th style={{width: "10rem"}}>Arch</th>
+                                <th style={{width: "10rem"}}>Size</th>
                                 {/* ToDo */}
                                 {/* <th>SHA256 Checksum</th> */}
                               </thead>
@@ -494,11 +492,11 @@ export default function Home({
                           {release.assets.length != 0 && (
                             <table className={styles.downloadTable}>
                               <thead className={styles.downloadTableHeader}>
-                                <th>File name</th>
-                                <th>Kind</th>
-                                <th>OS</th>
-                                <th>Arch</th>
-                                <th>Size</th>
+                                <th style={{width: "24rem"}}>File name</th>
+                                <th style={{width: "12rem"}}>Kind</th>
+                                <th style={{width: "10rem"}}>OS</th>
+                                <th style={{width: "10rem"}}>Arch</th>
+                                <th style={{width: "10rem"}}>Size</th>
                                 {/* ToDo */}
                                 {/* <th>SHA256 Checksum</th> */}
                               </thead>
