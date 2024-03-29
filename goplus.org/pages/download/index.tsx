@@ -459,17 +459,17 @@ export default function Home({
                       <div className={styles.releaseAssetListDiv}>
                         <ul className={styles.releaseAssetList}>
                           {release.assets.length === 0 && (
-                              <table className={styles.downloadTable}>
-                                <thead className={styles.downloadTableHeader}>
-                                  <th>File name</th>
-                                  <th>Kind</th>
-                                  <th>OS</th>
-                                  <th>Arch</th>
-                                  <th>Size</th>
-                                  {/* ToDo */}
-                                  {/* <th>SHA256 Checksum</th> */}
-                                </thead>
-                                <tbody>
+                            <table className={styles.downloadTable}>
+                              <thead className={styles.downloadTableHeader}>
+                                <th>File name</th>
+                                <th>Kind</th>
+                                <th>OS</th>
+                                <th>Arch</th>
+                                <th>Size</th>
+                                {/* ToDo */}
+                                {/* <th>SHA256 Checksum</th> */}
+                              </thead>
+                              <tbody>
                                 <tr
                                   className={styles.tableHighlight}
                                   key={release.id}
@@ -488,56 +488,55 @@ export default function Home({
                                   <td></td>
                                   <td></td>
                                 </tr>
-                                </tbody>
-                              </table>
-                            
-                        )}
-                        {release.assets.length != 0 && (
-                              <table className={styles.downloadTable}>
-                                <thead className={styles.downloadTableHeader}>
-                                  <th>File name</th>
-                                  <th>Kind</th>
-                                  <th>OS</th>
-                                  <th>Arch</th>
-                                  <th>Size</th>
-                                  {/* ToDo */}
-                                  {/* <th>SHA256 Checksum</th> */}
-                                </thead>
-                                <tbody>
-                                  {release.assets.map((asset) => (
-                                    <tr
-                                      className={styles.tableHighlight}
-                                      key={asset.id}
-                                    >
-                                      <DownloadTable
-                                        browser_download_url={
-                                          asset.browser_download_url
-                                        }
-                                        name={asset.name}
-                                        Size={asset.size}
-                                      />
-                                    </tr>
-                                  ))}
+                              </tbody>
+                            </table>
+                          )}
+                          {release.assets.length != 0 && (
+                            <table className={styles.downloadTable}>
+                              <thead className={styles.downloadTableHeader}>
+                                <th>File name</th>
+                                <th>Kind</th>
+                                <th>OS</th>
+                                <th>Arch</th>
+                                <th>Size</th>
+                                {/* ToDo */}
+                                {/* <th>SHA256 Checksum</th> */}
+                              </thead>
+                              <tbody>
+                                {release.assets.map((asset) => (
                                   <tr
                                     className={styles.tableHighlight}
-                                    key={release.id}
+                                    key={asset.id}
                                   >
-                                    <td className={styles.filename}>
-                                      <a
-                                        className={styles.link}
-                                        href={release.zipball_url}
-                                      >
-                                        {"gop_"+release.tag_name+".src.zip"}
-                                      </a>
-                                    </td>
-                                    <td>Source</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <DownloadTable
+                                      browser_download_url={
+                                        asset.browser_download_url
+                                      }
+                                      name={asset.name}
+                                      Size={asset.size}
+                                    />
                                   </tr>
-                                </tbody>
+                                ))}
+                                <tr
+                                  className={styles.tableHighlight}
+                                  key={release.id}
+                                >
+                                  <td className={styles.filename}>
+                                    <a
+                                      className={styles.link}
+                                      href={release.zipball_url}
+                                    >
+                                      {"gop_"+release.tag_name+".src.zip"}
+                                    </a>
+                                  </td>
+                                  <td>Source</td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                              </tbody>
                             </table>  
-                        )}
+                          )}
                         </ul>
                       </div>
                     )}
