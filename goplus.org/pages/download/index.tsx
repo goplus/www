@@ -276,7 +276,7 @@ export default function Home({
         <main className={styles.main}>
           <h1 className={styles.title}>All releases</h1>
           <p className={styles.description}>
-            After downloading a binary release suitable for your system, please follow the &nbsp;
+            After downloading a binary release suitable for your system, please follow the&nbsp;
             <a
               href="https://github.com/goplus/gop?tab=readme-ov-file#how-to-install"
               className={styles.link}
@@ -386,48 +386,45 @@ export default function Home({
               </div>
               {selectedRelease === StableRelease.id && (
                 <div className={styles.releaseAssetListDiv}>
-                  <ul className={styles.releaseAssetList}>
-                    <table className={styles.downloadTable}>
-                      <thead className={styles.downloadTableHeader}>
-                        <th style={{width: "24rem"}}>File name</th>
-                        <th style={{width: "12rem"}}>Kind</th>
-                        <th style={{width: "10rem"}}>OS</th>
-                        <th style={{width: "10rem"}}>Arch</th>
-                        <th style={{width: "10rem"}}>Size</th>
-                        {/* ToDo */}
-                        {/* <th>SHA256 Checksum</th> */}
-                      </thead>
-                      <tbody>
-                        {StableRelease.assets.map((asset) => (
-                          <tr className={styles.tableHighlight} key={asset.id}>
-                            <DownloadTable
-                              browser_download_url={asset.browser_download_url}
-                              name={asset.name}
-                              Size={asset.size}
-                            />
-                          </tr>
-                        ))}
-                        <tr
-                          className={styles.tableHighlight}
-                          key={StableRelease.id}
-                        >
-                          <td className={styles.filename}>
-                            <a
-                              className={styles.link}
-                              href={StableRelease.zipball_url}
-                              download={StableRelease.name + "_source_code.zip"}
-                            >
-                              {"gop_"+StableRelease.tag_name+".src.zip"}
-                            </a>
-                          </td>
-                          <td>Source</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                  <table className={styles.downloadTable}>
+                    <thead className={styles.downloadTableHeader}>
+                      <th className={styles.downloadTableHeaderName}>File name</th>
+                      <th className={styles.downloadTableHeaderKind}>Kind</th>
+                      <th className={styles.downloadTableHeaderOs}>OS</th>
+                      <th className={styles.downloadTableHeaderArch}>Arch</th>
+                      <th className={styles.downloadTableHeaderSize}>Size</th>
+                      {/* ToDo */}
+                      {/* <th>SHA256 Checksum</th> */}
+                    </thead>
+                    <tbody>
+                      {StableRelease.assets.map((asset) => (
+                        <tr className={styles.tableHighlight} key={asset.id}>
+                          <DownloadTable
+                            browser_download_url={asset.browser_download_url}
+                            name={asset.name}
+                            Size={asset.size}
+                          />
                         </tr>
-                      </tbody>
-                    </table>
-                  </ul>
+                      ))}
+                      <tr
+                        className={styles.tableHighlight}
+                        key={StableRelease.id}
+                      >
+                        <td className={styles.filename}>
+                          <a
+                            className={styles.link}
+                            href={StableRelease.zipball_url}
+                          >
+                            {"gop_"+StableRelease.tag_name+".src.zip"}
+                          </a>
+                        </td>
+                        <td>Source</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>)}
             </li>
           </ul>
@@ -455,87 +452,85 @@ export default function Home({
                     </div>
                     {selectedRelease === release.id && (
                       <div className={styles.releaseAssetListDiv}>
-                        <ul className={styles.releaseAssetList}>
-                          {release.assets.length === 0 && (
-                            <table className={styles.downloadTable}>
-                              <thead className={styles.downloadTableHeader}>
-                                <th style={{width: "24rem"}}>File name</th>
-                                <th style={{width: "12rem"}}>Kind</th>
-                                <th style={{width: "10rem"}}>OS</th>
-                                <th style={{width: "10rem"}}>Arch</th>
-                                <th style={{width: "10rem"}}>Size</th>
-                                {/* ToDo */}
-                                {/* <th>SHA256 Checksum</th> */}
-                              </thead>
-                              <tbody>
-                                <tr
-                                  className={styles.tableHighlight}
-                                  key={release.id}
-                                >
-                                  <td className={styles.filename}>
-                                    <a
-                                      className={styles.link}
-                                      href={release.zipball_url}
-                                      download="source_code.zip"
-                                    >
-                                      {"gop_"+release.tag_name+".src.zip"}
-                                    </a>
-                                  </td>
-                                  <td>Source</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          )}
-                          {release.assets.length != 0 && (
-                            <table className={styles.downloadTable}>
-                              <thead className={styles.downloadTableHeader}>
-                                <th style={{width: "24rem"}}>File name</th>
-                                <th style={{width: "12rem"}}>Kind</th>
-                                <th style={{width: "10rem"}}>OS</th>
-                                <th style={{width: "10rem"}}>Arch</th>
-                                <th style={{width: "10rem"}}>Size</th>
-                                {/* ToDo */}
-                                {/* <th>SHA256 Checksum</th> */}
-                              </thead>
-                              <tbody>
-                                {release.assets.map((asset) => (
-                                  <tr
-                                    className={styles.tableHighlight}
-                                    key={asset.id}
+                        {release.assets.length === 0 && (
+                          <table className={styles.downloadTable}>
+                            <thead className={styles.downloadTableHeader}>
+                              <th className={styles.downloadTableHeaderName}>File name</th>
+                              <th className={styles.downloadTableHeaderKind}>Kind</th>
+                              <th className={styles.downloadTableHeaderOs}>OS</th>
+                              <th className={styles.downloadTableHeaderArch}>Arch</th>
+                              <th className={styles.downloadTableHeaderSize}>Size</th>
+                              {/* ToDo */}
+                              {/* <th>SHA256 Checksum</th> */}
+                            </thead>
+                            <tbody>
+                              <tr
+                                className={styles.tableHighlight}
+                                key={release.id}
+                              >
+                                <td className={styles.filename}>
+                                  <a
+                                    className={styles.link}
+                                    href={release.zipball_url}
+                                    download="source_code.zip"
                                   >
-                                    <DownloadTable
-                                      browser_download_url={
-                                        asset.browser_download_url
-                                      }
-                                      name={asset.name}
-                                      Size={asset.size}
-                                    />
-                                  </tr>
-                                ))}
+                                    {"gop_"+release.tag_name+".src.zip"}
+                                  </a>
+                                </td>
+                                <td>Source</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        )}
+                        {release.assets.length != 0 && (
+                          <table className={styles.downloadTable}>
+                            <thead className={styles.downloadTableHeader}>
+                              <th className={styles.downloadTableHeaderName}>File name</th>
+                              <th className={styles.downloadTableHeaderKind}>Kind</th>
+                              <th className={styles.downloadTableHeaderOs}>OS</th>
+                              <th className={styles.downloadTableHeaderArch}>Arch</th>
+                              <th className={styles.downloadTableHeaderSize}>Size</th>
+                              {/* ToDo */}
+                              {/* <th>SHA256 Checksum</th> */}
+                            </thead>
+                            <tbody>
+                              {release.assets.map((asset) => (
                                 <tr
                                   className={styles.tableHighlight}
-                                  key={release.id}
+                                  key={asset.id}
                                 >
-                                  <td className={styles.filename}>
-                                    <a
-                                      className={styles.link}
-                                      href={release.zipball_url}
-                                    >
-                                      {"gop_"+release.tag_name+".src.zip"}
-                                    </a>
-                                  </td>
-                                  <td>Source</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
+                                  <DownloadTable
+                                    browser_download_url={
+                                      asset.browser_download_url
+                                    }
+                                    name={asset.name}
+                                    Size={asset.size}
+                                  />
                                 </tr>
-                              </tbody>
-                            </table>  
-                          )}
-                        </ul>
+                              ))}
+                              <tr
+                                className={styles.tableHighlight}
+                                key={release.id}
+                              >
+                                <td className={styles.filename}>
+                                  <a
+                                    className={styles.link}
+                                    href={release.zipball_url}
+                                  >
+                                    {"gop_"+release.tag_name+".src.zip"}
+                                  </a>
+                                </td>
+                                <td>Source</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>  
+                        )}
                       </div>
                     )}
                   </li>

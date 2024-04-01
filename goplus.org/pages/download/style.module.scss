@@ -4,23 +4,22 @@
   @include centered;
   font-size: 1.2rem;
 }
-.main{
-    display: block;
+.main {
+  display: block;
 }
 
 @include mobile {
-  
-  .main{
+  .main {
     padding: 0px 16px;
   }
 }
 
-.title{
+.title {
   font-size: 2.25rem;
   font-weight: bold;
 }
 
-.titleH2{
+.titleH2 {
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -38,174 +37,156 @@
 }
 
 .link {
-color: #007d9c;
-text-decoration: none;
+  color: #007d9c;
+  text-decoration: none;
 }
 
 .link:hover {
-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .downloadWrapper {
-display: flex;
-flex-wrap: wrap;
-gap: 0.5rem;
-margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .downloadBox {
-display: flex;
-flex-direction: column;
-color: rgba(0, 0, 0, 0.5);
-background: #f8f8f8;
-width: 14rem;
-height: 9rem;
-float: left;
-padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.5);
+  background: #f8f8f8;
+  width: 14rem;
+  height: 9rem;
+  float: left;
+  padding: 1rem;
 }
 
 .downloadBoxTitle {
-font-size: large;
-width: auto;
-margin-top: 0.15rem;
-margin-bottom: 0.1rem;
+  font-size: large;
+  width: auto;
+  margin-top: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
 .downloadBoxP {
-width: auto;
-font-weight: 400;
-font-size: 0.95rem;
-line-height: 1rem;
-margin-top: 0.7rem;
-margin-bottom: auto;
-color: #6e7072;
+  width: auto;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1rem;
+  margin-top: 0.7rem;
+  margin-bottom: auto;
+  color: #6e7072;
 }
 
 .downloadBoxLink {
-width: auto;
-color: #007d9c;
-text-decoration: none;
-font-weight: 400;
-font-size: 0.85rem;
-margin-top: auto;
+  width: auto;
+  color: #007d9c;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-top: auto;
 }
 
 .downloadBoxLink:hover {
-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .grid {
-color: #202224;
-margin: 0 auto 1.875rem;
-max-width: 75.75rem;
-padding: 0 1.5rem;
+  color: #202224;
+  margin: 0 auto 1.875rem;
+  max-width: 75.75rem;
+  padding: 0 1.5rem;
+}
+
+.downloadTable {
+  text-indent: initial;
+  margin-top: -0.5rem;
+  padding-left: 0.5rem;
+  padding-top: -1rem;
+  padding-bottom: 1rem;
+}
+.releaseList {
+  list-style-type: none;
+}
+
+.releaseItemName {
+  font-weight: 500;
+  font-size: 1.1rem;
+  background: #f8f8f8;
+  margin-bottom: 10px;
+  padding: 0.7rem;
+  height: 2.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 @include pc {
   .releaseList {
-    list-style-type: none;
     margin-left: -2.5rem;
-    }
+  }
   .downloadTable {
     width: 100%;
-    border-collapse: collapse;
-    display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: gray;
-    margin-top: -0.5rem;
-    padding-left: 0.5rem;
-    padding-top: -1rem;
-    padding-bottom: 1rem;
-    
-    }
-  .releaseItemName {
-    font-weight: 500;
-    font-size: 1.1rem;
-    background: #f8f8f8;
-    margin-bottom: 10px;
-    padding: 0.7rem;
-    height: 2.6rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    }
-  .releasAssetList {
-    list-style-type: none;
-    margin-left: -2.5rem;
-    
   }
 }
 
 @include mobile {
   .releaseList {
-    list-style-type: none;
     margin-left: 0rem;
     margin-right: -0.3rem;
     padding-left: 0px;
-    }
+  }
   .downloadTable {
-    width: 50rem;
-    display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: gray;
-    margin-top: -0.5rem;
-    margin-left: -2rem;
-    padding-left: 0.5rem;
-    padding-top: -1rem;
-    padding-bottom: 1rem;
-    }
-
-  .releaseItemName {
-    font-weight: 500;
-    font-size: 1.1rem;
-    background: #f8f8f8;
-    margin-bottom: 10px;
-    padding: 0.7rem;
-    height: 2.6rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    }
-  .releaseAssetListDiv{
+    margin-left: 0.5rem;
+  }
+  .releaseAssetListDiv {
     padding-right: 1rem;
     overflow-x: auto;
-    // width: 100%;
     -webkit-overflow-scrolling: touch;
   }
-  .releasAssetList {
-    padding-left: 0px;
+  .downloadTableHeaderName {
+    min-width: 20rem;
+  }
+  .downloadTableHeaderKind {
+    min-width: 7rem;
+  }
+  .downloadTableHeaderOs {
+    min-width: 7rem;
+  }
+  .downloadTableHeaderArch {
+    min-width: 7rem;
+  }
+  .downloadTableHeaderSize {
+    min-width: 5rem;
   }
 }
 
 .tableHighlight {
-vertical-align: inherit;
-border-color: inherit;
+  vertical-align: inherit;
+  // display: table-row;
+  border: 2px solid #f8f8f8;
 }
 
 .filename {
-vertical-align: inherit;
+  vertical-align: inherit;
 }
 
 .buttonLink {
-font-style: normal;
-font-weight: 400;
-font-size: 1.2rem;
-line-height: 1.5rem;
-margin-left: 1.1rem;
-color: #007d9c;
-text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  margin-left: 1.1rem;
+  color: #007d9c;
+  text-decoration: none;
 }
 
 .releaseSpan {
-padding-left: 1.5rem;
-margin-left: 1.1rem;
-font-weight: 500;
-font-size: 1.2rem;
-font-style: italic;
+  padding-left: 1.5rem;
+  margin-left: 1.1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+  font-style: italic;
 }
