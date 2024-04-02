@@ -18,6 +18,11 @@ export const navItems: NavItemInfo[] = [
     isBlank: false
   },
   {
+    children: 'Download',
+    href: 'https://goplus.org/download',
+    isBlank: false
+  },
+  {
     children: 'Playground',
     href: 'https://play.goplus.org/',
     isBlank: true

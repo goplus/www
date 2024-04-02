@@ -19,7 +19,7 @@ export default function Intro() {
         <LinkButton primary href="https://github.com/goplus/gop/blob/main/doc/docs.md">
           Get Started <IconArrowRight />
         </LinkButton>
-        <LinkButton href="https://github.com/goplus/gop#how-to-install">
+        <LinkButton href="https://goplus.org/download">
           Download
         </LinkButton>
       </div>
