@@ -1,192 +1,119 @@
 @import "~utils/index.scss";
 
-.container {
-  @include centered;
-  font-size: 1.2rem;
-}
 .main {
-  display: block;
-}
+  @include centered;
 
-@include mobile {
-  .main {
+  @include mobile {
     padding: 0px 16px;
   }
 }
 
 .title {
-  font-size: 2.25rem;
-  font-weight: bold;
+  font-size: 36px;
 }
 
 .titleH2 {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 26px;
 }
 
 .description {
-  color: #202224;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  max-width: 75.75rem;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: normal;
-}
-
-.link {
-  color: #007d9c;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
+  margin: 16px 0;
 }
 
 .downloadWrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .downloadBox {
   display: flex;
   flex-direction: column;
-  color: rgba(0, 0, 0, 0.5);
   background: #f8f8f8;
-  width: 14rem;
-  height: 9rem;
-  float: left;
-  padding: 1rem;
+  width: 14em;
+  padding: 16px;
 }
 
 .downloadBoxTitle {
-  font-size: large;
-  width: auto;
-  margin-top: 0.15rem;
-  margin-bottom: 0.1rem;
+  font-size: 16px;
+  margin: 0;
 }
 
 .downloadBoxP {
-  width: auto;
-  font-weight: 400;
-  font-size: 0.95rem;
-  line-height: 1rem;
-  margin-top: 0.7rem;
+  font-size: 14px;
   margin-bottom: auto;
   color: #6e7072;
 }
 
 .downloadBoxLink {
   width: auto;
-  color: #007d9c;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 0.85rem;
-  margin-top: auto;
+  font-size: 12px;
+  margin-top: 12px;
+  word-break: break-all;
+
+  @include link;
 }
 
-.downloadBoxLink:hover {
-  text-decoration: underline;
+.link {
+  @include link;
 }
 
-.grid {
-  color: #202224;
-  margin: 0 auto 1.875rem;
-  max-width: 75.75rem;
-  padding: 0 1.5rem;
-}
-
-.downloadTable {
-  text-indent: initial;
-  margin-top: -0.5rem;
-  padding-left: 0.5rem;
-  padding-top: -1rem;
-  padding-bottom: 1rem;
-}
 .releaseList {
+  padding: 0;
   list-style-type: none;
 }
 
 .releaseItemName {
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 16px;
   background: #f8f8f8;
-  margin-bottom: 10px;
-  padding: 0.7rem;
-  height: 2.6rem;
-  cursor: pointer;
+  margin: 10px 0;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
-@include pc {
-  .releaseList {
-    margin-left: -2.5rem;
-  }
-  .downloadTable {
+.downloadTable {
+  @include pc {
     width: 100%;
+  }
+  th, td {
+    padding: 4px 16px;
   }
 }
 
 @include mobile {
-  .releaseList {
-    margin-left: 0rem;
-    margin-right: -0.3rem;
-    padding-left: 0px;
-  }
-  .downloadTable {
-    margin-left: 0.5rem;
-  }
   .releaseAssetListDiv {
-    padding-right: 1rem;
+    width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
   .downloadTableHeaderName {
-    min-width: 20rem;
+    min-width: 20em;
   }
   .downloadTableHeaderKind {
-    min-width: 7rem;
+    min-width: 7em;
   }
   .downloadTableHeaderOs {
-    min-width: 7rem;
+    min-width: 7em;
   }
   .downloadTableHeaderArch {
-    min-width: 7rem;
+    min-width: 7em;
   }
   .downloadTableHeaderSize {
-    min-width: 5rem;
+    min-width: 5em;
   }
 }
 
 .tableHighlight {
-  vertical-align: inherit;
-  // display: table-row;
-  border: 2px solid #f8f8f8;
-}
-
-.filename {
-  vertical-align: inherit;
+  // TODO: what is this for?
+  // border: 2px solid #f8f8f8;
 }
 
 .buttonLink {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
-  margin-left: 1.1rem;
+  font-weight: normal;
+  font-size: 18px;
+  margin-left: 16px;
   color: #007d9c;
   text-decoration: none;
-}
-
-.releaseSpan {
-  padding-left: 1.5rem;
-  margin-left: 1.1rem;
-  font-weight: 500;
-  font-size: 1.2rem;
-  font-style: italic;
 }

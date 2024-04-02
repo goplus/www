@@ -272,274 +272,260 @@ export default function Home({
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>All releases</h1>
-          <p className={styles.description}>
-            After downloading a binary release suitable for your system, please follow the&nbsp;
-            <a
-              href="https://github.com/goplus/gop?tab=readme-ov-file#how-to-install"
-              className={styles.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              installation instructions
-            </a>. 
-          </p>
-          <p className={styles.description}>
-          If you are building from source, you can also find instructions in the <a
-              href="https://github.com/goplus/gop?tab=readme-ov-file#from-source-code"
-              className={styles.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              document
-            </a>.
-          </p>
-          <p className={styles.description}>
-          See the&nbsp;<a
-              href="https://github.com/goplus/gop/releases"
-              className={styles.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              release history
-            </a>&nbsp;for more information about Go+ releases.
-          </p>
-          <h2 className={styles.titleH2}>Featured downloads </h2>
+      <main className={styles.main}>
+        <h1 className={styles.title}>All releases</h1>
+        <p className={styles.description}>
+          After downloading a binary release suitable for your system, please follow the&nbsp;
+          <a
+            href="https://github.com/goplus/gop?tab=readme-ov-file#how-to-install"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            installation instructions
+          </a>. 
+        </p>
+        <p className={styles.description}>
+        If you are building from source, you can also find instructions in the <a
+            href="https://github.com/goplus/gop?tab=readme-ov-file#from-source-code"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            document
+          </a>.
+        </p>
+        <p className={styles.description}>
+        See the&nbsp;<a
+            href="https://github.com/goplus/gop/releases"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            release history
+          </a>&nbsp;for more information about Go+ releases.
+        </p>
+        <h2 className={styles.titleH2}>Featured downloads </h2>
 
-          <div className={styles.downloadWrapper}>
-            <a
-              href={latestWinAsset.browser_download_url}
-              className={styles.downloadBox}
-            >
-              <h4 className={styles.downloadBoxTitle}>Microsoft Windows </h4>
-              <p className={styles.downloadBoxP}>
-                Windows, Intel 64-bit processor
-              </p>
-              <span className={styles.downloadBoxLink}>
-                {latestWinAsset.name}
-              </span>
-            </a>
+        <div className={styles.downloadWrapper}>
+          <a
+            href={latestWinAsset.browser_download_url}
+            className={styles.downloadBox}
+          >
+            <h4 className={styles.downloadBoxTitle}>Microsoft Windows </h4>
+            <p className={styles.downloadBoxP}>
+              Windows, Intel 64-bit processor
+            </p>
+            <span className={styles.downloadBoxLink}>
+              {latestWinAsset.name}
+            </span>
+          </a>
 
-            <a
-              href={latestMacOSx86Asset.browser_download_url}
-              className={styles.downloadBox}
-            >
-              <h4 className={styles.downloadBoxTitle}>Apple MacOS (X86_64)</h4>
-              <p className={styles.downloadBoxP}>
-                MacOS, Intel 64-bit processor
-              </p>
-              <span className={styles.downloadBoxLink}>
-                {latestMacOSx86Asset.name}
-              </span>
-            </a>
+          <a
+            href={latestMacOSx86Asset.browser_download_url}
+            className={styles.downloadBox}
+          >
+            <h4 className={styles.downloadBoxTitle}>Apple MacOS (X86_64)</h4>
+            <p className={styles.downloadBoxP}>
+              MacOS, Intel 64-bit processor
+            </p>
+            <span className={styles.downloadBoxLink}>
+              {latestMacOSx86Asset.name}
+            </span>
+          </a>
 
-            <a
-              href={latestMacOSarmAsset.browser_download_url}
-              className={styles.downloadBox}
-            >
-              <h4 className={styles.downloadBoxTitle}>Apple MacOS (ARM64)</h4>
-              <p className={styles.downloadBoxP}>
-                MacOS, Apple 64-bit processor
-              </p>
-              <span className={styles.downloadBoxLink}>
-                {latestMacOSarmAsset.name}
-              </span>
-            </a>
+          <a
+            href={latestMacOSarmAsset.browser_download_url}
+            className={styles.downloadBox}
+          >
+            <h4 className={styles.downloadBoxTitle}>Apple MacOS (ARM64)</h4>
+            <p className={styles.downloadBoxP}>
+              MacOS, Apple 64-bit processor
+            </p>
+            <span className={styles.downloadBoxLink}>
+              {latestMacOSarmAsset.name}
+            </span>
+          </a>
 
-            <a
-              href={latestLinuxX86Asset.browser_download_url}
-              className={styles.downloadBox}
+          <a
+            href={latestLinuxX86Asset.browser_download_url}
+            className={styles.downloadBox}
+          >
+            <h4 className={styles.downloadBoxTitle}>Linux (x86_64)</h4>
+            <p className={styles.downloadBoxP}>
+              Linux, Intel 64-bit processor
+            </p>
+            <span className={styles.downloadBoxLink}>
+              {latestLinuxX86Asset.name}
+            </span>
+          </a>
+          {/* source code zipball_url */}
+          <a
+            href={StableRelease.zipball_url}
+            className={styles.downloadBox}
+          >
+            <h4 className={styles.downloadBoxTitle}>Source Code</h4>
+            <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
+            <span className={styles.downloadBoxLink}>
+              &nbsp;
+              {"gop_"+StableRelease.tag_name+".src.zip"}
+            </span>
+          </a>
+        </div>
+        <h2 className={styles.titleH2}>Stable versions</h2>
+        <ul className={styles.releaseList}>
+          <li key={StableRelease.id}>
+            <h4
+              onClick={() => toggleReleaseAssets(StableRelease)}
+              className={styles.releaseItemName}
             >
-              <h4 className={styles.downloadBoxTitle}>Linux (x86_64)</h4>
-              <p className={styles.downloadBoxP}>
-                Linux, Intel 64-bit processor
-              </p>
-              <span className={styles.downloadBoxLink}>
-                {latestLinuxX86Asset.name}
-              </span>
-            </a>
-            {/* source code zipball_url */}
-            <a
-              href={StableRelease.zipball_url}
-              className={styles.downloadBox}
-            >
-              <h4 className={styles.downloadBoxTitle}>Source Code</h4>
-              <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
-              <span className={styles.downloadBoxLink}>
-                &nbsp;
-                {"gop_"+StableRelease.tag_name+".src.zip"}
-              </span>
-            </a>
-          </div>
-          <h2 className={styles.titleH2}>Stable versions</h2>
-          <ul className={styles.releaseList}>
-            <li key={StableRelease.id}>
-              <div
-                onClick={() => toggleReleaseAssets(StableRelease)}
-                className={styles.releaseItemName}
-              >
-                <span>GoPlus_{StableRelease.tag_name}</span>
-                {selectedRelease != StableRelease.id && <ArrowDown />}
-                {selectedRelease === StableRelease.id && <ArrowUp />}
-              </div>
-              {selectedRelease === StableRelease.id && (
-                <div className={styles.releaseAssetListDiv}>
-                  <table className={styles.downloadTable}>
-                    <thead className={styles.downloadTableHeader}>
-                      <th className={styles.downloadTableHeaderName}>File name</th>
-                      <th className={styles.downloadTableHeaderKind}>Kind</th>
-                      <th className={styles.downloadTableHeaderOs}>OS</th>
-                      <th className={styles.downloadTableHeaderArch}>Arch</th>
-                      <th className={styles.downloadTableHeaderSize}>Size</th>
-                      {/* ToDo */}
-                      {/* <th>SHA256 Checksum</th> */}
-                    </thead>
-                    <tbody>
-                      {StableRelease.assets.map((asset) => (
-                        <tr className={styles.tableHighlight} key={asset.id}>
-                          <DownloadTable
-                            browser_download_url={asset.browser_download_url}
-                            name={asset.name}
-                            Size={asset.size}
-                          />
-                        </tr>
-                      ))}
-                      <tr
-                        className={styles.tableHighlight}
-                        key={StableRelease.id}
-                      >
-                        <td className={styles.filename}>
-                          <a
-                            className={styles.link}
-                            href={StableRelease.zipball_url}
-                          >
-                            {"gop_"+StableRelease.tag_name+".src.zip"}
-                          </a>
-                        </td>
-                        <td>Source</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+              <span>GoPlus_{StableRelease.tag_name}</span>
+              {selectedRelease != StableRelease.id && <ArrowDown />}
+              {selectedRelease === StableRelease.id && <ArrowUp />}
+            </h4>
+            {selectedRelease === StableRelease.id && (
+              <div className={styles.releaseAssetListDiv}>
+                <table className={styles.downloadTable}>
+                  <thead className={styles.downloadTableHeader}>
+                    <th className={styles.downloadTableHeaderName}>File name</th>
+                    <th className={styles.downloadTableHeaderKind}>Kind</th>
+                    <th className={styles.downloadTableHeaderOs}>OS</th>
+                    <th className={styles.downloadTableHeaderArch}>Arch</th>
+                    <th className={styles.downloadTableHeaderSize}>Size</th>
+                    {/* ToDo */}
+                    {/* <th>SHA256 Checksum</th> */}
+                  </thead>
+                  <tbody>
+                    {StableRelease.assets.map((asset) => (
+                      <tr key={asset.id}>
+                        <DownloadTable
+                          browser_download_url={asset.browser_download_url}
+                          name={asset.name}
+                          Size={asset.size}
+                        />
                       </tr>
-                    </tbody>
-                  </table>
-                </div>)}
-            </li>
-          </ul>
-          <h2 onClick={toggleContentVisibility} className={styles.titleH2} style={{ cursor: "pointer" }}>
-            Archived versions
-            {isContentVisible && (
-              <span className={styles.buttonLink}>Hide</span>
-            )}
-            {!isContentVisible && (
-              <span className={styles.buttonLink}>Show</span>
-            )}
-          </h2>
+                    ))}
+                    <tr key={StableRelease.id}>
+                      <td className={styles.filename}>
+                        <a
+                          className={styles.link}
+                          href={StableRelease.zipball_url}
+                        >
+                          {"gop_"+StableRelease.tag_name+".src.zip"}
+                        </a>
+                      </td>
+                      <td>Source</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>)}
+          </li>
+        </ul>
+        <h2 onClick={toggleContentVisibility} className={styles.titleH2} style={{ cursor: "pointer" }}>
+          Archived versions
           {isContentVisible && (
-            <div>
-              <ul className={styles.releaseList}>
-                {ArchivedReleases.map((release) => (
-                  <li key={release.id}>
-                    <div
-                      onClick={() => toggleReleaseAssets(release)}
-                      className={styles.releaseItemName}
-                    >
-                      <span>GoPlus_{release.tag_name}</span>
-                      {selectedRelease != release.id && <ArrowDown />}
-                      {selectedRelease === release.id && <ArrowUp />}
-                    </div>
-                    {selectedRelease === release.id && (
-                      <div className={styles.releaseAssetListDiv}>
-                        {release.assets.length === 0 && (
-                          <table className={styles.downloadTable}>
-                            <thead className={styles.downloadTableHeader}>
-                              <th className={styles.downloadTableHeaderName}>File name</th>
-                              <th className={styles.downloadTableHeaderKind}>Kind</th>
-                              <th className={styles.downloadTableHeaderOs}>OS</th>
-                              <th className={styles.downloadTableHeaderArch}>Arch</th>
-                              <th className={styles.downloadTableHeaderSize}>Size</th>
-                              {/* ToDo */}
-                              {/* <th>SHA256 Checksum</th> */}
-                            </thead>
-                            <tbody>
-                              <tr
-                                className={styles.tableHighlight}
-                                key={release.id}
-                              >
-                                <td className={styles.filename}>
-                                  <a
-                                    className={styles.link}
-                                    href={release.zipball_url}
-                                    download="source_code.zip"
-                                  >
-                                    {"gop_"+release.tag_name+".src.zip"}
-                                  </a>
-                                </td>
-                                <td>Source</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        )}
-                        {release.assets.length != 0 && (
-                          <table className={styles.downloadTable}>
-                            <thead className={styles.downloadTableHeader}>
-                              <th className={styles.downloadTableHeaderName}>File name</th>
-                              <th className={styles.downloadTableHeaderKind}>Kind</th>
-                              <th className={styles.downloadTableHeaderOs}>OS</th>
-                              <th className={styles.downloadTableHeaderArch}>Arch</th>
-                              <th className={styles.downloadTableHeaderSize}>Size</th>
-                              {/* ToDo */}
-                              {/* <th>SHA256 Checksum</th> */}
-                            </thead>
-                            <tbody>
-                              {release.assets.map((asset) => (
-                                <tr
-                                  className={styles.tableHighlight}
-                                  key={asset.id}
-                                >
-                                  <DownloadTable
-                                    browser_download_url={
-                                      asset.browser_download_url
-                                    }
-                                    name={asset.name}
-                                    Size={asset.size}
-                                  />
-                                </tr>
-                              ))}
-                              <tr
-                                className={styles.tableHighlight}
-                                key={release.id}
-                              >
-                                <td className={styles.filename}>
-                                  <a
-                                    className={styles.link}
-                                    href={release.zipball_url}
-                                  >
-                                    {"gop_"+release.tag_name+".src.zip"}
-                                  </a>
-                                </td>
-                                <td>Source</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
-                          </table>  
-                        )}
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <span className={styles.buttonLink}>Hide</span>
           )}
-        </main>
-      </div>
+          {!isContentVisible && (
+            <span className={styles.buttonLink}>Show</span>
+          )}
+        </h2>
+        {isContentVisible && (
+          <div>
+            <ul className={styles.releaseList}>
+              {ArchivedReleases.map((release) => (
+                <li key={release.id}>
+                  <h4
+                    onClick={() => toggleReleaseAssets(release)}
+                    className={styles.releaseItemName}
+                  >
+                    <span>GoPlus_{release.tag_name}</span>
+                    {selectedRelease != release.id && <ArrowDown />}
+                    {selectedRelease === release.id && <ArrowUp />}
+                  </h4>
+                  {selectedRelease === release.id && (
+                    <div className={styles.releaseAssetListDiv}>
+                      {release.assets.length === 0 && (
+                        <table className={styles.downloadTable}>
+                          <thead className={styles.downloadTableHeader}>
+                            <th className={styles.downloadTableHeaderName}>File name</th>
+                            <th className={styles.downloadTableHeaderKind}>Kind</th>
+                            <th className={styles.downloadTableHeaderOs}>OS</th>
+                            <th className={styles.downloadTableHeaderArch}>Arch</th>
+                            <th className={styles.downloadTableHeaderSize}>Size</th>
+                            {/* ToDo */}
+                            {/* <th>SHA256 Checksum</th> */}
+                          </thead>
+                          <tbody>
+                            <tr key={release.id}>
+                              <td className={styles.filename}>
+                                <a
+                                  className={styles.link}
+                                  href={release.zipball_url}
+                                  download="source_code.zip"
+                                >
+                                  {"gop_"+release.tag_name+".src.zip"}
+                                </a>
+                              </td>
+                              <td>Source</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      )}
+                      {release.assets.length != 0 && (
+                        <table className={styles.downloadTable}>
+                          <thead className={styles.downloadTableHeader}>
+                            <th className={styles.downloadTableHeaderName}>File name</th>
+                            <th className={styles.downloadTableHeaderKind}>Kind</th>
+                            <th className={styles.downloadTableHeaderOs}>OS</th>
+                            <th className={styles.downloadTableHeaderArch}>Arch</th>
+                            <th className={styles.downloadTableHeaderSize}>Size</th>
+                            {/* ToDo */}
+                            {/* <th>SHA256 Checksum</th> */}
+                          </thead>
+                          <tbody>
+                            {release.assets.map((asset) => (
+                              <tr key={asset.id}>
+                                <DownloadTable
+                                  browser_download_url={
+                                    asset.browser_download_url
+                                  }
+                                  name={asset.name}
+                                  Size={asset.size}
+                                />
+                              </tr>
+                            ))}
+                            <tr key={release.id}>
+                              <td className={styles.filename}>
+                                <a
+                                  className={styles.link}
+                                  href={release.zipball_url}
+                                >
+                                  {"gop_"+release.tag_name+".src.zip"}
+                                </a>
+                              </td>
+                              <td>Source</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>  
+                      )}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </main>
     </Layout>
   )
 }
