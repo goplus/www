@@ -19,7 +19,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Download',
-    href: '/download',
+    href: 'https://goplus.org/download',
     isBlank: false
   },
   {
