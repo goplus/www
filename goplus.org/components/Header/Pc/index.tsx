@@ -29,10 +29,11 @@ export default function Nav() {
 }
 
 function NavItem({ href, isBlank, children }: NavItemInfo) {
-  const url = useUrl()
-  const host = url != null ? new URL(url).host : null
-  const itemHost = new URL(href).host
-  const selected = host === itemHost
+  const urlStr = useUrl()
+  const currentUrl = urlStr != null ? new URL(urlStr) : null
+  const itemUrl = new URL(href)
+  // TODO: for tutorial, we may want to compare host instead of host + path
+  const selected = currentUrl != null && currentUrl.host === itemUrl.host && currentUrl.pathname === itemUrl.pathname
   return (
     <a className={`${styles.linkItem} ${selected ? styles.selected : ''}`} href={href} {...( isBlank && { target:"_blank" } )} rel="noreferrer">
       {children}
