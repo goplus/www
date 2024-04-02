@@ -30,7 +30,9 @@ export default function Nav() {
 
 function NavItem({ href, isBlank, children }: NavItemInfo) {
   const url = useUrl()
-  const selected = url != null && url.startsWith(href)
+  const host = url != null ? new URL(url).host : null
+  const itemHost = new URL(href).host
+  const selected = host === itemHost
   return (
     <a className={`${styles.linkItem} ${selected ? styles.selected : ''}`} href={href} {...( isBlank && { target:"_blank" } )} rel="noreferrer">
       {children}
