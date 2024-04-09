@@ -32,16 +32,20 @@ export function cns(...classNames: Array<string | null | undefined | false>) {
   return classNames.filter(Boolean).join(' ')
 }
 
-
+/** Code for goplus.org may be runned on pages other than goplus.org (with widgets), which 
+ * means relative URLs like `/download` may be resolved to `<other-site-origin>/download`,
+ * which is not expected. So we need to get origin based on current enviroment information 
+ * to construct absolute URL */
 export function getOrigin() {
   if (process.env.NODE_ENV === 'development') {
+    //'development' Environment
     return "http://localhost:3000"
   } else {
     if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' && process.env.VERCEL_BRANCH_URL) {
-      // 在预览环境下，将 /download 路径重定向到预览页面
+      // 'preview' Environment
       return 'https://' + process.env.VERCEL_BRANCH_URL
     } else {
-      // 在其他环境下，保持 /download 路径不变
+      //'production' Environment
       return "https://goplus.org"
     }
   }
