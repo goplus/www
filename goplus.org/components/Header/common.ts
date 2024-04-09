@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import {getOrigin} from 'utils/index'
+import { getOrigin } from 'utils'
 
 export interface NavItemInfo {
   children: ReactNode
@@ -25,7 +25,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Playground',
-    href: 'https://play.goplus.org/',
+    href: 'https://play.goplus.org',
     isBlank: true
   },
   {
