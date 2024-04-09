@@ -39,14 +39,14 @@ export function cns(...classNames: Array<string | null | undefined | false>) {
 export function getOrigin() {
   if (process.env.NODE_ENV === 'development') {
     //'development' Environment
-    return "http://localhost:3000"
+    return 'http://localhost:3000'
   } else {
     if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' && process.env.VERCEL_BRANCH_URL) {
       // 'preview' Environment
       return 'https://' + process.env.VERCEL_BRANCH_URL
     } else {
       //'production' Environment
-      return "https://goplus.org"
+      return 'https://goplus.org'
     }
   }
 }
