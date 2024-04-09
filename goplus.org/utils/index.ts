@@ -1,5 +1,6 @@
 import { Children, ReactNode, isValidElement } from 'react'
 import variables from './variables.module.scss'
+import { loadEnvConfig } from '@next/env'
 
 /** 判断当前是否在浏览器中执行，与之对应的是在 Node.js 环境执行（生成静态页面时） */
 export function isBrowser() {
@@ -30,4 +31,21 @@ export function matchMediaMobile() {
 /** Join class names */
 export function cns(...classNames: Array<string | null | undefined | false>) {
   return classNames.filter(Boolean).join(' ')
+}
+
+
+export function getOrigin() {
+  const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+  console.log(process.env.NODE_ENV)
+  if (process.env.NODE_ENV === 'development'){
+    return "http://localhost:3000"
+  } else{
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
+    // 在预览环境下，将 /download 路径重定向到预览页面
+      return VERCEL_URL
+    } else {
+    // 在其他环境下，保持 /download 路径不变
+      return "https://goplus.org"
+    } 
+  }
 }
