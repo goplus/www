@@ -38,7 +38,7 @@ export function getOrigin() {
   if (process.env.NODE_ENV === 'development') {
     return "http://localhost:3000"
   } else {
-    if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL) {
+    if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL != undefined) {
       // 在预览环境下，将 /download 路径重定向到预览页面
       return process.env.VERCEL_URL
     } else {
