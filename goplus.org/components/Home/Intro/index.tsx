@@ -4,6 +4,7 @@ import Logo from 'components/Icon/Logo'
 import CodeEditor from 'components/Code/Editor'
 import Select, { Option } from 'components/UI/Select'
 import LinkButton from 'components/UI/LinkButton'
+import {getOrigin} from 'utils/index'
 
 import examples from './examples'
 import styles from './style.module.scss'
@@ -19,7 +20,7 @@ export default function Intro() {
         <LinkButton primary href="https://github.com/goplus/gop/blob/main/doc/docs.md">
           Get Started <IconArrowRight />
         </LinkButton>
-        <LinkButton href="https://goplus.org/download">
+        <LinkButton href={getOrigin()+"/download"}>
           Download
         </LinkButton>
       </div>
