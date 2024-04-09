@@ -38,9 +38,9 @@ export function getOrigin() {
   if (process.env.NODE_ENV === 'development') {
     return "http://localhost:3000"
   } else {
-    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' && process.env.NEXT_PUBLIC_VERCEL_URL) {
+    if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL) {
       // 在预览环境下，将 /download 路径重定向到预览页面
-      return process.env.NEXT_PUBLIC_VERCEL_URL
+      return process.env.VERCEL_URL
     } else {
       // 在其他环境下，保持 /download 路径不变
       return "https://goplus.org"
