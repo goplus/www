@@ -10,7 +10,7 @@ export interface NavItemInfo {
 export const navItems: NavItemInfo[] = [
   {
     children: 'Overview',
-    href: 'https://goplus.org',
+    href: getOrigin(),
     isBlank: false
   },
   {
