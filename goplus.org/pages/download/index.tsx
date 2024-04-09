@@ -191,8 +191,8 @@ function DownloadTable({
   if (Arch.includes("386")) {
     Arch = "x86"
   }
-  else if(Arch.includes("amd64") ){
-    Arch = "x86_64"
+  else if(Arch.includes("amd64") || Arch.includes("x86_64")){
+    Arch = "x86-64"
   }
   else if(Arch.includes("arm") ){
     Arch = "ARM" + Arch.slice(3)
@@ -325,9 +325,9 @@ export default function Home({
             href={latestMacOSx86Asset.browser_download_url}
             className={styles.downloadBox}
           >
-            <h4 className={styles.downloadBoxTitle}>Apple MacOS (X86_64)</h4>
+            <h4 className={styles.downloadBoxTitle}>Apple macOS (x86-64)</h4>
             <p className={styles.downloadBoxP}>
-              MacOS, Intel 64-bit processor
+              macOS, Intel 64-bit processor
             </p>
             <span className={styles.downloadBoxLink}>
               {latestMacOSx86Asset.name}
@@ -338,9 +338,9 @@ export default function Home({
             href={latestMacOSarmAsset.browser_download_url}
             className={styles.downloadBox}
           >
-            <h4 className={styles.downloadBoxTitle}>Apple MacOS (ARM64)</h4>
+            <h4 className={styles.downloadBoxTitle}>Apple macOS (ARM64)</h4>
             <p className={styles.downloadBoxP}>
-              MacOS, Apple 64-bit processor
+              macOS, Apple 64-bit processor
             </p>
             <span className={styles.downloadBoxLink}>
               {latestMacOSarmAsset.name}
@@ -351,7 +351,7 @@ export default function Home({
             href={latestLinuxX86Asset.browser_download_url}
             className={styles.downloadBox}
           >
-            <h4 className={styles.downloadBoxTitle}>Linux (x86_64)</h4>
+            <h4 className={styles.downloadBoxTitle}>Linux (x86-64)</h4>
             <p className={styles.downloadBoxP}>
               Linux, Intel 64-bit processor
             </p>

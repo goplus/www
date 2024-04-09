@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import {getOrigin} from 'utils/index'
 
 export interface NavItemInfo {
   children: ReactNode
@@ -9,7 +10,7 @@ export interface NavItemInfo {
 export const navItems: NavItemInfo[] = [
   {
     children: 'Overview',
-    href: 'https://goplus.org',
+    href: getOrigin(),
     isBlank: false
   },
   {
@@ -19,7 +20,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Download',
-    href: 'https://goplus.org/download',
+    href: getOrigin() + '/download',
     isBlank: false
   },
   {
