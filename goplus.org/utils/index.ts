@@ -35,17 +35,15 @@ export function cns(...classNames: Array<string | null | undefined | false>) {
 
 
 export function getOrigin() {
-  const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
-  console.log(process.env.NODE_ENV)
-  if (process.env.NODE_ENV === 'development'){
+  if (process.env.NODE_ENV === 'development') {
     return "http://localhost:3000"
-  } else{
-    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
-    // 在预览环境下，将 /download 路径重定向到预览页面
-      return VERCEL_URL
+  } else {
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' && process.env.NEXT_PUBLIC_VERCEL_URL) {
+      // 在预览环境下，将 /download 路径重定向到预览页面
+      return process.env.NEXT_PUBLIC_VERCEL_URL
     } else {
-    // 在其他环境下，保持 /download 路径不变
+      // 在其他环境下，保持 /download 路径不变
       return "https://goplus.org"
-    } 
+    }
   }
 }
