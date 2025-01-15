@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 // Copyright 2014 The Go Authors. All rights reserved.
@@ -8,13 +9,13 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 )
 
 func main() {
-	body, err := ioutil.ReadAll(os.Stdin)
+	body, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatalf("error reading stdin: %v", err)
 	}
