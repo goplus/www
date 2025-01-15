@@ -453,7 +453,7 @@ func sandboxBuildGoplus(_ context.Context, tmpDir string, in []byte, vet bool) (
 	os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
 module playgrounddemo
 
-go 1.16
+go 1.19
 
 require github.com/goplus/gop main
 
@@ -465,7 +465,7 @@ require github.com/goplus/gop main
 package dummy
 
 import (
-	_ "github.com/goplus/gop"
+	_ "github.com/goplus/gop/ast"
 	_ "github.com/goplus/spx"
 	_ "github.com/qiniu/x/errors"
 )
