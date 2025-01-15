@@ -7,7 +7,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -24,14 +23,14 @@ import (
 // as a temporary compatibility bridge to older javascript clients.
 func vetCheck(ctx context.Context, req *request) (*response, error) {
 	return &response{}, nil
-	tmpDir, err := ioutil.TempDir("", "vet")
+	tmpDir, err := os.MkdirTemp("", "vet")
 	if err != nil {
 		return nil, fmt.Errorf("error creating temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
 
 	in := filepath.Join(tmpDir, progName)
-	if err := ioutil.WriteFile(in, []byte(req.Body), 0400); err != nil {
+	if err := os.WriteFile(in, []byte(req.Body), 0400); err != nil {
 		return nil, fmt.Errorf("error creating temp file %q: %v", in, err)
 	}
 	const useModules = false // legacy handler; no modules (see func comment)

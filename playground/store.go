@@ -7,7 +7,7 @@ package main
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"os"
 	"syscall"
 
@@ -43,7 +43,7 @@ func (s localStore) PutSnippet(ctx context.Context, id string, snip *snippet) er
 func (s localStore) GetSnippet(ctx context.Context, id string, snip *snippet) error {
 	file, err := vfsutil.Open(ctx, s.LocalFS, id)
 	if err == nil {
-		snip.Body, err = ioutil.ReadAll(file)
+		snip.Body, err = io.ReadAll(file)
 	}
 	return err
 }
@@ -112,7 +112,7 @@ func (s *s3Storage) GetSnippet(ctx context.Context, id string, snip *snippet) er
 	if err != nil {
 		return err
 	}
-	b, _ := ioutil.ReadAll(result.Body)
+	b, _ := io.ReadAll(result.Body)
 	defer result.Body.Close()
 
 	*snip = snippet{Body: b}

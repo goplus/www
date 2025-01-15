@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
@@ -72,7 +71,7 @@ func handleFmt(w http.ResponseWriter, r *http.Request) {
 					json.NewEncoder(w).Encode(fmtResponse{Error: strings.Replace(string(fmtErr), tmpGopFile, "prog.gop", -1)})
 					return
 				}
-				out, err = ioutil.ReadFile(tmpGopFile)
+				out, err = os.ReadFile(tmpGopFile)
 				if err != nil {
 					err = errors.New("interval error when formatting gop code")
 				}

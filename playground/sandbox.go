@@ -18,8 +18,8 @@ import (
 	"go/doc"
 	"go/parser"
 	"go/token"
+	"html/template"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"os"
@@ -29,7 +29,6 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"text/template"
 	"time"
 	"unicode"
 	"unicode/utf8"
@@ -345,7 +344,7 @@ var failedTestPattern = "--- FAIL"
 // *response.Errors contains an explanation for a user.
 func compileAndRun(ctx context.Context, req *request) (*response, error) {
 	// TODO(andybons): Add semaphore to limit number of running programs at once.
-	tmpDir, err := ioutil.TempDir("", "sandbox")
+	tmpDir, err := os.MkdirTemp("", "sandbox")
 	if err != nil {
 		return nil, fmt.Errorf("error creating temp directory: %v", err)
 	}
@@ -439,8 +438,8 @@ func (b *buildResult) cleanup() error {
 }
 
 // sandboxBuildGoplus build the goplus program in a temp directory and not run it;
-func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool) (*buildResult, error) {
-	err := ioutil.WriteFile(filepath.Join(tmpDir, "prog.gop"), []byte(in), 0644)
+func sandboxBuildGoplus(_ context.Context, tmpDir string, in []byte, vet bool) (*buildResult, error) {
+	err := os.WriteFile(filepath.Join(tmpDir, "prog.gop"), []byte(in), 0644)
 	if err != nil {
 		return nil, err
 	}
@@ -451,7 +450,7 @@ func sandboxBuildGoplus(ctx context.Context, tmpDir string, in []byte, vet bool)
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	ioutil.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
+	os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
 module playgrounddemo
 
 go 1.16
@@ -462,7 +461,7 @@ require github.com/goplus/gop main
 
 	dumyCmd := exec.Command("mkdir", filepath.Join(tmpDir, "dummy"))
 	dumyCmd.Run()
-	ioutil.WriteFile(filepath.Join(tmpDir, "dummy", "dummy.go"), []byte(`
+	os.WriteFile(filepath.Join(tmpDir, "dummy", "dummy.go"), []byte(`
 package dummy
 
 import (
@@ -504,7 +503,7 @@ import (
 	return br, nil
 }
 
-//try to handle gop build output
+// try to handle gop build output
 func trimGopBuild(output string) string {
 	var res []string
 	for _, v := range strings.Split(output, "\n") {
@@ -520,7 +519,7 @@ func trimGopBuild(output string) string {
 // sandboxRun runs a Go binary in a sandbox environment.
 func sandboxRun(ctx context.Context, exePath string, testParam string) (sandboxtypes.Response, error) {
 	var execRes sandboxtypes.Response
-	exeBytes, err := ioutil.ReadFile(exePath)
+	exeBytes, err := os.ReadFile(exePath)
 	if err != nil {
 		return execRes, err
 	}
@@ -534,7 +533,7 @@ func sandboxRun(ctx context.Context, exePath string, testParam string) (sandboxt
 	if testParam != "" {
 		sreq.Header.Add("X-Argument", testParam)
 	}
-	sreq.GetBody = func() (io.ReadCloser, error) { return ioutil.NopCloser(bytes.NewReader(exeBytes)), nil }
+	sreq.GetBody = func() (io.ReadCloser, error) { return io.NopCloser(bytes.NewReader(exeBytes)), nil }
 	res, err := sandboxBackendClient().Do(sreq)
 	if err != nil {
 		if errors.Is(ctx.Err(), context.DeadlineExceeded) {
@@ -584,7 +583,7 @@ func playgroundGoproxy() string {
 // healthCheck attempts to build a binary from the source in healthProg.
 // It returns any error returned from sandboxBuild, or nil if none is returned.
 func (s *server) healthCheck(ctx context.Context) error {
-	tmpDir, err := ioutil.TempDir("", "sandbox")
+	tmpDir, err := os.MkdirTemp("", "sandbox")
 	if err != nil {
 		return fmt.Errorf("error creating temp directory: %v", err)
 	}
