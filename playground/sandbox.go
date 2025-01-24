@@ -455,8 +455,6 @@ module playgrounddemo
 
 go 1.19
 
-require github.com/goplus/gop main
-
 `), 0644)
 
 	dumyCmd := exec.Command("mkdir", filepath.Join(tmpDir, "dummy"))
