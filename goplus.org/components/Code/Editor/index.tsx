@@ -55,7 +55,7 @@ export interface Props {
 
 loader.config({
   paths: {
-    vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.28.1/min/vs'
+    vs: 'https://static.gopluscdn.com/libs/monaco-editor/0.28.1/min/vs'
   }
 })
 
