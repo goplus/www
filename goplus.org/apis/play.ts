@@ -1,4 +1,4 @@
-const host = 'https://play.goplus.org'
+const host = 'https://seplay.goplus.org'
 
 export type CompileOptions = {
   body: string
