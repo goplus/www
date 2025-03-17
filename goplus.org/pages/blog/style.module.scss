@@ -45,3 +45,7 @@
 .date,.author{
   font-style: italic;
 }
+
+.articleContent a{
+  @include link;  
+}

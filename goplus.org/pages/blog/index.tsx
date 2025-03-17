@@ -1,7 +1,9 @@
 import { GetStaticProps } from "next"
-import { getAllArticles, ArticleMetadata } from "lib/blog"
-import BlogPage from "../../components/Blog/BlogPage"
 import Link from "next/link"
+
+import { getAllArticles, ArticleMetadata } from "lib/blog"
+import BlogPage from "components/Blog/BlogPage"
+
 import styles from "./style.module.scss"
 
 interface BlogNewsProps {
