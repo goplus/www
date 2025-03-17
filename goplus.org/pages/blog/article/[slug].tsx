@@ -1,6 +1,4 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
-import fs from 'fs'
-import path from 'path'
 
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
@@ -52,7 +50,7 @@ export default function Blog({ article,navigation }: BlogProps) {
                 {navigation.prev && (
                   <div className={styles.navItem}>
                     <span className={styles.navLabel}>Previous article:</span>
-                    <Link href={`/blog/${navigation.prev.slug}`} passHref>
+                    <Link href={`/blog/article/${navigation.prev.slug}`} passHref>
                       <span className={styles.prevLink}>{navigation.prev.title}</span>
                     </Link>
                   </div>
@@ -60,7 +58,7 @@ export default function Blog({ article,navigation }: BlogProps) {
                 {navigation.next && (
                   <div className={styles.navItem}>
                     <span className={styles.navLabel}>Next article:</span>
-                    <Link href={`/blog/${navigation.next.slug}`} passHref>
+                    <Link href={`/blog/article/${navigation.next.slug}`} passHref>
                       <span className={styles.nextLink}>{navigation.next.title}</span>
                     </Link>
                   </div>

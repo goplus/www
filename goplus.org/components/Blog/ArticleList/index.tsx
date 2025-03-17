@@ -17,7 +17,7 @@ export function formatDate(date: string): string {
 function ArticleItem(article:ArticleMetadata){
   return (
     <div className={styles.article}>
-      <a className={styles.title} href={`/blog/${article.slug}`}>
+      <a className={styles.title} href={`/blog/article/${article.slug}`}>
         {article.title}
       </a>
       <span className={styles.date}>
