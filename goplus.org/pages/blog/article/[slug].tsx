@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
+import { useState } from 'react'
 
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
@@ -18,6 +19,9 @@ interface BlogProps {
 }
 
 export default function Blog({ article,navigation }: BlogProps) {
+  // Executes once during SSG and again during client hydration
+  // This ensures we get the date string in the user's actual timezone on the client side
+  const [time] = useState(()=>formatDate(article.date))
   return (
     <Layout>
       <Centered>
@@ -26,7 +30,7 @@ export default function Blog({ article,navigation }: BlogProps) {
         </Link>
         <article>
           <h1>{article.title}</h1>
-          <div className={styles.date}>{formatDate(article.date)}</div>
+          <div className={styles.date}>{time}</div>
           <div className={styles.author}>{article.by.join(', ')}</div>
           <div className={styles.articleContent}>
             <ReactMarkdown
