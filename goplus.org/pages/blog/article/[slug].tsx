@@ -6,14 +6,14 @@ import rehypeRaw from 'rehype-raw'
 
 import Layout from 'components/Layout'
 import Centered from 'components/Centered'
-import { formatDate } from 'components/Blog/ArticleList'
+import { formatDate } from '../all'
 import CodeForMD from "components/CodeForMD"
 
 import styles from './style.module.scss'
-import { Article,ArticleNavigation, getArticleData,getAllArticles } from 'lib/blog'
+import { Article, ArticleNavigation, getArticleData, getAllArticles } from 'lib/article'
 
 interface BlogProps {
-  article:Article,
+  article: Article
   navigation: ArticleNavigation
 }
 
@@ -22,7 +22,7 @@ export default function Blog({ article,navigation }: BlogProps) {
     <Layout>
       <Centered>
         <Link href="/blog" passHref>
-          <span className={styles.news}>The GoPlus Blog</span>
+          <a className={styles.news}>The GoPlus Blog</a>
         </Link>
         <article>
           <h1>{article.title}</h1>
@@ -51,7 +51,7 @@ export default function Blog({ article,navigation }: BlogProps) {
                   <div className={styles.navItem}>
                     <span className={styles.navLabel}>Previous article:</span>
                     <Link href={`/blog/article/${navigation.prev.slug}`} passHref>
-                      <span className={styles.prevLink}>{navigation.prev.title}</span>
+                      <a className={styles.prevLink}>{navigation.prev.title}</a>
                     </Link>
                   </div>
                 )}
@@ -59,13 +59,13 @@ export default function Blog({ article,navigation }: BlogProps) {
                   <div className={styles.navItem}>
                     <span className={styles.navLabel}>Next article:</span>
                     <Link href={`/blog/article/${navigation.next.slug}`} passHref>
-                      <span className={styles.nextLink}>{navigation.next.title}</span>
+                      <a className={styles.nextLink}>{navigation.next.title}</a>
                     </Link>
                   </div>
                 )}
               </div>
               <Link href="/blog/all" passHref>
-                <span className={styles.blogIndex}>Blog Index</span>
+                <a className={styles.blogIndex}>Blog Index</a>
               </Link>
             </div>
           )}

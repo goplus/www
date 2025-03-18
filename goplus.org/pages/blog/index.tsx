@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next"
 import Link from "next/link"
 
-import { getAllArticles, ArticleMetadata } from "lib/blog"
-import BlogPage from "components/Blog/BlogPage"
+import { getAllArticles, ArticleMetadata } from "lib/article"
+import { BlogPage } from "./all"
 
 import styles from "./style.module.scss"
 
@@ -13,7 +13,7 @@ interface BlogNewsProps {
 export default function BlogNews({ articles }: BlogNewsProps) {
   return <BlogPage articles={articles} title="The GoPlus Blog" after={
     <Link href="/blog/all" passHref>
-      <span className={styles.all}>More articles...</span>
+      <a className={styles.all}>More articles...</a>
     </Link>
   }/>
 }

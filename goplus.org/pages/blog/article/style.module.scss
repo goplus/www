@@ -1,6 +1,10 @@
 @import "~utils/index.scss";
 
-.date,.author{
+.news {
+    @include link;
+}
+
+.date,.author {
     font-style: italic;
 }
 

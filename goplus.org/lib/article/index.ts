@@ -17,25 +17,25 @@ export interface Article extends ArticleMetadata {
     content: string
 }
 
-export interface ArticleNavigation{
-  prev:{ slug:string,title:string } | null
-  next:{ slug:string,title:string } | null
+export interface ArticleNavigation {
+  prev:{ slug: string,title: string } | null
+  next:{ slug: string,title: string } | null
 }
 
-interface ArticleInfo{
-  article:Article,
-  navigation:ArticleNavigation
+interface ArticleInfo {
+  article: Article,
+  navigation: ArticleNavigation
 }
 interface ArticleCache{
-  articles:ArticleMetadata[]
-  fullArticles:Record<string,ArticleInfo>
+  articles: ArticleMetadata[]
+  fullArticles: Record<string,ArticleInfo>
 }
   
 const articlesDirectory = path.join(process.cwd(), "articles")
 
-let cache:ArticleCache = {
-  articles:[],
-  fullArticles:{},
+let cache: ArticleCache = {
+  articles: [],
+  fullArticles: {}
 }
 
 export function getAllArticles(limit?: number): ArticleMetadata[] {
@@ -57,7 +57,7 @@ export function getAllArticles(limit?: number): ArticleMetadata[] {
         slug:fileName.replace(/\.md$/, ""),
       }
 
-      cache.fullArticles[metadata.slug] ={
+      cache.fullArticles[metadata.slug]={
         article:{
           ...metadata,
           content: matterResult.content
