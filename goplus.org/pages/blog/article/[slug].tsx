@@ -37,7 +37,14 @@ export default function Blog({ article,navigation }: BlogProps) {
               rehypePlugins={[rehypeRaw]}
               components={{
                 img: ({ src, alt, ...props }) => {
-                  const imageSrc = src?.startsWith('http') ? src : `/api/article-image?path=${encodeURIComponent(`${src || ''}`)}`
+                  let imageSrc
+                  if (src?.startsWith('http')) {
+                    imageSrc = src
+                  }else {
+                    // use the static images from public directory
+                    // when dev & production will automatically copy the images to public directory
+                    imageSrc = `/articles/${src || ''}`
+                  }
                   return <img src={imageSrc} alt={alt} {...props} />
                 },
                 code: ({ node, children, ...props }) => {
@@ -104,4 +111,4 @@ export const getStaticProps: GetStaticProps<BlogProps> = async ({ params }) => {
       navigation:articleInfo.navigation
     }
   }
-} 
+}
