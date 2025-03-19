@@ -47,8 +47,8 @@ export default function Blog({ article,navigation }: BlogProps) {
                   }
                   return <img src={imageSrc} alt={alt} {...props} />
                 },
-                code: ({ node, children, ...props }) => {
-                  return <CodeForMD {...props}>{children}</CodeForMD>
+                code: ({ children, ...props }) => {
+                  return <CodeForMD copyable={false} runnable={false} editable={false} {...props}>{children}</CodeForMD>
                 }
               }}
             >
