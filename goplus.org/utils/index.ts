@@ -32,7 +32,7 @@ export function cns(...classNames: Array<string | null | undefined | false>) {
   return classNames.filter(Boolean).join(' ')
 }
 
-/** Code for goplus.org may be runned on pages other than goplus.org (with widgets), which 
+/** Code for xgo.dev may be runned on pages other than xgo.dev (with widgets), which 
  * means relative URLs like `/download` may be resolved to `<other-site-origin>/download`,
  * which is not expected. So we need to get origin based on current enviroment information 
  * to construct absolute URL */
@@ -46,7 +46,7 @@ export function getOrigin() {
       return 'https://' + process.env.VERCEL_BRANCH_URL
     } else {
       //'production' Environment
-      return 'https://goplus.org'
+      return 'https://xgo.dev'
     }
   }
 }

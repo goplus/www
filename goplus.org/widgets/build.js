@@ -64,8 +64,8 @@ async function main(isDev = false) {
   const NEXT_PUBLIC_VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV
   // The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`.
   const NEXT_PUBLIC_VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL
-  // For production build, use `goplus.org` instead of url like `www-*-goplus.vercel.app`
-  const vercelHost = NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'goplus.org' : NEXT_PUBLIC_VERCEL_URL
+  // For production build, use `xgo.dev` instead of url like `www-*-goplus.vercel.app`
+  const vercelHost = NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'xgo.dev' : NEXT_PUBLIC_VERCEL_URL
   // Asset prefix for local development
   const LOCAL_ASSET_PREFIX = process.env.LOCAL_ASSET_PREFIX
   nextConfig.assetPrefix = LOCAL_ASSET_PREFIX || (vercelHost ? ('https://' + vercelHost) : '')

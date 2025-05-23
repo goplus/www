@@ -6,17 +6,17 @@ import { defineWidget, getAttr, getBoolAttr, isElementNode, isTextNode } from '.
  * Usage:
  * 
  * ```html
- * <goplus-code>
- *   <goplus-code-doc>
+ * <xgo-code>
+ *   <xgo-code-doc>
  *     Strings, which can be added together with +.
- *   </goplus-code-doc>
+ *   </xgo-code-doc>
  *   println "Go"+"Plus"
- *   <goplus-code-doc>
+ *   <xgo-code-doc>
  *     Integers and floats.
- *   </goplus-code-doc>
+ *   </xgo-code-doc>
  *   println "1+1 =", 1+1
  *   println "7.0/3.0 =", 7.0/3.0
- * </goplus-code>
+ * </xgo-code>
  * ```
  */
 
@@ -32,7 +32,7 @@ defineWidget('code', el => {
   }
 
   Array.from(el.childNodes).forEach(node => {
-    if (isElementNode(node) && node.tagName === 'GOPLUS-CODE-DOC') {
+    if (isElementNode(node) && node.tagName.endsWith('-CODE-DOC')) {
       sealSegment()
       segment = {
         content: '',

@@ -1,6 +1,6 @@
 /**
- * @file Code Editor for GoPlus (with "Run" button)
- * @desc Edit & run gop code
+ * @file Code Editor for XGo (with "Run" button)
+ * @desc Edit & run xgo code
  */
 
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
@@ -91,7 +91,7 @@ export default function CodeEditor({
   )
 
   function handleEditorMount(_: unknown, monaco: Monaco) {
-    const themeName = 'gop'
+    const themeName = 'xgo'
     monaco.editor.defineTheme(themeName, theme)
     monaco.editor.setTheme(themeName)
     setEditorReady(true)

@@ -4,4 +4,4 @@ fields := [
 	"and data science",
 ]
 
-echo "The Go+ language for", fields.join(", ")
+echo "The XGo language for", fields.join(", ")

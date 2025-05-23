@@ -1,5 +1,5 @@
 /**
- * @file Loader for goplus widgets
+ * @file Loader for xgo widgets
  * @description It loads widgets.
  */
 

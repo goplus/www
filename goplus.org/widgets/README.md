@@ -1,13 +1,13 @@
-# Web Widgets provided by goplus.org
+# Web Widgets provided by xgo.dev
 
-Web-based widgets for 3rd-party websites to embed goplus-related content or function.
+Web-based widgets for 3rd-party websites to embed xgo-related content or function.
 
 ### Usage
 
 #### 1. Import Widget Loader
 
 ```html
-<script data-widgets="header,footer" src="https://goplus.org/widgets/loader.js"></script>
+<script data-widgets="header,footer" src="https://xgo.dev/widgets/loader.js"></script>
 ```
 
 Note that you need to specify widgets to load by `data-widgets`. For all available widgets, check directory `/widgets/entries`.
@@ -17,11 +17,11 @@ Note that you need to specify widgets to load by `data-widgets`. For all availab
 Then just use corresponding custom element in you application to render widgets:
 
 ```html
-<goplus-header></goplus-header>
-<goplus-footer></goplus-footer>
+<xgo-header></xgo-header>
+<xgo-footer></xgo-footer>
 ```
 
-For widget `foo`, use HTML tag `goplus-foo` to render it. For example, `<goplus-header></goplus-header>` renders widget `header`.
+For widget `foo`, use HTML tag `xgo-foo` to render it. For example, `<xgo-header></xgo-header>` renders widget `header`.
 
 ### Build Widgets
 
@@ -45,6 +45,6 @@ Then launch a static file server under `/out`. Suppose the server listens to `80
 
 ### What Happened
 
-We created a widget loader & widget files when building widgets. The loader file's location will be constant: `https://goplus.org/widgets/loader.js` and the file will not be cached by browser. 3rd-party sites will insert it in page and tell which widgets they want to load. The loader will load corresponding widget files for them.
+We created a widget loader & widget files when building widgets. The loader file's location will be constant: `https://xgo.dev/widgets/loader.js` and the file will not be cached by browser. 3rd-party sites will insert it in page and tell which widgets they want to load. The loader will load corresponding widget files for them.
 
-The widget files defines custom elements on page, which makes HTML tags like `<goplus-header></goplus-header>` work. Widget files' location changes with widget content changing (content-based addressing). But the loader will always know the correct location for each widget, which makes it possible to cache widget files' content locally - actually we will tell browsers to cache widget file content as long as possible.
+The widget files defines custom elements on page, which makes HTML tags like `<xgo-header></xgo-header>` work. Widget files' location changes with widget content changing (content-based addressing). But the loader will always know the correct location for each widget, which makes it possible to cache widget files' content locally - actually we will tell browsers to cache widget file content as long as possible.

@@ -9,7 +9,7 @@ import styles from './style.module.scss'
 export default function Applications() {
   return (
     <div className={styles.section}>
-      <h2 className={styles.title}>Applications written in Go+</h2>
+      <h2 className={styles.title}>Applications written in XGo</h2>
       <div className={styles.cards}>
         <Card
           title="2D Games"

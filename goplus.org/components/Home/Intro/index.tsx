@@ -15,7 +15,10 @@ export default function Intro() {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <div className={styles.slogan}>For engineering, STEM education, and data science</div>
+      <div className={styles.slogan}>XGo = C * Go * Python * JavaScript + Scratch</div>
+      <div className={styles.sloganDesc}>
+        The first AI-native language that integrates software engineering into a unified whole.
+      </div>
       <div className={styles.btnsWrap}>
         <LinkButton primary href="https://github.com/goplus/gop/blob/main/doc/docs.md">
           Get Started <IconArrowRight />
@@ -24,7 +27,7 @@ export default function Intro() {
           Download
         </LinkButton>
       </div>
-      <h2 className={styles.title}>Try Go+</h2>
+      <h2 className={styles.title}>Try XGo</h2>
       <CodeExamples />
     </div>
   )
