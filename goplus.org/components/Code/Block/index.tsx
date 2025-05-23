@@ -1,6 +1,6 @@
 /**
- * @file Code Block for GoPlus
- * @desc Display & run a gop code snippet
+ * @file Code Block for XGo
+ * @desc Display & run a xgo code snippet
  */
 
 import React, { useCallback, useState, ReactNode, useRef, useEffect, ButtonHTMLAttributes } from 'react'
@@ -15,9 +15,10 @@ import syntaxHighlightStyle from './syntax-highlight-style'
 
 import styles from './style.module.scss'
 
-const langGop = 'gop'
+const langGop = 'gop' // For backward compatibility
+const langXgo = 'xgo'
 
-// `gop|raw` means language: `gop`, while not interactive (runnable / editable)
+// `xgo|raw` means language: `xgo`, while not interactive (runnable / editable)
 const tagRaw = 'raw'
 
 export type CodeSegmentInfo = {
@@ -30,7 +31,7 @@ export type CodeSegmentInfo = {
 export interface Props {
   /** Code */
   code: string | CodeSegmentInfo[]
-  /** Language of given code, language with tag (`gop|raw`) is also supported */
+  /** Language of given code, language with tag (`xgo|raw`) is also supported */
   language?: string
   /** If code copyable (with a copy button) */
   copyable?: boolean
@@ -44,7 +45,7 @@ export interface Props {
 
 export default function CodeBlock({
   code,
-  language = langGop,
+  language = langXgo,
   copyable = true,
   runnable = true,
   editable = true,
@@ -56,8 +57,9 @@ export default function CodeBlock({
   const hasDoc = codeSegments.some(seg => seg.doc != null)
   const [runResult, setRunResult] = useState<ReactNode>(null)
 
-  const [lang, tag] = language.split('|')
-  const interactive = lang === langGop && tag !== tagRaw
+  let [lang, tag] = language.split('|')
+  if (lang === langGop) lang = langXgo
+  const interactive = lang === langXgo && tag !== tagRaw
 
   runnable = interactive && runnable
   editable = interactive && editable
@@ -105,7 +107,7 @@ function CodeSegment({ content, doc, language, hasDoc }: CodeSegmentProps) {
       {hasDoc && <aside className={styles.doc}>{doc}</aside>}
       <SyntaxHighlighter
         className={styles.code}
-        language={language === langGop ? 'go' : language} // `gop` not supported yet
+        language={language === langXgo ? 'go' : language} // `xgo` not supported yet
         showLineNumbers={false}
         useInlineStyles
         style={syntaxHighlightStyle}
@@ -167,7 +169,7 @@ function EditButton({ code }: { code: string }) {
 
   async function handleClick() {
     if (url == null) return
-    window.open(url, 'goplus-playground')
+    window.open(url, 'xgo-playground')
   }
 
   const urlReady = url != null

@@ -16,11 +16,12 @@
 }
 
 .logo {
+  display: flex;
   margin-bottom: 24px;
 
   svg {
-    width: 120px;
-    height: 100%;
+    width: 128px;
+    height: auto;
   }
 
   @include mobile {

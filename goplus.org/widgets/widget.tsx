@@ -13,9 +13,7 @@ export function defineWidget(name: string, render: Renderer) {
   // do nothing if executed at server
   if (typeof window === 'undefined') return
 
-  const tagName = `goplus-${name}`
-
-  const Clz = class extends HTMLElement {
+  const makeClz = () => class extends HTMLElement {
     async connectedCallback() {
       const { width, height } = this.getBoundingClientRect()
       const rendered = render(this)
@@ -45,7 +43,8 @@ export function defineWidget(name: string, render: Renderer) {
       container.removeAttribute('style')
     }
   }
-  window.customElements.define(tagName, Clz)
+  window.customElements.define(`goplus-${name}`, makeClz()) // For backward compatibility
+  window.customElements.define(`xgo-${name}`, makeClz())
 }
 
 export function getAttr(el: HTMLElement, name: string) {

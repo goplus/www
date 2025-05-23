@@ -15,7 +15,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Tutorial',
-    href: 'https://tutorial.goplus.org',
+    href: 'https://tutorial.xgo.dev',
     isBlank: false
   },
   {
@@ -25,7 +25,7 @@ export const navItems: NavItemInfo[] = [
   },
   {
     children: 'Playground',
-    href: 'https://play.goplus.org',
+    href: 'https://play.xgo.dev',
     isBlank: true
   },
   {

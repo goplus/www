@@ -6,7 +6,7 @@ import { defineWidget } from '../widget'
  * Usage:
  * 
  * ```html
- * <goplus-footer></goplus-footer>
+ * <xgo-footer></xgo-footer>
  * ```
  */
 

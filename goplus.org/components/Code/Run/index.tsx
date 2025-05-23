@@ -1,5 +1,5 @@
 /**
- * @file Run result for gop code
+ * @file Run result for xgo code
  * @desc includes states like running, error, success, etc
  */
 
@@ -17,7 +17,7 @@ export interface Props {
   className?: string
 }
 
-/** Display run result for gop code */
+/** Display run result for xgo code */
 export function RunResult({
   result,
   autoScroll = true,
@@ -45,7 +45,7 @@ export function RunResult({
   )
 }
 
-/** Control running process of gop code & outputs result */
+/** Control running process of xgo code & outputs result */
 export function useCodeRun(code: string) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ReactNode | null>(null)

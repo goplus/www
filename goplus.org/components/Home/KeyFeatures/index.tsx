@@ -9,20 +9,17 @@ import styles from './style.module.scss'
 // Copied from https://github.com/goplus/gop/blob/main/README.md#key-features-of-go
 // with doc link address normalized
 const content = `
-* A static typed language.
-* The simplest engineering language that can be mastered by children (script-like style).
-* Performance: as fast as Go (Go+'s main backend compiles to human-readable Go).
-* Fully compatible with [Go](https://github.com/golang/go) and can mix Go/Go+ code in the same package (see [Go/Go+ hybrid programming](https://github.com/goplus/gop/blob/main/doc/docs.md#gogo-hybrid-programming)).
-* No DSL (Domain Specific Language) support, but SDF ([Specific Domain Friendliness](https://github.com/goplus/gop/blob/main/doc/classfile.md)).
-* Support Go code generation (main backend) and [bytecode backend](https://github.com/goplus/igop) (REPL: see [iGo+](https://repl.goplus.org/)).
-* [Simplest way to interaction with C](https://github.com/goplus/gop/blob/main/doc/docs.md#calling-c-from-go) (cgo is supported but not recommended).
-* [Powerful built-in data processing capabilities](https://github.com/goplus/gop/blob/main/doc/docs.md#data-processing).
+* Approaching natural language expression and intuitive (see [How Go+ simplifies Go's expressions](https://github.com/goplus/gop/blob/main/README.md#how-go-simplifies-gos-expressions)).
+* Smallest but Turing-complete syntax set in best practices (see [The Go+ Mini Specification](https://github.com/goplus/gop/blob/main/doc/spec-mini.md)).
+* Fully compatible with [Go](https://github.com/golang/go) and can mix Go/Go+ code in the same package (see [The Go+ Full Specification](https://github.com/goplus/gop/blob/main/doc/spec.md) and [Go/Go+ Hybrid Programming](https://github.com/goplus/gop/blob/main/doc/docs.md#gogo-hybrid-programming)).
+* Integrating with the C ecosystem including Python and providing limitless possibilities based on [LLGo](https://github.com/goplus/llgo) (see [Importing C/C++ and Python libraries](https://github.com/goplus/gop/blob/main/README.md#importing-cc-and-python-libraries)).
+* Does not support DSL (Domain-Specific Languages), but supports SDF (Specific Domain Friendliness) (see [Go+ Classfiles](https://github.com/goplus/gop/blob/main/doc/classfile.md) and [Domain Text Literal](https://github.com/goplus/gop/blob/main/doc/domian-text-lit.md)).
 `
 
 export default function KeyFeatures() {
   return (
     <div className={styles.section}>
-      <h2 className={styles.title}>Key Features of Go+</h2>
+      <h2 className={styles.title}>Key Features of XGo</h2>
       <TextWrapper>
         <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
       </TextWrapper>

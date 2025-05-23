@@ -5,7 +5,7 @@ module.exports = {
 
   webpack: (config, options) => {
     config.module.rules.push({
-      test: /\.(md|gop)$/,
+      test: /\.(md|gop|xgo)$/,
       type: 'asset/source'
     })
 

@@ -303,7 +303,7 @@ export default function Home({
             rel="noopener noreferrer"
           >
             release history
-          </a>&nbsp;for more information about Go+ releases.
+          </a>&nbsp;for more information about XGo releases.
         </p>
         <h2 className={styles.titleH2}>Featured downloads </h2>
 
@@ -368,7 +368,7 @@ export default function Home({
             <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
             <span className={styles.downloadBoxLink}>
               &nbsp;
-              {"gop_"+StableRelease.tag_name+".src.zip"}
+              {"xgo_"+StableRelease.tag_name+".src.zip"}
             </span>
           </a>
         </div>
@@ -379,7 +379,7 @@ export default function Home({
               onClick={() => toggleReleaseAssets(StableRelease)}
               className={styles.releaseItemName}
             >
-              <span>GoPlus_{StableRelease.tag_name}</span>
+              <span>XGo_{StableRelease.tag_name}</span>
               {selectedRelease != StableRelease.id && <ArrowDown />}
               {selectedRelease === StableRelease.id && <ArrowUp />}
             </h4>
@@ -387,13 +387,15 @@ export default function Home({
               <div className={styles.releaseAssetListDiv}>
                 <table className={styles.downloadTable}>
                   <thead className={styles.downloadTableHeader}>
-                    <th className={styles.downloadTableHeaderName}>File name</th>
-                    <th className={styles.downloadTableHeaderKind}>Kind</th>
-                    <th className={styles.downloadTableHeaderOs}>OS</th>
-                    <th className={styles.downloadTableHeaderArch}>Arch</th>
-                    <th className={styles.downloadTableHeaderSize}>Size</th>
-                    {/* ToDo */}
-                    {/* <th>SHA256 Checksum</th> */}
+                    <tr>
+                      <th className={styles.downloadTableHeaderName}>File name</th>
+                      <th className={styles.downloadTableHeaderKind}>Kind</th>
+                      <th className={styles.downloadTableHeaderOs}>OS</th>
+                      <th className={styles.downloadTableHeaderArch}>Arch</th>
+                      <th className={styles.downloadTableHeaderSize}>Size</th>
+                      {/* ToDo */}
+                      {/* <th>SHA256 Checksum</th> */}
+                    </tr>
                   </thead>
                   <tbody>
                     {StableRelease.assets.map((asset) => (
@@ -411,7 +413,7 @@ export default function Home({
                           className={styles.link}
                           href={StableRelease.zipball_url}
                         >
-                          {"gop_"+StableRelease.tag_name+".src.zip"}
+                          {"xgo_"+StableRelease.tag_name+".src.zip"}
                         </a>
                       </td>
                       <td>Source</td>
@@ -442,7 +444,7 @@ export default function Home({
                     onClick={() => toggleReleaseAssets(release)}
                     className={styles.releaseItemName}
                   >
-                    <span>GoPlus_{release.tag_name}</span>
+                    <span>XGo_{release.tag_name}</span>
                     {selectedRelease != release.id && <ArrowDown />}
                     {selectedRelease === release.id && <ArrowUp />}
                   </h4>
@@ -451,13 +453,15 @@ export default function Home({
                       {release.assets.length === 0 && (
                         <table className={styles.downloadTable}>
                           <thead className={styles.downloadTableHeader}>
-                            <th className={styles.downloadTableHeaderName}>File name</th>
-                            <th className={styles.downloadTableHeaderKind}>Kind</th>
-                            <th className={styles.downloadTableHeaderOs}>OS</th>
-                            <th className={styles.downloadTableHeaderArch}>Arch</th>
-                            <th className={styles.downloadTableHeaderSize}>Size</th>
-                            {/* ToDo */}
-                            {/* <th>SHA256 Checksum</th> */}
+                            <tr>
+                              <th className={styles.downloadTableHeaderName}>File name</th>
+                              <th className={styles.downloadTableHeaderKind}>Kind</th>
+                              <th className={styles.downloadTableHeaderOs}>OS</th>
+                              <th className={styles.downloadTableHeaderArch}>Arch</th>
+                              <th className={styles.downloadTableHeaderSize}>Size</th>
+                              {/* ToDo */}
+                              {/* <th>SHA256 Checksum</th> */}
+                            </tr>
                           </thead>
                           <tbody>
                             <tr key={release.id}>
@@ -467,7 +471,7 @@ export default function Home({
                                   href={release.zipball_url}
                                   download="source_code.zip"
                                 >
-                                  {"gop_"+release.tag_name+".src.zip"}
+                                  {"xgo_"+release.tag_name+".src.zip"}
                                 </a>
                               </td>
                               <td>Source</td>
@@ -481,13 +485,15 @@ export default function Home({
                       {release.assets.length != 0 && (
                         <table className={styles.downloadTable}>
                           <thead className={styles.downloadTableHeader}>
-                            <th className={styles.downloadTableHeaderName}>File name</th>
-                            <th className={styles.downloadTableHeaderKind}>Kind</th>
-                            <th className={styles.downloadTableHeaderOs}>OS</th>
-                            <th className={styles.downloadTableHeaderArch}>Arch</th>
-                            <th className={styles.downloadTableHeaderSize}>Size</th>
-                            {/* ToDo */}
-                            {/* <th>SHA256 Checksum</th> */}
+                            <tr>
+                              <th className={styles.downloadTableHeaderName}>File name</th>
+                              <th className={styles.downloadTableHeaderKind}>Kind</th>
+                              <th className={styles.downloadTableHeaderOs}>OS</th>
+                              <th className={styles.downloadTableHeaderArch}>Arch</th>
+                              <th className={styles.downloadTableHeaderSize}>Size</th>
+                              {/* ToDo */}
+                              {/* <th>SHA256 Checksum</th> */}
+                            </tr>
                           </thead>
                           <tbody>
                             {release.assets.map((asset) => (
@@ -507,7 +513,7 @@ export default function Home({
                                   className={styles.link}
                                   href={release.zipball_url}
                                 >
-                                  {"gop_"+release.tag_name+".src.zip"}
+                                  {"xgo_"+release.tag_name+".src.zip"}
                                 </a>
                               </td>
                               <td>Source</td>

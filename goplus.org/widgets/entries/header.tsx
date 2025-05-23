@@ -6,9 +6,9 @@ import { defineWidget } from '../widget'
  * Usage:
  * 
  * ```html
- * <goplus-header>
+ * <xgo-header>
  *   <div style="height: 72px;"><!-- placeholder --></div>
- * </goplus-header>
+ * </xgo-header>
  * ```
  */
 

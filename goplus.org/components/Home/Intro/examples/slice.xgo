@@ -2,7 +2,7 @@
 a := []float64{1, 2, 3.4}
 println a
 
-// in GoPlus we do:
+// in XGo we do:
 b := [1, 2, 3.4]
 println b
 

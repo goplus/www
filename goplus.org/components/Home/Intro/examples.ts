@@ -3,17 +3,17 @@
  * @todo Use the same resource with `playground/examples/`
  */
 
-import basic from './examples/basic.gop'
-import error from './examples/error.gop'
-import hello from './examples/hello.gop'
-import listmap from './examples/listmap.gop'
-import range from './examples/range.gop'
-import rational from './examples/rational.gop'
-import slice from './examples/slice.gop'
+import basic from './examples/basic.xgo'
+import error from './examples/error.xgo'
+import hello from './examples/hello.xgo'
+import listmap from './examples/listmap.xgo'
+import range from './examples/range.xgo'
+import rational from './examples/rational.xgo'
+import slice from './examples/slice.xgo'
 
 const examples = [
-  { name: 'Hello, Go+', code: hello },
-  { name: 'Go+ Basic', code: basic },
+  { name: 'Hello, XGo', code: hello },
+  { name: 'XGo Basic', code: basic },
   { name: 'Error wrap', code: error },
   { name: 'List/Map comprehension', code: listmap },
   { name: 'Range', code: range },
