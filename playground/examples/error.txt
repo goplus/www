@@ -11,7 +11,7 @@ func addSafe(x, y string) int {
 }
 
 // Error handling
-// We reinvent the error handling specification in Go+. We call them ErrWrap expressions:
+// We reinvent the error handling specification in XGo. We call them ErrWrap expressions:
 
 // expr! // panic if err
 // expr? // return if err

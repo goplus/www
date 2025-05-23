@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const hostname = "play.goplus.org"
+const hostname = "play.xgo.dev"
 
 var editTemplate = template.Must(template.ParseFiles("edit.html"))
 
@@ -94,5 +94,5 @@ const hello = `fields := [
 	"and data science",
 ]
 
-println "The Go+ language for", fields.join(", ")
+println "The XGo language for", fields.join(", ")
 `
