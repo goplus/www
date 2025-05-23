@@ -15,7 +15,7 @@ export default function Intro() {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <div className={styles.slogan}>XGo = C * Go * Python * JavaScript + Scratch</div>
+      <div className={styles.slogan}>XGo := C * Go * Python * JavaScript + Scratch</div>
       <div className={styles.sloganDesc}>
         The first AI-native language that integrates software engineering into a unified whole.
       </div>
