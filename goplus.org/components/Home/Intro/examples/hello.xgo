@@ -1,7 +1,8 @@
 fields := [
-	"engineering",
-	"STEM education", 
-	"and data science",
+	"C",
+	"Go", 
+	"Python",
+	"JavaScript",
 ]
 
-echo "The XGo language for", fields.join(", ")
+echo "XGo :=", fields.join(" * "), "+ Scratch"
