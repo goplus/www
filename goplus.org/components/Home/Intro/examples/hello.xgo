@@ -1,8 +1,8 @@
-fields := [
+languages := [
 	"C",
 	"Go", 
 	"Python",
 	"JavaScript",
 ]
 
-echo "XGo :=", fields.join(" * "), "+ Scratch"
+echo "XGo :=", languages.join(" * "), "+ Scratch"
