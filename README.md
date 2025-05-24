@@ -1,4 +1,4 @@
-# Source code of https://goplus.org/
+# https://xgo.dev
 
 [![LICENSE](https://img.shields.io/github/license/goplus/www.svg)](https://github.com/goplus/www/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/goplus/www.png?branch=master)](https://travis-ci.org/goplus/www)
