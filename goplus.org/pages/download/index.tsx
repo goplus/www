@@ -367,8 +367,7 @@ export default function Home({
             <h4 className={styles.downloadBoxTitle}>Source Code</h4>
             <p className={styles.downloadBoxP}>Requires go1.18 or later</p>
             <span className={styles.downloadBoxLink}>
-              &nbsp;
-              {"xgo_"+StableRelease.tag_name+".src.zip"}
+              Download (zip)
             </span>
           </a>
         </div>
@@ -379,7 +378,7 @@ export default function Home({
               onClick={() => toggleReleaseAssets(StableRelease)}
               className={styles.releaseItemName}
             >
-              <span>XGo_{StableRelease.tag_name}</span>
+              <span>{StableRelease.tag_name}</span>
               {selectedRelease != StableRelease.id && <ArrowDown />}
               {selectedRelease === StableRelease.id && <ArrowUp />}
             </h4>
@@ -413,7 +412,7 @@ export default function Home({
                           className={styles.link}
                           href={StableRelease.zipball_url}
                         >
-                          {"xgo_"+StableRelease.tag_name+".src.zip"}
+                          Source code (zip)
                         </a>
                       </td>
                       <td>Source</td>
@@ -444,7 +443,7 @@ export default function Home({
                     onClick={() => toggleReleaseAssets(release)}
                     className={styles.releaseItemName}
                   >
-                    <span>XGo_{release.tag_name}</span>
+                    <span>{release.tag_name}</span>
                     {selectedRelease != release.id && <ArrowDown />}
                     {selectedRelease === release.id && <ArrowUp />}
                   </h4>
@@ -471,7 +470,7 @@ export default function Home({
                                   href={release.zipball_url}
                                   download="source_code.zip"
                                 >
-                                  {"xgo_"+release.tag_name+".src.zip"}
+                                  Source code (zip)
                                 </a>
                               </td>
                               <td>Source</td>
@@ -513,7 +512,7 @@ export default function Home({
                                   className={styles.link}
                                   href={release.zipball_url}
                                 >
-                                  {"xgo_"+release.tag_name+".src.zip"}
+                                  Source code (zip)
                                 </a>
                               </td>
                               <td>Source</td>
