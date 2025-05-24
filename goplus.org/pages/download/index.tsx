@@ -235,27 +235,27 @@ export default function Home({
     }
   }
 
-  function getTarGz(assets: Asset[], os: string, arch: string) {
+  function getTarGz(assets: Asset[], os: string, arch: string[]) {
     let latestAsset
     if (os === "win") {
       latestAsset = assets.find(
         (asset) =>
           (asset.name.includes("win") || asset.name.includes("Win")) &&
-          asset.name.includes(arch) &&
+          arch.some(a => asset.name.includes(a)) &&
           asset.name.includes(".zip")
       )
     } else if (os === "macOS") {
       latestAsset = assets.find(
         (asset) =>
           (asset.name.includes("darwin") || asset.name.includes("Darwin")) &&
-          asset.name.includes(arch) &&
+          arch.some(a => asset.name.includes(a)) &&
           asset.name.includes(".tar.gz")
       )
     } else if (os === "linux") {
       latestAsset = assets.find(
         (asset) =>
           (asset.name.includes("linux") || asset.name.includes("Linux")) &&
-          asset.name.includes(arch) &&
+          arch.some(a => asset.name.includes(a)) &&
           asset.name.includes(".tar.gz")
       )
     }
@@ -265,10 +265,10 @@ export default function Home({
     return latestAsset
   }
 
-  const latestWinAsset = getTarGz(StableRelease.assets, "win", "x86_64") //Win's asset is .zip file.
-  const latestMacOSx86Asset = getTarGz(StableRelease.assets, "macOS", "x86_64")
-  const latestMacOSarmAsset = getTarGz(StableRelease.assets, "macOS", "arm")
-  const latestLinuxX86Asset = getTarGz(StableRelease.assets, "linux", "x86_64")
+  const latestWinAsset = getTarGz(StableRelease.assets, "win", ["x86_64", "amd64"]) //Win's asset is .zip file.
+  const latestMacOSx86Asset = getTarGz(StableRelease.assets, "macOS", ["x86_64", "amd64"])
+  const latestMacOSarmAsset = getTarGz(StableRelease.assets, "macOS", ["arm",])
+  const latestLinuxX86Asset = getTarGz(StableRelease.assets, "linux", ["x86_64", "amd64"])
 
   return (
     <Layout>
@@ -305,7 +305,7 @@ export default function Home({
             release history
           </a>&nbsp;for more information about XGo releases.
         </p>
-        <h2 className={styles.titleH2}>Featured downloads </h2>
+        <h2 className={styles.titleH2}>Featured downloads</h2>
 
         <div className={styles.downloadWrapper}>
           <a
@@ -522,7 +522,7 @@ export default function Home({
                               <td></td>
                             </tr>
                           </tbody>
-                        </table>  
+                        </table>
                       )}
                     </div>
                   )}
