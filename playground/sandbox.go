@@ -450,16 +450,25 @@ func sandboxBuildGoplus(_ context.Context, tmpDir string, in []byte, vet bool) (
 	if err != nil {
 		return nil, fmt.Errorf("error find qgo command: %v", err)
 	}
-	os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
+	if err := os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
 module playgrounddemo
 
 go 1.19
 
-`), 0644)
+// FIXME: This is a workaround for the transition period during which gop is
+// being renamed to xgo. Once xgo reaches a stable release, the pins can be
+// removed.
+require (
+	github.com/goplus/gop v1.4.6
+	github.com/qiniu/x v1.14.6
+)
+`), 0644); err != nil {
+		return nil, fmt.Errorf("failed to write go.mod: %w", err)
+	}
 
 	dumyCmd := exec.Command("mkdir", filepath.Join(tmpDir, "dummy"))
 	dumyCmd.Run()
-	os.WriteFile(filepath.Join(tmpDir, "dummy", "dummy.go"), []byte(`
+	if err := os.WriteFile(filepath.Join(tmpDir, "dummy", "dummy.go"), []byte(`
 package dummy
 
 import (
@@ -467,7 +476,9 @@ import (
 	_ "github.com/goplus/spx"
 	_ "github.com/qiniu/x/errors"
 )
-`), 0644)
+`), 0644); err != nil {
+		return nil, fmt.Errorf("failed to write dummy.go: %w", err)
+	}
 
 	tidyCmd := exec.Command("go", "mod", "tidy")
 	tidyCmd.Dir = tmpDir
