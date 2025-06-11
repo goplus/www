@@ -446,22 +446,14 @@ func sandboxBuildGoplus(_ context.Context, tmpDir string, in []byte, vet bool) (
 
 	br := new(buildResult)
 
-	qgo, err := exec.LookPath("gop")
+	xgo, err := exec.LookPath("xgo")
 	if err != nil {
-		return nil, fmt.Errorf("error find qgo command: %v", err)
+		return nil, fmt.Errorf("error find xgo command: %v", err)
 	}
 	if err := os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte(`
 module playgrounddemo
 
-go 1.19
-
-// FIXME: This is a workaround for the transition period during which gop is
-// being renamed to xgo. Once xgo reaches a stable release, the pins can be
-// removed.
-require (
-	github.com/goplus/gop v1.4.6
-	github.com/qiniu/x v1.14.6
-)
+go 1.24.0
 `), 0644); err != nil {
 		return nil, fmt.Errorf("failed to write go.mod: %w", err)
 	}
@@ -472,7 +464,7 @@ require (
 package dummy
 
 import (
-	_ "github.com/goplus/gop/ast"
+	_ "github.com/goplus/xgo/ast"
 	_ "github.com/goplus/spx"
 	_ "github.com/qiniu/x/errors"
 )
@@ -484,7 +476,7 @@ import (
 	tidyCmd.Dir = tmpDir
 	tidyCmd.Run()
 
-	cmdGenerate := exec.Command(qgo, "build", "-o", "a.out", ".")
+	cmdGenerate := exec.Command(xgo, "build", "-o", "a.out", ".")
 	cmdGenerate.Dir = tmpDir
 
 	out := &bytes.Buffer{}
@@ -495,7 +487,7 @@ import (
 			return nil, fmt.Errorf("process took too long")
 		}
 		if _, ok := err.(*exec.ExitError); ok {
-			br.errorMessage = br.errorMessage + trimGopBuild(string(out.Bytes()))
+			br.errorMessage = br.errorMessage + trimGopBuild(out.String())
 			return br, nil
 		}
 	}
