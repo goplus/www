@@ -1,0 +1,33 @@
+@import "~utils/index.scss";
+
+.news {
+    @include link;
+}
+
+.date,.author {
+    font-style: italic;
+}
+
+.articleContent a{
+    @include link;  
+}
+
+.navigation {
+    margin-top: 3rem;
+}
+  
+.navigationLinks {
+    display: flex;
+    margin-bottom: 1rem;
+    flex-direction: column;
+}
+
+.navLabel {
+    font-weight: bold;
+}
+
+.prevLink,
+.nextLink,
+.blogIndex {
+    @include link;
+}

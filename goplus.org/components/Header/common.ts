@@ -37,5 +37,10 @@ export const navItems: NavItemInfo[] = [
     children: 'IDE Plugins',
     href: 'https://github.com/goplus/gop#ide-plugins',
     isBlank: true
-  }
+  },
+  {
+    children: "Blog",
+    href: getOrigin() + "/blog",
+    isBlank: false
+  },
 ]

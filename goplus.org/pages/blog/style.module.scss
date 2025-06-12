@@ -1,0 +1,27 @@
+@import "~utils/index.scss";
+
+.wrapper {
+  width: 50%;
+  margin: 0 auto;
+  @include mobile {
+      width: auto;
+      padding: 0px 16px;
+  }
+}
+
+.news,.all {
+    @include link;
+}
+
+.article {
+  margin-bottom: 20px;
+}
+.title {
+  @include link;
+}
+.date {
+  margin-left: 10px;
+}
+.author {
+  font-style: italic;
+}

@@ -6,15 +6,18 @@ export interface Props {
   inline?: boolean
   className?: string
   children?: ReactNode
+  copyable?: boolean
+  runnable?: boolean
+  editable?: boolean
 }
 
-export default function CodeForMD({ inline = false, children, className }: Props) {
+export default function CodeForMD({ inline = false, children, className, copyable, runnable, editable }: Props) {
   if (inline) {
     return <code>{children}</code>
   }
   const language = getLang(className)
   const code = getSourceCode(children)
-  return <CodeBlock language={language} code={code} />
+  return <CodeBlock language={language} code={code} copyable={copyable} runnable={runnable} editable={editable} />
 }
 
 const classNamePattern = /^language-(.*)$/
