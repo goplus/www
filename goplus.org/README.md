@@ -1,34 +1,102 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# XGo Official Website (xgo.dev)
+
+This is the official website for **XGo** (accessible at [xgo.dev](https://xgo.dev) and [goplus.org](https://goplus.org)), built with [Next.js](https://nextjs.org/).
+
+**XGo** is the first AI-native programming language that integrates software engineering into a unified whole, combining the power of:
+- **C** × **Go** × **Python** × **JavaScript** + **Scratch**
+
+## Features
+
+- 🌐 **Official XGo Website**: Landing page, documentation, and resources
+- 🎮 **Interactive Code Examples**: Try XGo directly in your browser
+- 📦 **Download Center**: Get XGo compiler and tools
+- 🧩 **Web Widgets**: Embeddable components for third-party websites
+- 📱 **Responsive Design**: Optimized for all devices
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js >= 22.0.0
+- npm or yarn
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+# Start the development server
+npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Open [http://localhost:3000](http://localhost:3000) to view the website in your browser.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The page auto-updates as you edit files. Start by modifying `pages/index.tsx`.
 
-## Learn More
+### Building
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Build for production (includes widgets)
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start production server
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Linting
 
-## Deploy on Vercel
+```bash
+# Run ESLint
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Web Widgets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project includes a unique widgets system that allows third-party websites to embed XGo-related components.
+
+### Building Widgets
+
+```bash
+# Build widgets for production
+npm run build:widgets
+
+# Develop widgets locally
+npm run dev:widgets
+```
+
+For detailed widget documentation, see [widgets/README.md](widgets/README.md).
+
+## Project Structure
+
+```
+goplus.org/
+├── components/          # React components
+├── pages/              # Next.js pages and API routes
+├── public/             # Static assets
+├── widgets/            # Embeddable web widgets
+├── utils/              # Utility functions
+└── types/              # TypeScript type definitions
+```
+
+## Related Projects
+
+- **XGo Language**: [github.com/goplus/gop](https://github.com/goplus/gop)
+- **XGo Documentation**: [github.com/goplus/gop/blob/main/doc/docs.md](https://github.com/goplus/gop/blob/main/doc/docs.md)
+- **Go+ Main Repository**: [github.com/goplus/gox](https://github.com/goplus/gox)
+
+## Contributing
+
+We welcome contributions! Please feel free to submit issues and pull requests.
+
+## License
+
+This project is licensed under the Apache License 2.0. See [LICENSE](../LICENSE) for details.
+
+## Deployment
+
+The website is deployed automatically via Vercel. The production build includes both the main website and the embeddable widgets system.
