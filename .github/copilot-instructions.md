@@ -3,7 +3,7 @@
 **ALWAYS reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
 This repository contains the XGo language website infrastructure with two main components:
-1. **Go Playground Service** - A web service similar to play.golang.org for running XGo code
+1. **XGo Playground Service** - A web service similar to play.golang.org for running XGo code
 2. **Next.js Website** - The main xgo.dev website with documentation and interactive features
 
 ## Working Effectively
@@ -12,7 +12,7 @@ This repository contains the XGo language website infrastructure with two main c
 Always run these commands in order to set up a working development environment:
 
 ```bash
-# 1. Build the Go playground (from repository root)
+# 1. Build the XGo playground (from repository root)
 go install ./playground
 # TIMING: Takes 20-30 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
 
@@ -34,7 +34,7 @@ npm run dev
 # Server starts in 1-2 seconds and auto-reloads on file changes
 ```
 
-#### Go Playground Development
+#### XGo Playground Development
 ```bash
 # Build from repository root (playground imports are relative to root module)
 go install ./playground
@@ -63,7 +63,7 @@ npm run lint
 Before committing changes, ALWAYS run these validation steps:
 
 ```bash
-# 1. Validate Go playground build works
+# 1. Validate XGo playground build works
 go install ./playground
 
 # 2. Validate Next.js build works
@@ -140,7 +140,7 @@ npm run dev
 ### Key Directories
 ```
 /                          # Go module root
-├── playground/           # Go playground service (similar to play.golang.org)
+├── playground/           # XGo playground service (similar to play.golang.org)
 │   ├── sandbox/         # Code execution sandbox
 │   ├── Dockerfile       # Docker build (does not work in CI)
 │   └── Makefile         # Build targets (requires gcloud auth)
@@ -207,7 +207,7 @@ npm run build:widgets   # Build embeddable widgets
 3. Clear module cache: `go clean -modcache` then retry
 
 ### Performance Issues
-1. **Slow builds**: Normal - Go playground builds take 20-30 seconds, Next.js builds take 15-30 seconds
+1. **Slow builds**: Normal - XGo playground builds take 20-30 seconds, Next.js builds take 15-30 seconds
 2. **Memory issues**: Consider increasing available RAM for long builds
 3. **Network timeouts**: Increase timeout values, builds legitimately take time
 
