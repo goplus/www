@@ -58,7 +58,7 @@ async function main(isDev = false) {
 
   loadEnvConfig(dir, false)
 
-  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null)
+  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, {})
 
   // The Environment that the app is deployed an running on. The value can be either `production`, `preview`, or `development`.
   const NEXT_PUBLIC_VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV

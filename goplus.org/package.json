@@ -11,29 +11,29 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@monaco-editor/react": "^4.3.1",
+    "@monaco-editor/react": "^4.7.0",
     "moveto": "^1.8.2",
-    "next": "^12.1.0",
-    "react": "^17.0.2",
+    "next": "^15.4.6",
+    "react": "^19.1.1",
     "react-copy-to-clipboard": "^5.0.4",
-    "react-dom": "^17.0.2",
-    "react-markdown": "^7.1.0",
+    "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^15.4.5",
-    "rehype-raw": "^6.1.0",
+    "rehype-raw": "^7.0.0",
     "trim": ">=0.0.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.27",
-    "@types/react": "^17.0.27",
-    "@types/react-copy-to-clipboard": "^5.0.1",
-    "@types/react-dom": "^17.0.11",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.2",
+    "@types/react-copy-to-clipboard": "^5.0.7",
+    "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^13.5.2",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^12.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.4.6",
     "fs-extra": "^10.0.0",
     "sass": "^1.43.4",
     "sharp": "^0.34.3",
-    "typescript": "^4.4.3"
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": ">=22.0.0"

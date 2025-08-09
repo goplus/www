@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import EnsureReady from 'components/EnsureReady'
 
 import './host.scss'
@@ -30,13 +30,13 @@ export function defineWidget(name: string, render: Renderer) {
       shadow.appendChild(container)
 
       const rendering = new Promise<void>(resolve => {
-        ReactDOM.render(
+        const root = createRoot(container)
+        root.render(
           <EnsureReady extra={waitings}>
             {rendered}
-          </EnsureReady>,
-          container,
-          resolve
+          </EnsureReady>
         )
+        resolve()
       })
 
       await Promise.all([...waitings, rendering])

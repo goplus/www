@@ -5,7 +5,7 @@
 
 import React, { useCallback, useState, ReactNode, useRef, useEffect, ButtonHTMLAttributes } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 import { useTimer } from 'hooks'
 import { share } from 'apis/play'
@@ -121,7 +121,7 @@ function CopyButton({ code }: { code: string }) {
   const [isCopied, setIsCopied] = useState(false)
   const timer = useTimer()
   const onCopy = useCallback(
-    (_, result) => {
+    (_: string, result: boolean) => {
       setIsCopied(result)
       timer.current = setTimeout(() => setIsCopied(false), 2500)
     },
