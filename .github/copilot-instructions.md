@@ -1,9 +1,9 @@
-# Go+ Language Website (https://xgo.dev)
+# XGo Language Website (https://xgo.dev)
 
 **ALWAYS reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
-This repository contains the Go+ language website infrastructure with two main components:
-1. **Go Playground Service** - A web service similar to play.golang.org for running Go+ code
+This repository contains the XGo language website infrastructure with two main components:
+1. **Go Playground Service** - A web service similar to play.golang.org for running XGo code
 2. **Next.js Website** - The main xgo.dev website with documentation and interactive features
 
 ## Working Effectively
@@ -159,7 +159,7 @@ npm run dev
 - `playground/Makefile`: Playground build scripts (requires cloud auth)
 
 ### Widget System
-The website includes a widget system for embedding Go+ functionality on external sites:
+The website includes a widget system for embedding XGo functionality on external sites:
 ```bash
 cd goplus.org
 npm run build:widgets  # Builds embeddable widgets
