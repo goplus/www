@@ -18,7 +18,7 @@ This is the official website for **XGo** (accessible at [xgo.dev](https://xgo.de
 ### Prerequisites
 
 - Node.js >= 22.0.0
-- npm or yarn
+- npm
 
 ### Installation
 
@@ -82,12 +82,6 @@ goplus.org/
 ├── utils/              # Utility functions
 └── types/              # TypeScript type definitions
 ```
-
-## Related Projects
-
-- **XGo Language**: [github.com/goplus/gop](https://github.com/goplus/gop)
-- **XGo Documentation**: [github.com/goplus/gop/blob/main/doc/docs.md](https://github.com/goplus/gop/blob/main/doc/docs.md)
-- **Go+ Main Repository**: [github.com/goplus/gox](https://github.com/goplus/gox)
 
 ## Contributing
 
