@@ -1,5 +1,5 @@
 const { resolve, join } = require('path')
-const { readFileSync, outputFileSync, readdirSync, copyFileSync, ensureDirSync } = require('fs-extra')
+const { readFileSync, outputFileSync, readdirSync, copyFileSync, ensureDirSync, existsSync } = require('fs-extra')
 const { loadEnvConfig } = require('@next/env')
 const { runCompiler } = require('next/dist/build/compiler')
 const getBaseWebpackConfig = require('next/dist/build/webpack-config')
@@ -161,13 +161,19 @@ async function main(isDev = false) {
   ;['chunks', 'media', 'widgets'].forEach(folder => {
     const folderPath = join(outputPath, 'static', folder)
     const nextFolderPath = join(nextOutputPath, 'static', folder)
-    ensureDirSync(nextFolderPath)
-    const files = readdirSync(folderPath)
-    files.forEach(fileName => {
-      const filePath = join(folderPath, fileName)
-      copyFileSync(filePath, join(nextOutputPath, 'static', folder, fileName))
-      console.log('copied', filePath, join(nextFolderPath, fileName))
-    })
+    
+    // Only copy if source folder exists
+    if (existsSync(folderPath)) {
+      ensureDirSync(nextFolderPath)
+      const files = readdirSync(folderPath)
+      files.forEach(fileName => {
+        const filePath = join(folderPath, fileName)
+        copyFileSync(filePath, join(nextOutputPath, 'static', folder, fileName))
+        console.log('copied', filePath, join(nextFolderPath, fileName))
+      })
+    } else {
+      console.log('skipping', folder, 'folder (does not exist)')
+    }
   })
 
   console.log('done')
