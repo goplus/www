@@ -15,7 +15,7 @@
     "moveto": "^1.8.2",
     "next": "^15.4.6",
     "react": "^19.1.1",
-    "react-copy-to-clipboard": "^5.1.0",
+    "copy-text-to-clipboard": "^3.2.0",
     "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^15.6.1",
@@ -25,7 +25,6 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.2",
-    "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^13.5.2",
     "eslint": "^8.57.1",
