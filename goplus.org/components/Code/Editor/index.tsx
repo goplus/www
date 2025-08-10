@@ -5,7 +5,6 @@
 
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import Editor, { EditorProps, Monaco, loader } from '@monaco-editor/react'
-import { editor } from 'monaco-editor/esm/vs/editor/editor.api'
 
 import { cns } from 'utils'
 import { useMobile } from 'hooks'
@@ -35,8 +34,8 @@ function getMonacoOptions(isMobile: boolean) {
 
 const editorBackground = '#3F4450'
 
-const theme: editor.IStandaloneThemeData = {
-  base: 'vs-dark',
+const theme = {
+  base: 'vs-dark' as const,
   inherit: true,
   rules: [],
   colors: {

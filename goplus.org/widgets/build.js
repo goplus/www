@@ -1,5 +1,5 @@
 const { resolve, join } = require('path')
-const { readFileSync, outputFileSync, readdirSync, copyFileSync, ensureDirSync } = require('fs-extra')
+const { readFileSync, outputFileSync, readdirSync, copyFileSync, ensureDirSync, existsSync } = require('fs-extra')
 const { loadEnvConfig } = require('@next/env')
 const { runCompiler } = require('next/dist/build/compiler')
 const getBaseWebpackConfig = require('next/dist/build/webpack-config')
@@ -58,7 +58,7 @@ async function main(isDev = false) {
 
   loadEnvConfig(dir, false)
 
-  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, null)
+  const nextConfig = await loadConfig.default(PHASE_PRODUCTION_BUILD, dir, {})
 
   // The Environment that the app is deployed an running on. The value can be either `production`, `preview`, or `development`.
   const NEXT_PUBLIC_VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV
@@ -134,12 +134,23 @@ async function main(isDev = false) {
   webpackConfig.optimization.splitChunks = false
   webpackConfig.optimization.runtimeChunk = false
 
+  // Add resolve alias for ~ to point to root directory
+  if (!webpackConfig.resolve.alias) {
+    webpackConfig.resolve.alias = {}
+  }
+  webpackConfig.resolve.alias['~'] = resolve('.')
+  webpackConfig.resolve.alias['components'] = resolve('./components')
+  webpackConfig.resolve.alias['utils'] = resolve('./utils')
+  webpackConfig.resolve.alias['hooks'] = resolve('./hooks')
+  webpackConfig.resolve.alias['apis'] = resolve('./apis')
+  webpackConfig.resolve.alias['public'] = resolve('./public')
+
   if (isDev) {
     webpackConfig.optimization.minimize = false
     webpackConfig.devtool = false
   }
 
-  const result = await runCompiler(webpackConfig, { runWebpackSpan })
+  const [result] = await runCompiler(webpackConfig, { runWebpackSpan })
   if (result.errors && result.errors.length > 0) {
     result.errors.forEach(err => {
       console.error("Error:")
@@ -161,13 +172,19 @@ async function main(isDev = false) {
   ;['chunks', 'media', 'widgets'].forEach(folder => {
     const folderPath = join(outputPath, 'static', folder)
     const nextFolderPath = join(nextOutputPath, 'static', folder)
-    ensureDirSync(nextFolderPath)
-    const files = readdirSync(folderPath)
-    files.forEach(fileName => {
-      const filePath = join(folderPath, fileName)
-      copyFileSync(filePath, join(nextOutputPath, 'static', folder, fileName))
-      console.log('copied', filePath, join(nextFolderPath, fileName))
-    })
+    
+    // Only copy if source folder exists
+    if (existsSync(folderPath)) {
+      ensureDirSync(nextFolderPath)
+      const files = readdirSync(folderPath)
+      files.forEach(fileName => {
+        const filePath = join(folderPath, fileName)
+        copyFileSync(filePath, join(nextOutputPath, 'static', folder, fileName))
+        console.log('copied', filePath, join(nextFolderPath, fileName))
+      })
+    } else {
+      console.log('skipping', folder, 'folder (does not exist)')
+    }
   })
 
   console.log('done')
