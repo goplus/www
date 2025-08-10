@@ -134,12 +134,23 @@ async function main(isDev = false) {
   webpackConfig.optimization.splitChunks = false
   webpackConfig.optimization.runtimeChunk = false
 
+  // Add resolve alias for ~ to point to root directory
+  if (!webpackConfig.resolve.alias) {
+    webpackConfig.resolve.alias = {}
+  }
+  webpackConfig.resolve.alias['~'] = resolve('.')
+  webpackConfig.resolve.alias['components'] = resolve('./components')
+  webpackConfig.resolve.alias['utils'] = resolve('./utils')
+  webpackConfig.resolve.alias['hooks'] = resolve('./hooks')
+  webpackConfig.resolve.alias['apis'] = resolve('./apis')
+  webpackConfig.resolve.alias['public'] = resolve('./public')
+
   if (isDev) {
     webpackConfig.optimization.minimize = false
     webpackConfig.devtool = false
   }
 
-  const result = await runCompiler(webpackConfig, { runWebpackSpan })
+  const [result] = await runCompiler(webpackConfig, { runWebpackSpan })
   if (result.errors && result.errors.length > 0) {
     result.errors.forEach(err => {
       console.error("Error:")
