@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { matchMediaMobile } from '../utils'
 
 export function useTimer() {
-  const timer = useRef<NodeJS.Timeout>()
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined)
 
   React.useEffect(() => {
     return () => timer.current && clearTimeout(timer.current)

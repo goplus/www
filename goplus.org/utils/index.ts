@@ -16,7 +16,7 @@ export function getText(node: ReactNode): string {
       return child + ''
     }
     if (isValidElement(child) && child.props) {
-      return getText(child.props.children)
+      return getText((child.props as any).children)
     }
     return ''
   }).join(' ')

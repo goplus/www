@@ -29,7 +29,7 @@ function getLang(className: string | undefined) {
 function getSourceCode(children: ReactNode) {
   const sources = Children.map(children, element => {
     while (isValidElement(element)) {
-      element = element.props.children
+      element = (element.props as any).children
     }
     return typeof element === 'string' ? element : ''
   })
