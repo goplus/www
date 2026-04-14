@@ -119,8 +119,12 @@ github.com/google/uuid v1.0.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+Tv3SM=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
-github.com/goplus/mod v0.19.0 h1:VwTawpScUFXozTEhtA4WsdhG/5pa12gJeAK4EGOgM/I=
-github.com/goplus/mod v0.19.0/go.mod h1:4HcnqpUHXFHWRTJXQgiHrFbvy0j3K/OEzpFh5KFYLRM=
+github.com/goplus/gogen v1.23.0-pre.2 h1:VpyZDIpdAs5xY2k4afW4N0yu3ElTbc3zTAzOLqfbv7A=
+github.com/goplus/gogen v1.23.0-pre.2/go.mod h1:Y7ulYW3wonQ3d9er00b0uGFEV/IUZa6okWJZh892ACQ=
+github.com/goplus/mod v0.20.2 h1:YX72E6AhhRLvlkVnI9cBK6PZvUwtge2hwROh7w9N6Yk=
+github.com/goplus/mod v0.20.2/go.mod h1:lWW62tH7L3Vm42Lr6wlUMYHvsm5w3TkEpE2ulKTgmU8=
+github.com/goplus/xgo v1.7.1-0.20260413043704-93ff1eed8445 h1:i5JE7yo66orsFWIXfuMsrwRYBNMPIaF5hAfZ+xIqrQY=
+github.com/goplus/xgo v1.7.1-0.20260413043704-93ff1eed8445/go.mod h1:hJbEZNT6rwf9CPpvlzjoIdOUqiodwJPQidnhoisSMRg=
 github.com/gorilla/context v1.1.1/go.mod h1:kBGZzfjB9CEq2AlWe17Uuf7NDRt0dE0s8S51q0aT7Yg=
 github.com/gorilla/mux v1.6.2/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/gorilla/mux v1.7.3/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
@@ -271,8 +275,8 @@ github.com/prometheus/procfs v0.2.0 h1:wH4vA7pcjKuZzjF7lM8awk4fnuJO6idemZXoKnULU
 github.com/prometheus/procfs v0.2.0/go.mod h1:lV6e/gmhEcM9IjHGsFOCxxuZ+z1YqCvr4OA4YeYWdaU=
 github.com/prometheus/statsd_exporter v0.20.0 h1:M0hQphnq2WyWKS5CefQL8PqWwBOBPhiAkyLo5l4ZYvE=
 github.com/prometheus/statsd_exporter v0.20.0/go.mod h1:YL3FWCG8JBBtaUSxAg4Gz2ZYu22bS84XM89ZQXXTWmQ=
-github.com/qiniu/x v1.16.0 h1:W2VOecyIT3Uxwjm6vJinUR7G3gpwgUgHZA9OpeHArdE=
-github.com/qiniu/x v1.16.0/go.mod h1:AiovSOCaRijaf3fj+0CBOpR1457pn24b0Vdb1JpwhII=
+github.com/qiniu/x v1.17.0 h1:OsyDKXzYp5vw9Hc7VAe4Cso1Sp50fLKGsBuDteyTevE=
+github.com/qiniu/x v1.17.0/go.mod h1:AiovSOCaRijaf3fj+0CBOpR1457pn24b0Vdb1JpwhII=
 github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=
 github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod h1:XWv6SoW27p1b0cqNHllgS5HIMJraePCO15w5zCzIWYg=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
